@@ -1,0 +1,720 @@
+fileFormatVersion: 2
+guid: 60aded76baa0ee642af5d8ff6a6333d6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8532549410338743473
+    second: elisa_IdleR0
+  - first:
+      213: 400130312501077216
+    second: elisa_IdleR1
+  - first:
+      213: 1932831535214518413
+    second: elisa_IdleR2
+  - first:
+      213: -2144462841620493222
+    second: elisa_IdleR3
+  - first:
+      213: 4953203107233948473
+    second: elisa_IdleR4
+  - first:
+      213: -8155593251173762869
+    second: elisa_Red_R0
+  - first:
+      213: -963052101349132367
+    second: elisa_Yellow_R0
+  - first:
+      213: -1099983492433884941
+    second: elisa_JumpR0
+  - first:
+      213: 7567175994280232010
+    second: elisa_JumpR1
+  - first:
+      213: 276214685161835636
+    second: elisa_JumpR2
+  - first:
+      213: -3008591655156446947
+    second: elisa_JumpR3
+  - first:
+      213: 711125370344691887
+    second: elisa_RunR0
+  - first:
+      213: -2868103990979952287
+    second: elisa_RunR1
+  - first:
+      213: -1986072808528359166
+    second: elisa_RunR2
+  - first:
+      213: -498187591703726170
+    second: elisa_RunR3
+  - first:
+      213: -8084245704098797246
+    second: elisa_RunR4
+  - first:
+      213: -3295111425897033200
+    second: elisa_RunR5
+  - first:
+      213: -4480851998880688359
+    second: elisa_RunR6
+  - first:
+      213: 2214608448269216818
+    second: elisa_RunR7
+  - first:
+      213: -3415909917429255411
+    second: elisa_SlashR0
+  - first:
+      213: -663576589838868895
+    second: elisa_SlashR1
+  - first:
+      213: -2384161301548517251
+    second: elisa_SlashR2
+  - first:
+      213: 5263424232165816735
+    second: elisa_SlashR3
+  - first:
+      213: 86938310743412625
+    second: elisa_SlashR4
+  - first:
+      213: -2982076827043409393
+    second: elisa_SlashR5
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: elisa_IdleR0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 454
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b4a5b73b74b96670800000000000000
+      internalID: 8532549410338743473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_IdleR1
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 454
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e42e74366c8d8500800000000000000
+      internalID: 400130312501077216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_IdleR2
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 454
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d80622b6a0cc2da10800000000000000
+      internalID: 1932831535214518413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_IdleR3
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 454
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5c8f2b48665d32e0800000000000000
+      internalID: -2144462841620493222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_IdleR4
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 454
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9336a0b9bff4db440800000000000000
+      internalID: 4953203107233948473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_Red_R0
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 454
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc8f633f52381de80800000000000000
+      internalID: -8155593251173762869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_Yellow_R0
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 454
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b734ee573d82a2f0800000000000000
+      internalID: -963052101349132367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_JumpR0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 396
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f84fa277d21cb0f0800000000000000
+      internalID: -1099983492433884941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_JumpR1
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 396
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a44cfe36972040960800000000000000
+      internalID: 7567175994280232010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_JumpR2
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 396
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47c41deeacf45d300800000000000000
+      internalID: 276214685161835636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_JumpR3
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 396
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d19023074d55f36d0800000000000000
+      internalID: -3008591655156446947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_RunR0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 337
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa8d922b1cc6ed900800000000000000
+      internalID: 711125370344691887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_RunR1
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 337
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16182c6bd927238d0800000000000000
+      internalID: -2868103990979952287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_RunR2
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 337
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 201da95ad4d0074e0800000000000000
+      internalID: -1986072808528359166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_RunR3
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 337
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a7fdfc56051619f0800000000000000
+      internalID: -498187591703726170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_RunR4
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 337
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 249a6324d5dfecf80800000000000000
+      internalID: -8084245704098797246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_RunR5
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 337
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 012931ccd996542d0800000000000000
+      internalID: -3295111425897033200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_RunR6
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 337
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9171e9bf8d0d0d1c0800000000000000
+      internalID: -4480851998880688359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_RunR7
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 337
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23c6aa376aedbbe10800000000000000
+      internalID: 2214608448269216818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_SlashR0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 271
+        width: 89
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0335e247004890d0800000000000000
+      internalID: -3415909917429255411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_SlashR1
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 271
+        width: 89
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16e93697b908ac6f0800000000000000
+      internalID: -663576589838868895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_SlashR2
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 271
+        width: 89
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d78b7f59de1c9eed0800000000000000
+      internalID: -2384161301548517251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_SlashR3
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 206
+        width: 89
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f993d6cc3707b0940800000000000000
+      internalID: 5263424232165816735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_SlashR4
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 206
+        width: 89
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19fcb39deedd43100800000000000000
+      internalID: 86938310743412625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: elisa_SlashR5
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 206
+        width: 89
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f02572fece88d96d0800000000000000
+      internalID: -2982076827043409393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
