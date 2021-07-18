@@ -5,10 +5,14 @@ using DG.Tweening;
 
 public class CharacterMove : MonoBehaviour
 {
+    private string name;
     private Rigidbody2D rigid = null;
     private BoxCollider2D boxCol2D = null;
     private SpriteRenderer spriteRenderer = null;
+    private Animator anim = null;
+
     private PlayerInput playerInput = null;
+    private CharacterStat characterStat = null;
 
     [SerializeField]
     private LayerMask whatIsGround;
@@ -17,18 +21,18 @@ public class CharacterMove : MonoBehaviour
     private bool isGround = false;
 
     [SerializeField]
-    private float speed = 2f;
-    [SerializeField]
-    private float jumpSpeed = 2f;
-    [SerializeField]
     private float dashRange = 2f;
     [SerializeField]
     private float dashStopRange = 0.1f;
     [SerializeField]
     private float dashDoTime = 0.1f;
+    [SerializeField]
+    private float dashResetTime = 1f;
     private bool isJump = false;
     private bool isDash = false;
+    private bool canDash = true;
     private bool dashMoving = false;
+    private bool staping = false;
 
     private Vector2 currentPosition = Vector2.zero;
     private Vector2 dashPosition = Vector2.zero;
@@ -39,13 +43,17 @@ public class CharacterMove : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         boxCol2D = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
 
         playerInput = GetComponent<PlayerInput>();
+        characterStat = GetComponent<CharacterStat>();
 
         if (playerInput == null)
         {
             playerInput = gameObject.AddComponent<PlayerInput>();
         }
+
+        name = characterStat.name;
     }
     void Update()
     {
@@ -72,16 +80,16 @@ public class CharacterMove : MonoBehaviour
         GroundCheck();
 
         MoveX(XMove);
-
         Jump();
+        InAirCheck();
         Dash();
         DashMove();
-
+    
         transform.position = currentPosition;
     }
     private void Dash()
     {
-        if (isDash && !dashMoving)
+        if (isDash && !dashMoving && canDash)
         {
             dashPosition = currentPosition;
 
@@ -96,11 +104,22 @@ public class CharacterMove : MonoBehaviour
             dashMoving = true;
 
             isDash = false;
+            canDash = false;
+
+            Invoke("DashRe", dashResetTime);
         }
+        else if (!canDash)
+        {
+            isDash = false;
+        }
+    }
+    private void DashRe()
+    {
+        canDash = true;
     }
     private void DashMove()
     {
-        if(dashMoving)
+        if (dashMoving)
         {
             transform.DOMove(dashPosition, dashDoTime).SetEase(Ease.InQuad);
         }
@@ -112,7 +131,7 @@ public class CharacterMove : MonoBehaviour
 
         float distance = Vector2.Distance(_dashPosition, _currentPosition);
 
-        if(distance <= dashStopRange)
+        if (distance <= dashStopRange)
         {
             dashMoving = false;
         }
@@ -120,21 +139,44 @@ public class CharacterMove : MonoBehaviour
 
     private void Jump()
     {
-        if (isJump && isGround)
+        if (isJump && !staping && isGround)
         {
-            rigid.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
-            isJump = false;
+            anim.Play(name + "Jump");
+        }
+    }
+    public void Jumping()
+    {
+        rigid.AddForce(Vector2.up * characterStat.jumpSpeed, ForceMode2D.Impulse);
+        isJump = false;
+    }
+    private void InAirCheck()
+    {
+        if (!isGround && !staping)
+        {
+            anim.Play(name + "InAir");
         }
     }
 
     private void MoveX(float XMove)
     {
-        rigid.velocity = new Vector2(XMove * speed, rigid.velocity.y);
+        rigid.velocity = new Vector2(XMove * characterStat.speed, rigid.velocity.y);
     }
 
     private void GroundCheck()
     {
-        isGround = Physics2D.OverlapCircle(GroundChecker.position, 0.1f, whatIsGround);
+        bool a = Physics2D.OverlapCircle(GroundChecker.position, 0.1f, whatIsGround);
+
+        if (isGround == false && a) // 착지하는 순간
+        {
+            staping = true;
+            anim.Play(name + "Stap");
+        }
+
+        isGround = a;
+    }
+    private void SetStaping()
+    {
+        staping = false;
     }
 
     private void LRCheck(float XMove)
@@ -146,6 +188,18 @@ public class CharacterMove : MonoBehaviour
         else if (XMove > 0f)
         {
             spriteRenderer.flipX = false;
+        }
+
+        if (!isJump && !staping && isGround)
+        {
+            if (XMove != 0f)
+            {
+                anim.Play(name + "Run");
+            }
+            else
+            {
+                anim.Play(name + "Idle");
+            }
         }
     }
 }
