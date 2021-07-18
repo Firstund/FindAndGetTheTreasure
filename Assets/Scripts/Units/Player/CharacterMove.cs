@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CharacterMove : MonoBehaviour
 {
@@ -19,8 +20,19 @@ public class CharacterMove : MonoBehaviour
     private float speed = 2f;
     [SerializeField]
     private float jumpSpeed = 2f;
+    [SerializeField]
+    private float dashRange = 2f;
+    [SerializeField]
+    private float dashStopRange = 0.1f;
+    [SerializeField]
+    private float dashDoTime = 0.1f;
     private bool isJump = false;
     private bool isDash = false;
+    private bool dashMoving = false;
+
+    private Vector2 currentPosition = Vector2.zero;
+    private Vector2 dashPosition = Vector2.zero;
+
 
     void Start()
     {
@@ -37,18 +49,22 @@ public class CharacterMove : MonoBehaviour
     }
     void Update()
     {
-        if(playerInput.isJump)
+
+        if (playerInput.isJump)
         {
             isJump = true;
         }
 
-        if(playerInput.isDash)
+        if (playerInput.isDash)
         {
             isDash = true;
         }
+
     }
     void FixedUpdate()
     {
+        currentPosition = transform.position;
+
         float XMove = playerInput.XMove;
 
         LRCheck(XMove);
@@ -58,6 +74,48 @@ public class CharacterMove : MonoBehaviour
         MoveX(XMove);
 
         Jump();
+        Dash();
+        DashMove();
+
+        transform.position = currentPosition;
+    }
+    private void Dash()
+    {
+        if (isDash && !dashMoving)
+        {
+            dashPosition = currentPosition;
+
+            float _dashRange = dashRange;
+
+            if (spriteRenderer.flipX)
+            {
+                _dashRange = -_dashRange;
+            }
+
+            dashPosition.x += _dashRange;
+            dashMoving = true;
+
+            isDash = false;
+        }
+    }
+    private void DashMove()
+    {
+        if(dashMoving)
+        {
+            transform.DOMove(dashPosition, dashDoTime).SetEase(Ease.InQuad);
+        }
+
+        Vector2 _dashPosition = dashPosition;
+        Vector2 _currentPosition = currentPosition;
+        _dashPosition.y = 0f;
+        _currentPosition.y = 0f;
+
+        float distance = Vector2.Distance(_dashPosition, _currentPosition);
+
+        if(distance <= dashStopRange)
+        {
+            dashMoving = false;
+        }
     }
 
     private void Jump()
@@ -81,11 +139,11 @@ public class CharacterMove : MonoBehaviour
 
     private void LRCheck(float XMove)
     {
-        if (XMove == -1f)
+        if (XMove < 0f)
         {
             spriteRenderer.flipX = true;
         }
-        else if (XMove == 1f)
+        else if (XMove > 0f)
         {
             spriteRenderer.flipX = false;
         }
