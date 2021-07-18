@@ -30,9 +30,11 @@ public class CharacterMove : MonoBehaviour
     private float dashResetTime = 1f;
     private bool isJump = false;
     private bool isDash = false;
+    private bool isAttack = false;
     private bool canDash = true;
     private bool dashMoving = false;
     private bool staping = false;
+    private bool attacking = false;
 
     private Vector2 currentPosition = Vector2.zero;
     private Vector2 dashPosition = Vector2.zero;
@@ -68,6 +70,11 @@ public class CharacterMove : MonoBehaviour
             isDash = true;
         }
 
+        if (playerInput.isAttack)
+        {
+            isAttack = true;
+        }
+
     }
     void FixedUpdate()
     {
@@ -80,11 +87,13 @@ public class CharacterMove : MonoBehaviour
         GroundCheck();
 
         MoveX(XMove);
+
         Jump();
+        Attack();
         InAirCheck();
         Dash();
         DashMove();
-    
+
         transform.position = currentPosition;
     }
     private void Dash()
@@ -136,10 +145,28 @@ public class CharacterMove : MonoBehaviour
             dashMoving = false;
         }
     }
+    private void Attack()
+    {
+        if (!attacking && !staping && isAttack) //isGround에 따라서 GroundAttack과 InAirAttack을 나눌것, dashing == true라면 dashAttack을 할것
+        {
+            if (isGround)
+            {
+                attacking = true;
 
+                anim.Play(name + "Attack");
+
+                isAttack = false;
+            }
+        }
+    }
+    private void SetAttacking()
+    {
+        attacking = false;
+        isAttack = false;
+    }
     private void Jump()
     {
-        if (isJump && !staping && isGround)
+        if (isJump && !staping && !attacking && isGround)
         {
             anim.Play(name + "Jump");
         }
@@ -151,7 +178,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void InAirCheck()
     {
-        if (!isGround && !staping)
+        if (!isGround && !staping && !attacking)
         {
             anim.Play(name + "InAir");
         }
@@ -190,7 +217,7 @@ public class CharacterMove : MonoBehaviour
             spriteRenderer.flipX = false;
         }
 
-        if (!isJump && !staping && isGround)
+        if (!isJump && !staping && !attacking && isGround)
         {
             if (XMove != 0f)
             {
