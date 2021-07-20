@@ -14,7 +14,7 @@ public class AfterImage : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void SetSprite(Sprite sprite, bool flip, Vector3 position)
+    public void SetSprite(Sprite sprite, bool flip, Vector3 position, SpawnAfterImage spawnAfterImage)
     {
         transform.position = position;
         spriteRenderer.flipX = flip;
@@ -22,6 +22,7 @@ public class AfterImage : MonoBehaviour
         spriteRenderer.sprite = sprite;
 
         spriteRenderer.DOFade(0, fadeOutTime).OnComplete(()=>{
+            spawnAfterImage.afterImageList.Add(this);
             gameObject.SetActive(false);
         });
     }

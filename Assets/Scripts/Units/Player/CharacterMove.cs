@@ -96,7 +96,7 @@ public class CharacterMove : MonoBehaviour
 
         Jump();
         InAirCheck();
-        Dash();
+        Dash(XMove);
 
         Attack();
 
@@ -105,9 +105,9 @@ public class CharacterMove : MonoBehaviour
 
         transform.position = currentPosition;
     }
-    private void Dash()
+    private void Dash(float XMove)
     {
-        if (isDash && !dashMoving && canDash)
+        if (!(XMove == 0) && isDash && !dashMoving && canDash)
         {
             float _dashRange = dashRange;
             dashPosition = currentPosition;  
@@ -144,10 +144,11 @@ public class CharacterMove : MonoBehaviour
 
             Invoke("DashRe", dashResetTime);
         }
-        else if (!canDash)
+        else
         {
             isDash = false;
         }
+
     }
     private void DashRe()
     {
