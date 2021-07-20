@@ -68,6 +68,7 @@ public class CharacterMove : MonoBehaviour
 
         if (playerInput.isJump)
         {
+            attacking = false;
             isJump = true;
         }
 
@@ -76,7 +77,7 @@ public class CharacterMove : MonoBehaviour
             isDash = true;
         }
 
-        if (playerInput.isAttack)
+        if (playerInput.isAttack && !attacking)
         {
             isAttack = true;
         }
@@ -273,8 +274,10 @@ public class CharacterMove : MonoBehaviour
 
         if (!isJump && !staping && !attacking && isGround)
         {
+            attacking = false;
+            
             if (XMove != 0f)
-            {
+            {   
                 anim.Play(name + "Run");
             }
             else
