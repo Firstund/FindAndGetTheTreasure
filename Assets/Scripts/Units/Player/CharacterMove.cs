@@ -8,10 +8,11 @@ public class CharacterMove : MonoBehaviour
     private string name;
     private Rigidbody2D rigid = null;
     private BoxCollider2D boxCol2D = null;
-    private SpriteRenderer spriteRenderer = null;
     private Animator anim = null;
+    public SpriteRenderer spriteRenderer { get; private set; }
 
     private PlayerInput playerInput = null;
+    private SpawnAfterImage spawnAfterImage = null;
     private CharacterStat characterStat = null;
 
     [SerializeField]
@@ -32,15 +33,16 @@ public class CharacterMove : MonoBehaviour
     private bool isDash = false;
     private bool isAttack = false;
     private bool canDash = true;
+    private bool canDashAttack = true;
     private bool dashMoving = false;
     private bool staping = false;
     private bool attacking = false;
+    private bool canSpawnAfterImage = true;
 
-    private Vector2 currentPosition = Vector2.zero;
     private Vector2 dashPosition = Vector2.zero;
 
-
-    void Start()
+    public Vector2 currentPosition { get; private set; }
+    private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         boxCol2D = GetComponent<BoxCollider2D>();
@@ -49,7 +51,11 @@ public class CharacterMove : MonoBehaviour
 
         playerInput = GetComponent<PlayerInput>();
         characterStat = GetComponent<CharacterStat>();
+        spawnAfterImage = GetComponent<SpawnAfterImage>();
+    }
 
+    void Start()
+    {
         if (playerInput == null)
         {
             playerInput = gameObject.AddComponent<PlayerInput>();
@@ -95,6 +101,7 @@ public class CharacterMove : MonoBehaviour
         Attack();
 
         DashMove();
+        SpawnAfterImage();
 
         transform.position = currentPosition;
     }
@@ -102,25 +109,38 @@ public class CharacterMove : MonoBehaviour
     {
         if (isDash && !dashMoving && canDash)
         {
-            dashPosition = currentPosition;
-
             float _dashRange = dashRange;
+            dashPosition = currentPosition;  
+
+            if (attacking)
+            {
+                if (canDashAttack)
+                {
+                    anim.Play(name + "DashAttack");
+
+                    _dashRange = dashRange / 2;
+
+                    dashPosition.x = currentPosition.x + _dashRange;
+                }
+            }
+            else
+            {
+                canDashAttack = false;
+                attacking = false;
+            }
 
             if (spriteRenderer.flipX)
             {
                 _dashRange = -_dashRange;
             }
 
-            dashPosition.x += _dashRange;
+            dashPosition.x = currentPosition.x + _dashRange;
             dashMoving = true;
 
             isDash = false;
             canDash = false;
 
-            if(attacking)
-            {
-                anim.Play(name + "DashAttack");
-            }
+            
 
             Invoke("DashRe", dashResetTime);
         }
@@ -132,6 +152,23 @@ public class CharacterMove : MonoBehaviour
     private void DashRe()
     {
         canDash = true;
+        canDashAttack = true;
+    }
+    private void SpawnAfterImage()
+    {
+        if (dashMoving && canSpawnAfterImage)
+        {
+            float spawnAfterImageDelay = Random.RandomRange(spawnAfterImage.spawnAfterImageDelayMinimum, spawnAfterImage.spawnAfterImageDelayMaximum);
+            spawnAfterImage.SetAfterImage();
+            canSpawnAfterImage = false;
+
+            Invoke("SpawnAfterImageRe", spawnAfterImageDelay);
+        }
+
+    }
+    private void SpawnAfterImageRe()
+    {
+        canSpawnAfterImage = true;
     }
     private void DashMove()
     {
@@ -147,6 +184,7 @@ public class CharacterMove : MonoBehaviour
 
         float distance = Vector2.Distance(_dashPosition, _currentPosition);
 
+
         if (distance <= dashStopRange)
         {
             dashMoving = false;
@@ -154,17 +192,14 @@ public class CharacterMove : MonoBehaviour
     }
     private void Attack()
     {
-        if (!attacking && !staping && isAttack) //isGround에 따라서 GroundAttack과 InAirAttack을 나눌것, dashing == true라면 dashAttack을 할것
+        if (!attacking && !dashMoving && !staping && isAttack) //isGround에 따라서 GroundAttack과 InAirAttack을 나눌것, dashing == true라면 dashAttack을 할것
         {
             if (isGround)
             {
                 attacking = true;
 
-                if (!dashMoving)
-                {
-                    anim.Play(name + "Attack"); 
-                }
-                
+                anim.Play(name + "Attack");
+
                 isAttack = false;
             }
             else if (!isGround)
