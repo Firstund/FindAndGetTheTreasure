@@ -89,9 +89,11 @@ public class CharacterMove : MonoBehaviour
         MoveX(XMove);
 
         Jump();
-        Attack();
         InAirCheck();
         Dash();
+
+        Attack();
+
         DashMove();
 
         transform.position = currentPosition;
@@ -114,6 +116,11 @@ public class CharacterMove : MonoBehaviour
 
             isDash = false;
             canDash = false;
+
+            if(attacking)
+            {
+                anim.Play(name + "DashAttack");
+            }
 
             Invoke("DashRe", dashResetTime);
         }
@@ -153,7 +160,17 @@ public class CharacterMove : MonoBehaviour
             {
                 attacking = true;
 
-                anim.Play(name + "Attack");
+                if (!dashMoving)
+                {
+                    anim.Play(name + "Attack"); 
+                }
+                
+                isAttack = false;
+            }
+            else if (!isGround)
+            {
+                attacking = true;
+                anim.Play(name + "InAirAttack");
 
                 isAttack = false;
             }
@@ -195,6 +212,7 @@ public class CharacterMove : MonoBehaviour
 
         if (isGround == false && a) // 착지하는 순간
         {
+            SetAttacking();
             staping = true;
             anim.Play(name + "Stap");
         }
