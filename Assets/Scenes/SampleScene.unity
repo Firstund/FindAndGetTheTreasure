@@ -426,12 +426,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 6
 --- !u!61 &961411899
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2152,6 +2152,9 @@ GameObject:
   - component: {fileID: 1570117822}
   - component: {fileID: 1570117824}
   - component: {fileID: 1570117823}
+  - component: {fileID: 1570117825}
+  - component: {fileID: 1570117826}
+  - component: {fileID: 1570117827}
   m_Layer: 0
   m_Name: Umiko
   m_TagString: Untagged
@@ -2303,7 +2306,7 @@ MonoBehaviour:
     m_Bits: 192
   whatIsEnemy:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 768
   GroundChecker: {fileID: 1219901421}
   LeftWallChecker: {fileID: 1900177495}
   RightWallChecker: {fileID: 1528156309}
@@ -2327,7 +2330,7 @@ MonoBehaviour:
   _hp: 10
   _ap: 2
   _dp: 2
-  _attackRange: 10
+  _attackRange: 1
   _speed: 5
   _jumpSpeed: 10
 --- !u!95 &1570117823
@@ -2365,6 +2368,52 @@ MonoBehaviour:
   afterImageSpawnPosition: {fileID: 1925565438}
   _spawnAfterImageDelayMinimum: 0
   _spawnAfterImageDelayMaximum: 0.01
+--- !u!114 &1570117825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570117815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4f8041ce74bc594ea9ad940234d9c3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 1
+  attack_color: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &1570117826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570117815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ceaae3c53061e443921d66a3600aa4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRangeX: 2.5
+  attackRangeY: 1
+  attack_color: {r: 0, g: 0, b: 0, a: 1}
+  offsetX: 1.25
+--- !u!114 &1570117827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570117815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ceaae3c53061e443921d66a3600aa4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRangeX: 2.5
+  attackRangeY: 1
+  attack_color: {r: 0, g: 0, b: 0, a: 1}
+  offsetX: -1.25
 --- !u!1 &1900177494
 GameObject:
   m_ObjectHideFlags: 0

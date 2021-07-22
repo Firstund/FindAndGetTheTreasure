@@ -126,14 +126,7 @@ public class CharacterMove : MonoBehaviour
 
             if (attacking)
             {
-                if (canDashAttack)
-                {
-                    anim.Play(name + "DashAttack");
-
-                    _dashRange = dashRange / 2;
-
-                    dashPosition.x = currentPosition.x + _dashRange;
-                }
+                _dashRange = DashAttack(_dashRange);
             }
             else
             {
@@ -179,6 +172,23 @@ public class CharacterMove : MonoBehaviour
         }
 
     }
+
+    private float DashAttack(float _dashRange)
+    {
+        if (canDashAttack)
+        {
+            anim.Play(name + "DashAttack");
+
+            _dashRange = dashRange / 2;
+
+            dashPosition.x = currentPosition.x + _dashRange;
+
+            GetDashAttackDamage();
+        }
+
+        return _dashRange;
+    }
+
     private void DashRe()
     {
         canDash = true;
@@ -205,6 +215,10 @@ public class CharacterMove : MonoBehaviour
         if (dashMoving)
         {
             transform.DOMove(dashPosition, dashDoTime).SetEase(Ease.InQuad);
+        }
+        else
+        {
+
         }
 
         Vector2 _dashPosition = dashPosition;
@@ -246,7 +260,7 @@ public class CharacterMove : MonoBehaviour
     private void GetDamage()
     {
         Collider2D[] a = Physics2D.OverlapCircleAll(currentPosition, characterStat.attackRange, whatIsEnemy);
-        
+
         foreach (var item in a)
         {
             EnemyStat enemyStat = item.GetComponent<EnemyStat>();
@@ -259,6 +273,40 @@ public class CharacterMove : MonoBehaviour
 
             enemyStat.hp = enemyHp;
         }
+    }
+    private void GetDashAttackDamage()
+    {
+        float attackRange = dashRange/2f;
+        float sizeX = attackRange;
+        float sizeY = 5f;
+
+        Vector2 _currentPosition = currentPosition;
+
+        if(spriteRenderer.flipX)
+        {
+            sizeX = -sizeX;
+        }
+
+        Vector3 size = Vector3.zero;
+        size.x = sizeX;
+        size.y = sizeY;
+
+        Collider2D[] a = Physics2D.OverlapAreaAll(GroundChecker.position, size, whatIsEnemy);
+
+        foreach (var item in a)
+        {
+            EnemyStat enemyStat = item.GetComponent<EnemyStat>();
+            float enemyHp = enemyStat.hp;
+            float enemyDp = enemyStat.dp;
+
+            float totalDamage = characterStat.ap - enemyDp; 
+
+            enemyHp -= totalDamage;
+
+            enemyStat.hp = enemyHp;
+        }
+
+
     }
     private void SetAttacking()
     {
