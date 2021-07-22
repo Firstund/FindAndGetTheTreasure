@@ -18,8 +18,17 @@ public class CharacterMove : MonoBehaviour
     [SerializeField]
     private LayerMask whatIsGround;
     [SerializeField]
+    private LayerMask whatIsEnemy;
+
+    [SerializeField]
     private Transform GroundChecker;
+    [SerializeField]
+    private Transform LeftWallChecker;
+    [SerializeField]
+    private Transform RightWallChecker;
     private bool isGround = false;
+    private bool leftWall = false;
+    private bool rightWall = false;
 
     [SerializeField]
     private float dashRange = 2f;
@@ -65,7 +74,6 @@ public class CharacterMove : MonoBehaviour
     }
     void Update()
     {
-
         if (playerInput.isJump)
         {
             attacking = false;
@@ -82,6 +90,11 @@ public class CharacterMove : MonoBehaviour
             isAttack = true;
         }
 
+
+        GroundCheck();
+        LeftWallCheck();
+        RightWallCheck();
+
     }
     void FixedUpdate()
     {
@@ -90,8 +103,6 @@ public class CharacterMove : MonoBehaviour
         float XMove = playerInput.XMove;
 
         LRCheck(XMove);
-
-        GroundCheck();
 
         MoveX(XMove);
 
@@ -111,7 +122,7 @@ public class CharacterMove : MonoBehaviour
         if (!(XMove == 0) && isDash && !dashMoving && canDash)
         {
             float _dashRange = dashRange;
-            dashPosition = currentPosition;  
+            dashPosition = currentPosition;
 
             if (attacking)
             {
@@ -136,12 +147,29 @@ public class CharacterMove : MonoBehaviour
             }
 
             dashPosition.x = currentPosition.x + _dashRange;
+
+            bool a = false;
+            do
+            {
+                a = Physics2D.OverlapCircle(dashPosition, 0.1f, whatIsGround);
+                if (a)
+                {
+                    if (spriteRenderer.flipX)
+                    {
+                        dashPosition.x += 0.1f;
+                    }
+                    else
+                    {
+                        dashPosition.x -= 0.1f;
+                    }
+                }
+
+            } while (a);
+
             dashMoving = true;
 
             isDash = false;
             canDash = false;
-
-            
 
             Invoke("DashRe", dashResetTime);
         }
@@ -211,6 +239,25 @@ public class CharacterMove : MonoBehaviour
 
                 isAttack = false;
             }
+
+            GetDamage();
+        }
+    }
+    private void GetDamage()
+    {
+        Collider2D[] a = Physics2D.OverlapCircleAll(currentPosition, characterStat.attackRange, whatIsEnemy);
+        
+        foreach (var item in a)
+        {
+            EnemyStat enemyStat = item.GetComponent<EnemyStat>();
+            float enemyHp = enemyStat.hp;
+            float enemyDp = enemyStat.dp;
+
+            float totalDamage = characterStat.ap - enemyDp; 
+
+            enemyHp -= totalDamage;
+
+            enemyStat.hp = enemyHp;
         }
     }
     private void SetAttacking()
@@ -256,6 +303,18 @@ public class CharacterMove : MonoBehaviour
 
         isGround = a;
     }
+    private void LeftWallCheck()
+    {
+        bool a = Physics2D.OverlapCircle(LeftWallChecker.position, 0.1f, whatIsGround);
+
+        leftWall = a;
+    }
+    private void RightWallCheck()
+    {
+        bool a = Physics2D.OverlapCircle(RightWallChecker.position, 0.1f, whatIsGround);
+
+        rightWall = a;
+    }
     private void SetStaping()
     {
         staping = false;
@@ -275,9 +334,9 @@ public class CharacterMove : MonoBehaviour
         if (!isJump && !staping && !attacking && isGround)
         {
             attacking = false;
-            
+
             if (XMove != 0f)
-            {   
+            {
                 anim.Play(name + "Run");
             }
             else

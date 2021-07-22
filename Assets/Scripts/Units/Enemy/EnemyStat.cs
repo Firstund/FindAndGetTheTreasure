@@ -21,18 +21,21 @@ public class EnemyStat : EnemyStatus
     public float hp
     {
         get { return _hp; }
+        set { _hp = value; }
     }
     [SerializeField]
     private float _ap = 1f;
     public float ap
     {
         get { return _ap; }
+        set { _ap = value; }
     }
     [SerializeField]
     private float _dp = 1f;
     public float dp
     {
         get { return _dp; }
+        set { _dp = value; }
     }
     [SerializeField]
     private float _searchSpeed = 1f;
