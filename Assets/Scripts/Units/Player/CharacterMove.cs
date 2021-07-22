@@ -160,7 +160,7 @@ public class CharacterMove : MonoBehaviour
     {
         if (dashMoving && canSpawnAfterImage)
         {
-            float spawnAfterImageDelay = Random.RandomRange(spawnAfterImage.spawnAfterImageDelayMinimum, spawnAfterImage.spawnAfterImageDelayMaximum);
+            float spawnAfterImageDelay = Random.Range(spawnAfterImage.spawnAfterImageDelayMinimum, spawnAfterImage.spawnAfterImageDelayMaximum);
             spawnAfterImage.SetAfterImage();
             canSpawnAfterImage = false;
 
