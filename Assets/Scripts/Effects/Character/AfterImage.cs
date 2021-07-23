@@ -18,7 +18,7 @@ public class AfterImage : MonoBehaviour
     {
         transform.position = position;
         spriteRenderer.flipX = flip;
-        spriteRenderer.color = new Color(10f,1f,1f,1f);
+        spriteRenderer.color = new Color(0.5f,1f,1f,1f);
         spriteRenderer.sprite = sprite;
 
         spriteRenderer.DOFade(0, fadeOutTime).OnComplete(()=>{

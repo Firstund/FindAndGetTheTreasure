@@ -17,17 +17,22 @@ public class EnemyMove : EnemyStatus
     [Header("이 유닛이 공중유닛일 경우에만 적용되는 값")]
     [SerializeField]
     private float searchRangeY = 1f;
-    
+
+    [SerializeField]
+    private LayerMask WhatIsPlayer;
+
     private bool isAttack = false;
     private bool isPursue = false;
     private bool isSearching = false;
+    private bool isDead = false;
+    private bool isHurt = false;
     private bool serachMove = true;
     private bool canAttack = true;
 
     private Vector2 currentPosition = Vector2.zero;
     private Vector2 playerPosition = Vector2.zero;
     private Vector2 searchTargetPosition = Vector2.zero;
-    
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -38,31 +43,45 @@ public class EnemyMove : EnemyStatus
 
     void Update()
     {
-        if(canAttack && enemyStat.currentStatus == Status.Attack)
+        if (!isDead)
         {
-            isAttack = true;
-            isPursue = false;
-            isSearching = false;
-        }
-        else if(enemyStat.currentStatus == Status.Found)
-        {
-            isAttack = false;
-            isPursue = true;
-            isSearching = false;
-        }
-        else if(enemyStat.currentStatus == Status.Searching)
-        {
-            isAttack = false;
-            isPursue = false;
-            isSearching = true;
+            if (enemyStat.currentStatus == Status.Attack)
+            {
+                isAttack = true;
+                isPursue = false;
+                isSearching = false;
+            }
+            else if (enemyStat.currentStatus == Status.Found)
+            {
+                isAttack = false;
+                isPursue = true;
+                isSearching = false;
+            }
+            else if (enemyStat.currentStatus == Status.Searching)
+            {
+                isAttack = false;
+                isPursue = false;
+                isSearching = true;
+            }
+
+            if (enemyStat.hp <= 0f)
+            {
+                isAttack = false;
+                isPursue = false;
+                isSearching = false;
+                isDead = true;
+
+                Dead();
+            }
         }
     }
     private void FixedUpdate()
-    {  
+    {
         currentPosition = transform.position;
         playerPosition = enemyStat.playerPosition.position;
 
         Pursue();
+        Attack();
         Searching();
 
         transform.position = currentPosition;
@@ -73,7 +92,7 @@ public class EnemyMove : EnemyStatus
     }
     private void Pursue()
     {
-        if(isPursue)
+        if (isPursue)
         {
             anim.Play("Move");
             currentPosition = Vector2.MoveTowards(currentPosition, playerPosition, enemyStat.pursueSpeed * Time.fixedDeltaTime);
@@ -82,25 +101,97 @@ public class EnemyMove : EnemyStatus
     }
     private void Attack()
     {
-        if(isAttack)
+        if (canAttack && isAttack)
         {
+            canAttack = false;
             anim.Play("Attack");
             FlipCheck(playerPosition);
+            Invoke("AttackRe", enemyStat.attackDelay);
         }
+    }
+    private void Dead()
+    {
+        anim.Play("Dead");
+    }
+    private void Destroye()
+    {
+        gameObject.SetActive(false);
+    }
+    private void AttackRe()
+    {
+        canAttack = true;
+    }
+    private void GetDamage()
+    {
+        bool a = Physics2D.OverlapCircle(currentPosition, enemyStat.attackRange, WhatIsPlayer);
+
+        if (a)
+        {
+            Collider2D player_Col = Physics2D.OverlapCircle(currentPosition, enemyStat.attackRange, WhatIsPlayer);
+            CharacterStat _player = player_Col.gameObject.GetComponent<CharacterStat>();
+            CharacterMove _playerMove = player_Col.gameObject.GetComponent<CharacterMove>();
+
+            float p_hp = _player.hp;
+            float p_dp = _player.dp;
+
+            float totalDamage;
+
+            totalDamage = enemyStat.ap - p_dp;
+
+            if (totalDamage <= 0f)
+            {
+                totalDamage = 0.5f;
+            }
+
+            p_hp -= totalDamage;
+            _player.hp = p_hp;
+
+            _playerMove._Hurt();
+        }
+    }
+       public void _Hurt()
+    {
+        if (!isHurt)
+        {
+            isHurt = true;
+
+            StartCoroutine(Hurt());
+            
+            Invoke("isHurtSet", 1f);
+
+        }
+    }
+    private IEnumerator Hurt()
+    {
+        Color color = new Color(1f, 0f, 1f, 0.5f);
+        Color color_origin = new Color(1f, 1f, 1f, 1f);
+
+
+        spriteRenderer.color = color;
+
+        // HitSound 재생
+
+        yield return new WaitForSeconds(0.5f);
+
+        spriteRenderer.color = color_origin;
+    }
+    private void isHurtSet()
+    {
+        isHurt = false;
     }
     private void Searching()
     {
         float distance;
-        if(isSearching)
+        if (isSearching)
         {
-            if(serachMove)
+            if (serachMove)
             {
                 anim.Play("Move");
                 currentPosition = Vector2.MoveTowards(currentPosition, searchTargetPosition, enemyStat.searchSpeed * Time.fixedDeltaTime);
 
                 distance = Vector2.Distance(currentPosition, searchTargetPosition);
 
-                if(distance <= searchResetDistance)
+                if (distance <= searchResetDistance)
                 {
                     serachMove = false;
                     SearchPositionSet();
@@ -122,7 +213,7 @@ public class EnemyMove : EnemyStatus
 
         searchTargetPosition.x += _searchX;
 
-        if(enemyStat.isAirEnemy)
+        if (enemyStat.isAirEnemy)
         {
             float _searchY = Random.Range(-searchRangeY, searchRangeY);
 

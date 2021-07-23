@@ -40,7 +40,9 @@ public class CharacterMove : MonoBehaviour
     private float dashResetTime = 1f;
     private bool isJump = false;
     private bool isDash = false;
+    private bool isDead = false;
     private bool isAttack = false;
+    private bool isHurt = false;
     private bool canDash = true;
     private bool canDashAttack = true;
     private bool dashMoving = false;
@@ -74,48 +76,105 @@ public class CharacterMove : MonoBehaviour
     }
     void Update()
     {
-        if (playerInput.isJump)
+        if (!isDead)
         {
-            attacking = false;
-            isJump = true;
+            if (playerInput.isJump)
+            {
+                attacking = false;
+                isJump = true;
+            }
+
+            if (playerInput.isDash)
+            {
+                isDash = true;
+            }
+
+            if (playerInput.isAttack && !attacking)
+            {
+                isAttack = true;
+            }
+
+            GroundCheck();
+            LeftWallCheck();
+            RightWallCheck();
         }
 
-        if (playerInput.isDash)
+        if (characterStat.hp <= 0f)
         {
-            isDash = true;
+            isDead = true;
+            isJump = false;
+            isDash = false;
+            isAttack = false;
+            isGround = false;
+
+            Dead();
         }
 
-        if (playerInput.isAttack && !attacking)
-        {
-            isAttack = true;
-        }
 
 
-        GroundCheck();
-        LeftWallCheck();
-        RightWallCheck();
 
     }
     void FixedUpdate()
     {
-        currentPosition = transform.position;
+        if (!isDead)
+        {
+            currentPosition = transform.position;
 
-        float XMove = playerInput.XMove;
+            float XMove = playerInput.XMove;
 
-        LRCheck(XMove);
+            LRCheck(XMove);
 
-        MoveX(XMove);
+            MoveX(XMove);
 
-        Jump();
-        InAirCheck();
-        Dash(XMove);
+            Jump();
+            InAirCheck();
+            Dash(XMove);
 
-        Attack();
+            Attack();
 
-        DashMove();
-        SpawnAfterImage();
+            DashMove();
+            SpawnAfterImage();
 
-        transform.position = currentPosition;
+            transform.position = currentPosition;
+        }
+    }
+    public void _Hurt()
+    {
+        if (!isHurt)
+        {
+            isHurt = true;
+
+            StartCoroutine(Hurt());
+            
+            Invoke("isHurtSet", 1f);
+
+        }
+    }
+    private IEnumerator Hurt()
+    {
+        Color color = new Color(1f, 0f, 1f, 0.5f);
+        Color color_origin = new Color(1f, 1f, 1f, 1f);
+
+
+        spriteRenderer.color = color;
+
+        // HitSound 재생
+
+        yield return new WaitForSeconds(0.5f);
+
+        spriteRenderer.color = color_origin;
+    }
+    private void isHurtSet()
+    {
+        isHurt = false;
+    }
+    private void Dead()
+    {
+        anim.Play(name + "Dead");
+    }
+    private void Destroye()
+    {
+        gameObject.SetActive(false);
     }
     private void Dash(float XMove)
     {
@@ -264,25 +323,34 @@ public class CharacterMove : MonoBehaviour
         foreach (var item in a)
         {
             EnemyStat enemyStat = item.GetComponent<EnemyStat>();
+            EnemyMove enemyMove = item.GetComponent<EnemyMove>();
+
             float enemyHp = enemyStat.hp;
             float enemyDp = enemyStat.dp;
 
-            float totalDamage = characterStat.ap - enemyDp; 
+            float totalDamage = characterStat.ap - enemyDp;
+
+            if (totalDamage <= 0f)
+            {
+                totalDamage = 0.5f;
+            }
 
             enemyHp -= totalDamage;
 
             enemyStat.hp = enemyHp;
+
+            enemyMove._Hurt();
         }
     }
     private void GetDashAttackDamage()
     {
-        float attackRange = dashRange/2f;
+        float attackRange = dashRange / 2f;
         float sizeX = attackRange;
-        float sizeY = 5f;
+        float sizeY = attackRange / 2f;
 
         Vector2 _currentPosition = currentPosition;
 
-        if(spriteRenderer.flipX)
+        if (spriteRenderer.flipX)
         {
             sizeX = -sizeX;
         }
@@ -296,14 +364,23 @@ public class CharacterMove : MonoBehaviour
         foreach (var item in a)
         {
             EnemyStat enemyStat = item.GetComponent<EnemyStat>();
+            EnemyMove enemyMove = item.GetComponent<EnemyMove>();
+
             float enemyHp = enemyStat.hp;
             float enemyDp = enemyStat.dp;
 
-            float totalDamage = characterStat.ap - enemyDp; 
+            float totalDamage = characterStat.ap - enemyDp;
+
+            if (totalDamage <= 0f)
+            {
+                totalDamage = 0.5f;
+            }
 
             enemyHp -= totalDamage;
 
             enemyStat.hp = enemyHp;
+
+            enemyMove._Hurt();
         }
 
 

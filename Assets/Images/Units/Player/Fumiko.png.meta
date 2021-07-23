@@ -67,13 +67,13 @@ TextureImporter:
     second: Fumiko_Run2
   - first:
       213: 4626920354569438321
-    second: Fumiko_22
+    second: Fumiko_Hurt0
   - first:
       213: 7177385748183536982
-    second: Fumiko_23
+    second: Fumiko_Hurt1
   - first:
       213: 1091012550707837366
-    second: Fumiko_24
+    second: Fumiko_Hurt2
   - first:
       213: -1928020750593270977
     second: Fumiko_Jump0
@@ -143,6 +143,9 @@ TextureImporter:
   - first:
       213: -7554847879729933539
     second: Fumiko_48
+  - first:
+      213: 7116909014314669858
+    second: Fumiko_14
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -685,7 +688,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fumiko_22
+      name: Fumiko_Hurt0
       rect:
         serializedVersion: 2
         x: 145
@@ -706,7 +709,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fumiko_23
+      name: Fumiko_Hurt1
       rect:
         serializedVersion: 2
         x: 170
@@ -727,7 +730,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fumiko_24
+      name: Fumiko_Hurt2
       rect:
         serializedVersion: 2
         x: 193
@@ -1226,6 +1229,27 @@ TextureImporter:
       bones: []
       spriteID: d13959471e9c72790800000000000000
       internalID: -7554847879729933539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fumiko_14
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 71
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2275001aa0754c260800000000000000
+      internalID: 7116909014314669858
       vertices: []
       indices: 
       edges: []
