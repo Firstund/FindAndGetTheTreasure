@@ -48,6 +48,12 @@ public class CharacterStat : MonoBehaviour
         get { return _speed; }
     }
     [SerializeField]
+    private float _hangSpeed = 0f;
+    public float hangSpeed
+    {
+        get{return _hangSpeed;}
+    }
+    [SerializeField]
     private float _jumpSpeed = 0f;
     public float jumpSpeed
     {

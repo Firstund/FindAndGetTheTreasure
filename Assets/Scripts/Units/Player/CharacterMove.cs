@@ -10,10 +10,14 @@ public class CharacterMove : MonoBehaviour
     private BoxCollider2D boxCol2D = null;
     private Animator anim = null;
     public SpriteRenderer spriteRenderer { get; private set; }
+    private SpriteRenderer pulleySpriteRenderer = null;
 
     private PlayerInput playerInput = null;
     private SpawnAfterImage spawnAfterImage = null;
     private CharacterStat characterStat = null;
+
+    [SerializeField]
+    private GameObject pulley = null;
 
     [SerializeField]
     private LayerMask whatIsGround;
@@ -26,9 +30,13 @@ public class CharacterMove : MonoBehaviour
     private Transform LeftWallChecker;
     [SerializeField]
     private Transform RightWallChecker;
+    [SerializeField]
+    private Transform UpWallChecker;
+
     private bool isGround = false;
     private bool leftWall = false;
     private bool rightWall = false;
+    private bool upWall = false;
 
     [SerializeField]
     private float dashRange = 2f;
@@ -38,7 +46,9 @@ public class CharacterMove : MonoBehaviour
     private float dashDoTime = 0.1f;
     [SerializeField]
     private float dashResetTime = 1f;
+
     private bool isJump = false;
+    private bool isHang = false;
     private bool isDash = false;
     private bool isDead = false;
     private bool isAttack = false;
@@ -53,11 +63,15 @@ public class CharacterMove : MonoBehaviour
     private Vector2 dashPosition = Vector2.zero;
 
     public Vector2 currentPosition { get; private set; }
+
+    private float firstGravity = 0f;
+
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         boxCol2D = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        pulleySpriteRenderer = pulley.GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 
         playerInput = GetComponent<PlayerInput>();
@@ -73,6 +87,7 @@ public class CharacterMove : MonoBehaviour
         }
 
         name = characterStat.name;
+        firstGravity = rigid.gravityScale;
     }
     void Update()
     {
@@ -81,7 +96,28 @@ public class CharacterMove : MonoBehaviour
             if (playerInput.isJump)
             {
                 attacking = false;
-                isJump = true;
+                if (upWall)
+                {
+                    if (!isHang)
+                    {
+                        isHang = true;
+                        isJump = false;
+                    }
+                    else
+                    {
+                        isHang = false;
+                    }
+                }
+                else
+                {
+                    isJump = true;
+                    isHang = false;
+                }
+            }
+
+            if (!upWall)
+            {
+                isHang = false;
             }
 
             if (playerInput.isDash)
@@ -95,6 +131,7 @@ public class CharacterMove : MonoBehaviour
             }
 
             GroundCheck();
+            UpWallCheck();
             LeftWallCheck();
             RightWallCheck();
         }
@@ -109,10 +146,6 @@ public class CharacterMove : MonoBehaviour
 
             Dead();
         }
-
-
-
-
     }
     void FixedUpdate()
     {
@@ -127,6 +160,7 @@ public class CharacterMove : MonoBehaviour
             MoveX(XMove);
 
             Jump();
+            Hang();
             InAirCheck();
             Dash(XMove);
 
@@ -138,6 +172,24 @@ public class CharacterMove : MonoBehaviour
             transform.position = currentPosition;
         }
     }
+    private void Hang()
+    {
+        if (isHang)
+        {
+            pulleySpriteRenderer.flipX = spriteRenderer.flipX;
+            pulley.SetActive(true);
+
+            rigid.gravityScale = -1f;
+            
+            anim.Play(name + "Hang");
+        }
+        else
+        {
+            rigid.gravityScale = firstGravity;
+
+            pulley.SetActive(false);
+        }
+    }
     public void _Hurt()
     {
         if (!isHurt)
@@ -145,7 +197,7 @@ public class CharacterMove : MonoBehaviour
             isHurt = true;
 
             StartCoroutine(Hurt());
-            
+
             Invoke("isHurtSet", 1f);
 
         }
@@ -178,10 +230,13 @@ public class CharacterMove : MonoBehaviour
     }
     private void Dash(float XMove)
     {
-        if (!(XMove == 0) && isDash && !dashMoving && canDash)
+        if (!(XMove == 0) && isDash && !isHang && !staping && !dashMoving && canDash)
         {
             float _dashRange = dashRange;
-            dashPosition = currentPosition;
+            dashPosition = GroundChecker.position;
+            Vector2 endPosition = currentPosition;
+
+            dashPosition.y += 0.2f;
 
             if (attacking)
             {
@@ -198,25 +253,42 @@ public class CharacterMove : MonoBehaviour
                 _dashRange = -_dashRange;
             }
 
-            dashPosition.x = currentPosition.x + _dashRange;
+            endPosition.x = currentPosition.x + _dashRange;
 
             bool a = false;
+            bool b = false;
             do
             {
                 a = Physics2D.OverlapCircle(dashPosition, 0.1f, whatIsGround);
-                if (a)
+                if (!a)
                 {
                     if (spriteRenderer.flipX)
                     {
-                        dashPosition.x += 0.1f;
+                        dashPosition.x -= 0.1f;
                     }
                     else
                     {
-                        dashPosition.x -= 0.1f;
+                        dashPosition.x += 0.1f;
                     }
                 }
 
-            } while (a);
+                if (spriteRenderer.flipX)
+                {
+                    if (dashPosition.x <= endPosition.x)
+                    {
+                        b = true;
+                    }
+                }
+                else
+                {
+                    if (dashPosition.x >= endPosition.x)
+                    {
+                        b = true;
+                    }
+                }
+            } while (!a && !b);
+
+            dashPosition.y = currentPosition.y;
 
             dashMoving = true;
 
@@ -311,6 +383,7 @@ public class CharacterMove : MonoBehaviour
                 anim.Play(name + "InAirAttack");
 
                 isAttack = false;
+                isHang = false;
             }
 
             GetDamage();
@@ -404,7 +477,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void InAirCheck()
     {
-        if (!isGround && !staping && !attacking)
+        if (!isGround && !isHang && !staping && !attacking)
         {
             anim.Play(name + "InAir");
         }
@@ -412,7 +485,21 @@ public class CharacterMove : MonoBehaviour
 
     private void MoveX(float XMove)
     {
-        rigid.velocity = new Vector2(XMove * characterStat.speed, rigid.velocity.y);
+        if (!isHang)
+        {
+            rigid.velocity = new Vector2(XMove * characterStat.speed, rigid.velocity.y);
+        }
+        else
+        {
+            if (spriteRenderer.flipX)
+            {
+                rigid.velocity = new Vector2(-1f * characterStat.hangSpeed, rigid.velocity.y);
+            }
+            else
+            {
+                rigid.velocity = new Vector2(1f * characterStat.hangSpeed, rigid.velocity.y);
+            }
+        }
     }
 
     private void GroundCheck()
@@ -427,6 +514,12 @@ public class CharacterMove : MonoBehaviour
         }
 
         isGround = a;
+    }
+    private void UpWallCheck()
+    {
+        bool a = Physics2D.OverlapCircle(UpWallChecker.position, 0.05f, whatIsGround);
+
+        upWall = a;
     }
     private void LeftWallCheck()
     {
@@ -447,26 +540,29 @@ public class CharacterMove : MonoBehaviour
 
     private void LRCheck(float XMove)
     {
-        if (XMove < 0f)
+        if (!isHang)
         {
-            spriteRenderer.flipX = true;
-        }
-        else if (XMove > 0f)
-        {
-            spriteRenderer.flipX = false;
-        }
-
-        if (!isJump && !staping && !attacking && isGround)
-        {
-            attacking = false;
-
-            if (XMove != 0f)
+            if (XMove < 0f)
             {
-                anim.Play(name + "Run");
+                spriteRenderer.flipX = true;
             }
-            else
+            else if (XMove > 0f)
             {
-                anim.Play(name + "Idle");
+                spriteRenderer.flipX = false;
+            }
+
+            if (!isJump && !staping && !attacking && isGround)
+            {
+                attacking = false;
+
+                if (XMove != 0f)
+                {
+                    anim.Play(name + "Run");
+                }
+                else
+                {
+                    anim.Play(name + "Idle");
+                }
             }
         }
     }
