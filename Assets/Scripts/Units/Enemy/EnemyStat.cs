@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyStat : EnemyStatus
 {
+    private GameManager gameManager = null;
     public SearchCharacter searchCharacter { get; private set; }
     public Status currentStatus { get; private set; }
 
@@ -81,6 +82,9 @@ public class EnemyStat : EnemyStatus
     void Start()
     {
         searchCharacter = GetComponent<SearchCharacter>();
+        gameManager = GameManager.Instance;
+
+        _playerPosition = gameManager.player.transform;
     }
 
 
