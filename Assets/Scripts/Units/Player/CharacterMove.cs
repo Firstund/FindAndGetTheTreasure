@@ -93,7 +93,7 @@ public class CharacterMove : MonoBehaviour
     {
         if (!isDead)
         {
-            if (playerInput.isJump)
+            if (playerInput.isJump && !staping)
             {
                 attacking = false;
                 if (upWall)
@@ -509,6 +509,7 @@ public class CharacterMove : MonoBehaviour
         if (isGround == false && a) // 착지하는 순간
         {
             SetAttacking();
+            isJump = false;
             staping = true;
             anim.Play(name + "Stap");
         }

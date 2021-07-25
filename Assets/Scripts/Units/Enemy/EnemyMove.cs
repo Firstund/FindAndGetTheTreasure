@@ -149,14 +149,14 @@ public class EnemyMove : EnemyStatus
             _playerMove._Hurt();
         }
     }
-       public void _Hurt()
+    public void _Hurt()
     {
         if (!isHurt)
         {
             isHurt = true;
 
             StartCoroutine(Hurt());
-            
+
             Invoke("isHurtSet", 1f);
 
         }
@@ -189,7 +189,17 @@ public class EnemyMove : EnemyStatus
                 anim.Play("Move");
                 currentPosition = Vector2.MoveTowards(currentPosition, searchTargetPosition, enemyStat.searchSpeed * Time.fixedDeltaTime);
 
-                distance = Vector2.Distance(currentPosition, searchTargetPosition);
+                if (enemyStat.isAirEnemy)
+                {
+                    distance = Vector2.Distance(currentPosition, searchTargetPosition);
+                }
+                else
+                {
+                    Vector2 _currentPosition = currentPosition;
+                    _currentPosition.y = searchTargetPosition.y;
+                    
+                    distance = Vector2.Distance(_currentPosition, searchTargetPosition);
+                }
 
                 if (distance <= searchResetDistance)
                 {
