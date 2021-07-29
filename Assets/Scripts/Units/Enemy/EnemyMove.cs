@@ -26,7 +26,7 @@ public class EnemyMove : EnemyStatus
     private bool isSearching = false;
     private bool isDead = false;
     private bool isHurt = false;
-    private bool serachMove = true;
+    private bool searchMove = true;
     private bool canAttack = true;
 
     private Vector2 currentPosition = Vector2.zero;
@@ -39,6 +39,9 @@ public class EnemyMove : EnemyStatus
         anim = GetComponent<Animator>();
 
         enemyStat = GetComponent<EnemyStat>();
+
+        currentPosition = transform.position;
+        SearchPositionSet();
     }
 
     void Update()
@@ -184,7 +187,7 @@ public class EnemyMove : EnemyStatus
         float distance;
         if (isSearching)
         {
-            if (serachMove)
+            if (searchMove)
             {
                 anim.Play("Move");
                 currentPosition = Vector2.MoveTowards(currentPosition, searchTargetPosition, enemyStat.searchSpeed * Time.fixedDeltaTime);
@@ -197,13 +200,13 @@ public class EnemyMove : EnemyStatus
                 {
                     Vector2 _currentPosition = currentPosition;
                     _currentPosition.y = searchTargetPosition.y;
-                    
+
                     distance = Vector2.Distance(_currentPosition, searchTargetPosition);
                 }
 
                 if (distance <= searchResetDistance)
                 {
-                    serachMove = false;
+                    searchMove = false;
                     SearchPositionSet();
                     Invoke("SearMoveReset", searchResetDelay);
                 }
@@ -232,6 +235,6 @@ public class EnemyMove : EnemyStatus
     }
     private void SearMoveReset()
     {
-        serachMove = true;
+        searchMove = true;
     }
 }

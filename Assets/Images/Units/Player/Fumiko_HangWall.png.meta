@@ -1,16 +1,7 @@
 fileFormatVersion: 2
-guid: 152e4bb3e98c71740a0a65df6b19ba59
+guid: 5f3e7b71b5c6377458f893d506c6ba0e
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -4845280888193106427
-    second: Fumiko_Hang_0
-  - first:
-      213: 3049196970285722106
-    second: Fumiko_Hang_1
-  - first:
-      213: 1999919436320433271
-    second: Fumiko_Hang_2
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -50,7 +41,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -110,70 +101,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Fumiko_Hang_0
-      rect:
-        serializedVersion: 2
-        x: 22
-        y: 1
-        width: 16
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 50eb24e14ba12ccb0800000000000000
-      internalID: -4845280888193106427
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fumiko_Hang_1
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 41
-        width: 27
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: af9e3183d7ce05a20800000000000000
-      internalID: 3049196970285722106
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fumiko_Hang_2
-      rect:
-        serializedVersion: 2
-        x: 25
-        y: 32
-        width: 3
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 774674d912421cb10800000000000000
-      internalID: 1999919436320433271
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []

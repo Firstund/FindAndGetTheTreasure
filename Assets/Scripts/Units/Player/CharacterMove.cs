@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 
@@ -53,12 +54,18 @@ public class CharacterMove : MonoBehaviour
     private bool isDead = false;
     private bool isAttack = false;
     private bool isHurt = false;
+    private bool isHangWall = false;
     private bool canDash = true;
     private bool canDashAttack = true;
     private bool dashMoving = false;
     private bool staping = false;
     private bool attacking = false;
+    private bool canJumpAgain = false;
+
     private bool canSpawnAfterImage = true;
+
+    private bool whenOutHangMove = false;
+    private bool whenOutHangMoveStarted = false;
 
     private Vector2 dashPosition = Vector2.zero;
 
@@ -101,6 +108,7 @@ public class CharacterMove : MonoBehaviour
                     if (!isHang)
                     {
                         isHang = true;
+                        whenOutHangMoveStarted = false;
                         isJump = false;
                     }
                     else
@@ -134,6 +142,7 @@ public class CharacterMove : MonoBehaviour
             UpWallCheck();
             LeftWallCheck();
             RightWallCheck();
+            CharacterHangWallCheck();
         }
 
         if (characterStat.hp <= 0f)
@@ -170,6 +179,7 @@ public class CharacterMove : MonoBehaviour
             SpawnAfterImage();
 
             transform.position = currentPosition;
+
         }
     }
     private void Hang()
@@ -180,15 +190,40 @@ public class CharacterMove : MonoBehaviour
             pulley.SetActive(true);
 
             rigid.gravityScale = -1f;
-            
+
             anim.Play(name + "Hang");
+
+            whenOutHangMove = true;
         }
         else
         {
             rigid.gravityScale = firstGravity;
 
             pulley.SetActive(false);
+
+            if (whenOutHangMove)
+            {
+
+                if (spriteRenderer.flipX)
+                {
+                    rigid.velocity = new Vector2(-1f * characterStat.speed, rigid.velocity.y);
+                }
+                else
+                {
+                    rigid.velocity = new Vector2(1f * characterStat.speed, rigid.velocity.y);
+                }
+
+                if (!whenOutHangMoveStarted)
+                {
+                    Invoke("WhenOutHangMoveSet", 1f);
+                    whenOutHangMoveStarted = true;
+                }
+            }
         }
+    }
+    private void WhenOutHangMoveSet()
+    {
+        whenOutHangMove = false;
     }
     public void _Hurt()
     {
@@ -230,11 +265,10 @@ public class CharacterMove : MonoBehaviour
     }
     private void Dash(float XMove)
     {
-        if (!(XMove == 0) && isDash && !isHang && !staping && !dashMoving && canDash)
+        if (XMove != 0 && isDash && !isHang && !staping && !dashMoving && canDash)
         {
             float _dashRange = dashRange;
             dashPosition = GroundChecker.position;
-            Vector2 endPosition = currentPosition;
 
             dashPosition.y += 0.2f;
 
@@ -253,40 +287,11 @@ public class CharacterMove : MonoBehaviour
                 _dashRange = -_dashRange;
             }
 
+            Vector2 endPosition = currentPosition;
+
             endPosition.x = currentPosition.x + _dashRange;
 
-            bool a = false;
-            bool b = false;
-            do
-            {
-                a = Physics2D.OverlapCircle(dashPosition, 0.1f, whatIsGround);
-                if (!a)
-                {
-                    if (spriteRenderer.flipX)
-                    {
-                        dashPosition.x -= 0.1f;
-                    }
-                    else
-                    {
-                        dashPosition.x += 0.1f;
-                    }
-                }
-
-                if (spriteRenderer.flipX)
-                {
-                    if (dashPosition.x <= endPosition.x)
-                    {
-                        b = true;
-                    }
-                }
-                else
-                {
-                    if (dashPosition.x >= endPosition.x)
-                    {
-                        b = true;
-                    }
-                }
-            } while (!a && !b);
+            dashPosition = positionCantCrossWall(dashPosition, endPosition);
 
             dashPosition.y = currentPosition.y;
 
@@ -304,15 +309,62 @@ public class CharacterMove : MonoBehaviour
 
     }
 
+    private Vector2 positionCantCrossWall(Vector2 originPosition, Vector2 endPosition)
+    {
+        bool a = false;
+        bool b = false;
+        do
+        {
+            a = Physics2D.OverlapCircle(originPosition, 0.1f, whatIsGround);
+            if (!a)
+            {
+                if (spriteRenderer.flipX)
+                {
+                    originPosition.x -= 0.1f;
+                }
+                else
+                {
+                    originPosition.x += 0.1f;
+                }
+            }
+
+            if (spriteRenderer.flipX)
+            {
+                if (originPosition.x <= endPosition.x)
+                {
+                    b = true;
+                }
+            }
+            else
+            {
+                if (originPosition.x >= endPosition.x)
+                {
+                    b = true;
+                }
+            }
+        } while (!a && !b);
+
+        return originPosition;
+    }
+
     private float DashAttack(float _dashRange)
     {
         if (canDashAttack)
         {
             anim.Play(name + "DashAttack");
 
-            _dashRange = dashRange / 2;
+            _dashRange = dashRange * (2f / 3f);
 
-            dashPosition.x = currentPosition.x + _dashRange;
+            Vector2 endPosition = currentPosition;
+
+            dashPosition = GroundChecker.position;
+
+            dashPosition.y += 0.2f;
+
+
+            endPosition.x = currentPosition.x + _dashRange;
+
+            dashPosition = positionCantCrossWall(dashPosition, endPosition);
 
             GetDashAttackDamage();
         }
@@ -335,7 +387,6 @@ public class CharacterMove : MonoBehaviour
 
             Invoke("SpawnAfterImageRe", spawnAfterImageDelay);
         }
-
     }
     private void SpawnAfterImageRe()
     {
@@ -346,10 +397,6 @@ public class CharacterMove : MonoBehaviour
         if (dashMoving)
         {
             transform.DOMove(dashPosition, dashDoTime).SetEase(Ease.InQuad);
-        }
-        else
-        {
-
         }
 
         Vector2 _dashPosition = dashPosition;
@@ -367,7 +414,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void Attack()
     {
-        if (!attacking && !dashMoving && !staping && isAttack) //isGround에 따라서 GroundAttack과 InAirAttack을 나눌것, dashing == true라면 dashAttack을 할것
+        if (!attacking && !dashMoving && !isHangWall && !staping && isAttack) //isGround에 따라서 GroundAttack과 InAirAttack을 나눌것, dashing == true라면 dashAttack을 할것
         {
             if (isGround)
             {
@@ -417,46 +464,95 @@ public class CharacterMove : MonoBehaviour
     }
     private void GetDashAttackDamage()
     {
-        float attackRange = dashRange / 2f;
-        float sizeX = attackRange;
-        float sizeY = attackRange / 2f;
+        float attackRange = dashRange;
 
         Vector2 _currentPosition = currentPosition;
 
+        List<RaycastHit2D> hits = new List<RaycastHit2D>();
+
+        Vector2[] targetPositions = new Vector2[5];
+
+        targetPositions = new Vector2[5] {
+            new Vector2(GroundChecker.position.x,UpWallChecker.position.y),
+             new Vector2(currentPosition.x, currentPosition.y),
+          new Vector2(UpWallChecker.position.x, GroundChecker.position.y),
+          new Vector2(UpWallChecker.position.x, UpWallChecker.position.y),
+          new Vector2(GroundChecker.position.x, GroundChecker.position.y)
+           };
+
         if (spriteRenderer.flipX)
         {
-            sizeX = -sizeX;
-        }
-
-        Vector3 size = Vector3.zero;
-        size.x = sizeX;
-        size.y = sizeY;
-
-        Collider2D[] a = Physics2D.OverlapAreaAll(GroundChecker.position, size, whatIsEnemy);
-
-        foreach (var item in a)
-        {
-            EnemyStat enemyStat = item.GetComponent<EnemyStat>();
-            EnemyMove enemyMove = item.GetComponent<EnemyMove>();
-
-            float enemyHp = enemyStat.hp;
-            float enemyDp = enemyStat.dp;
-
-            float totalDamage = characterStat.ap - enemyDp;
-
-            if (totalDamage <= 0f)
+            for (int i = 0; i < 5; i++)
             {
-                totalDamage = 0.5f;
+                Vector2 endPosition = new Vector2(targetPositions[i].x - attackRange, targetPositions[i].y);
+                targetPositions[i] = endPosition;
             }
-
-            enemyHp -= totalDamage;
-
-            enemyStat.hp = enemyHp;
-
-            enemyMove._Hurt();
+        }
+        else
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Vector2 endPosition = new Vector2(targetPositions[i].x + attackRange, targetPositions[i].y);
+                targetPositions[i] = endPosition;
+            }
         }
 
+        targetPositions[0] = SetTargetPositionsForRay(GroundChecker.position, targetPositions[0]);
+        targetPositions[1] = SetTargetPositionsForRay(currentPosition, targetPositions[1]);
+        targetPositions[2] = SetTargetPositionsForRay(UpWallChecker.position, targetPositions[2]);
+        targetPositions[3] = SetTargetPositionsForRay(UpWallChecker.position, targetPositions[3]);
+        targetPositions[4] = SetTargetPositionsForRay(GroundChecker.position, targetPositions[4]);
 
+        Ray2D[] rays = new Ray2D[5];
+
+        rays[0] = new Ray2D(GroundChecker.position, targetPositions[0]);
+        rays[1] = new Ray2D(currentPosition, targetPositions[1]);
+        rays[2] = new Ray2D(UpWallChecker.position, targetPositions[2]);
+        rays[3] = new Ray2D(UpWallChecker.position, targetPositions[3]);
+        rays[4] = new Ray2D(GroundChecker.position, targetPositions[4]);
+
+        for (int i = 0; i < 5; i++)
+        {
+            RaycastHit2D[] hit = Physics2D.RaycastAll(rays[i].origin, rays[i].direction, attackRange, whatIsEnemy);
+
+            Debug.DrawRay(rays[i].origin, rays[i].direction, Color.red, 10f);
+            
+            foreach (var item in hit)
+            {
+                hits.Add(item);
+            }
+        }
+
+        hits = hits.Distinct().ToList();
+
+        foreach (var item in hits)
+        {
+            EnemyStat enemyStat = item.transform.GetComponent<EnemyStat>();
+            EnemyMove enemyMove = item.transform.GetComponent<EnemyMove>();
+
+            if (enemyMove != null && enemyStat != null)
+            {
+                float enemyHp = enemyStat.hp;
+                float enemyDp = enemyStat.dp;
+
+                float totalDamage = characterStat.ap - enemyDp;
+
+                if (totalDamage <= 0f)
+                {
+                    totalDamage = 0.5f;
+                }
+
+                enemyHp -= totalDamage;
+
+                enemyStat.hp = enemyHp;
+
+                enemyMove._Hurt();
+            }
+        }
+    }
+    private Vector2 SetTargetPositionsForRay(Vector2 startPosition, Vector2 targetPosition)
+    {
+        return (targetPosition - startPosition);
     }
     private void SetAttacking()
     {
@@ -465,19 +561,31 @@ public class CharacterMove : MonoBehaviour
     }
     private void Jump()
     {
-        if (isJump && !staping && !attacking && isGround)
+        if ((isJump && !staping && !attacking && isGround && !isHangWall) || (canJumpAgain && isJump && !staping && !attacking && !isHangWall))
         {
+            if (canJumpAgain)
+            {
+                rigid.velocity = new Vector2(rigid.velocity.x, 0f);
+                canJumpAgain = false;
+            }
+
+            if (isGround)
+            {
+                canJumpAgain = true;
+            }
+
             anim.Play(name + "Jump");
         }
     }
     public void Jumping()
     {
-        rigid.AddForce(Vector2.up * characterStat.jumpSpeed, ForceMode2D.Impulse);
+        rigid.velocity = new Vector2(rigid.velocity.x, characterStat.jumpSpeed);
+
         isJump = false;
     }
     private void InAirCheck()
     {
-        if (!isGround && !isHang && !staping && !attacking)
+        if (!(isJump || isHangWall || isGround || isHang || staping || attacking))
         {
             anim.Play(name + "InAir");
         }
@@ -487,34 +595,74 @@ public class CharacterMove : MonoBehaviour
     {
         if (!isHang)
         {
-            rigid.velocity = new Vector2(XMove * characterStat.speed, rigid.velocity.y);
+            // if ((leftWall || rightWall) && !isGround)
+            // {
+            //     if (leftWall && spriteRenderer.flipX && !isJump)
+            //     {
+            //         rigid.velocity = new Vector2(0f, -1f);
+            //     }
+            //     else if (rightWall && !spriteRenderer.flipX && !isJump)
+            //     {
+            //         rigid.velocity = new Vector2(0f, -1f);
+            //     }
+            // }
+            // else
+            {
+                rigid.velocity = new Vector2(XMove * characterStat.speed, rigid.velocity.y);
+            }
         }
         else
         {
             if (spriteRenderer.flipX)
             {
-                rigid.velocity = new Vector2(-1f * characterStat.hangSpeed, rigid.velocity.y);
+
+                rigid.velocity = new Vector2(-characterStat.hangSpeed, rigid.velocity.y);
+
             }
             else
             {
-                rigid.velocity = new Vector2(1f * characterStat.hangSpeed, rigid.velocity.y);
+                rigid.velocity = new Vector2(characterStat.hangSpeed, rigid.velocity.y);
             }
         }
     }
 
     private void GroundCheck()
     {
-        bool a = Physics2D.OverlapCircle(GroundChecker.position, 0.1f, whatIsGround);
+        bool a = Physics2D.OverlapCircle(GroundChecker.position, 0.05f, whatIsGround);
 
-        if (isGround == false && a) // 착지하는 순간
+        if (!isGround && a) // 착지하는 순간
         {
             SetAttacking();
             isJump = false;
             staping = true;
             anim.Play(name + "Stap");
+            canJumpAgain = false;
+        }
+
+        if (isGround && !a)// 공중으로 떨어진 순간
+        {
+            canJumpAgain = true;
+        }
+
+        if (isGround)
+        {
+            WhenOutHangMoveSet();
+            staping = false;
         }
 
         isGround = a;
+    }
+    private void CharacterHangWallCheck()
+    {
+        if ((leftWall || rightWall) && !isGround)
+        {
+            canJumpAgain = true;
+            isHangWall = true;
+        }
+        else
+        {
+            isHangWall = false;
+        }
     }
     private void UpWallCheck()
     {
@@ -552,17 +700,24 @@ public class CharacterMove : MonoBehaviour
                 spriteRenderer.flipX = false;
             }
 
-            if (!isJump && !staping && !attacking && isGround)
+            if (!isJump && !staping && !attacking)
             {
                 attacking = false;
 
-                if (XMove != 0f)
+                if (isHangWall)
                 {
-                    anim.Play(name + "Run");
+                    anim.Play(name + "HangWall");
                 }
-                else
+                else if (isGround)
                 {
-                    anim.Play(name + "Idle");
+                    if (XMove != 0f)
+                    {
+                        anim.Play(name + "Run");
+                    }
+                    else
+                    {
+                        anim.Play(name + "Idle");
+                    }
                 }
             }
         }
