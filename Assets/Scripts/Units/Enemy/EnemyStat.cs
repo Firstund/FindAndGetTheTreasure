@@ -24,6 +24,12 @@ public class EnemyStat : EnemyStatus
         get { return _hp; }
         set { _hp = value; }
     }
+    private float _firstHp = 0f;
+    public float firstHp
+    {
+        get { return _firstHp; }
+        set { _firstHp = value; }
+    }
     [SerializeField]
     private float _ap = 1f;
     public float ap
@@ -85,6 +91,8 @@ public class EnemyStat : EnemyStatus
         gameManager = GameManager.Instance;
 
         _playerPosition = gameManager.player.transform;
+
+        firstHp = hp;
     }
 
 

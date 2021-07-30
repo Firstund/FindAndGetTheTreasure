@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyMove : EnemyStatus
 {
+    private StageManager stageManager = null;
+
     private Animator anim = null;
     private SpriteRenderer spriteRenderer = null;
     private EnemyStat enemyStat = null;
@@ -35,6 +37,8 @@ public class EnemyMove : EnemyStatus
 
     void Start()
     {
+        stageManager = FindObjectOfType<StageManager>();
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 
@@ -78,6 +82,12 @@ public class EnemyMove : EnemyStatus
             }
         }
     }
+    public void SpawnSet()
+    {
+        spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+        enemyStat.hp = enemyStat.firstHp;
+        isDead = false;
+    }
     private void FixedUpdate()
     {
         currentPosition = transform.position;
@@ -118,7 +128,7 @@ public class EnemyMove : EnemyStatus
     }
     private void Destroye()
     {
-        gameObject.SetActive(false);
+        stageManager.DespawnEnemy(gameObject);
     }
     private void AttackRe()
     {
