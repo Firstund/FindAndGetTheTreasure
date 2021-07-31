@@ -6,10 +6,10 @@ public class CharacterStat : MonoBehaviour
 {
     [Header("캐릭터의 이름")]
     [SerializeField]
-    private string _name = "";
-    public string name
+    private string _characterName = "";
+    public string characterName
     {
-        get { return _name; }
+        get { return _characterName; }
     }
     [Header("캐릭터의 능력치 관련")]
     [SerializeField]

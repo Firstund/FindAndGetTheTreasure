@@ -6,7 +6,10 @@ using DG.Tweening;
 
 public class CharacterMove : MonoBehaviour
 {
-    private string name;
+    private GameManager gameManager = null;
+    private StageManager stageManager = null;
+
+    private string characterName;
     private Rigidbody2D rigid = null;
     private BoxCollider2D boxCol2D = null;
     private Animator anim = null;
@@ -62,7 +65,7 @@ public class CharacterMove : MonoBehaviour
     private bool attacking = false;
     private bool canJumpAgain = false;
 
-    private bool canSpawnAfterImage = true;
+    private bool canSpawnAfterImageByDash = true;
 
     private bool whenOutHangMove = false;
     private bool whenOutHangMoveStarted = false;
@@ -88,12 +91,15 @@ public class CharacterMove : MonoBehaviour
 
     void Start()
     {
+        gameManager = GameManager.Instance;
+        stageManager = FindObjectOfType<StageManager>();
+
         if (playerInput == null)
         {
             playerInput = gameObject.AddComponent<PlayerInput>();
         }
 
-        name = characterStat.name;
+        characterName = characterStat.characterName;
         firstGravity = rigid.gravityScale;
     }
     void Update()
@@ -176,7 +182,7 @@ public class CharacterMove : MonoBehaviour
             Attack();
 
             DashMove();
-            SpawnAfterImage();
+            SpawnAfterImageByDash();
 
             transform.position = currentPosition;
 
@@ -191,7 +197,7 @@ public class CharacterMove : MonoBehaviour
 
             rigid.gravityScale = -1f;
 
-            anim.Play(name + "Hang");
+            anim.Play(characterName + "Hang");
 
             whenOutHangMove = true;
         }
@@ -230,6 +236,7 @@ public class CharacterMove : MonoBehaviour
         if (!isHurt)
         {
             isHurt = true;
+            stageManager.ShakeCamera(1f, 0.1f);
 
             StartCoroutine(Hurt());
 
@@ -257,7 +264,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void Dead()
     {
-        anim.Play(name + "Dead");
+        anim.Play(characterName + "Dead");
     }
     private void Destroye()
     {
@@ -274,6 +281,7 @@ public class CharacterMove : MonoBehaviour
 
             if (attacking)
             {
+                gameManager.SetSlowTime(0.1f);
                 _dashRange = DashAttack(_dashRange);
             }
             else
@@ -351,7 +359,7 @@ public class CharacterMove : MonoBehaviour
     {
         if (canDashAttack)
         {
-            anim.Play(name + "DashAttack");
+            anim.Play(characterName + "DashAttack");
 
             _dashRange = dashRange * (2f / 3f);
 
@@ -377,20 +385,20 @@ public class CharacterMove : MonoBehaviour
         canDash = true;
         canDashAttack = true;
     }
-    private void SpawnAfterImage()
+    private void SpawnAfterImageByDash()
     {
-        if (dashMoving && canSpawnAfterImage)
+        if (dashMoving && canSpawnAfterImageByDash)
         {
             float spawnAfterImageDelay = Random.Range(spawnAfterImage.spawnAfterImageDelayMinimum, spawnAfterImage.spawnAfterImageDelayMaximum);
             spawnAfterImage.SetAfterImage();
-            canSpawnAfterImage = false;
+            canSpawnAfterImageByDash = false;
 
-            Invoke("SpawnAfterImageRe", spawnAfterImageDelay);
+            Invoke("SpawnAfterImageByDashRe", spawnAfterImageDelay);
         }
     }
-    private void SpawnAfterImageRe()
+    private void SpawnAfterImageByDashRe()
     {
-        canSpawnAfterImage = true;
+        canSpawnAfterImageByDash = true;
     }
     private void DashMove()
     {
@@ -416,18 +424,19 @@ public class CharacterMove : MonoBehaviour
     {
         if (!attacking && !dashMoving && !isHangWall && !staping && isAttack) //isGround에 따라서 GroundAttack과 InAirAttack을 나눌것, dashing == true라면 dashAttack을 할것
         {
+            gameManager.SetSlowTime(0.05f);
             if (isGround)
             {
                 attacking = true;
 
-                anim.Play(name + "Attack");
+                anim.Play(characterName + "Attack");
 
                 isAttack = false;
             }
             else if (!isGround)
             {
                 attacking = true;
-                anim.Play(name + "InAirAttack");
+                anim.Play(characterName + "InAirAttack");
 
                 isAttack = false;
                 isHang = false;
@@ -574,7 +583,7 @@ public class CharacterMove : MonoBehaviour
                 canJumpAgain = true;
             }
 
-            anim.Play(name + "Jump");
+            anim.Play(characterName + "Jump");
         }
     }
     public void Jumping()
@@ -587,7 +596,7 @@ public class CharacterMove : MonoBehaviour
     {
         if (!(isJump || isHangWall || isGround || isHang || staping || attacking))
         {
-            anim.Play(name + "InAir");
+            anim.Play(characterName + "InAir");
         }
     }
 
@@ -635,7 +644,7 @@ public class CharacterMove : MonoBehaviour
             SetAttacking();
             isJump = false;
             staping = true;
-            anim.Play(name + "Stap");
+            anim.Play(characterName + "Stap");
             canJumpAgain = false;
         }
 
@@ -706,17 +715,17 @@ public class CharacterMove : MonoBehaviour
 
                 if (isHangWall)
                 {
-                    anim.Play(name + "HangWall");
+                    anim.Play(characterName + "HangWall");
                 }
                 else if (isGround)
                 {
                     if (XMove != 0f)
                     {
-                        anim.Play(name + "Run");
+                        anim.Play(characterName + "Run");
                     }
                     else
                     {
-                        anim.Play(name + "Idle");
+                        anim.Play(characterName + "Idle");
                     }
                 }
             }

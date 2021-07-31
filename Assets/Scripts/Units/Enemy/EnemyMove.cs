@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyMove : EnemyStatus
 {
+    private GameManager gameManager = null;
     private StageManager stageManager = null;
 
     private Animator anim = null;
@@ -37,6 +38,7 @@ public class EnemyMove : EnemyStatus
 
     void Start()
     {
+        gameManager = GameManager.Instance;
         stageManager = FindObjectOfType<StageManager>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -124,6 +126,7 @@ public class EnemyMove : EnemyStatus
     }
     private void Dead()
     {
+        gameManager.SetSlowTime(0.3f);
         anim.Play("Dead");
     }
     private void Destroye()
@@ -169,7 +172,7 @@ public class EnemyMove : EnemyStatus
             isHurt = true;
 
             StartCoroutine(Hurt());
-
+            stageManager.ShakeCamera(0.5f, 0.1f);
             Invoke("isHurtSet", 1f);
 
         }

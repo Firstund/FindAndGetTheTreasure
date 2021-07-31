@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 29657377}
   - component: {fileID: 29657379}
   - component: {fileID: 29657378}
+  - component: {fileID: 29657380}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -210,6 +211,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &29657380
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29657376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 699.64746, y: -93.34216, z: -638.00024}
 --- !u!1 &104802555
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,7 +873,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.163191, y: -0.03014636, z: -30}
+  m_LocalPosition: {x: -5.165749, y: -0.03014636, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1806299133}
@@ -1313,7 +1331,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766173253}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.163191, y: -0.03014636, z: -30}
+  m_LocalPosition: {x: -5.165749, y: -0.03014636, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 29657377}
@@ -4078,7 +4096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc4b758fdac7b1468662aaf2018bdaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Umiko
+  _characterName: Umiko
   _hp: 10
   _ap: 2
   _dp: 2
@@ -4119,8 +4137,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   afterImageObj: {fileID: 8240345119412888718, guid: a2fddadd48eca2c42ac03438f311b050, type: 3}
   afterImageSpawnPosition: {fileID: 1925565438}
-  _spawnAfterImageDelayMinimum: 0.1
-  _spawnAfterImageDelayMaximum: 0.05
+  _spawnAfterImageDelayMinimum: 0.05
+  _spawnAfterImageDelayMaximum: 0.1
 --- !u!114 &1570117825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4242,6 +4260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e46908d654f1b31499516327bcf66c2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cinemachineVirtualCamera: {fileID: 766173254}
 --- !u!1 &1806299131
 GameObject:
   m_ObjectHideFlags: 0

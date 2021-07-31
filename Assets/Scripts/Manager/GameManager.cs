@@ -29,20 +29,38 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
-    
+
     [SerializeField]
     private Transform _enemys = null;
     public Transform enemys
     {
-        get{return _enemys;}
+        get { return _enemys; }
     }
+    private float slowTime = 0f;
     void Start()
     {
-    
+
     }
 
     void Update()
     {
-
+        TimeSlow();
+    }
+    public void SetSlowTime(float time)
+    {
+        slowTime = time;
+    }
+    private void TimeSlow()
+    {
+        if (slowTime > 0f)
+        {
+            slowTime -= Time.deltaTime;
+            Time.timeScale = 0.4f;
+        }
+        else
+        {
+            slowTime = 0f;
+            Time.timeScale = 1f;
+        }
     }
 }
