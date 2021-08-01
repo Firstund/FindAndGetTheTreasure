@@ -9,7 +9,7 @@ public class SearchCharacter : EnemyStatus
     [SerializeField]
     private LayerMask whatIsPlayer;
     private float distance = 0f;
-    public Status CheckStatus(Vector2 playerPosition, float foundRange, float attackRange)
+    public Status CheckStatus(Vector2 playerPosition, bool isShootProjectile, float foundRange,float shootRange , float attackRange)
     {
         distance = Vector2.Distance(transform.position, playerPosition);
 
@@ -26,9 +26,14 @@ public class SearchCharacter : EnemyStatus
         {
             if (hit.collider.gameObject.layer == GetLayer(LayerMask.GetMask("PLAYER")))
             {
+                
                 if (distance <= attackRange)
                 {
                     return Status.Attack;
+                }
+                else if(distance <= shootRange && isShootProjectile)
+                {
+                    return Status.Shoot;
                 }
                 else if (distance <= foundRange)
                 {

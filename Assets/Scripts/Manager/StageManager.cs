@@ -7,6 +7,12 @@ public class StageManager : MonoBehaviour
 {
     private GameManager gameManager = null;
     private List<GameObject> enemys = new List<GameObject>();
+    [SerializeField]
+    private Transform _enemys = null;
+
+    private List<GameObject> projectiles = new List<GameObject>();
+    [SerializeField]
+    private Transform _projectiles = null;
 
     private float shakeTimer = 0f; // 시네머신을 이용하여 카메라를 흔들 때 사용되는 변수
 
@@ -22,6 +28,38 @@ public class StageManager : MonoBehaviour
     {
         TimerCheck();
     }
+    public void ShootProjectile(GameObject shootIt, EnemyStat enemyStat, bool flipX, Vector2 spawnPosition, float shootRange)
+    {
+        bool shoot = false;
+
+        if(projectiles.Count > 0f)
+        {
+            foreach(var item in projectiles)
+            {
+                if(item.name == shootIt.name + "(Clone)")
+                {
+                    item.SetActive(true);
+                    item.GetComponent<EnemyProjectile>().SpawnSet(flipX, shootRange, enemyStat.ap);
+                    item.transform.position = spawnPosition;
+                    projectiles.Remove(item);
+                    shoot = true;
+                    break;
+                }
+            }
+        }
+
+        if(!shoot)
+        {
+            GameObject a = Instantiate(shootIt, _projectiles);
+            a.GetComponent<EnemyProjectile>().SpawnSet(flipX , shootRange, enemyStat.ap);
+            a.transform.position = spawnPosition;
+        }
+    }
+    public void DespawnProjectile(GameObject deSpawnProjectile)
+    {
+        projectiles.Add(deSpawnProjectile);
+        deSpawnProjectile.SetActive(false);
+    }
 
     public void SpawnEnemy(GameObject spawnObject, Vector2 spawnPosition)
     {
@@ -29,8 +67,6 @@ public class StageManager : MonoBehaviour
 
         if (enemys.Count > 0)
         {
-            Debug.Log(enemys[0].name);
-
             foreach (var item in enemys)
             {
                 if (item.name == spawnObject.name + "(Clone)")
@@ -45,11 +81,9 @@ public class StageManager : MonoBehaviour
             }
         }
 
-        Debug.Log(spawnObject.name);
-
         if (!enemySpanwed)
         {
-            GameObject a = Instantiate(spawnObject, gameManager.enemys);
+            GameObject a = Instantiate(spawnObject, _enemys);
             a.transform.position = spawnPosition;
         }
     }

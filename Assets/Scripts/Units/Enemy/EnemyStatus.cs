@@ -8,6 +8,7 @@ public class EnemyStatus : MonoBehaviour
         Searching,
         Found,
         Attack,
+        Shoot,
         Dead
     }
 }

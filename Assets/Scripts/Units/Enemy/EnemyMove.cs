@@ -22,9 +22,13 @@ public class EnemyMove : EnemyStatus
     private float searchRangeY = 1f;
 
     [SerializeField]
+    private GameObject projectile = null;
+
+    [SerializeField]
     private LayerMask WhatIsPlayer;
 
     private bool isAttack = false;
+    private bool isShoot = false;
     private bool isPursue = false;
     private bool isSearching = false;
     private bool isDead = false;
@@ -54,7 +58,14 @@ public class EnemyMove : EnemyStatus
     {
         if (!isDead)
         {
-            if (enemyStat.currentStatus == Status.Attack)
+            if (enemyStat.currentStatus == Status.Shoot)
+            {
+                isShoot = true;
+                isAttack = false;
+                isPursue = false;
+                isSearching = false;
+            }
+            else if (enemyStat.currentStatus == Status.Attack)
             {
                 isAttack = true;
                 isPursue = false;
@@ -97,6 +108,12 @@ public class EnemyMove : EnemyStatus
 
         Pursue();
         Attack();
+
+        if (enemyStat.isShootProjectile)
+        {
+            Shoot();
+        }
+
         Searching();
 
         transform.position = currentPosition;
@@ -124,6 +141,16 @@ public class EnemyMove : EnemyStatus
             Invoke("AttackRe", enemyStat.attackDelay);
         }
     }
+    private void Shoot()
+    {
+        if (canAttack && isShoot)
+        {
+            canAttack = false;
+            anim.Play("Shoot");
+            FlipCheck(playerPosition);
+            Invoke("AttackRe", enemyStat.attackDelay);
+        }
+    }
     private void Dead()
     {
         gameManager.SetSlowTime(0.3f);
@@ -137,6 +164,10 @@ public class EnemyMove : EnemyStatus
     {
         canAttack = true;
     }
+    private void ShootProjectile()
+    {
+        stageManager.ShootProjectile(projectile, enemyStat, spriteRenderer.flipX, currentPosition, enemyStat.shootRange);
+    }
     private void GetDamage()
     {
         bool a = Physics2D.OverlapCircle(currentPosition, enemyStat.attackRange, WhatIsPlayer);
@@ -147,22 +178,26 @@ public class EnemyMove : EnemyStatus
             CharacterStat _player = player_Col.gameObject.GetComponent<CharacterStat>();
             CharacterMove _playerMove = player_Col.gameObject.GetComponent<CharacterMove>();
 
-            float p_hp = _player.hp;
-            float p_dp = _player.dp;
-
-            float totalDamage;
-
-            totalDamage = enemyStat.ap - p_dp;
-
-            if (totalDamage <= 0f)
+            if (_playerMove.canHurt)
             {
-                totalDamage = 0.5f;
+                float p_hp = _player.hp;
+                float p_dp = _player.dp;
+
+                float totalDamage;
+
+                totalDamage = enemyStat.ap - p_dp;
+
+                if (totalDamage <= 0f)
+                {
+                    totalDamage = 0.5f;
+                }
+
+                p_hp -= totalDamage;
+                _player.hp = p_hp;
+
+
+                _playerMove._Hurt();
             }
-
-            p_hp -= totalDamage;
-            _player.hp = p_hp;
-
-            _playerMove._Hurt();
         }
     }
     public void _Hurt()
@@ -173,6 +208,7 @@ public class EnemyMove : EnemyStatus
 
             StartCoroutine(Hurt());
             stageManager.ShakeCamera(0.5f, 0.1f);
+            gameManager.SetSlowTime(0.05f);
             Invoke("isHurtSet", 1f);
 
         }

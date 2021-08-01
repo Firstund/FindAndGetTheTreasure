@@ -57,6 +57,11 @@ public class CharacterMove : MonoBehaviour
     private bool isDead = false;
     private bool isAttack = false;
     private bool isHurt = false;
+    private bool _canHurt = true;
+    public bool canHurt
+    {
+        get { return _canHurt; }
+    }
     private bool isHangWall = false;
     private bool canDash = true;
     private bool canDashAttack = true;
@@ -233,9 +238,10 @@ public class CharacterMove : MonoBehaviour
     }
     public void _Hurt()
     {
-        if (!isHurt)
+        if (!isHurt && canHurt)
         {
             isHurt = true;
+            _canHurt = false;
             stageManager.ShakeCamera(1f, 0.1f);
 
             StartCoroutine(Hurt());
@@ -261,6 +267,7 @@ public class CharacterMove : MonoBehaviour
     private void isHurtSet()
     {
         isHurt = false;
+        _canHurt = true;
     }
     private void Dead()
     {
@@ -424,7 +431,6 @@ public class CharacterMove : MonoBehaviour
     {
         if (!attacking && !dashMoving && !isHangWall && !staping && isAttack) //isGround에 따라서 GroundAttack과 InAirAttack을 나눌것, dashing == true라면 dashAttack을 할것
         {
-            gameManager.SetSlowTime(0.05f);
             if (isGround)
             {
                 attacking = true;
@@ -525,7 +531,7 @@ public class CharacterMove : MonoBehaviour
             RaycastHit2D[] hit = Physics2D.RaycastAll(rays[i].origin, rays[i].direction, attackRange, whatIsEnemy);
 
             Debug.DrawRay(rays[i].origin, rays[i].direction, Color.red, 10f);
-            
+
             foreach (var item in hit)
             {
                 hits.Add(item);

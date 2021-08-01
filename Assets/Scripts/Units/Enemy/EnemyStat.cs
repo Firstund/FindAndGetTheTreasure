@@ -65,6 +65,13 @@ public class EnemyStat : EnemyStatus
 
     [Header("스테이터스 변경 관련 함수")]
     [SerializeField]
+    private bool _isShootProjectile = false;
+    public bool isShootProjectile
+    {
+        get { return _isShootProjectile; }
+    }
+
+    [SerializeField]
     private float _foundRange = 5f;
     public float foundRange
     {
@@ -75,6 +82,12 @@ public class EnemyStat : EnemyStatus
     public float attackRange
     {
         get { return _attackRange; }
+    }
+    [SerializeField]
+    private float _shootRange = 5f;
+    public float shootRange
+    {
+        get { return _shootRange; }
     }
 
     [Header("스테이터스 변경을 위한 플레이어 포지션값")]
@@ -98,6 +111,6 @@ public class EnemyStat : EnemyStatus
 
     void Update()
     {
-        currentStatus = searchCharacter.CheckStatus(playerPosition.position, foundRange, attackRange);
+        currentStatus = searchCharacter.CheckStatus(playerPosition.position, isShootProjectile, foundRange, shootRange, attackRange);
     }
 }

@@ -173,6 +173,7 @@ MonoBehaviour:
   searchResetDistance: 0.5
   searchRangeX: 5
   searchRangeY: 1
+  projectile: {fileID: 7053485288860369376, guid: 0b36cff4c5c464548bf079f656ed1a96, type: 3}
   WhatIsPlayer:
     serializedVersion: 2
     m_Bits: 8
@@ -195,8 +196,10 @@ MonoBehaviour:
   _searchSpeed: 1
   _pursueSpeed: 5
   _attackDelay: 1
+  _isShootProjectile: 1
   _foundRange: 8
   _attackRange: 1
+  _shootRange: 5
   _playerPosition: {fileID: 0}
 --- !u!114 &8850736437412420418
 MonoBehaviour:

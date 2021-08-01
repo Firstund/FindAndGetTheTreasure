@@ -30,17 +30,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    private Transform _enemys = null;
-    public Transform enemys
-    {
-        get { return _enemys; }
-    }
     private float slowTime = 0f;
-    void Start()
-    {
-
-    }
 
     void Update()
     {
