@@ -114,7 +114,7 @@ public class CharacterMove : MonoBehaviour
             if (playerInput.isJump && !staping)
             {
                 attacking = false;
-                if (upWall)
+                if (upWall && !isGround)
                 {
                     if (!isHang)
                     {
@@ -306,7 +306,7 @@ public class CharacterMove : MonoBehaviour
 
             endPosition.x = currentPosition.x + _dashRange;
 
-            dashPosition = positionCantCrossWall(dashPosition, endPosition);
+            dashPosition = stageManager.PositionCantCrossWall(dashPosition, endPosition, spriteRenderer.flipX, whatIsGround);
 
             dashPosition.y = currentPosition.y;
 
@@ -323,45 +323,6 @@ public class CharacterMove : MonoBehaviour
         }
 
     }
-
-    private Vector2 positionCantCrossWall(Vector2 originPosition, Vector2 endPosition)
-    {
-        bool a = false;
-        bool b = false;
-        do
-        {
-            a = Physics2D.OverlapCircle(originPosition, 0.1f, whatIsGround);
-            if (!a)
-            {
-                if (spriteRenderer.flipX)
-                {
-                    originPosition.x -= 0.1f;
-                }
-                else
-                {
-                    originPosition.x += 0.1f;
-                }
-            }
-
-            if (spriteRenderer.flipX)
-            {
-                if (originPosition.x <= endPosition.x)
-                {
-                    b = true;
-                }
-            }
-            else
-            {
-                if (originPosition.x >= endPosition.x)
-                {
-                    b = true;
-                }
-            }
-        } while (!a && !b);
-
-        return originPosition;
-    }
-
     private float DashAttack(float _dashRange)
     {
         if (canDashAttack)
@@ -379,7 +340,7 @@ public class CharacterMove : MonoBehaviour
 
             endPosition.x = currentPosition.x + _dashRange;
 
-            dashPosition = positionCantCrossWall(dashPosition, endPosition);
+            dashPosition = stageManager.PositionCantCrossWall(dashPosition, endPosition, spriteRenderer.flipX, whatIsGround);
 
             GetDashAttackDamage();
         }
@@ -500,7 +461,7 @@ public class CharacterMove : MonoBehaviour
             for (int i = 0; i < 5; i++)
             {
                 Vector2 endPosition = new Vector2(targetPositions[i].x - attackRange, targetPositions[i].y);
-                targetPositions[i] = endPosition;
+                targetPositions[i] = stageManager.PositionCantCrossWall(targetPositions[i], endPosition, spriteRenderer.flipX, whatIsGround);
             }
         }
         else
@@ -508,7 +469,7 @@ public class CharacterMove : MonoBehaviour
             for (int i = 0; i < 5; i++)
             {
                 Vector2 endPosition = new Vector2(targetPositions[i].x + attackRange, targetPositions[i].y);
-                targetPositions[i] = endPosition;
+                targetPositions[i] = stageManager.PositionCantCrossWall(targetPositions[i], endPosition, spriteRenderer.flipX, whatIsGround);
             }
         }
 
@@ -651,6 +612,16 @@ public class CharacterMove : MonoBehaviour
             isJump = false;
             staping = true;
             anim.Play(characterName + "Stap");
+
+            if (rigid.velocity.y <= -20f)
+            {
+                if (canHurt)
+                {
+                    characterStat.hp -= (0.1f * (-(rigid.velocity.y + 20f)));
+                    _Hurt();
+                }
+            }
+
             canJumpAgain = false;
         }
 

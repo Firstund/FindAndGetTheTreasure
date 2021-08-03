@@ -114,5 +114,91 @@ public class StageManager : MonoBehaviour
             }
         }
     }
+    public Vector2 PositionCantCrossWall(Vector2 originPosition, Vector2 endPosition, bool flipX, LayerMask whatIsGround)
+    {
+        bool goUp = endPosition.y > originPosition.y;
+        bool a = false;
+        bool b = false;
+        bool c = false;
+
+        do
+        {
+            a = Physics2D.OverlapCircle(originPosition, 0.1f, whatIsGround);
+            if (!a)
+            {
+                if (!b)
+                {
+                    if (flipX)
+                    {
+                        if (originPosition.x > endPosition.x)
+                        {
+                            originPosition.x -= 0.1f;
+                        }
+                    }
+                    else
+                    {
+                        if (originPosition.x < endPosition.x)
+                        {
+                            originPosition.x += 0.1f;
+                        }
+                    }
+                }
+
+                if (!c)
+                {
+                    if (goUp)
+                    {
+                        if (originPosition.y < endPosition.y)
+                        {
+                            originPosition.y += 0.1f;
+                        }
+                    }
+                    else
+                    {
+                        if (originPosition.y > endPosition.y)
+                        {
+                            originPosition.y -= 0.1f;
+                        }
+                    }
+                }
+            }
+
+
+            if (flipX)
+            {
+                if (originPosition.x <= endPosition.x)
+                {
+                    b = true;
+                }
+            }
+            else
+            {
+                if (originPosition.x >= endPosition.x)
+                {
+                    b = true;
+                }
+            }
+
+            if (goUp)
+            {
+                if (originPosition.y >= endPosition.y)
+                {
+                    c = true;
+                }
+            }
+            else
+            {
+                if (originPosition.y <= endPosition.y)
+                {
+                    c = true;
+                }
+            }
+
+
+        } while (!a && (!b || !c));
+
+
+        return originPosition;
+    }
 
 }

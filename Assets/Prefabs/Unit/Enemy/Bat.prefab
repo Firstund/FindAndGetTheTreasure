@@ -173,6 +173,7 @@ MonoBehaviour:
   searchResetDistance: 0.5
   searchRangeX: 2
   searchRangeY: 2
+  projectile: {fileID: 0}
   WhatIsPlayer:
     serializedVersion: 2
     m_Bits: 8
@@ -189,14 +190,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isAirEnemy: 1
-  _hp: 3
+  _hp: 20
   _ap: 1
   _dp: 1
   _searchSpeed: 1
   _pursueSpeed: 2.5
   _attackDelay: 1
+  _isShootProjectile: 0
   _foundRange: 4
   _attackRange: 0.5
+  _shootRange: 5
   _playerPosition: {fileID: 0}
 --- !u!114 &3647104476763481174
 MonoBehaviour:

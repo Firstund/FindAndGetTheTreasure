@@ -21,11 +21,16 @@ public class EnemyMove : EnemyStatus
     [SerializeField]
     private float searchRangeY = 1f;
 
+    private float searchResetTime = 5f;
+    private float searchResetTimer = 0f;
+
     [SerializeField]
     private GameObject projectile = null;
 
     [SerializeField]
     private LayerMask WhatIsPlayer;
+    [SerializeField]
+    private LayerMask WhatIsGround;
 
     private bool isAttack = false;
     private bool isShoot = false;
@@ -52,6 +57,8 @@ public class EnemyMove : EnemyStatus
 
         currentPosition = transform.position;
         SearchPositionSet();
+
+        searchResetTimer = searchResetTime;
     }
 
     void Update()
@@ -67,18 +74,21 @@ public class EnemyMove : EnemyStatus
             }
             else if (enemyStat.currentStatus == Status.Attack)
             {
+                isShoot = false;
                 isAttack = true;
                 isPursue = false;
                 isSearching = false;
             }
             else if (enemyStat.currentStatus == Status.Found)
             {
+                isShoot = false;
                 isAttack = false;
                 isPursue = true;
                 isSearching = false;
             }
             else if (enemyStat.currentStatus == Status.Searching)
             {
+                isShoot = false;
                 isAttack = false;
                 isPursue = false;
                 isSearching = true;
@@ -86,13 +96,25 @@ public class EnemyMove : EnemyStatus
 
             if (enemyStat.hp <= 0f)
             {
+                isShoot = false;
                 isAttack = false;
                 isPursue = false;
                 isSearching = false;
                 isDead = true;
-
-                Dead();
             }
+
+            if(searchResetTimer > 0f)
+            {
+                searchResetTimer -= Time.deltaTime;
+            }
+            else
+            {
+                SearchPositionSet();
+            }
+        }
+        if(isDead)
+        {
+            Dead();
         }
     }
     public void SpawnSet()
@@ -270,17 +292,21 @@ public class EnemyMove : EnemyStatus
     }
     private void SearchPositionSet()
     {
-        searchTargetPosition = currentPosition;
+        searchResetTimer = searchResetTime;
+
+        Vector2 endPosition = currentPosition;
         float _searchX = Random.Range(-searchRangeX, searchRangeX);
 
-        searchTargetPosition.x += _searchX;
+        endPosition.x += _searchX;
 
         if (enemyStat.isAirEnemy)
         {
             float _searchY = Random.Range(-searchRangeY, searchRangeY);
 
-            searchTargetPosition.y += _searchY;
+            endPosition.y += _searchY;
         }
+
+        searchTargetPosition = stageManager.PositionCantCrossWall(currentPosition, endPosition, (currentPosition.x > endPosition.x), WhatIsGround);
     }
     private void SearMoveReset()
     {
