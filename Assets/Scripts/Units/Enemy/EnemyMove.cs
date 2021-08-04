@@ -176,6 +176,7 @@ public class EnemyMove : EnemyStatus
     private void Dead()
     {
         gameManager.SetSlowTime(0.3f);
+        StartCoroutine(stageManager.SetCameraSize(6.8f, 0.2f));
         anim.Play("Dead");
     }
     private void Destroye()

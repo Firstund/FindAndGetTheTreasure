@@ -22,6 +22,12 @@ public class CharacterMove : MonoBehaviour
 
     [SerializeField]
     private GameObject pulley = null;
+    [SerializeField]
+    private GameObject dashAttackSoundBox = null;
+    [SerializeField]
+    private GameObject attackSoundBox = null;
+    [SerializeField]
+    private GameObject hurtSoundBox = null;
 
     [SerializeField]
     private LayerMask whatIsGround;
@@ -243,6 +249,7 @@ public class CharacterMove : MonoBehaviour
             isHurt = true;
             _canHurt = false;
             stageManager.ShakeCamera(1f, 0.1f);
+            stageManager.SpawnSoundBox(hurtSoundBox);
 
             StartCoroutine(Hurt());
 
@@ -414,10 +421,16 @@ public class CharacterMove : MonoBehaviour
     }
     private void GetDamage()
     {
+        bool soundPlayed = false;
         Collider2D[] a = Physics2D.OverlapCircleAll(currentPosition, characterStat.attackRange, whatIsEnemy);
 
         foreach (var item in a)
         {
+            if(!soundPlayed)
+            {
+                stageManager.SpawnSoundBox(attackSoundBox);
+                soundPlayed = true;
+            }
             EnemyStat enemyStat = item.GetComponent<EnemyStat>();
             EnemyMove enemyMove = item.GetComponent<EnemyMove>();
 
@@ -440,6 +453,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void GetDashAttackDamage()
     {
+        bool soundPlayed = false;
         float attackRange = dashRange;
 
         Vector2 _currentPosition = currentPosition;
@@ -508,6 +522,12 @@ public class CharacterMove : MonoBehaviour
 
             if (enemyMove != null && enemyStat != null)
             {
+                if (!soundPlayed)
+                {
+                    soundPlayed = true;
+                    stageManager.SpawnSoundBox(dashAttackSoundBox);
+                }
+
                 float enemyHp = enemyStat.hp;
                 float enemyDp = enemyStat.dp;
 

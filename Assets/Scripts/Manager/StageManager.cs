@@ -20,6 +20,8 @@ public class StageManager : MonoBehaviour
 
     private float shakeTimer = 0f; // 시네머신을 이용하여 카메라를 흔들 때 사용되는 변수
 
+    private float originOrthographicSize = 0f;
+
     [SerializeField]
     private CinemachineVirtualCamera cinemachineVirtualCamera = null;
     [SerializeField]
@@ -28,7 +30,7 @@ public class StageManager : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
-        
+        originOrthographicSize = cinemachineVirtualCamera.m_Lens.OrthographicSize;
     }
 
     void Update()
@@ -117,7 +119,6 @@ public class StageManager : MonoBehaviour
                     item.SetActive(true);
                     soundBoxes.Remove(item);
                     soundBoxSpawned = true;
-                    Debug.Log("bbb");
                     break;
                 }
             }
@@ -240,6 +241,14 @@ public class StageManager : MonoBehaviour
 
 
         return originPosition;
+    }
+    public IEnumerator SetCameraSize(float orthographicSize, float time)
+    {
+        cinemachineVirtualCamera.m_Lens.OrthographicSize = orthographicSize;
+
+        yield return new WaitForSeconds(time);
+
+        cinemachineVirtualCamera.m_Lens.OrthographicSize = originOrthographicSize;
     }
 
 }
