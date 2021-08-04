@@ -10,6 +10,10 @@ public class StageManager : MonoBehaviour
     [SerializeField]
     private Transform _enemys = null;
 
+    private List<GameObject> soundBoxes = new List<GameObject>();
+    [SerializeField]
+    private Transform _soundBoxes = null;
+
     private List<GameObject> projectiles = new List<GameObject>();
     [SerializeField]
     private Transform _projectiles = null;
@@ -18,15 +22,23 @@ public class StageManager : MonoBehaviour
 
     [SerializeField]
     private CinemachineVirtualCamera cinemachineVirtualCamera = null;
+    [SerializeField]
+    private GameObject TestSoundBox = null;
 
     void Start()
     {
         gameManager = GameManager.Instance;
+        
     }
 
     void Update()
     {
         TimerCheck();
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            SpawnSoundBox(TestSoundBox);
+            Debug.Log("Aaa");
+        }
     }
     public void ShootProjectile(GameObject shootIt, EnemyStat enemyStat, bool flipX, Vector2 spawnPosition, float shootRange)
     {
@@ -91,6 +103,35 @@ public class StageManager : MonoBehaviour
     {
         enemys.Add(deSpawnObject);
         deSpawnObject.SetActive(false);
+    }
+    public void SpawnSoundBox(GameObject spawnIt)
+    {
+        bool soundBoxSpawned = false;
+
+        if (soundBoxes.Count > 0)
+        {
+            foreach (var item in soundBoxes)
+            {
+                if (item.name == spawnIt.name + "(Clone)")
+                {
+                    item.SetActive(true);
+                    soundBoxes.Remove(item);
+                    soundBoxSpawned = true;
+                    Debug.Log("bbb");
+                    break;
+                }
+            }
+        }
+
+        if (!soundBoxSpawned)
+        {
+            GameObject a = Instantiate(spawnIt, _soundBoxes);
+        }
+    }
+    public void DesapwnSoundBox(GameObject despawnIt)
+    {
+        soundBoxes.Add(despawnIt);
+        despawnIt.SetActive(false);
     }
 
     public void ShakeCamera(float intensity, float time)
