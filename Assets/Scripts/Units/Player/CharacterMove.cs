@@ -379,6 +379,7 @@ public class CharacterMove : MonoBehaviour
     {
         if (dashMoving)
         {
+            rigid.velocity = new Vector2(rigid.velocity.x, 0f);
             transform.DOMove(dashPosition, dashDoTime).SetEase(Ease.InQuad);
         }
 

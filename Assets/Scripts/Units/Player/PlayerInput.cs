@@ -11,6 +11,7 @@ public class PlayerInput : MonoBehaviour
     public bool spawnPortal0 { get; private set; }
     public bool spawnPortal1 { get; private set; }
     public bool usePortal { get; private set; }
+    public bool timeWarp{get; private set;}
 
     // Update is called once per frame
     void Update()
@@ -22,5 +23,6 @@ public class PlayerInput : MonoBehaviour
         spawnPortal0 = Input.GetButtonDown("SpawnPortal0");
         spawnPortal1 = Input.GetButtonDown("SpawnPortal1");
         usePortal = Input.GetButtonDown("UsePortal");
+        timeWarp = Input.GetButtonDown("TimeWarp");
     }
 }
