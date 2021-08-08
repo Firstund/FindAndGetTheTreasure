@@ -30,7 +30,13 @@ public class StageManager : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
+        
+        cinemachineVirtualCamera = gameManager.cinemachineVirtualCamera;
+        cinemachineVirtualCamera.m_Follow = gameManager.player.transform;
+
         originOrthographicSize = cinemachineVirtualCamera.m_Lens.OrthographicSize;
+
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update()
