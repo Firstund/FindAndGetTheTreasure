@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyStat : EnemyStatus
 {
     private GameManager gameManager = null;
+    private StageManager stageManager = null;
     public SearchCharacter searchCharacter { get; private set; }
     public Status currentStatus { get; private set; }
 
@@ -98,14 +99,22 @@ public class EnemyStat : EnemyStatus
         get { return _playerPosition; }
     }
 
+    [SerializeField]
+    private float despawnTimer = 10f;
+    private float firstDespawnTimer = 0f;
+    private bool isOutCamera = false;
+
     void Start()
     {
         searchCharacter = GetComponent<SearchCharacter>();
+
         gameManager = GameManager.Instance;
+        stageManager = FindObjectOfType<StageManager>();
 
         _playerPosition = gameManager.player.transform;
 
         firstHp = hp;
+        firstDespawnTimer = despawnTimer;
     }
 
 
@@ -113,4 +122,32 @@ public class EnemyStat : EnemyStatus
     {
         currentStatus = searchCharacter.CheckStatus(playerPosition.position, isShootProjectile, foundRange, shootRange, attackRange);
     }
+    void FixedUpdate()
+    {
+        DespawnByOutCamera();
+    }
+
+    private void DespawnByOutCamera()
+    {
+        if (isOutCamera)
+        {
+            despawnTimer -= Time.fixedDeltaTime;
+        }
+
+        if(despawnTimer <= 0f)
+        {
+            stageManager.DespawnEnemy(gameObject);
+        }
+    }
+
+    private void OnBecameVisible()
+    {
+        isOutCamera = false;
+        despawnTimer = firstDespawnTimer;
+    }
+    private void OnBecameInvisible()
+    {
+        isOutCamera = true;
+    }
+   
 }
