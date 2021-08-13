@@ -36,7 +36,6 @@ public class StageManager : MonoBehaviour
 
         originOrthographicSize = cinemachineVirtualCamera.m_Lens.OrthographicSize;
 
-        DontDestroyOnLoad(gameObject);
     }
 
     void Update()

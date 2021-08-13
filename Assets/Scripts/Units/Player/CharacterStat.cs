@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CharacterStat : MonoBehaviour
 {
+    private GameManager gameManager = null;
+
     [Header("캐릭터의 이름")]
     [SerializeField]
     private string _characterName = "";
@@ -19,6 +21,14 @@ public class CharacterStat : MonoBehaviour
         get { return _hp; }
         set { _hp = value; }
     }
+
+    [SerializeField]
+    private float _firstHp = 0f;
+    public float firstHp
+    {
+        get { return _firstHp; }
+    }
+
     [SerializeField]
     private float _ap = 0f;
     public float ap
@@ -51,12 +61,20 @@ public class CharacterStat : MonoBehaviour
     private float _hangSpeed = 0f;
     public float hangSpeed
     {
-        get{return _hangSpeed;}
+        get { return _hangSpeed; }
     }
     [SerializeField]
     private float _jumpSpeed = 0f;
     public float jumpSpeed
     {
         get { return _jumpSpeed; }
+    }
+
+    private void Start()
+    {
+        _firstHp = hp;
+
+        gameManager = GameManager.Instance;
+        gameManager.characterHpBar.GetCharacterStat(this);
     }
 }
