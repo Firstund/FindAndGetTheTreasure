@@ -35,14 +35,14 @@ public class GameManager : MonoBehaviour
         }
     }
     [SerializeField]
-    private CharacterHpBar _characterHpBar = null;
-    public CharacterHpBar characterHpBar
+    private CharacterStatBar _characterHpBar = null;
+    public CharacterStatBar characterHpBar
     {
         get
         {
             if (_characterHpBar == null)
             {
-                _characterHpBar = FindObjectOfType<CharacterHpBar>();
+                _characterHpBar = FindObjectOfType<CharacterStatBar>();
             }
             return _characterHpBar;
         }
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        _characterHpBar = FindObjectOfType<CharacterHpBar>();
+        _characterHpBar = FindObjectOfType<CharacterStatBar>();
 
         DontDestroyOnLoad(gameObject);
     }
