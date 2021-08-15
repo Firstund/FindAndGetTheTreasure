@@ -14,12 +14,15 @@ public class CharacterStatBar : MonoBehaviour
     }
     [SerializeField]
     private float doValueTime = 0.5f;
+    [SerializeField]
+    private RectTransform HPBarBackGroundRect = null;
+    private RectTransform rectTransform = null;
+
     private CharacterStat _characterStat = null;
     public CharacterStat characterStat
     {
         get { return _characterStat; }
     }
-    private StatBarBackground statBarBackground = null;
     private Slider _hpSlider = null;
     private Slider hpSlider
     {
@@ -34,11 +37,14 @@ public class CharacterStatBar : MonoBehaviour
     }
     void Start()
     {
+        rectTransform = GetComponent<RectTransform>();
+
         DontDestroyOnLoad(gameObject);
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        rectTransform.sizeDelta = HPBarBackGroundRect.sizeDelta;
         SetSliderValue();
     }
 
@@ -57,10 +63,8 @@ public class CharacterStatBar : MonoBehaviour
 
     public void GetCharacterStat(CharacterStat a)
     {
-        statBarBackground = FindObjectOfType<StatBarBackground>();
         _characterStat = a;
 
-        statBarBackground.SetRects();
         hpSlider.maxValue = characterStat.hp;
         hpSlider.minValue = 0f;
     }

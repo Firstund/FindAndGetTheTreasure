@@ -3,33 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StatBarBackground : MonoBehaviour
-{    
-    private CharacterStatBar characterStatBar = null;
-    private CharacterStat characterStat = null;
+{
+    [SerializeField]
+    private string statName = "";
+    [SerializeField]
+    private float stat = 0f;
+
     private RectTransform _rectTransform = null;
     public RectTransform rectTransform
     {
-        get { return _rectTransform; }
-    }
-    void Start()
-    {
-        _rectTransform = GetComponent<RectTransform>();
-        characterStatBar = transform.parent.GetComponent<CharacterStatBar>();
-    }
+        get
+        {
+            if (_rectTransform == null)
+            {
+                _rectTransform = GetComponent<RectTransform>();
+            }
 
+            return _rectTransform;
+        }
+    }
+    private float firstSizeX = 0f;
+    private void Awake()
+    {
+        firstSizeX = rectTransform.sizeDelta.x;
+        SetRects();
+    }
+        
     public void SetRects()
     {
-        characterStat = characterStatBar.characterStat;
-
-        switch (characterStatBar.stat)
+        switch (statName)
         {
             case "hp":
-                rectTransform.sizeDelta = new Vector2(characterStat.hp * 32, rectTransform.sizeDelta.y);
-                rectTransform.anchoredPosition = new Vector2((-65) + characterStat.hp * 14.5f, 0);
+                rectTransform.sizeDelta = new Vector2(stat * firstSizeX, rectTransform.sizeDelta.y);
                 break;
         }
-
-
     }
 
     void Update()

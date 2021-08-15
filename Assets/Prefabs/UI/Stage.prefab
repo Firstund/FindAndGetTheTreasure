@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -65, y: 3.2}
-  m_SizeDelta: {x: 32, y: 68}
+  m_AnchoredPosition: {x: -5, y: 3.2}
+  m_SizeDelta: {x: 16, y: 34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &327279675561173560
 CanvasRenderer:
@@ -88,6 +88,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a2df3232bbc3b34985ed2914a85eb27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statName: hp
+  stat: 10
+  characterStat: {fileID: 0}
+  characterStatBar: {fileID: 7378456643460830479}
 --- !u!1 &327279675841318550
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +273,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -5, y: 3.3000002}
-  m_SizeDelta: {x: 140, y: 62}
+  m_SizeDelta: {x: 70, y: 31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &243512381184699362
 MonoBehaviour:
@@ -319,10 +323,10 @@ RectTransform:
   m_Father: {fileID: 3531300167102341342}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -334, y: 201.7}
-  m_SizeDelta: {x: 160, y: 122.0738}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 160, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &327279676997014942
 MonoBehaviour:
@@ -389,6 +393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stat: hp
   doValueTime: 0.5
+  HPBarBackGroundRect: {fileID: 327279675561173566}
 --- !u!1 &1596533927127202934
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,10 +426,10 @@ RectTransform:
   m_Father: {fileID: 3531300167102341342}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -553, y: 245}
-  m_SizeDelta: {x: 378, y: 288}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 189, y: 144}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1543595490063763516
 CanvasRenderer:
@@ -473,6 +478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3531300167102341342}
+  - component: {fileID: 2284170727330470793}
   m_Layer: 5
   m_Name: StatBar
   m_TagString: Untagged
@@ -498,6 +504,32 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -732, y: 335}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2284170727330470793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6856015676794398538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 7
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0

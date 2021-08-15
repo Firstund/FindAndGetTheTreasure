@@ -19,6 +19,5 @@ public class CharacterStatBarFillArea : MonoBehaviour
     public void SetRects()
     {
         rectTransform.sizeDelta = new Vector2(statBarBackground.rectTransform.sizeDelta.x, statBarBackground.rectTransform.sizeDelta.y - 10f);
-        rectTransform.anchoredPosition = statBarBackground.rectTransform.anchoredPosition;
     }
 }
