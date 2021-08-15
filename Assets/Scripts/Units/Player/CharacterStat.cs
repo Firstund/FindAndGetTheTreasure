@@ -75,6 +75,6 @@ public class CharacterStat : MonoBehaviour
         _firstHp = hp;
 
         gameManager = GameManager.Instance;
-        gameManager.characterHpBar.GetCharacterStat(this);
+        gameManager.characterStat = this;
     }
 }

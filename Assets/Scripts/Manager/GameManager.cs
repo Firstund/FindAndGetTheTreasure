@@ -35,17 +35,11 @@ public class GameManager : MonoBehaviour
         }
     }
     [SerializeField]
-    private CharacterStatBar _characterHpBar = null;
-    public CharacterStatBar characterHpBar
+    private CharacterStat _characterStat = null;
+    public CharacterStat characterStat
     {
-        get
-        {
-            if (_characterHpBar == null)
-            {
-                _characterHpBar = FindObjectOfType<CharacterStatBar>();
-            }
-            return _characterHpBar;
-        }
+        get { return _characterStat; }
+        set { _characterStat = value; }
     }
 
     private static GameManager instance;
@@ -76,8 +70,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        _characterHpBar = FindObjectOfType<CharacterStatBar>();
-
         DontDestroyOnLoad(gameObject);
     }
     void Update()

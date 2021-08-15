@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class StatBarBackground : MonoBehaviour
 {
+    [Header("Ap, Dp, Hp중 가장 큰 값")]
     [SerializeField]
-    private string statName = "";
-    [SerializeField]
-    private float stat = 0f;
+    private float maxValue = 0f;
 
     private RectTransform _rectTransform = null;
     public RectTransform rectTransform
@@ -31,16 +30,6 @@ public class StatBarBackground : MonoBehaviour
         
     public void SetRects()
     {
-        switch (statName)
-        {
-            case "hp":
-                rectTransform.sizeDelta = new Vector2(stat * firstSizeX, rectTransform.sizeDelta.y);
-                break;
-        }
-    }
-
-    void Update()
-    {
-
+        rectTransform.sizeDelta = new Vector2(maxValue * firstSizeX, rectTransform.sizeDelta.y);
     }
 }

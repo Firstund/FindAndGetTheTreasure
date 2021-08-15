@@ -6,6 +6,8 @@ using DG.Tweening;
 
 public class CharacterStatBar : MonoBehaviour
 {
+    private GameManager gameManager = null;
+
     [SerializeField]
     private string _stat = "";
     public string stat
@@ -14,14 +16,26 @@ public class CharacterStatBar : MonoBehaviour
     }
     [SerializeField]
     private float doValueTime = 0.5f;
+
+    [Header("Ap, Dp, Hp중 가장 큰 값")]
     [SerializeField]
-    private RectTransform HPBarBackGroundRect = null;
+    private float maxValue = 0f;
+    [SerializeField]
+    private RectTransform StatBarBackgroundRect = null;
     private RectTransform rectTransform = null;
 
     private CharacterStat _characterStat = null;
     public CharacterStat characterStat
     {
-        get { return _characterStat; }
+        get
+        {
+            if (_characterStat == null)
+            {
+                _characterStat = gameManager.characterStat;
+            }
+
+            return _characterStat;
+        }
     }
     private Slider _hpSlider = null;
     private Slider hpSlider
@@ -37,14 +51,16 @@ public class CharacterStatBar : MonoBehaviour
     }
     void Start()
     {
+        gameManager = GameManager.Instance;
+
         rectTransform = GetComponent<RectTransform>();
 
-        DontDestroyOnLoad(gameObject);
+        GetCharacterStat();
     }
 
     void FixedUpdate()
     {
-        rectTransform.sizeDelta = HPBarBackGroundRect.sizeDelta;
+        rectTransform.sizeDelta = new Vector2(StatBarBackgroundRect.sizeDelta.x, rectTransform.sizeDelta.y);
         SetSliderValue();
     }
 
@@ -58,14 +74,25 @@ public class CharacterStatBar : MonoBehaviour
                     hpSlider.DOValue(characterStat.hp, doValueTime);
                 }
                 break;
+
+            case "ap":
+                if (characterStat != null)
+                {
+                    hpSlider.DOValue(characterStat.ap, doValueTime);
+                }
+                break;
+            case "dp":
+                if (characterStat != null)
+                {
+                    hpSlider.DOValue(characterStat.dp, doValueTime);
+                }
+                break;
         }
     }
 
-    public void GetCharacterStat(CharacterStat a)
+    public void GetCharacterStat()
     {
-        _characterStat = a;
-
-        hpSlider.maxValue = characterStat.hp;
+        hpSlider.maxValue = maxValue;
         hpSlider.minValue = 0f;
     }
 }
