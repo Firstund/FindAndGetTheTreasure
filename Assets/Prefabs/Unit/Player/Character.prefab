@@ -101,8 +101,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5143956853094607358}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0451, y: -0.205, z: 0}
-  m_LocalScale: {x: 1, y: 4, z: 1}
+  m_LocalPosition: {x: -0.0451, y: -0.204, z: 0}
+  m_LocalScale: {x: 1, y: 3.3228, z: 1}
   m_Children: []
   m_Father: {fileID: 5143956854866003332}
   m_RootOrder: 0
@@ -376,6 +376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterName: Umiko
   _hp: 10
+  _firstHp: 0
   _ap: 2
   _dp: 2
   _attackRange: 1
@@ -1032,7 +1033,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5143956854866003331}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.012, y: 0.508, z: 0}
+  m_LocalPosition: {x: 0.012, y: 0.412, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5143956853094607359}
