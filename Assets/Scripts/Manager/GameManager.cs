@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cinemachine;
@@ -68,13 +69,33 @@ public class GameManager : MonoBehaviour
         get { return _currentStage; }
     }
 
+    private Func<float, float> TimeSlow;
+
+    void Awake()
+    {
+        TimeSlow = a =>
+        {
+            if (a > 0f)
+            {
+                a -= Time.deltaTime;
+                Time.timeScale = 0.4f;
+            }
+            else
+            {
+                a = 0f;
+                Time.timeScale = 1f;
+            }
+
+            return a;
+        };
+    }
     void Start()
     {
         DontDestroyOnLoad(gameObject);
     }
     void Update()
     {
-        TimeSlow();
+        slowTime = TimeSlow(slowTime);
     }
     public void SpawnStages(int stageNum)
     {
@@ -89,18 +110,5 @@ public class GameManager : MonoBehaviour
     public void SetSlowTime(float time)
     {
         slowTime = time;
-    }
-    private void TimeSlow()
-    {
-        if (slowTime > 0f)
-        {
-            slowTime -= Time.deltaTime;
-            Time.timeScale = 0.4f;
-        }
-        else
-        {
-            slowTime = 0f;
-            Time.timeScale = 1f;
-        }
     }
 }

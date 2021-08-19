@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using Cinemachine;
 
@@ -27,6 +28,31 @@ public class StageManager : MonoBehaviour
     [SerializeField]
     private GameObject TestSoundBox = null;
 
+    private Func<float, float> TimerCheck;
+
+    private void Awake()
+    {
+        TimerCheck = t =>
+        {
+            if (t > 0f)
+            {
+                t -= Time.deltaTime;
+
+                if (t <= 0f)
+                {
+                    CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
+                    cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0f;
+                }
+
+            }
+
+            return t;
+
+        };
+
+    }
+
     void Start()
     {
         gameManager = GameManager.Instance;
@@ -40,7 +66,7 @@ public class StageManager : MonoBehaviour
 
     void Update()
     {
-        TimerCheck();
+        shakeTimer = TimerCheck(shakeTimer);
         if (Input.GetKeyDown(KeyCode.A))
         {
             SpawnSoundBox(TestSoundBox);
@@ -94,25 +120,16 @@ public class StageManager : MonoBehaviour
     }
     public void SpawnSoundBox(GameObject spawnIt)
     {
-        bool soundBoxSpawned = false;
+        GameObject spawnSoundBox = soundBoxes.Find(x => x.name == spawnIt.name + "(Clone)");
 
-        if (soundBoxes.Count > 0)
-        {
-            foreach (var item in soundBoxes)
-            {
-                if (item.name == spawnIt.name + "(Clone)")
-                {
-                    item.SetActive(true);
-                    soundBoxes.Remove(item);
-                    soundBoxSpawned = true;
-                    break;
-                }
-            }
-        }
-
-        if (!soundBoxSpawned)
+        if (spawnSoundBox == null)
         {
             GameObject a = Instantiate(spawnIt, _soundBoxes);
+        }
+        else
+        {
+            spawnSoundBox.SetActive(true);
+            soundBoxes.Remove(spawnSoundBox);
         }
     }
     public void DesapwnSoundBox(GameObject despawnIt)
@@ -127,20 +144,6 @@ public class StageManager : MonoBehaviour
 
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
         shakeTimer = time;
-    }
-    private void TimerCheck()
-    {
-        if (shakeTimer > 0f)
-        {
-            shakeTimer -= Time.deltaTime;
-
-            if (shakeTimer <= 0f)
-            {
-                CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-
-                cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0f;
-            }
-        }
     }
     public Vector2 PositionCantCrossWall(Vector2 originPosition, Vector2 endPosition, bool flipX, LayerMask whatIsGround)
     {
@@ -221,8 +224,6 @@ public class StageManager : MonoBehaviour
                     c = true;
                 }
             }
-
-
         } while (!a && (!b || !c));
 
 
