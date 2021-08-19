@@ -30,7 +30,7 @@ public class StageManager : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
-        
+
         cinemachineVirtualCamera = gameManager.cinemachineVirtualCamera;
         cinemachineVirtualCamera.m_Follow = gameManager.player.transform;
 
@@ -41,37 +41,27 @@ public class StageManager : MonoBehaviour
     void Update()
     {
         TimerCheck();
-        if(Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             SpawnSoundBox(TestSoundBox);
-            Debug.Log("Aaa");
         }
     }
     public void ShootProjectile(GameObject shootIt, EnemyStat enemyStat, bool flipX, Vector2 spawnPosition, float shootRange)
     {
-        bool shoot = false;
+        GameObject shootObject = projectiles.Find(x => x.name == shootIt.name + "(Clone)");
 
-        if(projectiles.Count > 0f)
-        {
-            foreach(var item in projectiles)
-            {
-                if(item.name == shootIt.name + "(Clone)")
-                {
-                    item.SetActive(true);
-                    item.GetComponent<EnemyProjectile>().SpawnSet(flipX, shootRange, enemyStat.ap);
-                    item.transform.position = spawnPosition;
-                    projectiles.Remove(item);
-                    shoot = true;
-                    break;
-                }
-            }
-        }
-
-        if(!shoot)
+        if (shootObject == null)
         {
             GameObject a = Instantiate(shootIt, _projectiles);
-            a.GetComponent<EnemyProjectile>().SpawnSet(flipX , shootRange, enemyStat.ap);
+            a.GetComponent<EnemyProjectile>().SpawnSet(flipX, shootRange, enemyStat.ap);
             a.transform.position = spawnPosition;
+        }
+        else
+        {
+            shootObject.SetActive(true);
+            shootObject.GetComponent<EnemyProjectile>().SpawnSet(flipX, shootRange, enemyStat.ap);
+            shootObject.transform.position = spawnPosition;
+            projectiles.Remove(shootObject);
         }
     }
     public void DespawnProjectile(GameObject deSpawnProjectile)
@@ -82,28 +72,19 @@ public class StageManager : MonoBehaviour
 
     public void SpawnEnemy(GameObject spawnObject, Vector2 spawnPosition)
     {
-        bool enemySpanwed = false;
+        GameObject spawnEnemy = enemys.Find(x => x.name == spawnObject.name + "(Clone)");
 
-        if (enemys.Count > 0)
-        {
-            foreach (var item in enemys)
-            {
-                if (item.name == spawnObject.name + "(Clone)")
-                {
-                    item.SetActive(true);
-                    item.GetComponent<EnemyMove>().SpawnSet();
-                    item.transform.position = spawnPosition;
-                    enemys.Remove(item);
-                    enemySpanwed = true;
-                    break;
-                }
-            }
-        }
-
-        if (!enemySpanwed)
+        if (spawnEnemy == null)
         {
             GameObject a = Instantiate(spawnObject, _enemys);
             a.transform.position = spawnPosition;
+        }
+        else
+        {
+            spawnEnemy.SetActive(true);
+            spawnEnemy.GetComponent<EnemyMove>().SpawnSet();
+            spawnEnemy.transform.position = spawnPosition;
+            enemys.Remove(spawnEnemy);
         }
     }
     public void DespawnEnemy(GameObject deSpawnObject)
