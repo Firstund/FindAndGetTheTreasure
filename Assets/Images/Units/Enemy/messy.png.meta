@@ -1,0 +1,2376 @@
+fileFormatVersion: 2
+guid: 59c0fa65a33f0d34d86905b2fd1eb34d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7668144579599846664
+    second: messy_0
+  - first:
+      213: -277654833151186096
+    second: messy_1
+  - first:
+      213: 3337948120287748366
+    second: messy_2
+  - first:
+      213: 2407206859076716249
+    second: messy_3
+  - first:
+      213: -3932034521436032673
+    second: messy_4
+  - first:
+      213: 3971973608480139859
+    second: messy_5
+  - first:
+      213: 6353019839678384917
+    second: messy_6
+  - first:
+      213: 1201122927455054359
+    second: messy_7
+  - first:
+      213: -3408497112917671335
+    second: messy_8
+  - first:
+      213: 9024564091849755644
+    second: messy_9
+  - first:
+      213: -6586192789743430530
+    second: messy_10
+  - first:
+      213: -2948787643249178668
+    second: messy_11
+  - first:
+      213: 7967710247023225768
+    second: messy_12
+  - first:
+      213: -7433492225296222189
+    second: test0
+  - first:
+      213: -1360214987009013291
+    second: test1
+  - first:
+      213: -7138221210153211848
+    second: messy_15
+  - first:
+      213: -1389443164584886065
+    second: test3
+  - first:
+      213: 6811012717255937176
+    second: messy_17
+  - first:
+      213: -5175213520277400438
+    second: messy_18
+  - first:
+      213: -519731245006496700
+    second: test2
+  - first:
+      213: -4243339172607595453
+    second: messy_20
+  - first:
+      213: -6838449254185074819
+    second: messy_21
+  - first:
+      213: -8024661789843046146
+    second: messy_22
+  - first:
+      213: -6194080681099155481
+    second: messy_23
+  - first:
+      213: 871702257982329612
+    second: messy_24
+  - first:
+      213: 3281214222470285158
+    second: messy_25
+  - first:
+      213: 5584329640731930641
+    second: messy_26
+  - first:
+      213: -8874605011189555893
+    second: messy_27
+  - first:
+      213: 4003439055542263537
+    second: messy_28
+  - first:
+      213: -1108984336999315330
+    second: messy_29
+  - first:
+      213: -4843902501565284989
+    second: messy_30
+  - first:
+      213: -4353470719063112461
+    second: messy_31
+  - first:
+      213: -5432242165252466575
+    second: messy_32
+  - first:
+      213: -1777411400306452130
+    second: messy_33
+  - first:
+      213: 8329772223149656352
+    second: messy_34
+  - first:
+      213: -3395036806824457684
+    second: messy_35
+  - first:
+      213: 3970107233312928615
+    second: messy_36
+  - first:
+      213: -3332750781954305440
+    second: messy_37
+  - first:
+      213: -4144225302542873825
+    second: messy_38
+  - first:
+      213: 453679977649015978
+    second: messy_39
+  - first:
+      213: -8086504499011226551
+    second: messy_40
+  - first:
+      213: 5518741723342161208
+    second: messy_41
+  - first:
+      213: 2382826657708765523
+    second: messy_42
+  - first:
+      213: -630484986747707310
+    second: messy_43
+  - first:
+      213: -6948724261556842341
+    second: messy_44
+  - first:
+      213: 8191550688011323424
+    second: messy_45
+  - first:
+      213: 3841345096944585063
+    second: messy_46
+  - first:
+      213: 3910320023906081789
+    second: messy_47
+  - first:
+      213: -6746611671044926490
+    second: messy_48
+  - first:
+      213: 5710906810263284211
+    second: messy_49
+  - first:
+      213: -3723689675960624424
+    second: messy_50
+  - first:
+      213: 3896276942079743099
+    second: messy_51
+  - first:
+      213: -1354102861144988549
+    second: messy_52
+  - first:
+      213: -7651485485692511067
+    second: messy_53
+  - first:
+      213: 6764934276116945703
+    second: messy_54
+  - first:
+      213: 190175987743965780
+    second: messy_55
+  - first:
+      213: -6676319428671175425
+    second: messy_56
+  - first:
+      213: -9010680374039478437
+    second: messy_57
+  - first:
+      213: 7717089299374551938
+    second: messy_58
+  - first:
+      213: 2259920100276346512
+    second: messy_59
+  - first:
+      213: 4235644738470309831
+    second: messy_60
+  - first:
+      213: -5629760977268906259
+    second: messy_61
+  - first:
+      213: 3109404234284687556
+    second: messy_62
+  - first:
+      213: 6954534280207458165
+    second: messy_63
+  - first:
+      213: 8913776757025537635
+    second: messy_64
+  - first:
+      213: -5805978718955120339
+    second: messy_65
+  - first:
+      213: -1039904124882014929
+    second: messy_66
+  - first:
+      213: 499794957593319025
+    second: messy_67
+  - first:
+      213: 3019243335443052556
+    second: messy_68
+  - first:
+      213: 3144472025788373935
+    second: messy_69
+  - first:
+      213: 4719761814223861030
+    second: messy_70
+  - first:
+      213: 2364302883885511169
+    second: messy_71
+  - first:
+      213: -2411028261873575617
+    second: messy_72
+  - first:
+      213: -248232584761912868
+    second: messy_73
+  - first:
+      213: 1124138103081543808
+    second: messy_74
+  - first:
+      213: -8425296768212898870
+    second: messy_75
+  - first:
+      213: -901752875388576356
+    second: messy_76
+  - first:
+      213: -8038180347620902398
+    second: messy_77
+  - first:
+      213: 7268819208287019591
+    second: messy_78
+  - first:
+      213: 785751084931479385
+    second: messy_79
+  - first:
+      213: 4071842786899035734
+    second: messy_80
+  - first:
+      213: 8276020268748334297
+    second: messy_81
+  - first:
+      213: 4414187167054287594
+    second: messy_82
+  - first:
+      213: 6896939632552147245
+    second: messy_83
+  - first:
+      213: -4751355700592536491
+    second: messy_84
+  - first:
+      213: 9110145459860108197
+    second: messy_85
+  - first:
+      213: -8945145104104974981
+    second: messy_86
+  - first:
+      213: 28176652961860936
+    second: messy_87
+  - first:
+      213: -6460353036066989904
+    second: messy_88
+  - first:
+      213: 4244990887089256839
+    second: messy_89
+  - first:
+      213: -8409457659973604508
+    second: messy_90
+  - first:
+      213: -5389351544777385292
+    second: messy_91
+  - first:
+      213: -8995077327767218254
+    second: messy_92
+  - first:
+      213: -779571428948014058
+    second: messy_93
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: messy_0
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 295
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f23d96e127459590800000000000000
+      internalID: -7668144579599846664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 295
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05b6adb7662952cf0800000000000000
+      internalID: -277654833151186096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_2
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 295
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e012f645126c25e20800000000000000
+      internalID: 3337948120287748366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_3
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 295
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d6c62862ed186120800000000000000
+      internalID: 2407206859076716249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_4
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 295
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f517b318f6b9e69c0800000000000000
+      internalID: -3932034521436032673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_5
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 295
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35a6fa6d3f84f1730800000000000000
+      internalID: 3971973608480139859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_6
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 295
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51b0a0b62e57a2850800000000000000
+      internalID: 6353019839678384917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_7
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 295
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71a298e40fe3ba010800000000000000
+      internalID: 1201122927455054359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_8
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 295
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 952099e4fe592b0d0800000000000000
+      internalID: -3408497112917671335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_9
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 295
+        width: 22
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfb43733a31bd3d70800000000000000
+      internalID: 9024564091849755644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_10
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 288
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e749a198d842994a0800000000000000
+      internalID: -6586192789743430530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_11
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 295
+        width: 22
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d74216034dc317d0800000000000000
+      internalID: -2948787643249178668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_12
+      rect:
+        serializedVersion: 2
+        x: 493
+        y: 295
+        width: 22
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ab2f03414ef29e60800000000000000
+      internalID: 7967710247023225768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test0
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 269
+        width: 24
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3183796943ee6d890800000000000000
+      internalID: -7433492225296222189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test1
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 269
+        width: 24
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d94a211dab8f1de0800000000000000
+      internalID: -1360214987009013291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_15
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 309
+        width: 6
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 838a8a811a1ffec90800000000000000
+      internalID: -7138221210153211848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test3
+      rect:
+        serializedVersion: 2
+        x: 747
+        y: 269
+        width: 21
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc0c25badc4b7bce0800000000000000
+      internalID: -1389443164584886065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_17
+      rect:
+        serializedVersion: 2
+        x: 761
+        y: 310
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89c45b4eaf3958e50800000000000000
+      internalID: 6811012717255937176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_18
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 301
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a84111709b2fd28b0800000000000000
+      internalID: -5175213520277400438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test2
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 269
+        width: 22
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44c57b2bf2b89c8f0800000000000000
+      internalID: -519731245006496700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_20
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 305
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34c69333181ac15c0800000000000000
+      internalID: -4243339172607595453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_21
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 267
+        width: 8
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7f73cd82a2f811a0800000000000000
+      internalID: -6838449254185074819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_22
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 282
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef041cd5e9ca2a090800000000000000
+      internalID: -8024661789843046146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_23
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 227
+        width: 38
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e7a9fc20743a0aa0800000000000000
+      internalID: -6194080681099155481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_24
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 264
+        width: 6
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0351fcc598e81c00800000000000000
+      internalID: 871702257982329612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_25
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 275
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6670d4263f6398d20800000000000000
+      internalID: 3281214222470285158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_26
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 264
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 110f280a8368f7d40800000000000000
+      internalID: 5584329640731930641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_27
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 227
+        width: 43
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4d152213c117d480800000000000000
+      internalID: -8874605011189555893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_28
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 227
+        width: 36
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fe95812c921f8730800000000000000
+      internalID: 4003439055542263537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_29
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 227
+        width: 38
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e780fa30f981c90f0800000000000000
+      internalID: -1108984336999315330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_30
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 258
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38d3393c65007ccb0800000000000000
+      internalID: -4843902501565284989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_31
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 227
+        width: 43
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f4cd2a527d5593c0800000000000000
+      internalID: -4353470719063112461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_32
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 227
+        width: 19
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1785a3e288ccc94b0800000000000000
+      internalID: -5432242165252466575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_33
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 227
+        width: 26
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e591101afbd5557e0800000000000000
+      internalID: -1777411400306452130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_34
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 252
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02940c434bb499370800000000000000
+      internalID: 8329772223149656352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_35
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 227
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2a0ad9030862e0d0800000000000000
+      internalID: -3395036806824457684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_36
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 227
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76373d18e77a81730800000000000000
+      internalID: 3970107233312928615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_37
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 227
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06255bc42d0bfb1d0800000000000000
+      internalID: -3332750781954305440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_38
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 227
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1b0fbc5b01cc76c0800000000000000
+      internalID: -4144225302542873825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_39
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 244
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aac0a75398bcb4600800000000000000
+      internalID: 453679977649015978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_40
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 154
+        width: 25
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94476d59007f6cf80800000000000000
+      internalID: -8086504499011226551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_41
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 198
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 835cfea9b52869c40800000000000000
+      internalID: 5518741723342161208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_42
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 205
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 351ff0e6830811120800000000000000
+      internalID: 2382826657708765523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_43
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 200
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 250afa8be311047f0800000000000000
+      internalID: -630484986747707310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_44
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 154
+        width: 23
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9014cb991c219f90800000000000000
+      internalID: -6948724261556842341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_45
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 154
+        width: 31
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 028858633fb3ea170800000000000000
+      internalID: 8191550688011323424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_46
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 154
+        width: 25
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 769021b63033f4530800000000000000
+      internalID: 3841345096944585063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_47
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 192
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfbd40f085f344630800000000000000
+      internalID: 3910320023906081789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_48
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 154
+        width: 23
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e3dcd52e683f52a0800000000000000
+      internalID: -6746611671044926490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_49
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 154
+        width: 20
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f92a1b7c77314f40800000000000000
+      internalID: 5710906810263284211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_50
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 135
+        width: 26
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dad39af7fbc25cc0800000000000000
+      internalID: -3723689675960624424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_51
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 187
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7455374c3b521630800000000000000
+      internalID: 3896276942079743099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_52
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 159
+        width: 13
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b74ec144f92453de0800000000000000
+      internalID: -1354102861144988549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_53
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 168
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ac9d357d7670d590800000000000000
+      internalID: -7651485485692511067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_54
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 164
+        width: 20
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72b90d8c1efd1ed50800000000000000
+      internalID: 6764934276116945703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_55
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 156
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 452c942ad04a3a200800000000000000
+      internalID: 190175987743965780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_56
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 154
+        width: 8
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff4040f2ad2f853a0800000000000000
+      internalID: -6676319428671175425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_57
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 90
+        width: 50
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5ffac0c0f1a3f280800000000000000
+      internalID: -9010680374039478437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_58
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 153
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2833035b4db981b60800000000000000
+      internalID: 7717089299374551938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_59
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 90
+        width: 57
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09e9cbd8b59dc5f10800000000000000
+      internalID: 2259920100276346512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_60
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 155
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cf664fb27808ca30800000000000000
+      internalID: 4235644738470309831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_61
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 90
+        width: 55
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de6e78b08321fd1b0800000000000000
+      internalID: -5629760977268906259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_62
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 147
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c062af3da2d62b20800000000000000
+      internalID: 3109404234284687556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_63
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 150
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57fda06c418738060800000000000000
+      internalID: 6954534280207458165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_64
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 90
+        width: 56
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36ef3a9bbb814bb70800000000000000
+      internalID: 8913776757025537635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_65
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 90
+        width: 19
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d29d333dd150d6fa0800000000000000
+      internalID: -5805978718955120339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_66
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 90
+        width: 19
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2da1f345b48191f0800000000000000
+      internalID: -1039904124882014929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_67
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 132
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17691ebadd0afe600800000000000000
+      internalID: 499794957593319025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_68
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 131
+        width: 4
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c087c8321d186e920800000000000000
+      internalID: 3019243335443052556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_69
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 90
+        width: 54
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fabd447b5a863ab20800000000000000
+      internalID: 3144472025788373935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_70
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 90
+        width: 19
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62534491d56ff7140800000000000000
+      internalID: 4719761814223861030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_71
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 127
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1027d6f32f0bfc020800000000000000
+      internalID: 2364302883885511169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_72
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 90
+        width: 20
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f39199be19e4a8ed0800000000000000
+      internalID: -2411028261873575617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_73
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 90
+        width: 19
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd1d69387c91e8cf0800000000000000
+      internalID: -248232584761912868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_74
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 128
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08828a816adb99f00800000000000000
+      internalID: 1124138103081543808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_75
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 127
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acb6c6b7a35531b80800000000000000
+      internalID: -8425296768212898870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_76
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 90
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9dd64b99845c73f0800000000000000
+      internalID: -901752875388576356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_77
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 90
+        width: 20
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20ab78bdf85a27090800000000000000
+      internalID: -8038180347620902398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_78
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 90
+        width: 20
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 742eb7ede8800e460800000000000000
+      internalID: 7268819208287019591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_79
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 90
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 957f73bd27c87ea00800000000000000
+      internalID: 785751084931479385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_80
+      rect:
+        serializedVersion: 2
+        x: 631
+        y: 114
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6568a5ee077128830800000000000000
+      internalID: 4071842786899035734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_81
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 110
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d46da016945ad270800000000000000
+      internalID: 8276020268748334297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_82
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 14
+        width: 25
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae2db5057d7524d30800000000000000
+      internalID: 4414187167054287594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_83
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 58
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d297593ed0ad6bf50800000000000000
+      internalID: 6896939632552147245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_84
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 65
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55497a00a2bcf0eb0800000000000000
+      internalID: -4751355700592536491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_85
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 60
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a37913370dbd6e70800000000000000
+      internalID: 9110145459860108197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_86
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 14
+        width: 24
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b759f75dbe57cd380800000000000000
+      internalID: -8945145104104974981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_87
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 14
+        width: 25
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84d40ce348a146000800000000000000
+      internalID: 28176652961860936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_88
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 14
+        width: 26
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b85c9164273856a0800000000000000
+      internalID: -6460353036066989904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_89
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 52
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 789b9bb88bc39ea30800000000000000
+      internalID: 4244990887089256839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_90
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 14
+        width: 23
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46be59f30da9b4b80800000000000000
+      internalID: -8409457659973604508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_91
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 14
+        width: 20
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ba57d3f25d2535b0800000000000000
+      internalID: -5389351544777385292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_92
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 14
+        width: 21
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b7d34f04d01b2380800000000000000
+      internalID: -8995077327767218254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: messy_93
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 47
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61c828c6ae76e25f0800000000000000
+      internalID: -779571428948014058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

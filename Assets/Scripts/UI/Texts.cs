@@ -9,6 +9,8 @@ using DG.Tweening;
 public class Texts : Text_Base
 {
     [SerializeField]
+    private GameObject textBox = null;
+    [SerializeField]
     private List<sText> texts = new List<sText>();
     [SerializeField]
     private Text text = null;
@@ -29,6 +31,9 @@ public class Texts : Text_Base
             {
                 text.alignment = TextAnchor.UpperRight;
             }
+
+            text.text = "";
+
             text.DOText(texts[currentTextNum].contents, a);
         };
     }
@@ -38,10 +43,20 @@ public class Texts : Text_Base
     }
     public void OnClickNext()
     {
+        Debug.Log("aa");
         currentTextNum++;
-        currentTextNum = Mathf.Clamp(currentTextNum, 0, texts.Count - 1);
 
-        SetText(0.5f);
+        if (currentTextNum < texts.Count)
+        {
+            currentTextNum = Mathf.Clamp(currentTextNum, 0, texts.Count - 1);
+
+            SetText(0.5f);
+        }
+        else
+        {
+            currentTextNum = 0;
+            textBox.SetActive(false);
+        }
     }
 
 
