@@ -10,9 +10,13 @@ public class Texts : Text_Base
 {
     private TalkManager talkManager = null;
     [SerializeField]
-    private List<sText> texts = new List<sText>();
+    private List<SText> texts = new List<SText>();
     [SerializeField]
     private Text text = null;
+    [SerializeField]
+    private Image LSpriteRenderer = null;
+    [SerializeField]
+    private Image RSpriteRenderer = null;
     [SerializeField]
     private int currentTextNum = 0;
     private bool doFirstText = true;
@@ -25,28 +29,57 @@ public class Texts : Text_Base
     }
     public void Update()
     {
-        if(doFirstText)
+        if (doFirstText)
         {
             SetText();
             doFirstText = false;
         }
     }
-    
+
     public void SetText()
     {
+        SetSpriteRenderers();
+
         if (texts[currentTextNum].isPlayerSay)
-            {
-                text.alignment = TextAnchor.UpperLeft;
-            }
-            else
-            {
-                text.alignment = TextAnchor.UpperRight;
-            }
+        {
+            text.alignment = TextAnchor.UpperLeft;
+            RSpriteRenderer.color = new Vector4(1f, 1f, 1f, 0.5f);
+        }
+        else
+        {
+            text.alignment = TextAnchor.UpperRight;
+            LSpriteRenderer.color = new Vector4(1f, 1f, 1f, 0.5f);
+        }
 
-            text.text = "";
+        text.text = "";
 
-            text.DOText(texts[currentTextNum].contents, 0.5f);
+        text.DOText(texts[currentTextNum].contents, 0.5f);
     }
+
+    private void SetSpriteRenderers()
+    {
+        LSpriteRenderer.sprite = texts[currentTextNum].LSprite;
+        RSpriteRenderer.sprite = texts[currentTextNum].RSprite;
+
+        if (LSpriteRenderer.sprite == null)
+        {
+            LSpriteRenderer.color = new Vector4(1f, 1f, 1f, 0f);
+        }
+        else
+        {
+            LSpriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
+        }
+
+        if (RSpriteRenderer.sprite == null)
+        {
+            RSpriteRenderer.color = new Vector4(1f, 1f, 1f, 0f);
+        }
+        else
+        {
+            RSpriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
+        }
+    }
+
     public void OnClickNext()
     {
         currentTextNum++;

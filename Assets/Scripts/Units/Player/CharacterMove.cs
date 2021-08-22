@@ -161,6 +161,10 @@ public class CharacterMove : MonoBehaviour
             RightWallCheck();
             CharacterHangWallCheck();
         }
+        else if(gameManager.stopTime)
+        {
+            anim.Play(characterName + "Idle");
+        }
 
         if (characterStat.hp <= 0f)
         {
