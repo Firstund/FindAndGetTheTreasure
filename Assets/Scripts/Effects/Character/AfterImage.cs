@@ -17,6 +17,7 @@ public class AfterImage : MonoBehaviour
     public void SetSprite(Sprite sprite, bool flip, Vector3 position, SpawnAfterImage spawnAfterImage)
     {
         transform.position = position;
+        
         spriteRenderer.flipX = flip;
         spriteRenderer.color = new Color(0f, 1f, 1f, 1f);
         spriteRenderer.sprite = sprite;

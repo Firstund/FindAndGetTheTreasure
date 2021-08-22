@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
 
     private Func<float, float> TimeSlow;
     public event Action<int> SpawnStages;
+    public event Action<bool> GameEnd;
 
     private bool _stopTime = false;
     public bool stopTime
@@ -107,6 +108,18 @@ public class GameManager : MonoBehaviour
             _currentStage = stageNum;
         };
 
+        GameEnd = gameClear =>
+        {
+            if(gameClear)
+            {
+                // 게임을 클리어했을 때
+            }
+            else
+            {
+                // 게임 오버상태일 때
+            }
+        };
+
     }
     void Start()
     {
@@ -128,4 +141,5 @@ public class GameManager : MonoBehaviour
     {
         _stopTime = st;
     }
+
 }
