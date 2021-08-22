@@ -63,7 +63,7 @@ public class EnemyMove : EnemyStatus
 
     void Update()
     {
-        if (!isDead)
+        if (!(isDead || gameManager.stopTime))
         {
             if (enemyStat.currentStatus == Status.Shoot)
             {
@@ -103,7 +103,7 @@ public class EnemyMove : EnemyStatus
                 isDead = true;
             }
 
-            if(searchResetTimer > 0f)
+            if (searchResetTimer > 0f)
             {
                 searchResetTimer -= Time.deltaTime;
             }
@@ -112,9 +112,35 @@ public class EnemyMove : EnemyStatus
                 SearchPositionSet();
             }
         }
-        if(isDead)
+        else if(gameManager.stopTime)
+        {
+            anim.Play("Idle");
+        }
+        
+        if (isDead)
         {
             Dead();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!(isDead || gameManager.stopTime))
+        {
+            currentPosition = transform.position;
+            playerPosition = enemyStat.playerPosition.position;
+
+            Pursue();
+            Attack();
+
+            if (enemyStat.isShootProjectile)
+            {
+                Shoot();
+            }
+
+            Searching();
+
+            transform.position = currentPosition;
         }
     }
     public void SpawnSet()
@@ -122,23 +148,6 @@ public class EnemyMove : EnemyStatus
         spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
         enemyStat.hp = enemyStat.firstHp;
         isDead = false;
-    }
-    private void FixedUpdate()
-    {
-        currentPosition = transform.position;
-        playerPosition = enemyStat.playerPosition.position;
-
-        Pursue();
-        Attack();
-
-        if (enemyStat.isShootProjectile)
-        {
-            Shoot();
-        }
-
-        Searching();
-
-        transform.position = currentPosition;
     }
     private void FlipCheck(Vector2 targetPosition)
     {

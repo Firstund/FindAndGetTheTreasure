@@ -115,7 +115,7 @@ public class CharacterMove : MonoBehaviour
     }
     void Update()
     {
-        if (!isDead)
+        if (!(isDead || gameManager.stopTime))
         {
             if (playerInput.isJump && !staping)
             {
@@ -175,7 +175,7 @@ public class CharacterMove : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (!isDead)
+        if (!(isDead || gameManager.stopTime))
         {
             currentPosition = transform.position;
 

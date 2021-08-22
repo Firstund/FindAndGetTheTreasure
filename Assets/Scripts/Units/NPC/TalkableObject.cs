@@ -22,9 +22,14 @@ public class TalkableObject : MonoBehaviour
     {
         distance = Vector2.Distance(transform.position, gameManager.player.transform.position);
 
-        if(Input.GetButtonDown("Attack") && distance <= talkableDistance)
+        CheckTalk();
+    }
+
+    private void CheckTalk()
+    {
+        if (Input.GetButtonDown("Attack") && distance <= talkableDistance)
         {
-            talkManager.currentTextBox.SpawnTextBox(spawnTextBoxIndex);
+            talkManager.currentTextBoxesParent.SpawnTextBox(spawnTextBoxIndex);
         }
     }
 }

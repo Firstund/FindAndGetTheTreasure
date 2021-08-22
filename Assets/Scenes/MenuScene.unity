@@ -1783,7 +1783,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2fa6271bb7d65f4dad2f4a6e19f608a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textBox: {fileID: 506586552}
   texts:
   - contents: "\uC774 \uD14D\uC2A4\uD2B8\uAC00 \uAE34 \uD14D\uC2A4\uD2B8\uC778\uC9C0
       \uC548\uAE34 \uD14D\uC2A4\uD2B8\uC778\uC9C0 \uC5B4\uCA0C\uB4E0 \uD14D\uC2A4\uD2B8\uC774\uAE34
@@ -3468,7 +3467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a950698d8bb4349a0b9117c2342046, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textBoxes:
+  textBoxesParent:
   - {fileID: 61917141}
   - {fileID: 1201153743}
 --- !u!4 &1147683491
@@ -3517,7 +3516,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2fa6271bb7d65f4dad2f4a6e19f608a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textBox: {fileID: 1596460689}
   texts:
   - contents: "\uC774 \uD14D\uC2A4\uD2B8\uAC00 \uAE34 \uD14D\uC2A4\uD2B8\uC778\uC9C0
       \uC548\uAE34 \uD14D\uC2A4\uD2B8\uC778\uC9C0 \uC5B4\uCA0C\uB4E0 \uD14D\uC2A4\uD2B8\uC774\uAE34
@@ -4655,7 +4653,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2fa6271bb7d65f4dad2f4a6e19f608a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textBox: {fileID: 838384471}
   texts:
   - contents: "\uC774 \uD14D\uC2A4\uD2B8\uAC00 \uAE34 \uD14D\uC2A4\uD2B8\uC778\uC9C0
       \uC548\uAE34 \uD14D\uC2A4\uD2B8\uC778\uC9C0 \uC5B4\uCA0C\uB4E0 \uD14D\uC2A4\uD2B8\uC774\uAE34
@@ -4848,7 +4845,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2fa6271bb7d65f4dad2f4a6e19f608a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textBox: {fileID: 84130451}
   texts:
   - contents: "\uC774 \uD14D\uC2A4\uD2B8\uAC00 \uAE34 \uD14D\uC2A4\uD2B8\uC778\uC9C0
       \uC548\uAE34 \uD14D\uC2A4\uD2B8\uC778\uC9C0 \uC5B4\uCA0C\uB4E0 \uD14D\uC2A4\uD2B8\uC774\uAE34
@@ -5168,7 +5164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2fa6271bb7d65f4dad2f4a6e19f608a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textBox: {fileID: 913772195}
   texts:
   - contents: "\uC774 \uD14D\uC2A4\uD2B8\uAC00 \uAE34 \uD14D\uC2A4\uD2B8\uC778\uC9C0
       \uC548\uAE34 \uD14D\uC2A4\uD2B8\uC778\uC9C0 \uC5B4\uCA0C\uB4E0 \uD14D\uC2A4\uD2B8\uC774\uAE34
@@ -5285,7 +5280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2fa6271bb7d65f4dad2f4a6e19f608a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textBox: {fileID: 822897411}
   texts:
   - contents: "\uC774 \uD14D\uC2A4\uD2B8\uAC00 \uAE34 \uD14D\uC2A4\uD2B8\uC778\uC9C0
       \uC548\uAE34 \uD14D\uC2A4\uD2B8\uC778\uC9C0 \uC5B4\uCA0C\uB4E0 \uD14D\uC2A4\uD2B8\uC774\uAE34

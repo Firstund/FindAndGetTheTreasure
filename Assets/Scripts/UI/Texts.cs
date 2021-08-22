@@ -8,22 +8,33 @@ using DG.Tweening;
 
 public class Texts : Text_Base
 {
-    [SerializeField]
-    private GameObject textBox = null;
+    private TalkManager talkManager = null;
     [SerializeField]
     private List<sText> texts = new List<sText>();
     [SerializeField]
     private Text text = null;
     [SerializeField]
     private int currentTextNum = 0;
+    private bool doFirstText = true;
 
-    public event Action<float> SetText;
-
-    void Awake()
+    void Start()
     {
-        SetText = a =>
+        talkManager = FindObjectOfType<TalkManager>();
+
+        SetText();
+    }
+    public void Update()
+    {
+        if(doFirstText)
         {
-            if (texts[currentTextNum].isPlayerSay)
+            SetText();
+            doFirstText = false;
+        }
+    }
+    
+    public void SetText()
+    {
+        if (texts[currentTextNum].isPlayerSay)
             {
                 text.alignment = TextAnchor.UpperLeft;
             }
@@ -34,28 +45,23 @@ public class Texts : Text_Base
 
             text.text = "";
 
-            text.DOText(texts[currentTextNum].contents, a);
-        };
-    }
-    void Start()
-    {
-        SetText(0.5f);
+            text.DOText(texts[currentTextNum].contents, 0.5f);
     }
     public void OnClickNext()
     {
-        Debug.Log("aa");
         currentTextNum++;
 
         if (currentTextNum < texts.Count)
         {
             currentTextNum = Mathf.Clamp(currentTextNum, 0, texts.Count - 1);
 
-            SetText(0.5f);
+            SetText();
         }
         else
         {
             currentTextNum = 0;
-            textBox.SetActive(false);
+            doFirstText = true;
+            talkManager.currentTextBoxesParent.DeSpawnTextBox();
         }
     }
 

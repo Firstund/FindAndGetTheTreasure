@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class TalkManager : MonoBehaviour
 {
     private GameManager gameManager = null;
     [SerializeField]
-    private List<GameObject> textBoxes;
+    private List<GameObject> textBoxesParent;
 
-    private TextBox _currentTextBox;
-    public TextBox currentTextBox
+    private TextBoxesParent _currentTextBoxesParent;
+    public TextBoxesParent currentTextBoxesParent
     {
-        get { return _currentTextBox; }
+        get { return _currentTextBoxesParent; }
     }
     void Start()
     {
@@ -21,14 +22,14 @@ public class TalkManager : MonoBehaviour
 
         DontDestroyOnLoad(this);
     }
-    public void SpawnTextBoxes(int index)
+    private void SpawnTextBoxes(int index)
     {
-        textBoxes[index].SetActive(true);
+        textBoxesParent[index].SetActive(true);
 
-        _currentTextBox = textBoxes[index].GetComponent<TextBox>();
+        _currentTextBoxesParent = textBoxesParent[index].GetComponent<TextBoxesParent>();
     }
     public void DeSpawnTextBoxes(int index)
     {
-        textBoxes[index].SetActive(false);
+        textBoxesParent[index].SetActive(false);
     }
 }

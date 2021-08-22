@@ -72,6 +72,12 @@ public class GameManager : MonoBehaviour
     private Func<float, float> TimeSlow;
     public event Action<int> SpawnStages;
 
+    private bool _stopTime = false;
+    public bool stopTime
+    {
+        get { return _stopTime; }
+    }
+
     void Awake()
     {
         TimeSlow = a =>
@@ -90,16 +96,17 @@ public class GameManager : MonoBehaviour
             return a;
         };
 
-        SpawnStages = stageNum => 
+        SpawnStages = stageNum =>
         {
             SceneManager.LoadScene("StageScene");
-        if (stageNum < 1)
-        {
-            stageNum = 1;
-        }
+            if (stageNum < 1)
+            {
+                stageNum = 1;
+            }
 
-        _currentStage = stageNum;
+            _currentStage = stageNum;
         };
+
     }
     void Start()
     {
@@ -109,12 +116,16 @@ public class GameManager : MonoBehaviour
     {
         slowTime = TimeSlow(slowTime);
     }
-    public void OnClickSpawnStageBtn(int stage)
+    private void OnClickSpawnStageBtn(int stage)
     {
         SpawnStages(stage);
     }
     public void SetSlowTime(float time)
     {
         slowTime = time;
+    }
+    public void StopTime(bool st)
+    {
+        _stopTime = st;
     }
 }
