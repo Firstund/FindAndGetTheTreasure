@@ -161,7 +161,7 @@ public class CharacterMove : MonoBehaviour
             RightWallCheck();
             CharacterHangWallCheck();
         }
-        else if(gameManager.stopTime)
+        else if (gameManager.stopTime)
         {
             anim.Play(characterName + "Idle");
         }
@@ -252,7 +252,7 @@ public class CharacterMove : MonoBehaviour
         {
             isHurt = true;
             _canHurt = false;
-            stageManager.ShakeCamera(1f, 0.1f);
+            stageManager.ShakeCamera(2f, 0.1f);
             stageManager.SpawnSoundBox(hurtSoundBox);
 
             StartCoroutine(Hurt());
@@ -265,7 +265,6 @@ public class CharacterMove : MonoBehaviour
     {
         Color color = new Color(1f, 0f, 1f, 0.5f);
         Color color_origin = new Color(1f, 1f, 1f, 1f);
-
 
         spriteRenderer.color = color;
 
@@ -431,7 +430,7 @@ public class CharacterMove : MonoBehaviour
 
         foreach (var item in a)
         {
-            if(!soundPlayed)
+            if (!soundPlayed)
             {
                 stageManager.SpawnSoundBox(attackSoundBox);
                 soundPlayed = true;
@@ -586,9 +585,18 @@ public class CharacterMove : MonoBehaviour
     }
     private void InAirCheck()
     {
-        if (!(isJump || isHangWall || isGround || isHang || staping || attacking))
+        if (!(isJump || isGround || isHang || staping || attacking))
         {
-            anim.Play(characterName + "InAir");
+            if (isHangWall)
+            {
+                spriteRenderer.flipX = leftWall;
+
+                anim.Play(characterName + "HangWall");
+            }
+            else
+            {
+                anim.Play(characterName + "InAir");
+            }
         }
     }
 
@@ -596,21 +604,7 @@ public class CharacterMove : MonoBehaviour
     {
         if (!isHang)
         {
-            // if ((leftWall || rightWall) && !isGround)
-            // {
-            //     if (leftWall && spriteRenderer.flipX && !isJump)
-            //     {
-            //         rigid.velocity = new Vector2(0f, -1f);
-            //     }
-            //     else if (rightWall && !spriteRenderer.flipX && !isJump)
-            //     {
-            //         rigid.velocity = new Vector2(0f, -1f);
-            //     }
-            // }
-            // else
-            {
-                rigid.velocity = new Vector2(XMove * characterStat.speed, rigid.velocity.y);
-            }
+            rigid.velocity = new Vector2(XMove * characterStat.speed, rigid.velocity.y);
         }
         else
         {
@@ -711,24 +705,17 @@ public class CharacterMove : MonoBehaviour
                 spriteRenderer.flipX = false;
             }
 
-            if (!isJump && !staping && !attacking)
+            if (!isJump && !staping && !attacking && isGround)
             {
                 attacking = false;
 
-                if (isHangWall)
+                if (XMove != 0f)
                 {
-                    anim.Play(characterName + "HangWall");
+                    anim.Play(characterName + "Run");
                 }
-                else if (isGround)
+                else
                 {
-                    if (XMove != 0f)
-                    {
-                        anim.Play(characterName + "Run");
-                    }
-                    else
-                    {
-                        anim.Play(characterName + "Idle");
-                    }
+                    anim.Play(characterName + "Idle");
                 }
             }
         }

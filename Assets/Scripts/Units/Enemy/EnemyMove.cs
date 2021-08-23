@@ -239,7 +239,7 @@ public class EnemyMove : EnemyStatus
             isHurt = true;
 
             StartCoroutine(Hurt());
-            stageManager.ShakeCamera(0.5f, 0.1f);
+            stageManager.ShakeCamera(1.5f, 0.1f);
             gameManager.SetSlowTime(0.05f);
             Invoke("isHurtSet", 1f);
 

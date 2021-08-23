@@ -34,6 +34,11 @@ public class Texts : Text_Base
             SetText();
             doFirstText = false;
         }
+
+        if(Input.GetButtonUp("Jump"))
+        {
+            OnClickNext();
+        }
     }
 
     public void SetText()
