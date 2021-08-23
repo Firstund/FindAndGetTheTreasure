@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
+    private DontDestroyOnLoadManager dontDestroyOnLoadManager = null;
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        dontDestroyOnLoadManager = DontDestroyOnLoadManager.Instance;
+        
+        dontDestroyOnLoadManager.DoNotDestroyOnLoad(gameObject);
     }
 }

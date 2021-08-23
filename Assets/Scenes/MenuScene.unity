@@ -2163,8 +2163,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 988320050}
   m_HandleRect: {fileID: 988320049}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.99999994
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3246,8 +3246,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 61917142}
     m_Modifications:
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
+      propertyPath: endGameAtEndTalk
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: texts.Array.size
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
+      propertyPath: gameClearAtEndGame
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: texts.Array.data[0].RSprite

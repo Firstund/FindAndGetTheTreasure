@@ -304,7 +304,6 @@ public class CharacterMove : MonoBehaviour
             else
             {
                 canDashAttack = false;
-                attacking = false;
             }
 
             if (spriteRenderer.flipX)
@@ -705,7 +704,7 @@ public class CharacterMove : MonoBehaviour
                 spriteRenderer.flipX = false;
             }
 
-            if (!isJump && !staping && !attacking && isGround)
+            if (!(isJump || staping || attacking) && isGround)
             {
                 attacking = false;
 

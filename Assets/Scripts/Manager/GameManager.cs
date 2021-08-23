@@ -7,6 +7,26 @@ using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<GameManager>();
+                if (instance == null)
+                {
+                    GameObject temp = new GameObject("GameManager");
+                    instance = temp.AddComponent<GameManager>();
+                }
+            }
+
+            return instance;
+        }
+    }
+    private DontDestroyOnLoadManager dontDestroyOnLoadManager = null;
+
     [SerializeField]
     private CinemachineVirtualCamera _cinemachineVirtualCamera = null;
     public CinemachineVirtualCamera cinemachineVirtualCamera
@@ -43,25 +63,6 @@ public class GameManager : MonoBehaviour
         set { _characterStat = value; }
     }
 
-    private static GameManager instance;
-    public static GameManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<GameManager>();
-                if (instance == null)
-                {
-                    GameObject temp = new GameObject("GameManager");
-                    instance = temp.AddComponent<GameManager>();
-                }
-            }
-
-            return instance;
-        }
-    }
-
     private float slowTime = 0f;
     private int _currentStage = 0;
     public int currentStage
@@ -71,7 +72,7 @@ public class GameManager : MonoBehaviour
 
     private Func<float, float> TimeSlow;
     public event Action<int> SpawnStages;
-    public event Action<bool> GameEnd;
+    public Action<bool> GameEnd;
 
     private bool _stopTime = false;
     public bool stopTime
@@ -118,12 +119,16 @@ public class GameManager : MonoBehaviour
             {
                 // 게임 오버상태일 때
             }
+
+            SceneManager.LoadScene("MenuScene");
         };
 
     }
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        dontDestroyOnLoadManager = DontDestroyOnLoadManager.Instance;
+        
+        dontDestroyOnLoadManager.DoNotDestroyOnLoad(gameObject);
     }
     void Update()
     {

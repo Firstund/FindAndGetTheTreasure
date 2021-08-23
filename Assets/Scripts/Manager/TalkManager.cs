@@ -6,6 +6,7 @@ using UnityEngine;
 public class TalkManager : MonoBehaviour
 {
     private GameManager gameManager = null;
+    private DontDestroyOnLoadManager dontDestroyOnLoadManager = null;
     [SerializeField]
     private List<GameObject> textBoxesParent;
 
@@ -17,10 +18,11 @@ public class TalkManager : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
+        dontDestroyOnLoadManager = DontDestroyOnLoadManager.Instance;
 
         gameManager.SpawnStages += x => SpawnTextBoxes(x - 1);
 
-        DontDestroyOnLoad(this);
+        dontDestroyOnLoadManager.DoNotDestroyOnLoad(gameObject);
     }
     private void SpawnTextBoxes(int index)
     {

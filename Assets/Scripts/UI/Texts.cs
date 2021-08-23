@@ -8,21 +8,31 @@ using DG.Tweening;
 
 public class Texts : Text_Base
 {
+    private GameManager gameManager = null;
     private TalkManager talkManager = null;
+
     [SerializeField]
     private List<SText> texts = new List<SText>();
     [SerializeField]
     private Text text = null;
+
     [SerializeField]
     private Image LSpriteRenderer = null;
     [SerializeField]
     private Image RSpriteRenderer = null;
+
     [SerializeField]
     private int currentTextNum = 0;
+
+    [SerializeField]
+    private bool endGameAtEndTalk = false;
+    [SerializeField]
+    private bool gameClearAtEndGame = false;
     private bool doFirstText = true;
 
     void Start()
     {
+        gameManager = GameManager.Instance;
         talkManager = FindObjectOfType<TalkManager>();
 
         SetText();
@@ -100,6 +110,12 @@ public class Texts : Text_Base
             currentTextNum = 0;
             doFirstText = true;
             talkManager.currentTextBoxesParent.DeSpawnTextBox();
+
+            if(endGameAtEndTalk)
+            {
+                gameManager.GameEnd(gameClearAtEndGame);
+                
+            }
         }
     }
 

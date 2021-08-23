@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class EventSystemScript : MonoBehaviour
 {
+    DontDestroyOnLoadManager dontDestroyOnLoadManager = null;
     void Start()
     {
-        DontDestroyOnLoad(this);
+        dontDestroyOnLoadManager = DontDestroyOnLoadManager.Instance;
+        
+        dontDestroyOnLoadManager.DoNotDestroyOnLoad(gameObject);
     }
 }
