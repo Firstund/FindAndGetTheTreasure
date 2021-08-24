@@ -56,28 +56,13 @@ public class EnemyProjectile : MonoBehaviour
 
         if (distance <= 0.5f)
         {
-            CharacterStat _player = gameManager.player.GetComponent<CharacterStat>();
-            CharacterMove _playerMove = gameManager.player.GetComponent<CharacterMove>();
+            CharacterMove characterMove = gameManager.player.GetComponent<CharacterMove>();
 
-            if (_playerMove.canHurt)
+            if (characterMove.canHurt)
             {
-                float p_hp = _player.hp;
-                float p_dp = _player.dp;
-
-                float totalDamage;
-
-                totalDamage = damage - p_dp;
-
-                if (totalDamage <= 0f)
-                {
-                    totalDamage = 0.5f;
-                }
-
-                p_hp -= totalDamage;
-                _player.hp = p_hp;
-
-                _playerMove._Hurt();
+                characterMove.Hurt(damage);
             }
+            
             isDestroy = true;
             stageManager.DespawnProjectile(gameObject);
         }

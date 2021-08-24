@@ -112,11 +112,11 @@ public class EnemyMove : EnemyStatus
                 SearchPositionSet();
             }
         }
-        else if(gameManager.stopTime)
+        else if (gameManager.stopTime)
         {
             anim.Play("Idle");
         }
-        
+
         if (isDead)
         {
             Dead();
@@ -207,45 +207,43 @@ public class EnemyMove : EnemyStatus
         if (a)
         {
             Collider2D player_Col = Physics2D.OverlapCircle(currentPosition, enemyStat.attackRange, WhatIsPlayer);
-            CharacterStat _player = player_Col.gameObject.GetComponent<CharacterStat>();
-            CharacterMove _playerMove = player_Col.gameObject.GetComponent<CharacterMove>();
+            CharacterMove characterMove = player_Col.gameObject.GetComponent<CharacterMove>();
 
-            if (_playerMove.canHurt)
+            if (characterMove.canHurt)
             {
-                float p_hp = _player.hp;
-                float p_dp = _player.dp;
 
-                float totalDamage;
-
-                totalDamage = enemyStat.ap - p_dp;
-
-                if (totalDamage <= 0f)
-                {
-                    totalDamage = 0.5f;
-                }
-
-                p_hp -= totalDamage;
-                _player.hp = p_hp;
-
-
-                _playerMove._Hurt();
+                characterMove.Hurt(enemyStat.ap);
             }
         }
     }
-    public void _Hurt()
+    public void Hurt(float damage)
     {
+        float enemyHp = enemyStat.hp;
+        float enemyDp = enemyStat.dp;
+
+        float totalDamage = damage - enemyDp;
+
+        if (totalDamage <= 0f)
+        {
+            totalDamage = 0.5f;
+        }
+
+        enemyHp -= totalDamage;
+
+        enemyStat.hp = enemyHp;
+
         if (!isHurt)
         {
             isHurt = true;
 
-            StartCoroutine(Hurt());
+            StartCoroutine(hurt());
             stageManager.ShakeCamera(1.5f, 0.1f);
             gameManager.SetSlowTime(0.05f);
             Invoke("isHurtSet", 1f);
 
         }
     }
-    private IEnumerator Hurt()
+    private IEnumerator hurt()
     {
         Color color = new Color(1f, 0f, 1f, 0.5f);
         Color color_origin = new Color(1f, 1f, 1f, 1f);

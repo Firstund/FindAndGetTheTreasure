@@ -246,22 +246,37 @@ public class CharacterMove : MonoBehaviour
     {
         whenOutHangMove = false;
     }
-    public void _Hurt()
+    public void Hurt(float damage)
     {
-        if (!isHurt && canHurt)
+        if (canHurt && !isHurt && canHurt)
         {
             isHurt = true;
             _canHurt = false;
             stageManager.ShakeCamera(2f, 0.1f);
             stageManager.SpawnSoundBox(hurtSoundBox);
 
-            StartCoroutine(Hurt());
+            float hp = characterStat.hp;
+            float dp = characterStat.dp;
+
+            float totalDamage;
+
+            totalDamage = damage - dp;
+
+            if (totalDamage <= 0f)
+            {
+                totalDamage = 0.5f;
+            }
+
+            hp -= totalDamage;
+            characterStat.hp = hp;
+
+            StartCoroutine(hurt());
 
             Invoke("isHurtSet", 1f);
 
         }
     }
-    private IEnumerator Hurt()
+    private IEnumerator hurt()
     {
         Color color = new Color(1f, 0f, 1f, 0.5f);
         Color color_origin = new Color(1f, 1f, 1f, 1f);
@@ -434,24 +449,10 @@ public class CharacterMove : MonoBehaviour
                 stageManager.SpawnSoundBox(attackSoundBox);
                 soundPlayed = true;
             }
-            EnemyStat enemyStat = item.GetComponent<EnemyStat>();
+
             EnemyMove enemyMove = item.GetComponent<EnemyMove>();
 
-            float enemyHp = enemyStat.hp;
-            float enemyDp = enemyStat.dp;
-
-            float totalDamage = characterStat.ap - enemyDp;
-
-            if (totalDamage <= 0f)
-            {
-                totalDamage = 0.5f;
-            }
-
-            enemyHp -= totalDamage;
-
-            enemyStat.hp = enemyHp;
-
-            enemyMove._Hurt();
+            enemyMove.Hurt(characterStat.ap);
         }
     }
     private void GetDashAttackDamage()
@@ -520,10 +521,9 @@ public class CharacterMove : MonoBehaviour
 
         foreach (var item in hits)
         {
-            EnemyStat enemyStat = item.transform.GetComponent<EnemyStat>();
             EnemyMove enemyMove = item.transform.GetComponent<EnemyMove>();
 
-            if (enemyMove != null && enemyStat != null)
+            if (enemyMove != null)
             {
                 if (!soundPlayed)
                 {
@@ -531,21 +531,7 @@ public class CharacterMove : MonoBehaviour
                     stageManager.SpawnSoundBox(dashAttackSoundBox);
                 }
 
-                float enemyHp = enemyStat.hp;
-                float enemyDp = enemyStat.dp;
-
-                float totalDamage = characterStat.ap - enemyDp;
-
-                if (totalDamage <= 0f)
-                {
-                    totalDamage = 0.5f;
-                }
-
-                enemyHp -= totalDamage;
-
-                enemyStat.hp = enemyHp;
-
-                enemyMove._Hurt();
+                enemyMove.Hurt(characterStat.ap);
             }
         }
     }
@@ -635,8 +621,7 @@ public class CharacterMove : MonoBehaviour
             {
                 if (canHurt)
                 {
-                    characterStat.hp -= (0.1f * (-(rigid.velocity.y + 20f)));
-                    _Hurt();
+                    Hurt(0.1f * (-(rigid.velocity.y + 20f)) + characterStat.dp);
                 }
             }
 
