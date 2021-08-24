@@ -119,8 +119,6 @@ public class GameManager : MonoBehaviour
             {
                 // 게임 오버상태일 때
             }
-
-            SceneManager.LoadScene("MenuScene");
         };
 
     }

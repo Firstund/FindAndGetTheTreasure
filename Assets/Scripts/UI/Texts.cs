@@ -24,8 +24,10 @@ public class Texts : Text_Base
     [SerializeField]
     private int currentTextNum = 0;
 
+    [Header("이 값이 true면 대화가 끝났을 때 게임종료처리")]
     [SerializeField]
     private bool endGameAtEndTalk = false;
+    [Header("이 값이 true면 게임종료시 게임클리어처리 false면 게임오버처리")]
     [SerializeField]
     private bool gameClearAtEndGame = false;
     private bool doFirstText = true;
@@ -45,7 +47,7 @@ public class Texts : Text_Base
             doFirstText = false;
         }
 
-        if(Input.GetButtonUp("Jump"))
+        if(Input.GetKeyUp(KeyCode.Space))
         {
             OnClickNext();
         }
@@ -54,17 +56,6 @@ public class Texts : Text_Base
     public void SetText()
     {
         SetSpriteRenderers();
-
-        if (texts[currentTextNum].isPlayerSay)
-        {
-            text.alignment = TextAnchor.UpperLeft;
-            RSpriteRenderer.color = new Vector4(1f, 1f, 1f, 0.5f);
-        }
-        else
-        {
-            text.alignment = TextAnchor.UpperRight;
-            LSpriteRenderer.color = new Vector4(1f, 1f, 1f, 0.5f);
-        }
 
         text.text = "";
 
@@ -76,6 +67,18 @@ public class Texts : Text_Base
         LSpriteRenderer.sprite = texts[currentTextNum].LSprite;
         RSpriteRenderer.sprite = texts[currentTextNum].RSprite;
 
+        if (texts[currentTextNum].isPlayerSay) // 말하고있는 대상의 alpha는 냅두고 말하고있지 않는 대상의 alpha를 0.5f로 줄여줌.
+        {
+            text.alignment = TextAnchor.UpperLeft;
+            RSpriteRenderer.color = new Vector4(1f, 1f, 1f, 0.5f);
+        }
+        else
+        {
+            text.alignment = TextAnchor.UpperRight;
+            LSpriteRenderer.color = new Vector4(1f, 1f, 1f, 0.5f);
+        }
+
+        // 왼쪽 혹은 오른쪽에 위치하는 sprite가 null일경우 alpha를 0f로 줄여줌
         if (LSpriteRenderer.sprite == null)
         {
             LSpriteRenderer.color = new Vector4(1f, 1f, 1f, 0f);
@@ -114,7 +117,6 @@ public class Texts : Text_Base
             if(endGameAtEndTalk)
             {
                 gameManager.GameEnd(gameClearAtEndGame);
-                
             }
         }
     }

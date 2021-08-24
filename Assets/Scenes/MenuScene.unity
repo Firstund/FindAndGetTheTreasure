@@ -1486,9 +1486,37 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 61917142}
     m_Modifications:
+    - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
+      propertyPath: endGameAtEndTalk
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
+      propertyPath: texts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
+      propertyPath: gameClearAtEndGame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
+      propertyPath: texts.Array.data[0].contents
+      value: "\uCC3E\uC558\uB2E4. \uCCAB\uBC88\uC9F8 \uBCF4\uBB3C\uC778\uAC00?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
+      propertyPath: texts.Array.data[0].isPlayerSay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
+      propertyPath: texts.Array.data[2].isPlayerSay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
+      propertyPath: texts.Array.data[4].isPlayerSay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 98518312725156332, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: m_Name
-      value: TextBox_1_1
+      value: TextBox_1_1_Goal
       objectReference: {fileID: 0}
     - target: {fileID: 98518312725156332, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: m_IsActive
@@ -1862,7 +1890,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 327279676639568401, guid: ad5cec81a20f45c4b8c008a13295f9b4, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 327279676639568401, guid: ad5cec81a20f45c4b8c008a13295f9b4, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3247,7 +3275,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: endGameAtEndTalk
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: texts.Array.size
@@ -3255,7 +3283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: gameClearAtEndGame
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: texts.Array.data[0].RSprite
@@ -3299,7 +3327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 98518312725156332, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: m_Name
-      value: TextBox_1_0
+      value: TextBox_1_0_Test
       objectReference: {fileID: 0}
     - target: {fileID: 98518312725156332, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: m_IsActive
