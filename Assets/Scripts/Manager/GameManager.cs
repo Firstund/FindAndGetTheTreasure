@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
     {
         slowTime = TimeSlow(slowTime);
     }
-    private void OnClickSpawnStageBtn(int stage)
+    public void SpawnStage(int stage)
     {
         SpawnStages(stage);
     }

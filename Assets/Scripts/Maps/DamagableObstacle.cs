@@ -13,7 +13,6 @@ public class DamagableObstacle : MonoBehaviour
     [Header("왼쪽 오른쪽 아래 위 / 체크한 방향의 위치에서 플레이어가 부딪혔을 때만 데미지 체크")]
     [SerializeField]
     private bool[] direction = new bool[4];
-    [SerializeField]
     private bool[] playerDirection = new bool[4];
     [SerializeField]
     private float damage = 1f;

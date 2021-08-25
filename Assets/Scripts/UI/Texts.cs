@@ -53,7 +53,7 @@ public class Texts : Text_Base
         }
     }
 
-    public void SetText()
+    public void SetText() // gameManager의 SetSlowTime이 실행된 상태면 텍스트 설정이 느리게 되는 버그
     {
         SetSpriteRenderers();
 
@@ -66,17 +66,7 @@ public class Texts : Text_Base
     {
         LSpriteRenderer.sprite = texts[currentTextNum].LSprite;
         RSpriteRenderer.sprite = texts[currentTextNum].RSprite;
-
-        if (texts[currentTextNum].isPlayerSay) // 말하고있는 대상의 alpha는 냅두고 말하고있지 않는 대상의 alpha를 0.5f로 줄여줌.
-        {
-            text.alignment = TextAnchor.UpperLeft;
-            RSpriteRenderer.color = new Vector4(1f, 1f, 1f, 0.5f);
-        }
-        else
-        {
-            text.alignment = TextAnchor.UpperRight;
-            LSpriteRenderer.color = new Vector4(1f, 1f, 1f, 0.5f);
-        }
+        
 
         // 왼쪽 혹은 오른쪽에 위치하는 sprite가 null일경우 alpha를 0f로 줄여줌
         if (LSpriteRenderer.sprite == null)
@@ -86,6 +76,7 @@ public class Texts : Text_Base
         else
         {
             LSpriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
+            PlayerSayCheck();
         }
 
         if (RSpriteRenderer.sprite == null)
@@ -95,6 +86,21 @@ public class Texts : Text_Base
         else
         {
             RSpriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
+            PlayerSayCheck();
+        }
+    }
+
+    private void PlayerSayCheck()
+    {
+        if (texts[currentTextNum].isPlayerSay) // 말하고있는 대상의 alpha는 냅두고 말하고있지 않는 대상의 alpha를 0.5f로 줄여줌.
+        {
+            text.alignment = TextAnchor.UpperLeft;
+            RSpriteRenderer.color = new Vector4(1f, 1f, 1f, 0.5f);
+        }
+        else
+        {
+            text.alignment = TextAnchor.UpperRight;
+            LSpriteRenderer.color = new Vector4(1f, 1f, 1f, 0.5f);
         }
     }
 
