@@ -6,7 +6,6 @@ public class EnemyMove : EnemyStatus
 {
     private GameManager gameManager = null;
     private StageManager stageManager = null;
-
     private Animator anim = null;
     private SpriteRenderer spriteRenderer = null;
     private EnemyStat enemyStat = null;
@@ -28,9 +27,9 @@ public class EnemyMove : EnemyStatus
     private GameObject projectile = null;
 
     [SerializeField]
-    private LayerMask WhatIsPlayer;
+    private LayerMask whatIsPlayer;
     [SerializeField]
-    private LayerMask WhatIsGround;
+    private LayerMask whatIsGround;
 
     private bool isAttack = false;
     private bool isShoot = false;
@@ -202,16 +201,15 @@ public class EnemyMove : EnemyStatus
     }
     private void GetDamage()
     {
-        bool a = Physics2D.OverlapCircle(currentPosition, enemyStat.attackRange, WhatIsPlayer);
+        bool a = Physics2D.OverlapCircle(currentPosition, enemyStat.attackRange, whatIsPlayer);
 
         if (a)
         {
-            Collider2D player_Col = Physics2D.OverlapCircle(currentPosition, enemyStat.attackRange, WhatIsPlayer);
+            Collider2D player_Col = Physics2D.OverlapCircle(currentPosition, enemyStat.attackRange, whatIsPlayer);
             CharacterMove characterMove = player_Col.gameObject.GetComponent<CharacterMove>();
 
             if (characterMove.canHurt)
             {
-
                 characterMove.Hurt(enemyStat.ap);
             }
         }
@@ -300,21 +298,36 @@ public class EnemyMove : EnemyStatus
     }
     private void SearchPositionSet()
     {
-        searchResetTimer = searchResetTime;
+        bool hitGround;
 
-        Vector2 endPosition = currentPosition;
-        float _searchX = Random.Range(-searchRangeX, searchRangeX);
-
-        endPosition.x += _searchX;
-
-        if (enemyStat.isAirEnemy)
+        do
         {
-            float _searchY = Random.Range(-searchRangeY, searchRangeY);
+            searchResetTimer = searchResetTime;
 
-            endPosition.y += _searchY;
-        }
+            Vector2 endPosition = currentPosition;
 
-        searchTargetPosition = stageManager.PositionCantCrossWall(currentPosition, endPosition, (currentPosition.x > endPosition.x), WhatIsGround);
+            float _searchX = Random.Range(-searchRangeX, searchRangeX);
+
+            endPosition.x += _searchX;
+
+            if (enemyStat.isAirEnemy)
+            {
+                float _searchY = Random.Range(-searchRangeY, searchRangeY);
+
+                endPosition.y += _searchY;
+            }
+
+            if (enemyStat.isAirEnemy)
+            {
+                hitGround = true;
+            }
+            else
+            {
+                hitGround = Physics2D.Raycast(endPosition, Vector2.down, transform.localScale.y + 0.5f, whatIsGround);
+            }
+
+            searchTargetPosition = stageManager.PositionCantCrossWall(currentPosition, endPosition, (currentPosition.x > endPosition.x), whatIsGround);
+        } while (!hitGround);
     }
     private void SearMoveReset()
     {

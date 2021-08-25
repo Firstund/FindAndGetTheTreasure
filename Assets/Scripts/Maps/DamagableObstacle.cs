@@ -9,13 +9,15 @@ public class DamagableObstacle : MonoBehaviour
     [SerializeField]
     private LayerMask whatIsPlayer;
 
-    [Header("왼쪽 오른쪽 위 아래 / 체크한 방향의 위치에서 플레이어가 부딪혔을 때만 데미지 체크")]
+
+    [Header("왼쪽 오른쪽 아래 위 / 체크한 방향의 위치에서 플레이어가 부딪혔을 때만 데미지 체크")]
     [SerializeField]
     private bool[] direction = new bool[4];
     [SerializeField]
-    private float damagableDistance = 0.5f;
+    private bool[] playerDirection = new bool[4];
     [SerializeField]
     private float damage = 1f;
+    private bool playerDamage = false;
 
     void Start()
     {
@@ -24,13 +26,105 @@ public class DamagableObstacle : MonoBehaviour
         player = gameManager.player;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        bool playerHurt = Physics2D.OverlapCircle(transform.position, damagableDistance, whatIsPlayer);
+        // 테스트용
+        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.left + Vector2.up), Color.red, 10f);
+        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.left + Vector2.down), Color.red, 10f);
+        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.right + Vector2.up), Color.red, 10f);
+        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.right + Vector2.down), Color.red, 10f);
 
-        if(playerHurt)
+        CheckDirection();
+
+        if (playerDamage)
         {
-            player.Hurt(damage);
+            if ((playerDirection[0] && direction[0]) ||
+                (playerDirection[1] && direction[1]) ||
+                (playerDirection[2] && direction[2]) ||
+                (playerDirection[3] && direction[3])
+            )
+            {
+                player.Hurt(damage);
+            }
         }
+    }
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.layer == GetLayer(LayerMask.GetMask("PLAYER"))) // 플레이어 캐릭터인지 체크
+        {
+            playerDamage = true;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D col)
+    {
+        if (col.gameObject.layer == GetLayer(LayerMask.GetMask("PLAYER")))
+        {
+            playerDamage = false;
+        }
+    }
+    private void CheckDirection()
+    {
+        float playerX = player.transform.position.x;
+        float playerY = player.transform.position.y;
+
+        if (playerX <= GetPlayerXOnLineGraph(1f, playerY) && playerX <= GetPlayerXOnLineGraph(-1f, playerY))
+        {
+            playerDirection[0] = true;
+            playerDirection[1] = false;
+        }
+        else if (playerX > GetPlayerXOnLineGraph(1f, playerY) && playerX > GetPlayerXOnLineGraph(-1f, playerY))
+        {
+            playerDirection[1] = true;
+            playerDirection[0] = false;
+        }
+        else
+        {
+            playerDirection[1] = false;
+            playerDirection[0] = false;
+        }
+
+        if (playerY <= GetPlayerYOnLineGraph(1f, playerX) && playerY <= GetPlayerYOnLineGraph(-1f, playerX))
+        {
+            playerDirection[2] = true;
+            playerDirection[3] = false;
+        }
+        else if (playerY > GetPlayerYOnLineGraph(1f, playerX) && playerY > GetPlayerYOnLineGraph(-1f, playerX))
+        {
+            playerDirection[3] = true;
+            playerDirection[2] = false;
+        }
+        else
+        {
+            playerDirection[3] = false;
+            playerDirection[2] = false;
+        }
+    }
+    private int GetLayer(LayerMask a)
+    {
+        int b = a;
+        int result = 0;
+
+        while (true)
+        {
+            if (b >= 2)
+            {
+                result++;
+                b = b / 2;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return result;
+    }
+    private float GetPlayerYOnLineGraph(float a, float playerX)
+    {
+        return a * playerX + (transform.position.y + transform.position.x);
+    }
+    private float GetPlayerXOnLineGraph(float a, float playerY)
+    {
+        return ((playerY - transform.position.y) / a) + transform.position.x;
     }
 }

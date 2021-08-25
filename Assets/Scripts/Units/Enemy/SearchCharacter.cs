@@ -7,7 +7,7 @@ public class SearchCharacter : EnemyStatus
     [SerializeField]
     private LayerMask whatIsHit;
     [SerializeField]
-    private LayerMask whatIsPlayer;
+    private LayerMask whatIsGround;
     private float distance = 0f;
     public Status CheckStatus(Vector2 playerPosition, bool isShootProjectile, float foundRange,float shootRange , float attackRange)
     {
@@ -57,7 +57,7 @@ public class SearchCharacter : EnemyStatus
     public bool CheckFlip(Vector2 targetPosition)
     {
         float a = targetPosition.x - transform.position.x;
-
+        
         if (a < 0)
         {
             return true;

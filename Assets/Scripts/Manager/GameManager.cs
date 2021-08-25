@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
         SpawnStages = stageNum =>
         {
             SceneManager.LoadScene("StageScene");
+
             if (stageNum < 1)
             {
                 stageNum = 1;

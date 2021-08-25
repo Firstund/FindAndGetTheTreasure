@@ -213,7 +213,7 @@ public class CharacterMove : MonoBehaviour
             rigid.gravityScale = -1f;
 
             anim.Play(characterName + "Hang");
-
+            canJumpAgain = true;
             whenOutHangMove = true;
         }
         else

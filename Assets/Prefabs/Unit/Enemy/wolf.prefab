@@ -174,9 +174,12 @@ MonoBehaviour:
   searchRangeX: 5
   searchRangeY: 1
   projectile: {fileID: 7053485288860369376, guid: 0b36cff4c5c464548bf079f656ed1a96, type: 3}
-  WhatIsPlayer:
+  whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &5140060500522011577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +204,7 @@ MonoBehaviour:
   _attackRange: 1
   _shootRange: 5
   _playerPosition: {fileID: 0}
+  despawnTimer: 10
 --- !u!114 &8850736437412420418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,9 +232,9 @@ MonoBehaviour:
   whatIsHit:
     serializedVersion: 2
     m_Bits: 200
-  whatIsPlayer:
+  whatIsGround:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
 --- !u!114 &6195501080361516180
 MonoBehaviour:
   m_ObjectHideFlags: 0
