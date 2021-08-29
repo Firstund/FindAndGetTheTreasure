@@ -18,6 +18,7 @@ public class CharacterTimeWarp : MonoBehaviour
     private float timeWarpDelay = 5f;
     private float totalTime = 0f;
     private int pasteI_TotalTime = 0;
+    private int currentMovePositionNum = 0;
     private bool isTimeWarp = false;
     private bool canTimeWarp = true;
     private bool canSpawnAfterImage = true;
@@ -44,7 +45,9 @@ public class CharacterTimeWarp : MonoBehaviour
     {
         SetPositions();
         SpawnAfterImage();
+
         TimeWarp();
+        
     }
 
     private void SetPositions()
@@ -85,17 +88,22 @@ public class CharacterTimeWarp : MonoBehaviour
         if (isTimeWarp)
         {
             canTimeWarp = false;
+            
+            transform.DOMove(positions[currentMovePositionNum], timeWarpDoTime).SetEase(Ease.InQuad);
 
-            transform.DOMove(positions[2], timeWarpDoTime).SetEase(Ease.InQuad);
-
-            float distance = Vector2.Distance(transform.position, positions[2]);
+            float distance = Vector2.Distance(transform.position, positions[currentMovePositionNum]);
 
             rigid.velocity = new Vector2(rigid.velocity.x, 0f);
 
-            if (distance <= 0.5f)
+            if (distance <= 0.5f && currentMovePositionNum >= 2)
             {
+                currentMovePositionNum = 0;
                 isTimeWarp = false;
                 Invoke("CanTimeWarpSet", timeWarpDelay);
+            }
+            else if(distance <= 0.5f)
+            {
+                currentMovePositionNum++;
             }
         }
     }

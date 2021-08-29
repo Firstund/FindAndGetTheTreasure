@@ -24,7 +24,7 @@ public class SearchCharacter : EnemyStatus
 
         if (hit)
         {
-            if (hit.collider.gameObject.layer == GetLayer(LayerMask.GetMask("PLAYER")))
+            if (1 << hit.collider.gameObject.layer == LayerMask.GetMask("PLAYER"))
             {
                 
                 if (distance <= attackRange)
@@ -66,25 +66,5 @@ public class SearchCharacter : EnemyStatus
         {
             return false;
         }
-    }
-    private int GetLayer(LayerMask a)
-    {
-        int b = a;
-        int result = 0;
-
-        while (true)
-        {
-            if (b >= 2)
-            {
-                result++;
-                b = b / 2;
-            }
-            else
-            {
-                break;
-            }
-        }
-
-        return result;
     }
 }

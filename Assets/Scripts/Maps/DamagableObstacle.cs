@@ -49,14 +49,14 @@ public class DamagableObstacle : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.layer == GetLayer(LayerMask.GetMask("PLAYER"))) // 플레이어 캐릭터인지 체크
+        if (1 << col.gameObject.layer == LayerMask.GetMask("PLAYER")) // 플레이어 캐릭터인지 체크
         {
             playerDamage = true;
         }
     }
     private void OnCollisionExit2D(Collision2D col)
     {
-        if (col.gameObject.layer == GetLayer(LayerMask.GetMask("PLAYER")))
+        if (1 << col.gameObject.layer == LayerMask.GetMask("PLAYER"))
         {
             playerDamage = false;
         }
@@ -97,26 +97,6 @@ public class DamagableObstacle : MonoBehaviour
             playerDirection[3] = false;
             playerDirection[2] = false;
         }
-    }
-    private int GetLayer(LayerMask a)
-    {
-        int b = a;
-        int result = 0;
-
-        while (true)
-        {
-            if (b >= 2)
-            {
-                result++;
-                b = b / 2;
-            }
-            else
-            {
-                break;
-            }
-        }
-
-        return result;
     }
     private float GetPlayerYOnLineGraph(float a, float playerX)
     {

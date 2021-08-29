@@ -15,9 +15,14 @@ public class TalkManager : MonoBehaviour
     {
         get { return _currentTextBoxesParent; }
     }
-    void Start()
+    private void Awake()
     {
         gameManager = GameManager.Instance;
+
+        gameManager.GameEnd += a => DeSpawnTextBoxes();
+    }
+    void Start()
+    {
         dontDestroyOnLoadManager = DontDestroyOnLoadManager.Instance;
 
         gameManager.SpawnStages += x => SpawnTextBoxes(x - 1);
@@ -26,12 +31,14 @@ public class TalkManager : MonoBehaviour
     }
     private void SpawnTextBoxes(int index)
     {
-        textBoxesParent[index].SetActive(true);
+        textBoxesParent[index].SetActive(true); // 메뉴로 돌아왔다가 다시 스테이지 접근에 시도하면 textBoxesParent가 null이 되는 현상 발생
 
         _currentTextBoxesParent = textBoxesParent[index].GetComponent<TextBoxesParent>();
     }
-    public void DeSpawnTextBoxes(int index)
+    public void DeSpawnTextBoxes()
     {
-        textBoxesParent[index].SetActive(false);
+        currentTextBoxesParent.gameObject.SetActive(false);
+
+        _currentTextBoxesParent = null;
     }
 }
