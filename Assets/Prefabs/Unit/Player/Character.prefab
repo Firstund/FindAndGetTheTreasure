@@ -500,6 +500,7 @@ MonoBehaviour:
   - {x: 0, y: 0}
   timeWarpDoTime: 0.1
   timeWarpDelay: 5
+  moveNum: 36
 --- !u!114 &5143956853646980541
 MonoBehaviour:
   m_ObjectHideFlags: 0

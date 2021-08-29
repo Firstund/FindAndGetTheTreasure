@@ -11,19 +11,24 @@ public class CharacterTimeWarp : MonoBehaviour
     private Rigidbody2D rigid = null;
 
     [SerializeField]
-    private Vector2[] positions = new Vector2[3];
+    private Vector2[] positions = new Vector2[12];
     [SerializeField]
     private float timeWarpDoTime = 1f;
     [SerializeField]
     private float timeWarpDelay = 5f;
     private float totalTime = 0f;
+    [SerializeField]
+    private int moveNum = 12;
     private int pasteI_TotalTime = 0;
     private int currentMovePositionNum = 0;
+    private int iTotalTime = 0;
     private bool isTimeWarp = false;
     private bool canTimeWarp = true;
     private bool canSpawnAfterImage = true;
     void Start()
     {
+        positions = new Vector2[moveNum];
+        
         playerInput = GetComponent<PlayerInput>();
         spawnAfterImage = GetComponent<SpawnAfterImage>();
         rigid = GetComponent<Rigidbody2D>();
@@ -47,7 +52,7 @@ public class CharacterTimeWarp : MonoBehaviour
         SpawnAfterImage();
 
         TimeWarp();
-        
+
     }
 
     private void SetPositions()
@@ -56,31 +61,41 @@ public class CharacterTimeWarp : MonoBehaviour
         {
             totalTime += Time.fixedDeltaTime;
 
-            int i_totalTime = (int)(totalTime % 3f);
+            iTotalTime = (int)((totalTime * 12f) % moveNum);
 
             bool isDifferent = false;
-            isDifferent = (i_totalTime != pasteI_TotalTime);
+            isDifferent = (iTotalTime != pasteI_TotalTime);
 
             if (isDifferent)
             {
-                if (i_totalTime >= 2)
+                for (int i = iTotalTime; i >= 0 ; i--)
                 {
-                    positions[2] = positions[1];
-                    positions[1] = positions[0];
-                    positions[0] = transform.position;
+                    if (i > 0)
+                    {
+                        positions[i] = positions[i - 1];
+                    }
                 }
-                else if (i_totalTime >= 1)
-                {
-                    positions[1] = positions[0];
-                    positions[0] = transform.position;
-                }
-                else if (i_totalTime >= 0)
-                {
-                    positions[0] = transform.position;
-                }
+
+                positions[0] = transform.position;
+
+                // if (iTotalTime >= 2)
+                // {
+                //     positions[2] = positions[1];
+                //     positions[1] = positions[0];
+                //     positions[0] = transform.position;
+                // }
+                // else if (iTotalTime >= 1)
+                // {
+                //     positions[1] = positions[0];
+                //     positions[0] = transform.position;
+                // }
+                // else if (iTotalTime >= 0)
+                // {
+                //     positions[0] = transform.position;
+                // }
             }
 
-            pasteI_TotalTime = i_totalTime;
+            pasteI_TotalTime = iTotalTime;
         }
     }
     public void TimeWarp()
@@ -88,21 +103,23 @@ public class CharacterTimeWarp : MonoBehaviour
         if (isTimeWarp)
         {
             canTimeWarp = false;
-            
-            transform.DOMove(positions[currentMovePositionNum], timeWarpDoTime).SetEase(Ease.InQuad);
+
+            transform.DOMove(positions[currentMovePositionNum], timeWarpDoTime / moveNum).SetEase(Ease.InQuad);
 
             float distance = Vector2.Distance(transform.position, positions[currentMovePositionNum]);
 
             rigid.velocity = new Vector2(rigid.velocity.x, 0f);
 
-            if (distance <= 0.5f && currentMovePositionNum >= 2)
+            if (distance <= 0.5f && currentMovePositionNum >= moveNum - 1)
             {
+                Debug.Log("aa");
                 currentMovePositionNum = 0;
                 isTimeWarp = false;
                 Invoke("CanTimeWarpSet", timeWarpDelay);
             }
-            else if(distance <= 0.5f)
+            else if (distance <= 0.5f && currentMovePositionNum < moveNum - 1)
             {
+                Debug.Log("bb");
                 currentMovePositionNum++;
             }
         }
