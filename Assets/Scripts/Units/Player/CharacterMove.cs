@@ -19,6 +19,7 @@ public class CharacterMove : MonoBehaviour
     private PlayerInput playerInput = null;
     private SpawnAfterImage spawnAfterImage = null;
     private CharacterStat characterStat = null;
+    private CharacterTimeWarp characterTimeWarp = null;
 
     [SerializeField]
     private GameObject pulley = null;
@@ -98,6 +99,7 @@ public class CharacterMove : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         characterStat = GetComponent<CharacterStat>();
         spawnAfterImage = GetComponent<SpawnAfterImage>();
+        characterTimeWarp = GetComponent<CharacterTimeWarp>();
     }
 
     void Start()
@@ -115,7 +117,7 @@ public class CharacterMove : MonoBehaviour
     }
     void Update()
     {
-        if (!(isDead || gameManager.stopTime))
+        if (!(isDead || gameManager.stopTime || characterTimeWarp.isTimeWarp))
         {
             if (playerInput.isJump && !staping)
             {
@@ -161,9 +163,18 @@ public class CharacterMove : MonoBehaviour
             RightWallCheck();
             CharacterHangWallCheck();
         }
-        else if (gameManager.stopTime)
+        else if (gameManager.stopTime && !characterTimeWarp.isTimeWarp)
         {
             anim.Play(characterName + "Idle");
+        }
+
+        if(characterTimeWarp.isTimeWarp)
+        {
+            anim.enabled = false;
+        }
+        else
+        {
+            anim.enabled = true;
         }
 
         if (characterStat.hp <= 0f)
@@ -179,10 +190,10 @@ public class CharacterMove : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (!(isDead || gameManager.stopTime))
-        {
-            currentPosition = transform.position;
+        currentPosition = transform.position;
 
+        if (!(isDead || gameManager.stopTime || characterTimeWarp.isTimeWarp))
+        {
             float XMove = playerInput.XMove;
 
             LRCheck(XMove);
@@ -199,9 +210,11 @@ public class CharacterMove : MonoBehaviour
             DashMove();
             SpawnAfterImageByDash();
 
-            transform.position = currentPosition;
 
         }
+        
+        transform.position = currentPosition;
+
     }
     private void Hang()
     {

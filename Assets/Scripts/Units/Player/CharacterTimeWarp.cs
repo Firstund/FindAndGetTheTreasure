@@ -5,63 +5,84 @@ using DG.Tweening;
 
 public class CharacterTimeWarp : MonoBehaviour
 {
+    private GameManager gameManager = null;
     private PlayerInput playerInput = null;
     private SpawnAfterImage spawnAfterImage = null;
-
+    private SpriteRenderer spriteRenderer = null;
     private Rigidbody2D rigid = null;
 
     [SerializeField]
-    private Vector2[] positions = new Vector2[12];
+    private Vector2[] positions;
+    private Sprite[] sprites;
+    private bool[] flipXes;
+
     [SerializeField]
     private float timeWarpDoTime = 1f;
     [SerializeField]
     private float timeWarpDelay = 5f;
     private float totalTime = 0f;
+
     [SerializeField]
     private int moveNum = 12;
+    [Header("타임워프를 사용했을 때 몇 초 뒤로 이동할것인가")]
+    [SerializeField]
+    private int moveBackTime = 3;
     private int pasteI_TotalTime = 0;
     private int currentMovePositionNum = 0;
+    private int totalMoveByTimeWarp = 0;
     private int iTotalTime = 0;
-    private bool isTimeWarp = false;
+
+    private bool _isTimeWarp = false;
+    public bool isTimeWarp
+    {
+        get{return _isTimeWarp;}
+    }
     private bool canTimeWarp = true;
     private bool canSpawnAfterImage = true;
+
     void Start()
-    {
-        positions = new Vector2[moveNum];
-        
+    {   
+        gameManager = GameManager.Instance;
+
         playerInput = GetComponent<PlayerInput>();
         spawnAfterImage = GetComponent<SpawnAfterImage>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
 
-        for (int i = 0; i < 3; i++)
+        positions = new Vector2[moveNum];
+        sprites = new Sprite[moveNum];
+        flipXes = new bool[moveNum];
+
+        for (int i = 0; i < moveNum; i++)
         {
             positions[i] = transform.position;
+            sprites[i] = spriteRenderer.sprite;
         }
     }
     void Update()
     {
         if (playerInput.timeWarp && canTimeWarp)
         {
-            isTimeWarp = playerInput.timeWarp;
+            _isTimeWarp = playerInput.timeWarp;
         }
     }
 
     void FixedUpdate()
     {
-        SetPositions();
-        SpawnAfterImage();
-
         TimeWarp();
 
+        SetPositions();
+        SpawnAfterImage();
     }
 
     private void SetPositions()
     {
         if (!isTimeWarp)
         {
-            totalTime += Time.fixedDeltaTime;
+            totalTime += Time.fixedDeltaTime * (moveNum / moveBackTime);
 
-            iTotalTime = (int)((totalTime * 12f) % moveNum);
+            iTotalTime = (int)((totalTime) % moveNum);
+            // Debug.Log(iTotalTime);
 
             bool isDifferent = false;
             isDifferent = (iTotalTime != pasteI_TotalTime);
@@ -73,26 +94,14 @@ public class CharacterTimeWarp : MonoBehaviour
                     if (i > 0)
                     {
                         positions[i] = positions[i - 1];
+                        sprites[i] = sprites[i - 1];
+                        flipXes[i] = flipXes[i - 1];
                     }
                 }
 
                 positions[0] = transform.position;
-
-                // if (iTotalTime >= 2)
-                // {
-                //     positions[2] = positions[1];
-                //     positions[1] = positions[0];
-                //     positions[0] = transform.position;
-                // }
-                // else if (iTotalTime >= 1)
-                // {
-                //     positions[1] = positions[0];
-                //     positions[0] = transform.position;
-                // }
-                // else if (iTotalTime >= 0)
-                // {
-                //     positions[0] = transform.position;
-                // }
+                sprites[0] = spriteRenderer.sprite;
+                flipXes[0] = spriteRenderer.flipX;
             }
 
             pasteI_TotalTime = iTotalTime;
@@ -104,7 +113,9 @@ public class CharacterTimeWarp : MonoBehaviour
         {
             canTimeWarp = false;
 
-            transform.DOMove(positions[currentMovePositionNum], timeWarpDoTime / moveNum).SetEase(Ease.InQuad);
+            transform.DOMove(positions[currentMovePositionNum], timeWarpDoTime / moveNum * 2).SetEase(Ease.InQuad);
+            spriteRenderer.sprite = sprites[currentMovePositionNum];
+            spriteRenderer.flipX = flipXes[currentMovePositionNum];
 
             float distance = Vector2.Distance(transform.position, positions[currentMovePositionNum]);
 
@@ -112,15 +123,17 @@ public class CharacterTimeWarp : MonoBehaviour
 
             if (distance <= 0.5f && currentMovePositionNum >= moveNum - 1)
             {
-                Debug.Log("aa");
                 currentMovePositionNum = 0;
-                isTimeWarp = false;
+                totalMoveByTimeWarp = 0;
+
+                _isTimeWarp = false;
+
                 Invoke("CanTimeWarpSet", timeWarpDelay);
             }
-            else if (distance <= 0.5f && currentMovePositionNum < moveNum - 1)
+            else if (distance <= 0.5f && currentMovePositionNum < moveNum)
             {
-                Debug.Log("bb");
                 currentMovePositionNum++;
+                totalMoveByTimeWarp++;
             }
         }
     }

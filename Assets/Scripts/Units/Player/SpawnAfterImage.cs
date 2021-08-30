@@ -23,7 +23,7 @@ public class SpawnAfterImage : MonoBehaviour
 
 
     private CharacterMove myMoveScript = null;
-    SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer = null;
     public List<AfterImage> afterImageList { get; private set; }
 
 
