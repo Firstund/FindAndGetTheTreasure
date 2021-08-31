@@ -195,6 +195,7 @@ GameObject:
   - component: {fileID: 5143956853646980540}
   - component: {fileID: 5143956853646980542}
   - component: {fileID: 5143956853646980541}
+  - component: {fileID: 1274470417103113234}
   m_Layer: 3
   m_Name: Umiko
   m_TagString: Untagged
@@ -210,7 +211,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5143956853646980559}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.097, y: -1.56, z: -10}
+  m_LocalPosition: {x: -5.09, y: -1.56, z: -10}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 5143956853967837845}
@@ -516,6 +517,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0, b: 0, a: 1}
   radious: 0.5
+--- !u!114 &1274470417103113234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5143956853646980559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50d1b2af74253284ab19b1f65dbdde28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectSpawnPosition: {fileID: 5143956854996559995}
+  effects: []
 --- !u!1 &5143956853695403496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,7 +1120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5143956854996559995}
   m_Layer: 3
-  m_Name: PortalSpawnPosition
+  m_Name: SpawnPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

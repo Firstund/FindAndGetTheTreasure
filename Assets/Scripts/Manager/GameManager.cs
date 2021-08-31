@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
             if (a > 0f)
             {
                 a -= Time.deltaTime;
-                Time.timeScale = 0.4f;
+                Time.timeScale = 0.8f;
             }
             else
             {

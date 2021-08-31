@@ -90,6 +90,13 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0
+    functionName: ShowEffect
+    data: 
+    objectReferenceParameter: {fileID: 2650916574421451465, guid: c474127063e0fc341b6e2bb034cdc68e, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.4
     functionName: SetAttacking
     data: 
