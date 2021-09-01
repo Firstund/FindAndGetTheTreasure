@@ -101,12 +101,14 @@ public class EnemyMove : EnemyStatus
         {
             isShoot = true;
             isAttack = false;
+            pursueTimer = 0f;
             isSearching = false;
         }
         else if (enemyStat.currentStatus == Status.Attack)
         {
             isShoot = false;
             isAttack = true;
+            pursueTimer = 0f;
             isSearching = false;
         }
         else if (enemyStat.currentStatus == Status.Found)
@@ -143,6 +145,8 @@ public class EnemyMove : EnemyStatus
             pursueTimer -= Time.deltaTime;
 
             isPursue = true;
+            isSearching = false;
+            
         }
         else
         {
@@ -191,7 +195,7 @@ public class EnemyMove : EnemyStatus
     }
     private void Attack()
     {
-        if (canAttack && isAttack && !isPursue)
+        if (canAttack && isAttack)
         {
             canAttack = false;
             anim.Play("Attack");
@@ -201,7 +205,7 @@ public class EnemyMove : EnemyStatus
     }
     private void Shoot()
     {
-        if (canAttack && isShoot && !isPursue)
+        if (canAttack && isShoot)
         {
             canAttack = false;
             anim.Play("Shoot");
@@ -288,7 +292,7 @@ public class EnemyMove : EnemyStatus
     private void Searching()
     {
         float distance;
-        if (isSearching && !isPursue)
+        if (isSearching)
         {
             if (searchMove)
             {
