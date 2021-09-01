@@ -93,7 +93,7 @@ AnimationClip:
   - time: 0
     functionName: ShowEffect
     data: 
-    objectReferenceParameter: {fileID: 2650916574421451465, guid: c474127063e0fc341b6e2bb034cdc68e, type: 3}
+    objectReferenceParameter: {fileID: 3136435146279858430, guid: 958cdaf14433d3d47b3c40003c875f1d, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

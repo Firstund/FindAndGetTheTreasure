@@ -34,6 +34,8 @@ public class CharacterMove : MonoBehaviour
     private LayerMask whatIsGround;
     [SerializeField]
     private LayerMask whatIsEnemy;
+    [SerializeField]
+    private LayerMask whatIsPorjectile;
 
     [SerializeField]
     private Transform GroundChecker;
@@ -119,43 +121,7 @@ public class CharacterMove : MonoBehaviour
     {
         if (!(isDead || gameManager.stopTime || characterTimeWarp.isTimeWarp))
         {
-            if (playerInput.isJump && !staping)
-            {
-                attacking = false;
-                if (upWall && !isGround)
-                {
-                    if (!isHang)
-                    {
-                        isHang = true;
-                        whenOutHangMoveStarted = false;
-                        isJump = false;
-                    }
-                    else
-                    {
-                        isHang = false;
-                    }
-                }
-                else
-                {
-                    isJump = true;
-                    isHang = false;
-                }
-            }
-
-            if (!upWall)
-            {
-                isHang = false;
-            }
-
-            if (playerInput.isDash)
-            {
-                isDash = true;
-            }
-
-            if (playerInput.isAttack && !attacking)
-            {
-                isAttack = true;
-            }
+            CheckStatus();
 
             GroundCheck();
             UpWallCheck();
@@ -168,15 +134,17 @@ public class CharacterMove : MonoBehaviour
             anim.Play(characterName + "Idle");
         }
 
-        if(characterTimeWarp.isTimeWarp)
-        {
-            anim.enabled = false;
-        }
-        else
-        {
-            anim.enabled = true;
-        }
+        SetAnimByTimeWarp();
+        CheckDead();
 
+        if (attacking)
+        {
+            DespawnProjectileByAttack();
+        }
+    }
+
+    private void CheckDead()
+    {
         if (characterStat.hp <= 0f)
         {
             isDead = true;
@@ -188,6 +156,60 @@ public class CharacterMove : MonoBehaviour
             Dead();
         }
     }
+
+    private void SetAnimByTimeWarp()
+    {
+        if (characterTimeWarp.isTimeWarp)
+        {
+            anim.enabled = false;
+        }
+        else
+        {
+            anim.enabled = true;
+        }
+    }
+
+    private void CheckStatus()
+    {
+        if (playerInput.isJump && !staping)
+        {
+            attacking = false;
+            if (upWall && !isGround)
+            {
+                if (!isHang)
+                {
+                    isHang = true;
+                    whenOutHangMoveStarted = false;
+                    isJump = false;
+                }
+                else
+                {
+                    isHang = false;
+                }
+            }
+            else
+            {
+                isJump = true;
+                isHang = false;
+            }
+        }
+
+        if (!upWall)
+        {
+            isHang = false;
+        }
+
+        if (playerInput.isDash)
+        {
+            isDash = true;
+        }
+
+        if (playerInput.isAttack && !attacking)
+        {
+            isAttack = true;
+        }
+    }
+
     void FixedUpdate()
     {
         currentPosition = transform.position;
@@ -212,7 +234,9 @@ public class CharacterMove : MonoBehaviour
 
 
         }
-        
+
+
+
         transform.position = currentPosition;
 
     }
@@ -466,6 +490,25 @@ public class CharacterMove : MonoBehaviour
             EnemyMove enemyMove = item.GetComponent<EnemyMove>();
 
             enemyMove.Hurt(characterStat.ap);
+        }
+    }
+    private void DespawnProjectileByAttack()
+    {
+        float distance;
+
+        for (int i = 0; i < stageManager.ProjectilesTrm.childCount; i++)
+        {
+            GameObject item = stageManager.ProjectilesTrm.GetChild(i).gameObject;
+
+            if (item.activeSelf)
+            {
+                distance = Vector2.Distance(currentPosition, item.transform.position);
+
+                if (distance <= characterStat.attackRange)
+                {
+                    stageManager.DespawnProjectile(item);
+                }
+            }
         }
     }
     private void GetDashAttackDamage()

@@ -14,10 +14,14 @@ public class StageManager : MonoBehaviour
     private List<GameObject> soundBoxes = new List<GameObject>();
     [SerializeField]
     private Transform _soundBoxes = null;
-
+    [SerializeField]
     private List<GameObject> projectiles = new List<GameObject>();
     [SerializeField]
-    private Transform _projectiles = null;
+    private Transform projectilesTrm = null;
+    public Transform ProjectilesTrm
+    {
+        get { return projectilesTrm; }
+    }
 
     private float shakeTimer = 0f; // 시네머신을 이용하여 카메라를 흔들 때 사용되는 변수
 
@@ -74,11 +78,11 @@ public class StageManager : MonoBehaviour
     }
     public void ShootProjectile(GameObject shootIt, EnemyStat enemyStat, bool flipX, Vector2 spawnPosition, float shootRange)
     {
-        GameObject shootObject = projectiles.Find(x => x.name == shootIt.name + "(Clone)");
+        GameObject shootObject = projectiles.Find(x => (x.name == shootIt.name + "(Clone)") && !x.activeSelf);
 
         if (shootObject == null)
         {
-            GameObject a = Instantiate(shootIt, _projectiles);
+            GameObject a = Instantiate(shootIt, projectilesTrm);
             a.GetComponent<EnemyProjectile>().SpawnSet(flipX, shootRange, enemyStat.ap);
             a.transform.position = spawnPosition;
         }

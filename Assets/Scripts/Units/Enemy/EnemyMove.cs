@@ -33,12 +33,16 @@ public class EnemyMove : EnemyStatus
 
     private bool isAttack = false;
     private bool isShoot = false;
-    private bool isPursue = false;
     private bool isSearching = false;
+    private bool isPursue = false;
     private bool isDead = false;
     private bool isHurt = false;
     private bool searchMove = true;
     private bool canAttack = true;
+
+    [SerializeField]
+    private float pursueTime = 3f;
+    private float pursueTimer = 0f;
 
     private Vector2 currentPosition = Vector2.zero;
     private Vector2 playerPosition = Vector2.zero;
@@ -64,61 +68,85 @@ public class EnemyMove : EnemyStatus
     {
         if (!(isDead || gameManager.stopTime))
         {
-            if (enemyStat.currentStatus == Status.Shoot)
-            {
-                isShoot = true;
-                isAttack = false;
-                isPursue = false;
-                isSearching = false;
-            }
-            else if (enemyStat.currentStatus == Status.Attack)
-            {
-                isShoot = false;
-                isAttack = true;
-                isPursue = false;
-                isSearching = false;
-            }
-            else if (enemyStat.currentStatus == Status.Found)
-            {
-                isShoot = false;
-                isAttack = false;
-                isPursue = true;
-                isSearching = false;
-            }
-            else if (enemyStat.currentStatus == Status.Searching)
-            {
-                isShoot = false;
-                isAttack = false;
-                isPursue = false;
-                isSearching = true;
-            }
+            CheckStatus();
 
-            if (enemyStat.hp <= 0f)
-            {
-                isShoot = false;
-                isAttack = false;
-                isPursue = false;
-                isSearching = false;
-                isDead = true;
-            }
+            SetIsPursue();
+            SetSearchResetTimer();
 
-            if (searchResetTimer > 0f)
-            {
-                searchResetTimer -= Time.deltaTime;
-            }
-            else
-            {
-                SearchPositionSet();
-            }
+            CheckDead();
         }
         else if (gameManager.stopTime)
         {
             anim.Play("Idle");
         }
+    }
 
-        if (isDead)
+    private void CheckDead()
+    {
+        if (enemyStat.hp <= 0f)
         {
+            isShoot = false;
+            isAttack = false;
+            isPursue = false;
+            isSearching = false;
+            isDead = true;
+
             Dead();
+        }
+    }
+
+    private void CheckStatus()
+    {
+        if (enemyStat.currentStatus == Status.Shoot)
+        {
+            isShoot = true;
+            isAttack = false;
+            isSearching = false;
+        }
+        else if (enemyStat.currentStatus == Status.Attack)
+        {
+            isShoot = false;
+            isAttack = true;
+            isSearching = false;
+        }
+        else if (enemyStat.currentStatus == Status.Found)
+        {
+            isShoot = false;
+            isAttack = false;
+            pursueTimer = pursueTime;
+            isSearching = false;
+        }
+        else if (enemyStat.currentStatus == Status.Searching)
+        {
+            isShoot = false;
+            isAttack = false;
+            isSearching = true;
+        }
+    }
+
+    private void SetSearchResetTimer()
+    {
+        if (searchResetTimer > 0f)
+        {
+            searchResetTimer -= Time.deltaTime;
+        }
+        else
+        {
+            SearchPositionSet();
+        }
+    }
+
+    private void SetIsPursue()
+    {
+        if (pursueTimer > 0f)
+        {
+            pursueTimer -= Time.deltaTime;
+
+            isPursue = true;
+        }
+        else
+        {
+            isPursue = false;
         }
     }
 
@@ -163,7 +191,7 @@ public class EnemyMove : EnemyStatus
     }
     private void Attack()
     {
-        if (canAttack && isAttack)
+        if (canAttack && isAttack && !isPursue)
         {
             canAttack = false;
             anim.Play("Attack");
@@ -173,7 +201,7 @@ public class EnemyMove : EnemyStatus
     }
     private void Shoot()
     {
-        if (canAttack && isShoot)
+        if (canAttack && isShoot && !isPursue)
         {
             canAttack = false;
             anim.Play("Shoot");
@@ -238,14 +266,12 @@ public class EnemyMove : EnemyStatus
             stageManager.ShakeCamera(1.5f, 0.1f);
             gameManager.SetSlowTime(0.01f);
             Invoke("isHurtSet", 1f);
-
         }
     }
     private IEnumerator hurt()
     {
         Color color = new Color(1f, 0f, 1f, 0.5f);
         Color color_origin = new Color(1f, 1f, 1f, 1f);
-
 
         spriteRenderer.color = color;
 
@@ -262,7 +288,7 @@ public class EnemyMove : EnemyStatus
     private void Searching()
     {
         float distance;
-        if (isSearching)
+        if (isSearching && !isPursue)
         {
             if (searchMove)
             {

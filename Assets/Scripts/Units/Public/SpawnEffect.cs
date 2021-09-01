@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnEffect : MonoBehaviour
 {
+    private SpriteRenderer spriteRenderer = null;
     private StageManager stageManager = null;
     [SerializeField]
     private Transform effectSpawnPosition = null;
@@ -13,6 +14,8 @@ public class SpawnEffect : MonoBehaviour
     private void Start()
     {
         stageManager = FindObjectOfType<StageManager>();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     public void ShowEffect(GameObject spawnIt)
     {
@@ -29,7 +32,11 @@ public class SpawnEffect : MonoBehaviour
             if (item.name == spawnIt.name + "(Clone)" && !item.activeSelf)
             {
                 findEffect = true;
+
                 item.transform.position = effectSpawnPosition.position;
+
+                item.GetComponent<SpriteRenderer>().flipX = spriteRenderer.flipX;
+
                 item.SetActive(true);
 
                 break;
@@ -42,6 +49,8 @@ public class SpawnEffect : MonoBehaviour
             effects.Add(obj);
 
             obj.transform.position = effectSpawnPosition.position;
+
+            obj.GetComponent<SpriteRenderer>().flipX = spriteRenderer.flipX;
         }
     }
 }

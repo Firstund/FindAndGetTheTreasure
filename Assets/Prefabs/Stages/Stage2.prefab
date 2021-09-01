@@ -5849,7 +5849,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemys: {fileID: 7965922998926088072}
   _soundBoxes: {fileID: 769946851165148879}
-  _projectiles: {fileID: 2028047096817018978}
+  projectiles: []
+  projectilesTrm: {fileID: 2028047096817018978}
   cinemachineVirtualCamera: {fileID: 0}
   TestSoundBox: {fileID: 6277426176205683575, guid: 6390e6faafda6dc4f9c95e9dbdd211f0, type: 3}
 --- !u!1 &7105510396593879185

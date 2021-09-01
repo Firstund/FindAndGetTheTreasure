@@ -76,6 +76,7 @@ public class EnemyProjectile : MonoBehaviour
             if (distance >= shootRange)
             {
                 isDestroy = true;
+                
                 stageManager.DespawnProjectile(gameObject);
             }
         }

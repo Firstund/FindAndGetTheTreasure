@@ -343,6 +343,9 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 768
+  whatIsPorjectile:
+    serializedVersion: 2
+    m_Bits: 2048
   GroundChecker: {fileID: 5143956853967837845}
   LeftWallChecker: {fileID: 5143956853037991215}
   RightWallChecker: {fileID: 5143956853739470317}
