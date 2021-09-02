@@ -7,7 +7,7 @@ public class PlayerInput : MonoBehaviour
     public float XMove { get; private set; }
     public bool isJump { get; private set; }
     public bool isDash { get; private set; }
-    public bool isAttack { get; private set; }
+    public bool isAttack { get; set; }
     public bool spawnPortal0 { get; private set; }
     public bool spawnPortal1 { get; private set; }
     public bool usePortal { get; private set; }

@@ -7,6 +7,7 @@ public class CharacterTimeWarp : MonoBehaviour
 {
     private GameManager gameManager = null;
     private PlayerInput playerInput = null;
+    private CharacterMove characterMove = null;
     private SpawnAfterImage spawnAfterImage = null;
     private SpriteRenderer spriteRenderer = null;
     private Rigidbody2D rigid = null;
@@ -21,12 +22,14 @@ public class CharacterTimeWarp : MonoBehaviour
     [SerializeField]
     private float timeWarpDelay = 5f;
     private float totalTime = 0f;
+    private float timeWarpTimer = 0f;
 
     [SerializeField]
     private int moveNum = 12;
-    [Header("타임워프를 사용했을 때 몇 초 뒤로 이동할것인가")]
+    [Header("타임워프를 대쉬어택 후 몇초안에 사용해야 하는가")]
     [SerializeField]
-    private int moveBackTime = 3;
+    private int canUseTimeWarpTime = 3;
+    private float moveBackTime = 0f;
     private int pasteI_TotalTime = 0;
     private int currentMovePositionNum = 0;
     private int totalMoveByTimeWarp = 0;
@@ -35,16 +38,19 @@ public class CharacterTimeWarp : MonoBehaviour
     private bool _isTimeWarp = false;
     public bool isTimeWarp
     {
-        get{return _isTimeWarp;}
+        get { return _isTimeWarp; }
     }
     private bool canTimeWarp = true;
+    private bool canTimeWaprPositionSet = true;
     private bool canSpawnAfterImage = true;
 
+
     void Start()
-    {   
+    {
         gameManager = GameManager.Instance;
 
         playerInput = GetComponent<PlayerInput>();
+        characterMove = GetComponent<CharacterMove>();
         spawnAfterImage = GetComponent<SpawnAfterImage>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
@@ -61,25 +67,54 @@ public class CharacterTimeWarp : MonoBehaviour
     }
     void Update()
     {
-        if (playerInput.timeWarp && canTimeWarp)
+        // timeWarp 후 굳는 현상 발생
+        if (characterMove.DashAttacking && canTimeWaprPositionSet && canTimeWarp)
+        {
+            timeWarpTimer = canUseTimeWarpTime;
+            canTimeWaprPositionSet = false;
+
+            positions[0] = transform.position;
+            sprites[0] = spriteRenderer.sprite;
+            flipXes[0] = spriteRenderer.flipX;
+        }
+
+        if (playerInput.timeWarp && !canTimeWaprPositionSet)
         {
             _isTimeWarp = playerInput.timeWarp;
+            Debug.Log("a" + moveBackTime);
         }
     }
 
     void FixedUpdate()
     {
-        TimeWarp();
 
-        SetPositions();
-        SpawnAfterImage();
+        if (timeWarpTimer > 0f)
+        {
+            timeWarpTimer -= Time.fixedDeltaTime;
+
+            if (!isTimeWarp)
+            {
+                moveBackTime += Time.fixedDeltaTime * (moveNum / canUseTimeWarpTime);
+            }
+
+            SetPositions();
+
+            TimeWarp();
+
+            SpawnAfterImage();
+        }
+        else
+        {
+            canTimeWaprPositionSet = true;
+            moveBackTime = 0f;
+        }
     }
 
     private void SetPositions()
     {
         if (!isTimeWarp)
         {
-            totalTime += Time.fixedDeltaTime * (moveNum / moveBackTime);
+            totalTime += Time.fixedDeltaTime * (moveNum / canUseTimeWarpTime);
 
             iTotalTime = (int)((totalTime) % moveNum);
             // Debug.Log(iTotalTime);
@@ -89,7 +124,7 @@ public class CharacterTimeWarp : MonoBehaviour
 
             if (isDifferent)
             {
-                for (int i = iTotalTime; i >= 0 ; i--)
+                for (int i = iTotalTime; i >= 0; i--)
                 {
                     if (i > 0)
                     {
@@ -117,12 +152,18 @@ public class CharacterTimeWarp : MonoBehaviour
             spriteRenderer.sprite = sprites[currentMovePositionNum];
             spriteRenderer.flipX = flipXes[currentMovePositionNum];
 
+            Debug.Log(currentMovePositionNum);
+
             float distance = Vector2.Distance(transform.position, positions[currentMovePositionNum]);
 
             rigid.velocity = new Vector2(rigid.velocity.x, 0f);
 
-            if (distance <= 0.5f && currentMovePositionNum >= moveNum - 1)
+            if (distance <= 0.5f && currentMovePositionNum >= (int)moveBackTime - 1)
             {
+                positions = new Vector2[moveNum];
+                sprites = new Sprite[moveNum];
+                flipXes = new bool[moveNum];
+
                 currentMovePositionNum = 0;
                 totalMoveByTimeWarp = 0;
 
@@ -130,7 +171,7 @@ public class CharacterTimeWarp : MonoBehaviour
 
                 Invoke("CanTimeWarpSet", timeWarpDelay);
             }
-            else if (distance <= 0.5f && currentMovePositionNum < moveNum)
+            else if (distance <= 0.5f && currentMovePositionNum < (int)moveBackTime - 1)
             {
                 currentMovePositionNum++;
                 totalMoveByTimeWarp++;

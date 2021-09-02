@@ -77,6 +77,11 @@ public class CharacterMove : MonoBehaviour
     private bool dashMoving = false;
     private bool staping = false;
     private bool attacking = false;
+    private bool dashAttacking = false;
+    public bool DashAttacking
+    {
+        get { return dashAttacking; }
+    }
     private bool canJumpAgain = false;
 
     private bool canSpawnAfterImageByDash = true;
@@ -204,7 +209,12 @@ public class CharacterMove : MonoBehaviour
             isDash = true;
         }
 
-        if (playerInput.isAttack && !attacking)
+        if (attacking)
+        {
+            playerInput.isAttack = false;
+        }
+
+        if (playerInput.isAttack)
         {
             isAttack = true;
         }
@@ -231,14 +241,9 @@ public class CharacterMove : MonoBehaviour
 
             DashMove();
             SpawnAfterImageByDash();
-
-
         }
 
-
-
         transform.position = currentPosition;
-
     }
     private void Hang()
     {
@@ -388,6 +393,8 @@ public class CharacterMove : MonoBehaviour
     {
         if (canDashAttack)
         {
+            dashAttacking = true;
+
             anim.Play(characterName + "DashAttack");
 
             _dashRange = dashRange * (2f / 3f);
@@ -407,6 +414,10 @@ public class CharacterMove : MonoBehaviour
         }
 
         return _dashRange;
+    }
+    private void DashAttackReSet()
+    {
+        dashAttacking = false;
     }
 
     private void DashRe()
