@@ -95,6 +95,8 @@ public class CharacterMove : MonoBehaviour
 
     private float firstGravity = 0f;
 
+    // TODO: OnCollision을 이용하여 벽에 붙었을 때 서서히 내려감
+
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -244,6 +246,18 @@ public class CharacterMove : MonoBehaviour
         }
 
         transform.position = currentPosition;
+    }
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        int layer = 2 << col.gameObject.layer - 1;
+
+        if(layer == LayerMask.GetMask("GROUND"))
+        {
+            if(rigid.velocity.y < 0f)
+            {
+                // 벽에서 미끄러 떨어지는 파티클 추가
+            }
+        }
     }
     private void Hang()
     {

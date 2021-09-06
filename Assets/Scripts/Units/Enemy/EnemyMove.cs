@@ -40,13 +40,21 @@ public class EnemyMove : EnemyStatus
     private bool searchMove = true;
     private bool canAttack = true;
 
+    private bool stopMyself = false;
+
     [SerializeField]
     private float pursueTime = 3f;
     private float pursueTimer = 0f;
+    private float stopMyselfTime = 0.5f;
+    private float stopMyselfTimer = 0f;
+
 
     private Vector2 currentPosition = Vector2.zero;
     private Vector2 playerPosition = Vector2.zero;
     private Vector2 searchTargetPosition = Vector2.zero;
+
+    private Color color = new Color(1f, 0f, 1f, 0.5f);
+    private Color color_origin = new Color(1f, 1f, 1f, 1f);
 
     void Start()
     {
@@ -68,10 +76,13 @@ public class EnemyMove : EnemyStatus
     {
         if (!(isDead || gameManager.stopTime))
         {
-            CheckStatus();
+            if (!stopMyself)
+            {
+                CheckStatus();
 
-            SetIsPursue();
-            SetSearchResetTimer();
+                SetIsPursue();
+                SetSearchResetTimer();
+            }
 
             CheckDead();
         }
@@ -79,6 +90,19 @@ public class EnemyMove : EnemyStatus
         {
             anim.Play("Idle");
         }
+
+        if (stopMyselfTimer > 0f)
+        {
+            stopMyselfTimer -= Time.deltaTime;
+
+            spriteRenderer.color = color;
+        }
+        else
+        {
+            stopMyself = false;
+            spriteRenderer.color = color_origin;
+        }
+
     }
 
     private void CheckDead()
@@ -146,7 +170,7 @@ public class EnemyMove : EnemyStatus
 
             isPursue = true;
             isSearching = false;
-            
+
         }
         else
         {
@@ -156,7 +180,7 @@ public class EnemyMove : EnemyStatus
 
     private void FixedUpdate()
     {
-        if (!(isDead || gameManager.stopTime))
+        if (!(isDead || gameManager.stopTime || stopMyself))
         {
             currentPosition = transform.position;
             playerPosition = enemyStat.playerPosition.position;
@@ -262,29 +286,31 @@ public class EnemyMove : EnemyStatus
 
         enemyStat.hp = enemyHp;
 
+        stopMyself = true;
+        stopMyselfTimer = stopMyselfTime;
+
         if (!isHurt)
         {
             isHurt = true;
 
-            StartCoroutine(hurt());
             stageManager.ShakeCamera(1.5f, 0.1f);
             gameManager.SetSlowTime(0.01f);
             Invoke("isHurtSet", 1f);
         }
     }
-    private IEnumerator hurt()
-    {
-        Color color = new Color(1f, 0f, 1f, 0.5f);
-        Color color_origin = new Color(1f, 1f, 1f, 1f);
+    // private IEnumerator hurt()
+    // {
+    //     Color color = new Color(1f, 0f, 1f, 0.5f);
+    //     Color color_origin = new Color(1f, 1f, 1f, 1f);
 
-        spriteRenderer.color = color;
+    //     spriteRenderer.color = color;
 
-        // HitSound 재생
+    //     // HitSound 재생
 
-        yield return new WaitForSeconds(0.5f);
+    //     yield return new WaitForSeconds(0.5f);
 
-        spriteRenderer.color = color_origin;
-    }
+    //     spriteRenderer.color = color_origin;
+    // }
     private void isHurtSet()
     {
         isHurt = false;
