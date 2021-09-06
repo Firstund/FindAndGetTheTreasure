@@ -90,13 +90,6 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
-    functionName: ShowEffect
-    data: 
-    objectReferenceParameter: {fileID: 3136435146279858430, guid: 958cdaf14433d3d47b3c40003c875f1d, type: 3}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
   - time: 0.4
     functionName: DashAttackReSet
     data: 

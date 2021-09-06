@@ -337,6 +337,8 @@ MonoBehaviour:
   dashAttackSoundBox: {fileID: 7089593807922516557, guid: b94227e17357ff94cbc42df33bbe2e3a, type: 3}
   attackSoundBox: {fileID: 6815060912298649864, guid: c6dc2a82fe465304d8bffe80eebd9746, type: 3}
   hurtSoundBox: {fileID: 758409182668700053, guid: eebc025157ad5704cbfec068c1fd5b72, type: 3}
+  dashAttackEffect: {fileID: 3136435146279858430, guid: 958cdaf14433d3d47b3c40003c875f1d, type: 3}
+  slideAtSideWall: {fileID: 6449521256822418348, guid: 3e882ce853fb65444a834277d739e54d, type: 3}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1216
@@ -354,6 +356,7 @@ MonoBehaviour:
   dashStopRange: 0.1
   dashDoTime: 0.04
   dashResetTime: 0.25
+  dropVelo: -70
 --- !u!114 &5143956853646980548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,7 +508,7 @@ MonoBehaviour:
   timeWarpDoTime: 0.1
   timeWarpDelay: 5
   moveNum: 60
-  moveBackTime: 3
+  canUseTimeWarpTime: 3
 --- !u!114 &5143956853646980541
 MonoBehaviour:
   m_ObjectHideFlags: 0

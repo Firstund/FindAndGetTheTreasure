@@ -15,6 +15,7 @@ public class CharacterMove : MonoBehaviour
     private Animator anim = null;
     public SpriteRenderer spriteRenderer { get; private set; }
     private SpriteRenderer pulleySpriteRenderer = null;
+    private SpawnEffect spawnEffect = null;
 
     private PlayerInput playerInput = null;
     private SpawnAfterImage spawnAfterImage = null;
@@ -29,6 +30,12 @@ public class CharacterMove : MonoBehaviour
     private GameObject attackSoundBox = null;
     [SerializeField]
     private GameObject hurtSoundBox = null;
+
+    [SerializeField]
+    private GameObject dashAttackEffect = null;
+    [SerializeField]
+    private GameObject slideAtSideWall = null;
+    private GameObject currentSlideAtSideWallEffect = null;
 
     [SerializeField]
     private LayerMask whatIsGround;
@@ -60,6 +67,9 @@ public class CharacterMove : MonoBehaviour
     [SerializeField]
     private float dashResetTime = 1f;
 
+    [SerializeField]
+    private float dropVelo = -70f; // 낙사
+
     private bool isJump = false;
     private bool isHang = false;
     private bool isDash = false;
@@ -89,6 +99,8 @@ public class CharacterMove : MonoBehaviour
     private bool whenOutHangMove = false;
     private bool whenOutHangMoveStarted = false;
 
+    private bool canShowSlideAtSideWallEffect = true;
+
     private Vector2 dashPosition = Vector2.zero;
 
     public Vector2 currentPosition { get; private set; }
@@ -109,6 +121,7 @@ public class CharacterMove : MonoBehaviour
         characterStat = GetComponent<CharacterStat>();
         spawnAfterImage = GetComponent<SpawnAfterImage>();
         characterTimeWarp = GetComponent<CharacterTimeWarp>();
+        spawnEffect = GetComponent<SpawnEffect>();
     }
 
     void Start()
@@ -152,15 +165,24 @@ public class CharacterMove : MonoBehaviour
 
     private void CheckDead()
     {
-        if (characterStat.hp <= 0f)
-        {
-            isDead = true;
-            isJump = false;
-            isDash = false;
-            isAttack = false;
-            isGround = false;
 
-            Dead();
+        if (!isDead)
+        {
+            if (rigid.velocity.y <= dropVelo)
+            {
+                Hurt(100);
+            }
+
+            if (characterStat.hp <= 0f)
+            {
+                isDead = true;
+                isJump = false;
+                isDash = false;
+                isAttack = false;
+                isGround = false;
+
+                Dead();
+            }
         }
     }
 
@@ -247,15 +269,34 @@ public class CharacterMove : MonoBehaviour
 
         transform.position = currentPosition;
     }
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionStay2D(Collision2D col)
     {
         int layer = 2 << col.gameObject.layer - 1;
 
-        if(layer == LayerMask.GetMask("GROUND"))
+        if (layer == LayerMask.GetMask("GROUND"))
         {
-            if(rigid.velocity.y < 0f)
+            if (rigid.velocity.y < 0f && canShowSlideAtSideWallEffect && !isGround)
             {
                 // 벽에서 미끄러 떨어지는 파티클 추가
+
+                if (currentSlideAtSideWallEffect == null)
+                {
+                    currentSlideAtSideWallEffect = spawnEffect.ShowEffect(slideAtSideWall, Vector2.zero);
+                    Debug.Log(currentSlideAtSideWallEffect);
+                }
+                else
+                {
+                    currentSlideAtSideWallEffect.SetActive(true);
+                }
+                canShowSlideAtSideWallEffect = false;
+            }
+            else if (rigid.velocity.y >= 0f || isGround)
+            {
+                if (currentSlideAtSideWallEffect != null)
+                {
+                    currentSlideAtSideWallEffect.SetActive(false);
+                    canShowSlideAtSideWallEffect = true;
+                }
             }
         }
     }
@@ -409,6 +450,8 @@ public class CharacterMove : MonoBehaviour
         {
             dashAttacking = true;
 
+            spawnEffect.ShowEffect(dashAttackEffect, Vector2.zero);
+
             anim.Play(characterName + "DashAttack");
 
             _dashRange = dashRange * (2f / 3f);
@@ -418,7 +461,6 @@ public class CharacterMove : MonoBehaviour
             dashPosition = GroundChecker.position;
 
             dashPosition.y += 0.2f;
-
 
             endPosition.x = currentPosition.x + _dashRange;
 
@@ -468,7 +510,6 @@ public class CharacterMove : MonoBehaviour
         _currentPosition.y = 0f;
 
         float distance = Vector2.Distance(_dashPosition, _currentPosition);
-
 
         if (distance <= dashStopRange)
         {
