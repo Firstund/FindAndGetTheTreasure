@@ -17,7 +17,7 @@ public class SpawnEffect : MonoBehaviour
 
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    public GameObject ShowEffect(GameObject spawnIt, Vector2 spawnPosition)
+    public void ShowEffect(GameObject spawnIt, Vector2 spawnPosition)
     {
         Transform spawnTrm = effectSpawnPosition;
         SpriteRenderer renderer = null;
@@ -40,7 +40,7 @@ public class SpawnEffect : MonoBehaviour
             {
                 findEffect = true;
 
-                item.transform.position = effectSpawnPosition.position;
+                item.transform.position = spawnTrm.position;
 
                 renderer = item.GetComponent<SpriteRenderer>();
 
@@ -51,7 +51,7 @@ public class SpawnEffect : MonoBehaviour
 
                 item.SetActive(true);
 
-                return item;
+                break;
             }
         }
 
@@ -60,7 +60,7 @@ public class SpawnEffect : MonoBehaviour
             GameObject obj = Instantiate(spawnIt, spawnTrm);
             effects.Add(obj);
 
-            obj.transform.position = effectSpawnPosition.position;
+            obj.transform.position = spawnTrm.position;
 
             renderer = obj.GetComponent<SpriteRenderer>();
 
@@ -68,10 +68,6 @@ public class SpawnEffect : MonoBehaviour
             {
                 renderer.flipX = spriteRenderer.flipX;
             }
-
-            return obj;
         }
-
-        return null;
     }
 }

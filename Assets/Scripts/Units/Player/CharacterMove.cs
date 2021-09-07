@@ -24,17 +24,25 @@ public class CharacterMove : MonoBehaviour
 
     [SerializeField]
     private GameObject pulley = null;
+    [Header("여기부터 사운드박스들")]
     [SerializeField]
     private GameObject dashAttackSoundBox = null;
     [SerializeField]
     private GameObject attackSoundBox = null;
     [SerializeField]
     private GameObject hurtSoundBox = null;
+    [SerializeField]
+    private GameObject jumpSoundBox = null;
 
+    [Header("여기부터 이펙트들")]
+    [SerializeField]
+    private GameObject attackEffect = null;
     [SerializeField]
     private GameObject dashAttackEffect = null;
     [SerializeField]
     private GameObject slideAtSideWall = null;
+    [SerializeField]
+    private GameObject jumpEffect = null;
     private GameObject currentSlideAtSideWallEffect = null;
 
     [SerializeField]
@@ -275,27 +283,20 @@ public class CharacterMove : MonoBehaviour
 
         if (layer == LayerMask.GetMask("GROUND"))
         {
-            if (rigid.velocity.y < 0f && canShowSlideAtSideWallEffect && !isGround)
+            if (rigid.velocity.y < 0f && !isGround)
             {
                 // 벽에서 미끄러 떨어지는 파티클 추가
 
                 if (currentSlideAtSideWallEffect == null)
                 {
-                    currentSlideAtSideWallEffect = spawnEffect.ShowEffect(slideAtSideWall, Vector2.zero);
-                    Debug.Log(currentSlideAtSideWallEffect);
-                }
-                else
-                {
-                    currentSlideAtSideWallEffect.SetActive(true);
-                }
-                canShowSlideAtSideWallEffect = false;
-            }
-            else if (rigid.velocity.y >= 0f || isGround)
-            {
-                if (currentSlideAtSideWallEffect != null)
-                {
-                    currentSlideAtSideWallEffect.SetActive(false);
-                    canShowSlideAtSideWallEffect = true;
+                    if (spriteRenderer.flipX)
+                    {
+                        spawnEffect.ShowEffect(slideAtSideWall, LeftWallChecker.position);
+                    }
+                    else
+                    {
+                        spawnEffect.ShowEffect(slideAtSideWall, RightWallChecker.position);
+                    }
                 }
             }
         }
@@ -520,6 +521,7 @@ public class CharacterMove : MonoBehaviour
     {
         if (!attacking && !dashMoving && !isHangWall && !staping && isAttack) //isGround에 따라서 GroundAttack과 InAirAttack을 나눌것, dashing == true라면 dashAttack을 할것
         {
+            spawnEffect.ShowEffect(attackEffect, Vector2.zero);
             if (isGround)
             {
                 attacking = true;
@@ -687,8 +689,11 @@ public class CharacterMove : MonoBehaviour
     public void Jumping()
     {
         rigid.velocity = new Vector2(rigid.velocity.x, characterStat.jumpSpeed);
-
+        
         isJump = false;
+
+        spawnEffect.ShowEffect(jumpEffect, Vector2.zero);
+        stageManager.SpawnSoundBox(jumpSoundBox);
     }
     private void InAirCheck()
     {
