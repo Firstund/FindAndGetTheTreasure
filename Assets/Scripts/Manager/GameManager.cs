@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour
     }
 
     private float slowTime = 0f;
+    private float slowTimeByLerp = 0f;
+    private float firstSlowTimeByLerp = 0f;
     private int _currentStage = 0;
     public int currentStage
     {
@@ -71,6 +73,8 @@ public class GameManager : MonoBehaviour
     }
 
     private Func<float, float> TimeSlow;
+    private Func<float, float> TimeSlowByLerp;
+    public Action StopSlowTimeByLerp;
     public event Action<int> SpawnStages;
     public Action<bool> GameEnd;
 
@@ -98,6 +102,30 @@ public class GameManager : MonoBehaviour
             return a;
         };
 
+        TimeSlowByLerp = a =>
+        {
+            if (a > 0f)
+            {
+                a -= Time.deltaTime * 20f;
+                Time.timeScale = Mathf.Lerp(0.1f, 1f, a / firstSlowTimeByLerp);
+
+                if (a <= 0f)
+                {
+                    StopSlowTimeByLerp();
+                    Time.timeScale = 1f;
+                }
+            }
+
+
+            return a;
+        };
+
+        StopSlowTimeByLerp = () =>
+        {
+            slowTimeByLerp = 0f;
+            firstSlowTimeByLerp = 0f;
+        };
+
         SpawnStages = stageNum =>
         {
             SceneManager.LoadScene("StageScene");
@@ -112,7 +140,7 @@ public class GameManager : MonoBehaviour
 
         GameEnd = gameClear =>
         {
-            if(gameClear)
+            if (gameClear)
             {
                 // 게임을 클리어했을 때
             }
@@ -126,12 +154,15 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         dontDestroyOnLoadManager = DontDestroyOnLoadManager.Instance;
-        
+
         dontDestroyOnLoadManager.DoNotDestroyOnLoad(gameObject);
     }
     void Update()
     {
         slowTime = TimeSlow(slowTime);
+        slowTimeByLerp = TimeSlowByLerp(slowTimeByLerp);
+
+        Debug.Log(Time.timeScale);
     }
     public void SpawnStage(int stage)
     {
@@ -140,6 +171,14 @@ public class GameManager : MonoBehaviour
     public void SetSlowTime(float time)
     {
         slowTime = time;
+    }
+    public void SetSlowTimeByLerp(float time)
+    {
+        if (slowTimeByLerp <= 0f)
+        {
+            slowTimeByLerp = time;
+            firstSlowTimeByLerp = time;
+        }
     }
     public void StopTime(bool st)
     {

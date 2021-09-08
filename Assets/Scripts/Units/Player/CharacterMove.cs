@@ -21,6 +21,7 @@ public class CharacterMove : MonoBehaviour
     private SpawnAfterImage spawnAfterImage = null;
     private CharacterStat characterStat = null;
     private CharacterTimeWarp characterTimeWarp = null;
+    private Reflect reflect = null;
 
     [SerializeField]
     private GameObject pulley = null;
@@ -130,6 +131,7 @@ public class CharacterMove : MonoBehaviour
         spawnAfterImage = GetComponent<SpawnAfterImage>();
         characterTimeWarp = GetComponent<CharacterTimeWarp>();
         spawnEffect = GetComponent<SpawnEffect>();
+        reflect = GetComponent<Reflect>();
     }
 
     void Start()
@@ -562,6 +564,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void DespawnProjectileByAttack()
     {
+        bool projectileDespawned = false;
         float distance;
 
         for (int i = 0; i < stageManager.ProjectilesTrm.childCount; i++)
@@ -575,11 +578,18 @@ public class CharacterMove : MonoBehaviour
                 if (distance <= characterStat.attackRange)
                 {
                     stageManager.DespawnProjectile(item);
+                    projectileDespawned = true;
                 }
             }
         }
+
+        if(projectileDespawned)
+        {
+            reflect.canSettingAngle = true;
+            reflect.canShoot = true;
+        }
     }
-    private void GetDashAttackDamage()
+    private void GetDashAttackDamage() // 판정관련 오류 있음
     {
         bool soundPlayed = false;
         float attackRange = dashRange;
@@ -692,7 +702,7 @@ public class CharacterMove : MonoBehaviour
         
         isJump = false;
 
-        spawnEffect.ShowEffect(jumpEffect, Vector2.zero);
+        spawnEffect.ShowEffect(jumpEffect, transform.position);
         stageManager.SpawnSoundBox(jumpSoundBox);
     }
     private void InAirCheck()

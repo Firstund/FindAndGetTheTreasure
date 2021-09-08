@@ -80,16 +80,18 @@ public class StageManager : MonoBehaviour
     {
         GameObject shootObject = projectiles.Find(x => (x.name == shootIt.name + "(Clone)") && !x.activeSelf);
 
+        Vector2 shootDir = flipX ? Vector2.left : Vector2.right;
+
         if (shootObject == null)
         {
             GameObject a = Instantiate(shootIt, projectilesTrm);
-            a.GetComponent<EnemyProjectile>().SpawnSet(flipX, shootRange, enemyStat.ap);
+            a.GetComponent<EnemyProjectile>().SpawnSet(flipX, shootRange, enemyStat.ap, shootDir);
             a.transform.position = spawnPosition;
         }
         else
         {
             shootObject.SetActive(true);
-            shootObject.GetComponent<EnemyProjectile>().SpawnSet(flipX, shootRange, enemyStat.ap);
+            shootObject.GetComponent<EnemyProjectile>().SpawnSet(flipX, shootRange, enemyStat.ap, shootDir);
             shootObject.transform.position = spawnPosition;
             projectiles.Remove(shootObject);
         }
