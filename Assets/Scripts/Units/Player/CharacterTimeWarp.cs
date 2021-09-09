@@ -117,7 +117,6 @@ public class CharacterTimeWarp : MonoBehaviour
             totalTime += Time.fixedDeltaTime * (moveNum / canUseTimeWarpTime);
 
             iTotalTime = (int)((totalTime) % moveNum);
-            // Debug.Log(iTotalTime);
 
             bool isDifferent = false;
             isDifferent = (iTotalTime != pasteI_TotalTime);

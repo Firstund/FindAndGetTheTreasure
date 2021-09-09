@@ -11,9 +11,13 @@ public class Reflect : MonoBehaviour
     public bool canSettingAngle { private get; set; }
     [SerializeField]
     private float upDownSpeed = 1f;
+    [SerializeField]
+    private float maxPosY = 5f;
 
     [SerializeField]
     private GameObject projectile = null;
+    [SerializeField]
+    private GameObject arrowAtEnd = null;
     [SerializeField]
     private LineRenderer projectileShootLine = null;
     private PlayerInput playerInput = null;
@@ -21,7 +25,9 @@ public class Reflect : MonoBehaviour
     [SerializeField]
     private Transform shootTrm = null;
     private Vector2 shootAngle = Vector2.zero;
-    void Start() /////////////////가끔 게임 멈추는 버그
+    private float shootAnlgePlus = 0f;
+
+    void Start()
     {
         gameManager = GameManager.Instance;
 
@@ -29,6 +35,8 @@ public class Reflect : MonoBehaviour
         {
             isAttack = false;
             canShoot = false;
+            canSettingAngle = false;
+            shootAnlgePlus = 0f;
 
             for (int i = 0; i < 2; i++)
             {
@@ -48,9 +56,14 @@ public class Reflect : MonoBehaviour
         {
             isAttack = true;
         }
+
+        projectileShootLine.gameObject.SetActive(canSettingAngle);
+        arrowAtEnd.SetActive(canSettingAngle);
     }
     void FixedUpdate()
     {
+        shootAngle = transform.position;
+
         if (canSettingAngle)
         {
             SettingAngle();
@@ -65,7 +78,7 @@ public class Reflect : MonoBehaviour
     {
         if (isAttack)
         {
-            Instantiate(projectile, shootTrm.position, Quaternion.identity).GetComponent<EnemyProjectile>().SpawnSet(false, 10, 1, shootAngle - (Vector2)shootTrm.position);
+            Instantiate(projectile, shootTrm.position, Quaternion.Euler(0f, 0f, shootAnlgePlus)).GetComponent<PlayerProjectile>().SpawnSet(false, 10, 1, Vector2.right);
 
             gameManager.StopSlowTimeByLerp();
         }
@@ -74,15 +87,20 @@ public class Reflect : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            shootAngle.y += upDownSpeed;
+            shootAnlgePlus += upDownSpeed;
         }
         else if (Input.GetKey(KeyCode.DownArrow))
         {
-            shootAngle.y -= upDownSpeed;
+            shootAnlgePlus -= upDownSpeed;
         }
 
-        projectileShootLine.SetPosition(0, shootTrm.position);
-        projectileShootLine.SetPosition(1, shootAngle - (Vector2)shootTrm.position);
+        shootTrm.rotation = Quaternion.Euler(0f, 0f, shootAnlgePlus);
+
+        projectileShootLine.SetPosition(0, (Vector2)shootTrm.localPosition);
+        projectileShootLine.SetPosition(1, shootTrm.right);
+
+        arrowAtEnd.transform.localPosition = shootTrm.right;
+        arrowAtEnd.transform.rotation = Quaternion.Euler(0f, 0f, shootAnlgePlus);
     }
     private void OnDrawGizmos()
     {

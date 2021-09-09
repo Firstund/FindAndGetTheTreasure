@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyProjectile : Projectile_Base, IProjectile
+public class PlayerProjectile : Projectile_Base, IProjectile
 {
-    void FixedUpdate()
+    void Update()
     {
         spriteRenderer.flipX = flipX;
         Move();
@@ -26,19 +26,24 @@ public class EnemyProjectile : Projectile_Base, IProjectile
     }
     public void GetDamage()
     {
-        float distance = Vector2.Distance(gameManager.player.currentPosition, transform.position);
+        float distance = 0f;
 
-        if (distance <= 0.5f)
+        foreach(var item in stageManager.Enemys)
         {
-            CharacterMove characterMove = gameManager.player.GetComponent<CharacterMove>();
-
-            if (characterMove.canHurt)
+            if(item.activeSelf)
             {
-                characterMove.Hurt(damage);
+                distance = Vector2.Distance(item.transform.position, transform.position);
+
+                if(distance <= 0.5f)
+                {
+                    EnemyMove enemyMove = item.GetComponent<EnemyMove>();
+
+                    enemyMove.Hurt(damage);
+
+                    isDestroy = true;
+                    stageManager.DespawnProjectile(gameObject);
+                }
             }
-            
-            isDestroy = true;
-            stageManager.DespawnProjectile(gameObject);
         }
     }
     public void Despawn()
@@ -49,9 +54,9 @@ public class EnemyProjectile : Projectile_Base, IProjectile
 
             if (distance >= shootRange)
             {
-                
                 isDestroy = true;
-                
+                Debug.Log(firstPosition);
+
                 stageManager.DespawnProjectile(gameObject);
             }
         }

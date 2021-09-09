@@ -8,6 +8,10 @@ public class StageManager : MonoBehaviour
 {
     private GameManager gameManager = null;
     private List<GameObject> enemys = new List<GameObject>();
+    public List<GameObject> Enemys ///////////////////////현재 움직이는중인 오브젝트들도 보관할 필요가 있음
+    {
+        get{return enemys;}
+    }
     [SerializeField]
     private Transform _enemys = null;
 

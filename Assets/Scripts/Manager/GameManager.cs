@@ -161,8 +161,6 @@ public class GameManager : MonoBehaviour
     {
         slowTime = TimeSlow(slowTime);
         slowTimeByLerp = TimeSlowByLerp(slowTimeByLerp);
-
-        Debug.Log(Time.timeScale);
     }
     public void SpawnStage(int stage)
     {
