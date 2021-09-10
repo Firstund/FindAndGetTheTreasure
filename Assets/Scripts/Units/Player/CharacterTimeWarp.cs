@@ -151,8 +151,6 @@ public class CharacterTimeWarp : MonoBehaviour
             spriteRenderer.sprite = sprites[currentMovePositionNum];
             spriteRenderer.flipX = flipXes[currentMovePositionNum];
 
-            Debug.Log(currentMovePositionNum);
-
             float distance = Vector2.Distance(transform.position, positions[currentMovePositionNum]);
 
             rigid.velocity = new Vector2(rigid.velocity.x, 0f);

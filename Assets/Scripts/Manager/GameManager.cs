@@ -66,6 +66,10 @@ public class GameManager : MonoBehaviour
     private float slowTime = 0f;
     private float slowTimeByLerp = 0f;
     private float firstSlowTimeByLerp = 0f;
+    [SerializeField]
+    private float slowTimeSomeObjectsTime = 3f;
+    private float slowTimeSomeObjectsTimer = 0f;
+
     private int _currentStage = 0;
     public int currentStage
     {
@@ -74,7 +78,9 @@ public class GameManager : MonoBehaviour
 
     private Func<float, float> TimeSlow;
     private Func<float, float> TimeSlowByLerp;
+    private Func<float, float> FuncSlowTimeSomeObjects;
     public Action StopSlowTimeByLerp;
+    public event Action SetFalseSlowTimeSomeObjects;
     public event Action<int> SpawnStages;
     public Action<bool> GameEnd;
 
@@ -82,6 +88,46 @@ public class GameManager : MonoBehaviour
     public bool stopTime
     {
         get { return _stopTime; }
+    }
+    [SerializeField]
+    private float slowTimeSOmeObjectsTime = 5f;
+    private bool slowTimeSomeObjects = false;
+    public bool SlowTimeSomeObjects
+    {
+        get { return slowTimeSomeObjects; }
+        set
+        {
+
+            if (value)
+            {
+                if (slowTimeSomeObjectsTimer <= 0f)
+                {
+                    slowTimeSomeObjectsTimer = slowTimeSomeObjectsTime;
+                }
+            }
+            else
+            {
+                SetFalseSlowTimeSomeObjects();
+            }
+
+            slowTimeSomeObjects = value;
+        }
+    }
+
+    [SerializeField]
+    private int slowTimeNum = 20; // 몇몇 오브젝트들만 느려지는 코드를 실행시킬 때 1/n으로 속도를 조정
+    public int SlowTimeNum
+    {
+        get { return slowTimeNum; }
+    }
+    private int currentSlowTimeNum = 0;
+    public int CurrentSlowTimeNum
+    {
+        get { return currentSlowTimeNum; }
+    }
+    public int CurrentSlowTimePerSlowTime
+    {
+        get { return currentSlowTimeNum / slowTimeNum; }
     }
 
     void Awake()
@@ -106,8 +152,8 @@ public class GameManager : MonoBehaviour
         {
             if (a > 0f)
             {
-                a -= Time.deltaTime * 20f;
-                Time.timeScale = Mathf.Lerp(0.1f, 1f, a / firstSlowTimeByLerp);
+                a -= Time.deltaTime;
+                Time.timeScale = Mathf.Lerp(1f, 0.08f, a / firstSlowTimeByLerp * 20f);
 
                 if (a <= 0f)
                 {
@@ -120,11 +166,29 @@ public class GameManager : MonoBehaviour
             return a;
         };
 
+        FuncSlowTimeSomeObjects = a =>
+        {
+            if (a > 0f)
+            {
+                a -= Time.deltaTime;
+
+                if (a <= 0f)
+                {
+                    a = 0f;
+                    SetFalseSlowTimeSomeObjects();
+                }
+            }
+
+            return a;
+        };
+
         StopSlowTimeByLerp = () =>
         {
             slowTimeByLerp = 0f;
             firstSlowTimeByLerp = 0f;
         };
+
+        SetFalseSlowTimeSomeObjects = () => { slowTimeSomeObjects = false; };
 
         SpawnStages = stageNum =>
         {
@@ -161,6 +225,18 @@ public class GameManager : MonoBehaviour
     {
         slowTime = TimeSlow(slowTime);
         slowTimeByLerp = TimeSlowByLerp(slowTimeByLerp);
+        slowTimeSomeObjectsTimer = FuncSlowTimeSomeObjects(slowTimeSomeObjectsTimer);
+    }
+    private void FixedUpdate()
+    {
+        if (slowTimeSomeObjects)
+        {
+            currentSlowTimeNum++;
+        }
+        else
+        {
+            currentSlowTimeNum = 0;
+        }
     }
     public void SpawnStage(int stage)
     {

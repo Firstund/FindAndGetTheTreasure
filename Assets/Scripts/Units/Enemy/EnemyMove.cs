@@ -9,6 +9,7 @@ public class EnemyMove : EnemyStatus
     private Animator anim = null;
     private SpriteRenderer spriteRenderer = null;
     private EnemyStat enemyStat = null;
+    private Rigidbody2D rigid = null;
 
     [SerializeField]
     private float searchResetDelay = 1f;
@@ -56,6 +57,9 @@ public class EnemyMove : EnemyStatus
     private Color color = new Color(1f, 0f, 1f, 0.5f);
     private Color color_origin = new Color(1f, 1f, 1f, 1f);
 
+    private float firstGravity = 0f;
+    private float firstMass = 0f;
+
     void Start()
     {
         gameManager = GameManager.Instance;
@@ -63,6 +67,7 @@ public class EnemyMove : EnemyStatus
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        rigid = GetComponent<Rigidbody2D>();
 
         enemyStat = GetComponent<EnemyStat>();
 
@@ -70,6 +75,8 @@ public class EnemyMove : EnemyStatus
         SearchPositionSet();
 
         searchResetTimer = searchResetTime;
+        firstGravity = rigid.gravityScale;
+        firstMass = rigid.mass;
     }
 
     void Update()
@@ -180,6 +187,26 @@ public class EnemyMove : EnemyStatus
 
     private void FixedUpdate()
     {
+        if (gameManager.SlowTimeSomeObjects && gameManager.CurrentSlowTimePerSlowTime == 0)
+        {
+            DoFixedUpdate();
+
+            anim.speed = 1f / gameManager.SlowTimeNum;
+            rigid.gravityScale = firstGravity / gameManager.SlowTimeNum;
+            rigid.mass = firstMass / gameManager.SlowTimeNum;
+        }
+        else if (!gameManager.SlowTimeSomeObjects)
+        {
+            DoFixedUpdate();
+
+            anim.speed = 1f;
+            rigid.gravityScale = firstGravity;
+            rigid.mass = firstMass;
+        }
+    }
+
+    private void DoFixedUpdate()
+    {
         if (!(isDead || gameManager.stopTime || stopMyself))
         {
             currentPosition = transform.position;
@@ -198,6 +225,7 @@ public class EnemyMove : EnemyStatus
             transform.position = currentPosition;
         }
     }
+
     public void SpawnSet()
     {
         spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
@@ -213,7 +241,16 @@ public class EnemyMove : EnemyStatus
         if (isPursue)
         {
             anim.Play("Move");
-            currentPosition = Vector2.MoveTowards(currentPosition, playerPosition, enemyStat.pursueSpeed * Time.fixedDeltaTime);
+
+            if (gameManager.SlowTimeSomeObjects)
+            {
+                currentPosition = Vector2.MoveTowards(currentPosition, playerPosition, enemyStat.pursueSpeed / gameManager.SlowTimeNum * Time.fixedDeltaTime);
+            }
+            else
+            {
+                currentPosition = Vector2.MoveTowards(currentPosition, playerPosition, enemyStat.pursueSpeed * Time.fixedDeltaTime);
+            }
+
             FlipCheck(playerPosition);
         }
     }
@@ -323,7 +360,15 @@ public class EnemyMove : EnemyStatus
             if (searchMove)
             {
                 anim.Play("Move");
-                currentPosition = Vector2.MoveTowards(currentPosition, searchTargetPosition, enemyStat.searchSpeed * Time.fixedDeltaTime);
+
+                if(gameManager.SlowTimeSomeObjects)
+                {
+                    currentPosition = Vector2.MoveTowards(currentPosition, searchTargetPosition, enemyStat.searchSpeed / gameManager.SlowTimeNum * Time.fixedDeltaTime);
+                }
+                else
+                {
+                    currentPosition = Vector2.MoveTowards(currentPosition, searchTargetPosition, enemyStat.searchSpeed * Time.fixedDeltaTime);
+                }
 
                 if (enemyStat.isAirEnemy)
                 {

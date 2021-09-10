@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class PlayerProjectile : Projectile_Base, IProjectile
 {
+    [SerializeField]
+    private GameObject attackSoundBox = null;
+    private bool soundBoxSpawned = false;
     void Update()
     {
-        spriteRenderer.flipX = flipX;
         Move();
         Despawn();
         GetDamage();
     }
-    public void SpawnSet(bool fX, float shootR, float dm, Vector2 angle)
+    public void SpawnSet(float shootR, float dm, Vector2 angle)
     {
-        flipX = fX;
         firstPosition = transform.position;
         isDestroy = false;
         shootRange = shootR;
@@ -28,20 +29,27 @@ public class PlayerProjectile : Projectile_Base, IProjectile
     {
         float distance = 0f;
 
-        foreach(var item in stageManager.Enemys)
+        foreach (var item in stageManager.Enemys)
         {
-            if(item.activeSelf)
+            if (item.activeSelf)
             {
                 distance = Vector2.Distance(item.transform.position, transform.position);
 
-                if(distance <= 0.5f)
+                if (distance <= hitRange)
                 {
                     EnemyMove enemyMove = item.GetComponent<EnemyMove>();
 
                     enemyMove.Hurt(damage);
 
-                    isDestroy = true;
-                    stageManager.DespawnProjectile(gameObject);
+                    if (!soundBoxSpawned)
+                    {
+                        stageManager.SpawnSoundBox(attackSoundBox);
+
+                        soundBoxSpawned = true;
+                    }
+
+                    // isDestroy = true;
+                    // stageManager.DespawnProjectile(gameObject);
                 }
             }
         }
@@ -55,7 +63,6 @@ public class PlayerProjectile : Projectile_Base, IProjectile
             if (distance >= shootRange)
             {
                 isDestroy = true;
-                Debug.Log(firstPosition);
 
                 stageManager.DespawnProjectile(gameObject);
             }

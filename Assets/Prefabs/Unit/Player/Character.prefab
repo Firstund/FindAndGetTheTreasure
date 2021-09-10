@@ -765,7 +765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7e731f82ffcdf844b57eca78297dbaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upDownSpeed: 10
+  upDownSpeed: 5
   maxPosY: 5
   projectile: {fileID: 7053485288860369376, guid: 6619353fc2fdbef488ec1bce193b9a6a, type: 3}
   arrowAtEnd: {fileID: 4554957391333964547}

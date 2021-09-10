@@ -33,21 +33,31 @@ public class Reflect : MonoBehaviour
 
         gameManager.StopSlowTimeByLerp += () =>
         {
-            isAttack = false;
-            canShoot = false;
-            canSettingAngle = false;
-            shootAnlgePlus = 0f;
+            WhenTimeNotSlow();
+        };
 
-            for (int i = 0; i < 2; i++)
-            {
-                projectileShootLine.SetPosition(i, Vector2.zero);
-            }
+        gameManager.SetFalseSlowTimeSomeObjects += () =>
+        {
+            WhenTimeNotSlow();
         };
 
         playerInput = GetComponent<PlayerInput>();
 
         canSettingAngle = true;
         canShoot = true;
+    }
+
+    private void WhenTimeNotSlow()
+    {
+        isAttack = false;
+        canShoot = false;
+        canSettingAngle = false;
+        shootAnlgePlus = 0f;
+
+        for (int i = 0; i < 2; i++)
+        {
+            projectileShootLine.SetPosition(i, Vector2.zero);
+        }
     }
 
     void Update()
@@ -70,7 +80,7 @@ public class Reflect : MonoBehaviour
         }
         if (canShoot)
         {
-            gameManager.SetSlowTimeByLerp(15f);
+            gameManager.SlowTimeSomeObjects = true;
             Shoot();
         }
     }
@@ -78,9 +88,9 @@ public class Reflect : MonoBehaviour
     {
         if (isAttack)
         {
-            Instantiate(projectile, shootTrm.position, Quaternion.Euler(0f, 0f, shootAnlgePlus)).GetComponent<PlayerProjectile>().SpawnSet(false, 10, 1, Vector2.right);
+            Instantiate(projectile, shootTrm.position, Quaternion.Euler(0f, 0f, shootAnlgePlus)).GetComponent<PlayerProjectile>().SpawnSet(10, 1, Vector2.right);
 
-            gameManager.StopSlowTimeByLerp();
+            gameManager.SlowTimeSomeObjects = false;
         }
     }
     public void SettingAngle()

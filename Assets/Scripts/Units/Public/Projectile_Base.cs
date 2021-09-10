@@ -10,9 +10,11 @@ public class Projectile_Base : MonoBehaviour
 
     [SerializeField]
     protected float speed = 1f;
+    [SerializeField]
     protected float damage = 1f;
+    [SerializeField]
+    protected float hitRange = 0.5f;
     protected float shootRange = 0f;
-    protected bool flipX = false;
     protected bool isDestroy = false;
 
     protected Vector2 firstPosition = Vector2.zero;

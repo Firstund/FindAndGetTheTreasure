@@ -89,13 +89,13 @@ public class StageManager : MonoBehaviour
         if (shootObject == null)
         {
             GameObject a = Instantiate(shootIt, projectilesTrm);
-            a.GetComponent<EnemyProjectile>().SpawnSet(flipX, shootRange, enemyStat.ap, shootDir);
+            a.GetComponent<EnemyProjectile>().SpawnSet(shootRange, enemyStat.ap, shootDir);
             a.transform.position = spawnPosition;
         }
         else
         {
             shootObject.SetActive(true);
-            shootObject.GetComponent<EnemyProjectile>().SpawnSet(flipX, shootRange, enemyStat.ap, shootDir);
+            shootObject.GetComponent<EnemyProjectile>().SpawnSet(shootRange, enemyStat.ap, shootDir);
             shootObject.transform.position = spawnPosition;
             projectiles.Remove(shootObject);
         }
@@ -108,24 +108,23 @@ public class StageManager : MonoBehaviour
 
     public void SpawnEnemy(GameObject spawnObject, Vector2 spawnPosition)
     {
-        GameObject spawnEnemy = enemys.Find(x => x.name == spawnObject.name + "(Clone)");
+        GameObject spawnEnemy = enemys.Find(x => (x.name == spawnObject.name + "(Clone)") && (!x.activeSelf));
 
         if (spawnEnemy == null)
         {
             GameObject a = Instantiate(spawnObject, _enemys);
             a.transform.position = spawnPosition;
+            enemys.Add(a);
         }
         else
         {
             spawnEnemy.SetActive(true);
             spawnEnemy.GetComponent<EnemyMove>().SpawnSet();
             spawnEnemy.transform.position = spawnPosition;
-            enemys.Remove(spawnEnemy);
         }
     }
     public void DespawnEnemy(GameObject deSpawnObject)
     {
-        enemys.Add(deSpawnObject);
         deSpawnObject.SetActive(false);
     }
     public void SpawnSoundBox(GameObject spawnIt)

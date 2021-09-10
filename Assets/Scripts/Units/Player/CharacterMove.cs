@@ -79,6 +79,7 @@ public class CharacterMove : MonoBehaviour
     [SerializeField]
     private float dropVelo = -70f; // 낙사
 
+
     private bool isJump = false;
     private bool isHang = false;
     private bool isDash = false;
@@ -115,6 +116,8 @@ public class CharacterMove : MonoBehaviour
     public Vector2 currentPosition { get; private set; }
 
     private float firstGravity = 0f;
+    private float firstMass = 0f;
+
 
     // TODO: OnCollision을 이용하여 벽에 붙었을 때 서서히 내려감
 
@@ -146,6 +149,9 @@ public class CharacterMove : MonoBehaviour
 
         characterName = characterStat.characterName;
         firstGravity = rigid.gravityScale;
+        firstMass = rigid.mass;
+
+        pulley.SetActive(false);
     }
     void Update()
     {
@@ -258,27 +264,65 @@ public class CharacterMove : MonoBehaviour
     {
         currentPosition = transform.position;
 
+        if (gameManager.SlowTimeSomeObjects && gameManager.CurrentSlowTimePerSlowTime == 0)
+        {
+            DoFixedUpdate();
+
+            anim.speed = 1f / gameManager.SlowTimeNum;
+
+            rigid.gravityScale = 0f;
+            rigid.mass = 0f;
+            rigid.velocity = Vector2.zero;
+
+        }
+        else if (!gameManager.SlowTimeSomeObjects)
+        {
+            DoFixedUpdate();
+
+            anim.speed = 1f;
+            rigid.gravityScale = firstGravity;
+            rigid.mass = firstMass;
+        }
+        
+        transform.position = currentPosition;
+    }
+
+    private void DoFixedUpdate()
+    {
         if (!(isDead || gameManager.stopTime || characterTimeWarp.isTimeWarp))
         {
             float XMove = playerInput.XMove;
 
+            if (gameManager.SlowTimeSomeObjects)
+            {
+                XMove /= gameManager.SlowTimeNum;
+            }
+
             LRCheck(XMove);
 
-            MoveX(XMove);
+            if (gameManager.SlowTimeSomeObjects)
+            {
+                isJump = false;
+                isHang = false;
+                isAttack = false;
+                XMove = 0f;
+            }
+            else
+            {
+                Jump();
+                Hang();
+                Attack();
+                MoveX(XMove);
+            }
 
-            Jump();
-            Hang();
             InAirCheck();
             Dash(XMove);
-
-            Attack();
 
             DashMove();
             SpawnAfterImageByDash();
         }
-
-        transform.position = currentPosition;
     }
+
     private void OnCollisionStay2D(Collision2D col)
     {
         int layer = 2 << col.gameObject.layer - 1;
@@ -583,7 +627,7 @@ public class CharacterMove : MonoBehaviour
             }
         }
 
-        if(projectileDespawned)
+        if (projectileDespawned)
         {
             reflect.canSettingAngle = true;
             reflect.canShoot = true;
@@ -699,7 +743,7 @@ public class CharacterMove : MonoBehaviour
     public void Jumping()
     {
         rigid.velocity = new Vector2(rigid.velocity.x, characterStat.jumpSpeed);
-        
+
         isJump = false;
 
         spawnEffect.ShowEffect(jumpEffect, transform.position);

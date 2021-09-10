@@ -6,14 +6,12 @@ public class EnemyProjectile : Projectile_Base, IProjectile
 {
     void FixedUpdate()
     {
-        spriteRenderer.flipX = flipX;
         Move();
         Despawn();
         GetDamage();
     }
-    public void SpawnSet(bool fX, float shootR, float dm, Vector2 angle)
+    public void SpawnSet(float shootR, float dm, Vector2 angle)
     {
-        flipX = fX;
         firstPosition = transform.position;
         isDestroy = false;
         shootRange = shootR;
@@ -28,7 +26,7 @@ public class EnemyProjectile : Projectile_Base, IProjectile
     {
         float distance = Vector2.Distance(gameManager.player.currentPosition, transform.position);
 
-        if (distance <= 0.5f)
+        if (distance <= hitRange)
         {
             CharacterMove characterMove = gameManager.player.GetComponent<CharacterMove>();
 
