@@ -27,10 +27,19 @@ public class Reflect : MonoBehaviour
     private Vector2 shootAngle = Vector2.zero;
     private float shootAnlgePlus = 0f;
 
-    void Start()
+    private void Awake()
     {
         gameManager = GameManager.Instance;
+    }
+    void Start()
+    {
+        playerInput = GetComponent<PlayerInput>();
 
+        canSettingAngle = true;
+        canShoot = true;
+    }
+    private void OnEnable()
+    {
         gameManager.StopSlowTimeByLerp += () =>
         {
             WhenTimeNotSlow();
@@ -40,11 +49,19 @@ public class Reflect : MonoBehaviour
         {
             WhenTimeNotSlow();
         };
+    }
+    private void OnDisable()
+    {
+        gameManager.StopSlowTimeByLerp -= () =>
+        {
 
-        playerInput = GetComponent<PlayerInput>();
+            WhenTimeNotSlow();
+        };
 
-        canSettingAngle = true;
-        canShoot = true;
+        gameManager.SetFalseSlowTimeSomeObjects -= () =>
+        {
+            WhenTimeNotSlow();
+        };
     }
 
     private void WhenTimeNotSlow()

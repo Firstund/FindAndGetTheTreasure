@@ -19,13 +19,30 @@ public class GameEndScript : MonoBehaviour
     {
         gameManager = GameManager.Instance;
 
-        gameManager.GameEnd += gameClear => 
+        
+    }
+    private void OnEnable() 
+    {
+        gameManager.GameEnd += gameClear =>
         {
-            gameManager.StopTime(true);
-            gotoMainTimer = gotoMainTime;
-            backgroundImg.DOFade(1f, 5f);
+            WhenGameEnd();
         };
     }
+    private void OnDisable() 
+    {
+        gameManager.GameEnd -= gameClear =>
+        {
+            WhenGameEnd();
+        };
+    }
+
+    private void WhenGameEnd()
+    {
+        gameManager.StopTime(true);
+        gotoMainTimer = gotoMainTime;
+        backgroundImg.DOFade(1f, 5f);
+    }
+
     void Start()
     {
         backgroundImg = GetComponent<Image>();

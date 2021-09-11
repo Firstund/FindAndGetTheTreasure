@@ -188,7 +188,10 @@ public class GameManager : MonoBehaviour
             firstSlowTimeByLerp = 0f;
         };
 
-        SetFalseSlowTimeSomeObjects = () => { slowTimeSomeObjects = false; };
+        SetFalseSlowTimeSomeObjects = () =>
+        {
+            slowTimeSomeObjects = false;
+        };
 
         SpawnStages = stageNum =>
         {
