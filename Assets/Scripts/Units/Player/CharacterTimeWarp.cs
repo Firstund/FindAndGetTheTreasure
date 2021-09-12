@@ -81,7 +81,6 @@ public class CharacterTimeWarp : MonoBehaviour
         if (playerInput.timeWarp && !canTimeWaprPositionSet)
         {
             _isTimeWarp = playerInput.timeWarp;
-            Debug.Log("a" + moveBackTime);
         }
     }
 

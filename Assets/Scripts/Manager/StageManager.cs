@@ -127,18 +127,22 @@ public class StageManager : MonoBehaviour
     {
         deSpawnObject.SetActive(false);
     }
-    public void SpawnSoundBox(GameObject spawnIt)
+    public GameObject SpawnSoundBox(GameObject spawnIt)
     {
         GameObject spawnSoundBox = soundBoxes.Find(x => x.name == spawnIt.name + "(Clone)");
 
         if (spawnSoundBox == null)
         {
             GameObject a = Instantiate(spawnIt, _soundBoxes);
+
+            return a;
         }
         else
         {
             spawnSoundBox.SetActive(true);
             soundBoxes.Remove(spawnSoundBox);
+
+            return spawnSoundBox;
         }
     }
     public void DesapwnSoundBox(GameObject despawnIt)

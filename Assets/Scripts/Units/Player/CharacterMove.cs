@@ -280,10 +280,15 @@ public class CharacterMove : MonoBehaviour
             DoFixedUpdate();
 
             anim.speed = 1f;
-            rigid.gravityScale = firstGravity;
+            
+            if (!isHang)
+            {
+                rigid.gravityScale = firstGravity;
+            }
+
             rigid.mass = firstMass;
         }
-        
+
         transform.position = currentPosition;
     }
 

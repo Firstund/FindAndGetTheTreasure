@@ -769,6 +769,7 @@ MonoBehaviour:
   maxPosY: 5
   projectile: {fileID: 7053485288860369376, guid: 6619353fc2fdbef488ec1bce193b9a6a, type: 3}
   arrowAtEnd: {fileID: 4554957391333964547}
+  timeSlowSoundEffectBox: {fileID: 8538887207857704578, guid: 7257171e1d63ec74a9196cf49ea6a104, type: 3}
   projectileShootLine: {fileID: 7277472147057837386}
   shootTrm: {fileID: 5143956854996559995}
 --- !u!1 &5143956853695403496

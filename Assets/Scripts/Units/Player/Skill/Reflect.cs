@@ -5,10 +5,13 @@ using UnityEngine;
 public class Reflect : MonoBehaviour
 {
     private GameManager gameManager = null;
+    private StageManager stageManager = null;
 
     private bool isAttack = false;
+    private bool timeSlowSoundEffectBoxSpawned = false;
     public bool canShoot { private get; set; }
     public bool canSettingAngle { private get; set; }
+
     [SerializeField]
     private float upDownSpeed = 1f;
     [SerializeField]
@@ -18,6 +21,9 @@ public class Reflect : MonoBehaviour
     private GameObject projectile = null;
     [SerializeField]
     private GameObject arrowAtEnd = null;
+    [SerializeField]
+    private GameObject timeSlowSoundEffectBox = null;
+    private GameObject currentSoundEffectBox = null;
     [SerializeField]
     private LineRenderer projectileShootLine = null;
     private PlayerInput playerInput = null;
@@ -33,6 +39,8 @@ public class Reflect : MonoBehaviour
     }
     void Start()
     {
+        stageManager = FindObjectOfType<StageManager>();
+
         playerInput = GetComponent<PlayerInput>();
 
         canSettingAngle = true;
@@ -54,7 +62,6 @@ public class Reflect : MonoBehaviour
     {
         gameManager.StopSlowTimeByLerp -= () =>
         {
-
             WhenTimeNotSlow();
         };
 
@@ -69,7 +76,11 @@ public class Reflect : MonoBehaviour
         isAttack = false;
         canShoot = false;
         canSettingAngle = false;
+        timeSlowSoundEffectBoxSpawned = false;
+        
         shootAnlgePlus = 0f;
+
+        stageManager.DesapwnSoundBox(currentSoundEffectBox);
 
         for (int i = 0; i < 2; i++)
         {
@@ -112,6 +123,12 @@ public class Reflect : MonoBehaviour
     }
     public void SettingAngle()
     {
+        if(!timeSlowSoundEffectBoxSpawned)
+        {
+            currentSoundEffectBox = stageManager.SpawnSoundBox(timeSlowSoundEffectBox);
+            timeSlowSoundEffectBoxSpawned = true;
+        }
+
         if (Input.GetKey(KeyCode.UpArrow))
         {
             shootAnlgePlus += upDownSpeed;

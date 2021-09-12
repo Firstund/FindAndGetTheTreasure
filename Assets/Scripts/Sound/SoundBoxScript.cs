@@ -17,6 +17,11 @@ public class SoundBoxScript : MonoBehaviour
 
         playTimer = playTime;
     }
+
+    private void OnEnable() 
+    {
+        playTimer = playTime;
+    }
     void Update()
     {
         if(playTimer > 0f)
