@@ -44,6 +44,8 @@ public class CharacterMove : MonoBehaviour
     private GameObject slideAtSideWall = null;
     [SerializeField]
     private GameObject jumpEffect = null;
+    [SerializeField]
+    private GameObject reflectEffect = null;
     private GameObject currentSlideAtSideWallEffect = null;
 
     [SerializeField]
@@ -85,6 +87,7 @@ public class CharacterMove : MonoBehaviour
     private bool isDash = false;
     private bool isDead = false;
     private bool isAttack = false;
+    private bool isReflect = false;
     private bool isHurt = false;
     private bool _canHurt = true;
     public bool canHurt
@@ -108,8 +111,6 @@ public class CharacterMove : MonoBehaviour
 
     private bool whenOutHangMove = false;
     private bool whenOutHangMoveStarted = false;
-
-    private bool canShowSlideAtSideWallEffect = true;
 
     private Vector2 dashPosition = Vector2.zero;
 
@@ -165,7 +166,7 @@ public class CharacterMove : MonoBehaviour
             RightWallCheck();
             CharacterHangWallCheck();
         }
-        else if (gameManager.stopTime && !characterTimeWarp.isTimeWarp)
+        else if (gameManager.stopTime && !characterTimeWarp.isTimeWarp && !reflect.canSettingAngle)
         {
             anim.Play(characterName + "Idle");
         }
@@ -273,14 +274,13 @@ public class CharacterMove : MonoBehaviour
             rigid.gravityScale = 0f;
             rigid.mass = 0f;
             rigid.velocity = Vector2.zero;
-
         }
         else if (!gameManager.SlowTimeSomeObjects)
         {
             DoFixedUpdate();
 
             anim.speed = 1f;
-            
+
             if (!isHang)
             {
                 rigid.gravityScale = firstGravity;
@@ -288,6 +288,8 @@ public class CharacterMove : MonoBehaviour
 
             rigid.mass = firstMass;
         }
+
+
 
         transform.position = currentPosition;
     }
@@ -310,7 +312,14 @@ public class CharacterMove : MonoBehaviour
                 isJump = false;
                 isHang = false;
                 isAttack = false;
+                attacking = false;
+
                 XMove = 0f;
+
+                anim.Play(name + "ReflectR");
+
+                reflectEffect.SetActive(true);
+                reflectEffect.transform.position = spriteRenderer.flipX ? RightWallChecker.position : LeftWallChecker.position;
             }
             else
             {
@@ -318,13 +327,17 @@ public class CharacterMove : MonoBehaviour
                 Hang();
                 Attack();
                 MoveX(XMove);
+
+                InAirCheck();
+                Dash(XMove);
+
+                DashMove();
+                SpawnAfterImageByDash();
+
+                reflectEffect.SetActive(false);
             }
 
-            InAirCheck();
-            Dash(XMove);
 
-            DashMove();
-            SpawnAfterImageByDash();
         }
     }
 
@@ -334,7 +347,7 @@ public class CharacterMove : MonoBehaviour
 
         if (layer == LayerMask.GetMask("GROUND"))
         {
-            if (rigid.velocity.y < 0f && !isGround)
+            if (rigid.velocity.y < 0f)
             {
                 // 벽에서 미끄러 떨어지는 파티클 추가
 
@@ -756,7 +769,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void InAirCheck()
     {
-        if (!(isJump || isGround || isHang || staping || attacking))
+        if (!(isJump || isGround || isHang || staping || attacking || reflect.canSettingAngle))
         {
             if (isHangWall)
             {
@@ -864,7 +877,7 @@ public class CharacterMove : MonoBehaviour
 
     private void LRCheck(float XMove)
     {
-        if (!isHang)
+        if (!(isHang || reflect.canSettingAngle))
         {
             if (XMove < 0f)
             {

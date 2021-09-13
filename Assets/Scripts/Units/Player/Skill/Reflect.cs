@@ -9,8 +9,8 @@ public class Reflect : MonoBehaviour
 
     private bool isAttack = false;
     private bool timeSlowSoundEffectBoxSpawned = false;
-    public bool canShoot { private get; set; }
-    public bool canSettingAngle { private get; set; }
+    public bool canShoot { get; set; }
+    public bool canSettingAngle { get; set; }
 
     [SerializeField]
     private float upDownSpeed = 1f;
@@ -22,10 +22,18 @@ public class Reflect : MonoBehaviour
     [SerializeField]
     private GameObject arrowAtEnd = null;
     [SerializeField]
-    private GameObject timeSlowSoundEffectBox = null;
-    private GameObject currentSoundEffectBox = null;
+    private GameObject refelctTimer = null;
+    [SerializeField]
+    private GameObject timeSlowEffectObj = null;
+
+    [SerializeField]
+    private GameObject timeSlowEffectSoundBox = null;
+    private GameObject currentEffectSoundBox = null;
+
     [SerializeField]
     private LineRenderer projectileShootLine = null;
+    [SerializeField]
+    private Animator anim = null;
     private PlayerInput playerInput = null;
 
     [SerializeField]
@@ -42,9 +50,11 @@ public class Reflect : MonoBehaviour
         stageManager = FindObjectOfType<StageManager>();
 
         playerInput = GetComponent<PlayerInput>();
+        anim = GetComponent<Animator>();
 
-        canSettingAngle = true;
-        canShoot = true;
+
+        // canSettingAngle = true;
+        // canShoot = true;
     }
     private void OnEnable()
     {
@@ -80,7 +90,7 @@ public class Reflect : MonoBehaviour
         
         shootAnlgePlus = 0f;
 
-        stageManager.DesapwnSoundBox(currentSoundEffectBox);
+        stageManager.DesapwnSoundBox(currentEffectSoundBox);
 
         for (int i = 0; i < 2; i++)
         {
@@ -118,6 +128,9 @@ public class Reflect : MonoBehaviour
         {
             Instantiate(projectile, shootTrm.position, Quaternion.Euler(0f, 0f, shootAnlgePlus)).GetComponent<PlayerProjectile>().SpawnSet(10, 1, Vector2.right);
 
+            SpawnDespawnEffects(false);
+
+            shootTrm.rotation = Quaternion.identity;
             gameManager.SlowTimeSomeObjects = false;
         }
     }
@@ -125,7 +138,10 @@ public class Reflect : MonoBehaviour
     {
         if(!timeSlowSoundEffectBoxSpawned)
         {
-            currentSoundEffectBox = stageManager.SpawnSoundBox(timeSlowSoundEffectBox);
+            currentEffectSoundBox = stageManager.SpawnSoundBox(timeSlowEffectSoundBox);
+
+            SpawnDespawnEffects(true);
+
             timeSlowSoundEffectBoxSpawned = true;
         }
 
@@ -146,6 +162,13 @@ public class Reflect : MonoBehaviour
         arrowAtEnd.transform.localPosition = shootTrm.right;
         arrowAtEnd.transform.rotation = Quaternion.Euler(0f, 0f, shootAnlgePlus);
     }
+
+    private void SpawnDespawnEffects(bool spawn)
+    {
+        refelctTimer.SetActive(spawn);
+        timeSlowEffectObj.SetActive(spawn);
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

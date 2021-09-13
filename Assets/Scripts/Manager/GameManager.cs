@@ -97,13 +97,9 @@ public class GameManager : MonoBehaviour
         get { return slowTimeSomeObjects; }
         set
         {
-
             if (value)
             {
-                if (slowTimeSomeObjectsTimer <= 0f)
-                {
-                    slowTimeSomeObjectsTimer = slowTimeSomeObjectsTime;
-                }
+                slowTimeSomeObjectsTimer = slowTimeSomeObjectsTime;
             }
             else
             {

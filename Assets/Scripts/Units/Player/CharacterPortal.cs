@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterSkill : MonoBehaviour
+public class CharacterPortal : MonoBehaviour
 {
     private PlayerInput playerInput = null;
+    private Reflect reflect = null;
 
     [SerializeField]
     private float canUsePortalRange = 1f;
@@ -28,6 +29,7 @@ public class CharacterSkill : MonoBehaviour
     {
         portalManager = FindObjectOfType<PortalManager>();
 
+        reflect = GetComponent<Reflect>();
         playerInput = GetComponent<PlayerInput>();
         characterPosition = playerInput.transform;
 
@@ -35,26 +37,29 @@ public class CharacterSkill : MonoBehaviour
         portal1 = portals[1].GetComponent<Portal>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (playerInput.spawnPortal0 && canSpawnPortal0)
+        if (!reflect.canSettingAngle)
         {
-            canSpawnPortal0 = false;
-            SpawnPortal0();
-            Invoke("CanSpawnPortal0Set", 1f);
-        }
-        if (playerInput.spawnPortal1 && canSpawnPortal1)
-        {
-            canSpawnPortal1 = false;
-            SpawnPortal1();
-            Invoke("CanSpawnPortal1Set", 1f);
-        }
+            if (playerInput.spawnPortal0 && canSpawnPortal0)
+            {
+                canSpawnPortal0 = false;
+                SpawnPortal0();
+                Invoke("CanSpawnPortal0Set", 1f);
+            }
+            if (playerInput.spawnPortal1 && canSpawnPortal1)
+            {
+                canSpawnPortal1 = false;
+                SpawnPortal1();
+                Invoke("CanSpawnPortal1Set", 1f);
+            }
 
-        if (playerInput.usePortal && canUsePortal)
-        {
-            canUsePortal = false;
-            UsePortal();
-            Invoke("CanUsePortalSet", 1f);
+            if (playerInput.usePortal && canUsePortal)
+            {
+                canUsePortal = false;
+                UsePortal();
+                Invoke("CanUsePortalSet", 1f);
+            }
         }
     }
     private void CanSpawnPortal0Set()

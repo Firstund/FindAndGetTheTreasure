@@ -2205,7 +2205,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 988320049}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2907,7 +2907,8 @@ MonoBehaviour:
   - {fileID: 5283051012625576936, guid: 69385ae3934bdb445b1e6159ec5c2429, type: 3}
   _player: {fileID: 0}
   _characterStat: {fileID: 0}
-  slowTimeSomeObjects: 1
+  slowTimeSomeObjectsTime: 3
+  slowTimeSOmeObjectsTime: 5
   slowTimeNum: 100
 --- !u!4 &1564100276
 Transform:
