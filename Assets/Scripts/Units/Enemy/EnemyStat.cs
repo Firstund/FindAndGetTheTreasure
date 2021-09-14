@@ -28,8 +28,12 @@ public class EnemyStat : EnemyStatus
     private float _firstHp = 0f;
     public float firstHp
     {
-        get { return _firstHp; }
-        set { _firstHp = value; }
+        get { 
+        if(_firstHp == 0f)
+        {
+            _firstHp = hp;
+        }
+        return  _firstHp; }
     }
     [SerializeField]
     private float _ap = 1f;
@@ -104,17 +108,19 @@ public class EnemyStat : EnemyStatus
     private float firstDespawnTimer = 0f;
     private bool isOutCamera = false;
 
-    void Start()
+    private void Awake()
     {
         searchCharacter = GetComponent<SearchCharacter>();
 
         gameManager = GameManager.Instance;
-        stageManager = FindObjectOfType<StageManager>();
 
         _playerPosition = gameManager.player.transform;
 
-        firstHp = hp;
         firstDespawnTimer = despawnTimer;
+    }
+    void Start()
+    {
+        stageManager = FindObjectOfType<StageManager>();
     }
 
 
@@ -134,7 +140,7 @@ public class EnemyStat : EnemyStatus
             despawnTimer -= Time.fixedDeltaTime;
         }
 
-        if(despawnTimer <= 0f)
+        if (despawnTimer <= 0f)
         {
             stageManager.DespawnEnemy(gameObject);
         }
@@ -149,5 +155,5 @@ public class EnemyStat : EnemyStatus
     {
         isOutCamera = true;
     }
-   
+
 }

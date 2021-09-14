@@ -180,6 +180,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  pursueTime: 3
 --- !u!114 &5140060500522011577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,9 +203,9 @@ MonoBehaviour:
   _isShootProjectile: 1
   _foundRange: 8
   _attackRange: 1
-  _shootRange: 5
+  _shootRange: 10
   _playerPosition: {fileID: 0}
-  despawnTimer: 10
+  despawnTimer: 500
 --- !u!114 &8850736437412420418
 MonoBehaviour:
   m_ObjectHideFlags: 0

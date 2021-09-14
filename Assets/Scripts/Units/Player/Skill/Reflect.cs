@@ -15,7 +15,7 @@ public class Reflect : MonoBehaviour
     [SerializeField]
     private float upDownSpeed = 1f;
     [SerializeField]
-    private float maxPosY = 5f;
+    private float projectileShootRange = 20f;
 
     [SerializeField]
     private GameObject projectile = null;
@@ -126,7 +126,7 @@ public class Reflect : MonoBehaviour
     {
         if (isAttack)
         {
-            Instantiate(projectile, shootTrm.position, Quaternion.Euler(0f, 0f, shootAnlgePlus)).GetComponent<PlayerProjectile>().SpawnSet(10, 1, Vector2.right);
+            Instantiate(projectile, shootTrm.position, Quaternion.Euler(0f, 0f, shootAnlgePlus)).GetComponent<PlayerProjectile>().SpawnSet(projectileShootRange, 1, Vector2.right);
 
             SpawnDespawnEffects(false);
 

@@ -6,10 +6,27 @@ public class EnemyProjectile : Projectile_Base, IProjectile
 {
     void FixedUpdate()
     {
+        if (gameManager.SlowTimeSomeObjects && gameManager.CurrentSlowTimePerSlowTime == 0)
+        {
+            speed = 0f;
+
+            DoFixedUpdate();
+        }
+        else if(!gameManager.SlowTimeSomeObjects)
+        {
+            speed = originSpeed;
+
+            DoFixedUpdate();
+        }
+    }
+
+    private void DoFixedUpdate()
+    {
         Move();
         Despawn();
         GetDamage();
     }
+
     public void SpawnSet(float shootR, float dm, Vector2 angle)
     {
         firstPosition = transform.position;
@@ -34,7 +51,7 @@ public class EnemyProjectile : Projectile_Base, IProjectile
             {
                 characterMove.Hurt(damage);
             }
-            
+
             isDestroy = true;
             stageManager.DespawnProjectile(gameObject);
         }
@@ -47,9 +64,9 @@ public class EnemyProjectile : Projectile_Base, IProjectile
 
             if (distance >= shootRange)
             {
-                
+
                 isDestroy = true;
-                
+
                 stageManager.DespawnProjectile(gameObject);
             }
         }

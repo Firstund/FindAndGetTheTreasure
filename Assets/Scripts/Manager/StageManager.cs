@@ -118,9 +118,8 @@ public class StageManager : MonoBehaviour
         }
         else
         {
-            spawnEnemy.SetActive(true);
-            spawnEnemy.GetComponent<EnemyMove>().SpawnSet();
             spawnEnemy.transform.position = spawnPosition;
+            spawnEnemy.SetActive(true);
         }
     }
     public void DespawnEnemy(GameObject deSpawnObject)

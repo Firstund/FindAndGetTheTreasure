@@ -13,7 +13,11 @@ public class CharacterTimeWarp : MonoBehaviour
     private Rigidbody2D rigid = null;
 
     [SerializeField]
+    private GameObject timeWarpPositionEffect = null;
+
+    [SerializeField]
     private Vector2[] positions;
+    private Vector2 timeWarpPosition = Vector2.zero;
     private Sprite[] sprites;
     private bool[] flipXes;
 
@@ -71,6 +75,7 @@ public class CharacterTimeWarp : MonoBehaviour
         if (characterMove.DashAttacking && canTimeWaprPositionSet && canTimeWarp)
         {
             timeWarpTimer = canUseTimeWarpTime;
+
             canTimeWaprPositionSet = false;
 
             positions[0] = transform.position;
@@ -78,15 +83,24 @@ public class CharacterTimeWarp : MonoBehaviour
             flipXes[0] = spriteRenderer.flipX;
         }
 
-        if (playerInput.timeWarp && !canTimeWaprPositionSet)
+        if (playerInput.timeWarp && canTimeWarp)
         {
-            _isTimeWarp = playerInput.timeWarp;
+            canTimeWarp = false;
+            _isTimeWarp = true;
+        }
+
+        if(!canTimeWarp)
+        {
+            timeWarpPositionEffect.SetActive(false);
+        }
+        else
+        {
+            timeWarpPositionEffect.SetActive(true);
         }
     }
 
     void FixedUpdate()
     {
-
         if (timeWarpTimer > 0f)
         {
             timeWarpTimer -= Time.fixedDeltaTime;
@@ -132,6 +146,18 @@ public class CharacterTimeWarp : MonoBehaviour
                     }
                 }
 
+                if (iTotalTime > 0)
+                {
+                    timeWarpPosition = positions[iTotalTime];
+                }
+                else
+                {
+                    timeWarpPosition = positions[0];
+                }
+
+                timeWarpPositionEffect.transform.position = timeWarpPosition;
+
+
                 positions[0] = transform.position;
                 sprites[0] = spriteRenderer.sprite;
                 flipXes[0] = spriteRenderer.flipX;
@@ -144,8 +170,6 @@ public class CharacterTimeWarp : MonoBehaviour
     {
         if (isTimeWarp)
         {
-            canTimeWarp = false;
-
             transform.DOMove(positions[currentMovePositionNum], timeWarpDoTime / moveNum * 2).SetEase(Ease.InQuad);
             spriteRenderer.sprite = sprites[currentMovePositionNum];
             spriteRenderer.flipX = flipXes[currentMovePositionNum];
@@ -154,12 +178,8 @@ public class CharacterTimeWarp : MonoBehaviour
 
             rigid.velocity = new Vector2(rigid.velocity.x, 0f);
 
-            if (distance <= 0.5f && currentMovePositionNum >= (int)moveBackTime - 1)
+            if (distance <= 0.5f && currentMovePositionNum >= iTotalTime)
             {
-                positions = new Vector2[moveNum];
-                sprites = new Sprite[moveNum];
-                flipXes = new bool[moveNum];
-
                 currentMovePositionNum = 0;
                 totalMoveByTimeWarp = 0;
 
@@ -167,7 +187,7 @@ public class CharacterTimeWarp : MonoBehaviour
 
                 Invoke("CanTimeWarpSet", timeWarpDelay);
             }
-            else if (distance <= 0.5f && currentMovePositionNum < (int)moveBackTime - 1)
+            else if (distance <= 0.5f && currentMovePositionNum < iTotalTime)
             {
                 currentMovePositionNum++;
                 totalMoveByTimeWarp++;
@@ -177,6 +197,7 @@ public class CharacterTimeWarp : MonoBehaviour
     private void CanTimeWarpSet()
     {
         canTimeWarp = true;
+        moveBackTime = 0f;
     }
     private void SpawnAfterImage()
     {

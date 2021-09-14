@@ -60,16 +60,19 @@ public class EnemyMove : EnemyStatus
     private float firstGravity = 0f;
     private float firstMass = 0f;
 
-    void Start()
+    private void Awake()
     {
         gameManager = GameManager.Instance;
-        stageManager = FindObjectOfType<StageManager>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
 
         enemyStat = GetComponent<EnemyStat>();
+    }
+    void Start()
+    {
+        stageManager = FindObjectOfType<StageManager>();
 
         currentPosition = transform.position;
         SearchPositionSet();
@@ -225,8 +228,7 @@ public class EnemyMove : EnemyStatus
             transform.position = currentPosition;
         }
     }
-
-    public void SpawnSet()
+    private void OnEnable()
     {
         spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
         enemyStat.hp = enemyStat.firstHp;
@@ -335,19 +337,6 @@ public class EnemyMove : EnemyStatus
             Invoke("isHurtSet", 1f);
         }
     }
-    // private IEnumerator hurt()
-    // {
-    //     Color color = new Color(1f, 0f, 1f, 0.5f);
-    //     Color color_origin = new Color(1f, 1f, 1f, 1f);
-
-    //     spriteRenderer.color = color;
-
-    //     // HitSound 재생
-
-    //     yield return new WaitForSeconds(0.5f);
-
-    //     spriteRenderer.color = color_origin;
-    // }
     private void isHurtSet()
     {
         isHurt = false;
@@ -361,7 +350,7 @@ public class EnemyMove : EnemyStatus
             {
                 anim.Play("Move");
 
-                if(gameManager.SlowTimeSomeObjects)
+                if (gameManager.SlowTimeSomeObjects)
                 {
                     currentPosition = Vector2.MoveTowards(currentPosition, searchTargetPosition, enemyStat.searchSpeed / gameManager.SlowTimeNum * Time.fixedDeltaTime);
                 }

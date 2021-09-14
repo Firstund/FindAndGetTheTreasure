@@ -18,18 +18,13 @@ public class TalkManager : MonoBehaviour
     private void Awake()
     {
         gameManager = GameManager.Instance;
-
-        
     }
     void Start()
     {
         dontDestroyOnLoadManager = DontDestroyOnLoadManager.Instance;
 
-
         dontDestroyOnLoadManager.DoNotDestroyOnLoad(gameObject);
-    }
-    private void OnEnable() 
-    {
+
         gameManager.SpawnStages += x => SpawnTextBoxes(x - 1);
         gameManager.GameEnd += a => DeSpawnTextBoxes();
     }

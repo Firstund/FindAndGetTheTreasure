@@ -237,7 +237,7 @@ public class GameManager : MonoBehaviour
             currentSlowTimeNum = 0;
         }
     }
-    public void SpawnStage(int stage)
+    public void SpawnStage(int stage) // 버튼에 사용
     {
         SpawnStages(stage);
     }

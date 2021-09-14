@@ -10,6 +10,7 @@ public class Projectile_Base : MonoBehaviour
 
     [SerializeField]
     protected float speed = 1f;
+    protected float originSpeed = 0f;
     [SerializeField]
     protected float damage = 1f;
     [SerializeField]
@@ -25,6 +26,8 @@ public class Projectile_Base : MonoBehaviour
         gameManager = GameManager.Instance;
         stageManager = FindObjectOfType<StageManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        originSpeed = speed;
     }
     // 벽에 부딪히면 사라지는 코드
 }
