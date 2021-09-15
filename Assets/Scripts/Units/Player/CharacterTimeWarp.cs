@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class CharacterTimeWarp : MonoBehaviour
@@ -14,6 +15,8 @@ public class CharacterTimeWarp : MonoBehaviour
 
     [SerializeField]
     private GameObject timeWarpPositionEffect = null;
+    [SerializeField]
+    private Image canGoBackTime = null;
 
     [SerializeField]
     private Vector2[] positions;
@@ -28,6 +31,7 @@ public class CharacterTimeWarp : MonoBehaviour
     private float totalTime = 0f;
     private float timeWarpTimer = 0f;
 
+    [Header("CanUseTimeWarpTime * 초당 저장하는 위치의 수")]
     [SerializeField]
     private int moveNum = 12;
     [Header("타임워프를 대쉬어택 후 몇초안에 사용해야 하는가")]
@@ -59,6 +63,11 @@ public class CharacterTimeWarp : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
 
+        OriginSet();
+    }
+
+    private void OriginSet()
+    {
         positions = new Vector2[moveNum];
         sprites = new Sprite[moveNum];
         flipXes = new bool[moveNum];
@@ -68,12 +77,20 @@ public class CharacterTimeWarp : MonoBehaviour
             positions[i] = transform.position;
             sprites[i] = spriteRenderer.sprite;
         }
+
+
+        timeWarpPositionEffect.transform.position = positions[0];
+
+        totalTime = 0f;
     }
+
     void Update()
     {
         // timeWarp 후 굳는 현상 발생
         if (characterMove.DashAttacking && canTimeWaprPositionSet)
         {
+            OriginSet();
+
             timeWarpTimer = canUseTimeWarpTime;
 
             canTimeWaprPositionSet = false;
@@ -84,23 +101,24 @@ public class CharacterTimeWarp : MonoBehaviour
             flipXes[0] = spriteRenderer.flipX;
         }
 
-        if (playerInput.timeWarp && canTimeWarp)
+        if (playerInput.timeWarp && canTimeWarp && !canTimeWaprPositionSet)
         {
             canTimeWarp = false;
             _isTimeWarp = true;
         }
 
         timeWarpPositionEffect.SetActive(canTimeWarp);
+        canGoBackTime.gameObject.SetActive(canTimeWarp);
     }
 
     void FixedUpdate()
     {
         if (timeWarpTimer > 0f)
         {
-            timeWarpTimer -= Time.fixedDeltaTime;
-
             if (!isTimeWarp)
             {
+                timeWarpTimer -= Time.fixedDeltaTime;
+
                 moveBackTime += Time.fixedDeltaTime * (moveNum / canUseTimeWarpTime);
             }
 
@@ -140,24 +158,14 @@ public class CharacterTimeWarp : MonoBehaviour
                     }
                 }
 
-                if (iTotalTime > 0)
-                {
-                    timeWarpPosition = positions[iTotalTime];
-                }
-                else
-                {
-                    timeWarpPosition = positions[0];
-                }
-
-                timeWarpPositionEffect.transform.position = timeWarpPosition;
-
-
                 positions[0] = transform.position;
                 sprites[0] = spriteRenderer.sprite;
                 flipXes[0] = spriteRenderer.flipX;
             }
 
             pasteI_TotalTime = iTotalTime;
+
+            canGoBackTime.fillAmount = 1 - totalTime / moveNum;
         }
     }
     public void TimeWarp()
@@ -172,7 +180,7 @@ public class CharacterTimeWarp : MonoBehaviour
 
             rigid.velocity = new Vector2(rigid.velocity.x, 0f);
 
-            if (distance <= 0.5f && currentMovePositionNum >= iTotalTime)
+            if (distance <= 0.5f && currentMovePositionNum > iTotalTime - 1)
             {
                 currentMovePositionNum = 0;
                 totalMoveByTimeWarp = 0;
@@ -181,7 +189,7 @@ public class CharacterTimeWarp : MonoBehaviour
 
                 Invoke("CanTimeWarpSet", timeWarpDelay);
             }
-            else if (distance <= 0.5f && currentMovePositionNum < iTotalTime)
+            else if (distance <= 0.5f && currentMovePositionNum <= iTotalTime - 1)
             {
                 currentMovePositionNum++;
                 totalMoveByTimeWarp++;
