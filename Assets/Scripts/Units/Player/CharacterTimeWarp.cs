@@ -33,10 +33,10 @@ public class CharacterTimeWarp : MonoBehaviour
     [Header("타임워프를 대쉬어택 후 몇초안에 사용해야 하는가")]
     [SerializeField]
     private int canUseTimeWarpTime = 3;
-    private float moveBackTime = 0f;
+    private float moveBackTime = 0f;//
     private int pasteI_TotalTime = 0;
-    private int currentMovePositionNum = 0;
-    private int totalMoveByTimeWarp = 0;
+    private int currentMovePositionNum = 0;//
+    private int totalMoveByTimeWarp = 0;//
     private int iTotalTime = 0;
 
     private bool _isTimeWarp = false;
@@ -44,7 +44,7 @@ public class CharacterTimeWarp : MonoBehaviour
     {
         get { return _isTimeWarp; }
     }
-    private bool canTimeWarp = true;
+    private bool canTimeWarp = false;
     private bool canTimeWaprPositionSet = true;
     private bool canSpawnAfterImage = true;
 
@@ -72,11 +72,12 @@ public class CharacterTimeWarp : MonoBehaviour
     void Update()
     {
         // timeWarp 후 굳는 현상 발생
-        if (characterMove.DashAttacking && canTimeWaprPositionSet && canTimeWarp)
+        if (characterMove.DashAttacking && canTimeWaprPositionSet)
         {
             timeWarpTimer = canUseTimeWarpTime;
 
             canTimeWaprPositionSet = false;
+            canTimeWarp = true;
 
             positions[0] = transform.position;
             sprites[0] = spriteRenderer.sprite;
@@ -89,14 +90,7 @@ public class CharacterTimeWarp : MonoBehaviour
             _isTimeWarp = true;
         }
 
-        if(!canTimeWarp)
-        {
-            timeWarpPositionEffect.SetActive(false);
-        }
-        else
-        {
-            timeWarpPositionEffect.SetActive(true);
-        }
+        timeWarpPositionEffect.SetActive(canTimeWarp);
     }
 
     void FixedUpdate()
@@ -196,7 +190,6 @@ public class CharacterTimeWarp : MonoBehaviour
     }
     private void CanTimeWarpSet()
     {
-        canTimeWarp = true;
         moveBackTime = 0f;
     }
     private void SpawnAfterImage()

@@ -545,6 +545,7 @@ public class CharacterMove : MonoBehaviour
     {
         canDash = true;
         canDashAttack = true;
+        dashAttacking = false;
     }
     private void SpawnAfterImageByDash()
     {
