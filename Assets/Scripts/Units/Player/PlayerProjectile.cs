@@ -62,7 +62,8 @@ public class PlayerProjectile : Projectile_Base, IProjectile
                         soundBoxSpawned = true;
                     }
 
-                    Enemys.Remove(item); //////////////////////////////////
+                    Enemys.Remove(item);
+                    break;
 
                     // isDestroy = true;
                     // stageManager.DespawnProjectile(gameObject);
