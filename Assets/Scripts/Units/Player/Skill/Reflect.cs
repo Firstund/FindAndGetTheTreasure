@@ -122,7 +122,7 @@ public class Reflect : MonoBehaviour
             Shoot();
         }
     }
-    public void Shoot()
+    public void Shoot() // 공격을 통해 파괴한 투사체가 많을수록 강한 데미지
     {
         if (isAttack)
         {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile_Base : MonoBehaviour
+public abstract class Projectile_Base : MonoBehaviour
 {
     protected GameManager gameManager = null;
     protected StageManager stageManager = null;

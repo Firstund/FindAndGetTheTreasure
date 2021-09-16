@@ -7,11 +7,25 @@ public class PlayerProjectile : Projectile_Base, IProjectile
     [SerializeField]
     private GameObject attackSoundBox = null;
     private bool soundBoxSpawned = false;
+    private List<GameObject> Enemys = new List<GameObject>();
     void Update()
     {
         Move();
         Despawn();
         GetDamage();
+    }
+    private void OnEnable()
+    {
+        if (stageManager == null)
+        {
+            stageManager = FindObjectOfType<StageManager>();
+        }
+
+        Enemys.Clear();
+        foreach (var item in stageManager.Enemys)
+        {
+            Enemys.Add(item);
+        }
     }
     public void SpawnSet(float shootR, float dm, Vector2 angle)
     {
@@ -29,7 +43,7 @@ public class PlayerProjectile : Projectile_Base, IProjectile
     {
         float distance = 0f;
 
-        foreach (var item in stageManager.Enemys)
+        foreach (var item in Enemys)
         {
             if (item.activeSelf)
             {
@@ -47,6 +61,8 @@ public class PlayerProjectile : Projectile_Base, IProjectile
 
                         soundBoxSpawned = true;
                     }
+
+                    Enemys.Remove(item); //////////////////////////////////
 
                     // isDestroy = true;
                     // stageManager.DespawnProjectile(gameObject);
