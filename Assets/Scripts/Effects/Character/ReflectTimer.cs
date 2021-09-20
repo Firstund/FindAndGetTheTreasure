@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ReflectTimer : MonoBehaviour
 {
+    private GameManager gameManager  = null;
+    private Reflect reflect = null;
     [SerializeField]
     private Image fillImage = null;
     [SerializeField]
@@ -13,6 +15,10 @@ public class ReflectTimer : MonoBehaviour
 
     void Start()
     {
+        gameManager = GameManager.Instance;
+
+        reflect = FindObjectOfType<Reflect>();
+
         timer = time;
     }
 
@@ -26,6 +32,10 @@ public class ReflectTimer : MonoBehaviour
         }
         else
         {
+            reflect.canShoot = false;
+            reflect.canSettingAngle = false;
+            gameManager.SlowTimeSomeObjects = false;
+
             gameObject.SetActive(false);
         }
     }

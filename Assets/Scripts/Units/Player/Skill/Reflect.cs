@@ -134,7 +134,6 @@ public class Reflect : MonoBehaviour
         if (isAttack)
         {
             Instantiate(projectile, shootTrm.position, Quaternion.Euler(0f, 0f, shootAnlgePlus)).GetComponent<PlayerProjectile>().SpawnSet(projectileShootRange, projectileDamage, Vector2.right);
-            Debug.Log(projectileDamage);
             
             SpawnDespawnEffects(false);
 
@@ -171,7 +170,7 @@ public class Reflect : MonoBehaviour
         arrowAtEnd.transform.rotation = Quaternion.Euler(0f, 0f, shootAnlgePlus);
     }
 
-    private void SpawnDespawnEffects(bool spawn)
+    public void SpawnDespawnEffects(bool spawn)
     {
         refelctTimer.SetActive(spawn);
         timeSlowEffectObj.SetActive(spawn);
