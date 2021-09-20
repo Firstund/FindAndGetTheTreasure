@@ -629,6 +629,7 @@ public class CharacterMove : MonoBehaviour
     {
         bool projectileDespawned = false;
         float distance;
+        float damage = 0f;
 
         for (int i = 0; i < stageManager.ProjectilesTrm.childCount; i++)
         {
@@ -641,6 +642,7 @@ public class CharacterMove : MonoBehaviour
                 if (distance <= characterStat.attackRange)
                 {
                     stageManager.DespawnProjectile(item);
+                    damage += 2;
                     projectileDespawned = true;
                 }
             }
@@ -650,6 +652,7 @@ public class CharacterMove : MonoBehaviour
         {
             reflect.canSettingAngle = true;
             reflect.canShoot = true;
+            reflect.ProjectileDamage = damage;
         }
     }
     private void GetDashAttackDamage() // 판정관련 오류 있음

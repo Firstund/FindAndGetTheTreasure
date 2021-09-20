@@ -131,6 +131,7 @@ public class CharacterTimeWarp : MonoBehaviour
         else
         {
             canTimeWaprPositionSet = true;
+            canTimeWarp = false;
             moveBackTime = 0f;
         }
     }

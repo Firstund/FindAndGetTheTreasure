@@ -39,7 +39,14 @@ public class Reflect : MonoBehaviour
     [SerializeField]
     private Transform shootTrm = null;
     private Vector2 shootAngle = Vector2.zero;
+
     private float shootAnlgePlus = 0f;
+    private float projectileDamage = 0f;
+    public float ProjectileDamage
+    {
+        get { return projectileDamage; }
+        set { projectileDamage = value; }
+    }
 
     private void Awake()
     {
@@ -87,7 +94,7 @@ public class Reflect : MonoBehaviour
         canShoot = false;
         canSettingAngle = false;
         timeSlowSoundEffectBoxSpawned = false;
-        
+
         shootAnlgePlus = 0f;
 
         stageManager.DesapwnSoundBox(currentEffectSoundBox);
@@ -126,8 +133,9 @@ public class Reflect : MonoBehaviour
     {
         if (isAttack)
         {
-            Instantiate(projectile, shootTrm.position, Quaternion.Euler(0f, 0f, shootAnlgePlus)).GetComponent<PlayerProjectile>().SpawnSet(projectileShootRange, 1, Vector2.right);
-
+            Instantiate(projectile, shootTrm.position, Quaternion.Euler(0f, 0f, shootAnlgePlus)).GetComponent<PlayerProjectile>().SpawnSet(projectileShootRange, projectileDamage, Vector2.right);
+            Debug.Log(projectileDamage);
+            
             SpawnDespawnEffects(false);
 
             shootTrm.rotation = Quaternion.identity;
@@ -136,7 +144,7 @@ public class Reflect : MonoBehaviour
     }
     public void SettingAngle()
     {
-        if(!timeSlowSoundEffectBoxSpawned)
+        if (!timeSlowSoundEffectBoxSpawned)
         {
             currentEffectSoundBox = stageManager.SpawnSoundBox(timeSlowEffectSoundBox);
 
