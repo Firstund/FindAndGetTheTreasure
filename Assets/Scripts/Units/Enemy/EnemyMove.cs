@@ -113,6 +113,10 @@ public class EnemyMove : EnemyStatus
             spriteRenderer.color = color_origin;
         }
 
+        if(isDead)
+        {
+            Dead();
+        }
     }
 
     private void CheckDead()
@@ -124,8 +128,6 @@ public class EnemyMove : EnemyStatus
             isPursue = false;
             isSearching = false;
             isDead = true;
-
-            Dead();
         }
     }
 
