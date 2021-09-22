@@ -10,8 +10,9 @@ public class StageManager : MonoBehaviour
     private List<GameObject> enemys = new List<GameObject>();
     public List<GameObject> Enemys
     {
-        get{return enemys;}
+        get { return enemys; }
     }
+
     [SerializeField]
     private Transform _enemys = null;
 
@@ -26,7 +27,8 @@ public class StageManager : MonoBehaviour
     {
         get { return projectilesTrm; }
     }
-
+    [SerializeField]
+    private float respawnDelay = 2f;
     private float shakeTimer = 0f; // 시네머신을 이용하여 카메라를 흔들 때 사용되는 변수
 
     private float originOrthographicSize = 0f;
@@ -75,10 +77,10 @@ public class StageManager : MonoBehaviour
     void Update()
     {
         shakeTimer = TimerCheck(shakeTimer);
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            SpawnSoundBox(TestSoundBox);
-        }
+        // if (Input.GetKeyDown(KeyCode.A))
+        // {
+        //     SpawnSoundBox(TestSoundBox);
+        // }
     }
     public void ShootProjectile(GameObject shootIt, EnemyStat enemyStat, bool flipX, Vector2 spawnPosition, float shootRange)
     {
@@ -249,5 +251,17 @@ public class StageManager : MonoBehaviour
 
         cinemachineVirtualCamera.m_Lens.OrthographicSize = originOrthographicSize;
     }
-
+    public void SetPlayerRespawnPosition(Vector2 respawnPos)
+    {
+        transform.position = respawnPos;
+    }
+    public void Respawn()
+    {
+        Invoke("PlayerRespawn", respawnDelay);
+    }
+    public void PlayerRespawn()
+    {
+        gameManager.player.gameObject.SetActive(true);
+        gameManager.player.transform.position = transform.position;
+    }
 }

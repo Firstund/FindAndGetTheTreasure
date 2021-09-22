@@ -143,6 +143,8 @@ public class CharacterMove : MonoBehaviour
         gameManager = GameManager.Instance;
         stageManager = FindObjectOfType<StageManager>();
 
+        stageManager.SetPlayerRespawnPosition(transform.position);
+
         if (playerInput == null)
         {
             playerInput = gameObject.AddComponent<PlayerInput>();
@@ -179,6 +181,15 @@ public class CharacterMove : MonoBehaviour
             DespawnProjectileByAttack();
         }
     }
+    private void OnEnable()
+    {
+        isDead = false;
+        attacking = false;
+
+        characterStat.hp = characterStat.firstHp;
+        spriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
+    }
+
 
     private void CheckDead()
     {
@@ -462,6 +473,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void Destroye()
     {
+        stageManager.Respawn();
         gameObject.SetActive(false);
     }
     private void Dash(float XMove)

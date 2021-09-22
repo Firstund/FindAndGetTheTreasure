@@ -26,7 +26,14 @@ public class CharacterStat : MonoBehaviour
     private float _firstHp = 0f;
     public float firstHp
     {
-        get { return _firstHp; }
+        get
+        {
+            if (_firstHp == 0f)
+            {
+                _firstHp = hp;
+            }
+            return _firstHp;
+        }
     }
 
     [SerializeField]
