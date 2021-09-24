@@ -47,7 +47,7 @@ public class Texts : Text_Base
             doFirstText = false;
         }
 
-        if(Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             OnClickNext();
         }
@@ -60,13 +60,27 @@ public class Texts : Text_Base
         text.text = "";
 
         text.DOText(texts[currentTextNum].contents, 0.5f);
+
+        foreach (GameObject obj in texts[currentTextNum].eventObjects)
+        {
+            obj.SetActive(true);
+        }
+
+        if(texts[currentTextNum].cameraFollowPos != null)
+        {
+            gameManager.cinemachineVirtualCamera.Follow = texts[currentTextNum].cameraFollowPos;
+        }
+        else
+        {
+            gameManager.cinemachineVirtualCamera.Follow = gameManager.player.transform;
+        }
     }
 
     private void SetSpriteRenderers()
     {
         LSpriteRenderer.sprite = texts[currentTextNum].LSprite;
         RSpriteRenderer.sprite = texts[currentTextNum].RSprite;
-        
+
 
         // 왼쪽 혹은 오른쪽에 위치하는 sprite가 null일경우 alpha를 0f로 줄여줌
         if (LSpriteRenderer.sprite == null)
@@ -106,26 +120,32 @@ public class Texts : Text_Base
 
     public void OnClickNext()
     {
-        currentTextNum++;
-
-        if (currentTextNum < texts.Count)
+        if (texts[currentTextNum].canNextTalk)
         {
-            currentTextNum = Mathf.Clamp(currentTextNum, 0, texts.Count - 1);
-
-            SetText();
-        }
-        else
-        {
-            currentTextNum = 0;
-            doFirstText = true;
-            talkManager.currentTextBoxesParent.DeSpawnTextBox();
-
-            if(endGameAtEndTalk)
+            foreach (GameObject obj in texts[currentTextNum].eventObjects)
             {
-                gameManager.GameEnd(gameClearAtEndGame);
+                obj.SetActive(false);
+            }
+
+            currentTextNum++;
+
+            if (currentTextNum < texts.Count)
+            {
+                currentTextNum = Mathf.Clamp(currentTextNum, 0, texts.Count - 1);
+
+                SetText();
+            }
+            else
+            {
+                currentTextNum = 0;
+                doFirstText = true;
+                talkManager.currentTextBoxesParent.DeSpawnTextBox();
+
+                if (endGameAtEndTalk)
+                {
+                    gameManager.GameEnd(gameClearAtEndGame);
+                }
             }
         }
     }
-
-
 }
