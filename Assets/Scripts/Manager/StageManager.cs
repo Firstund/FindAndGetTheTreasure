@@ -28,6 +28,21 @@ public class StageManager : MonoBehaviour
         get { return projectilesTrm; }
     }
     [SerializeField]
+    private Transform playerRespanwTrm = null;
+    private Transform PlayerRespawnTrm
+    {
+        get
+        {
+            if (playerRespanwTrm == null)
+            {
+                playerRespanwTrm = GameObject.Find("PlayerRespawnTrm").transform;
+            }
+
+            return playerRespanwTrm;
+        }
+    }
+
+    [SerializeField]
     private float respawnDelay = 2f;
     private float shakeTimer = 0f; // 시네머신을 이용하여 카메라를 흔들 때 사용되는 변수
 
@@ -72,6 +87,10 @@ public class StageManager : MonoBehaviour
 
         originOrthographicSize = cinemachineVirtualCamera.m_Lens.OrthographicSize;
 
+        // if(playerRespanwTrm == null)
+        // {
+        //     playerRespanwTrm = GameObject.Find("PlayerRespawnTrm").transform;
+        // }
     }
 
     void Update()
@@ -253,7 +272,7 @@ public class StageManager : MonoBehaviour
     }
     public void SetPlayerRespawnPosition(Vector2 respawnPos)
     {
-        transform.position = respawnPos;
+        PlayerRespawnTrm.position = respawnPos;
     }
     public void Respawn()
     {
@@ -262,6 +281,6 @@ public class StageManager : MonoBehaviour
     public void PlayerRespawn()
     {
         gameManager.player.gameObject.SetActive(true);
-        gameManager.player.transform.position = transform.position;
+        gameManager.player.transform.position = PlayerRespawnTrm.position;
     }
 }
