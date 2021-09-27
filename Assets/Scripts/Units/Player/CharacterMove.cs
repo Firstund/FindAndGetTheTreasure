@@ -87,7 +87,6 @@ public class CharacterMove : MonoBehaviour
     private bool isDash = false;
     private bool isDead = false;
     private bool isAttack = false;
-    private bool isReflect = false;
     private bool isHurt = false;
     private bool _canHurt = true;
     public bool canHurt

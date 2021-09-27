@@ -50,8 +50,6 @@ public class StageManager : MonoBehaviour
 
     [SerializeField]
     private CinemachineVirtualCamera cinemachineVirtualCamera = null;
-    [SerializeField]
-    private GameObject TestSoundBox = null;
 
     private Func<float, float> TimerCheck;
 
@@ -86,20 +84,11 @@ public class StageManager : MonoBehaviour
         cinemachineVirtualCamera.m_Follow = gameManager.player.transform;
 
         originOrthographicSize = cinemachineVirtualCamera.m_Lens.OrthographicSize;
-
-        // if(playerRespanwTrm == null)
-        // {
-        //     playerRespanwTrm = GameObject.Find("PlayerRespawnTrm").transform;
-        // }
     }
 
     void Update()
     {
         shakeTimer = TimerCheck(shakeTimer);
-        // if (Input.GetKeyDown(KeyCode.A))
-        // {
-        //     SpawnSoundBox(TestSoundBox);
-        // }
     }
     public void ShootProjectile(GameObject shootIt, EnemyStat enemyStat, bool flipX, Vector2 spawnPosition, float shootRange)
     {

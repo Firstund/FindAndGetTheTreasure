@@ -11,6 +11,17 @@ public class Texts : Text_Base
     private GameManager gameManager = null;
     private TalkManager talkManager = null;
 
+    [Serializable]
+    private struct SEventObjSpawnData
+    {
+        public GameObject eventObject;
+        public Vector2 eventObjSpawnPos;
+    }
+
+    [Header("해당 대화 이벤트에서 사용할 EventObject들")]
+    [SerializeField]
+    private List<SEventObjSpawnData> eventObjSpawnData = new List<SEventObjSpawnData>();
+
     [SerializeField]
     private List<SText> texts = new List<SText>();
     [SerializeField]
@@ -22,6 +33,9 @@ public class Texts : Text_Base
     private Image RSpriteRenderer = null;
 
     [SerializeField]
+    private GameObject nextButton = null;
+
+    [SerializeField]
     private int currentTextNum = 0;
 
     [Header("이 값이 true면 대화가 끝났을 때 게임종료처리")]
@@ -31,13 +45,20 @@ public class Texts : Text_Base
     [SerializeField]
     private bool gameClearAtEndGame = false;
     private bool doFirstText = true;
+    public bool canNextTalk = true;
 
     void Start()
     {
         gameManager = GameManager.Instance;
         talkManager = FindObjectOfType<TalkManager>();
 
-        SetText();
+        foreach (SEventObjSpawnData objData in eventObjSpawnData)
+        {
+            objData.eventObject.SetActive(true);
+            objData.eventObject.transform.position = objData.eventObjSpawnPos;
+
+            talkManager.CurrentEvents.Enqueue(objData.eventObject.GetComponent<TextEventObject>());
+        }
     }
     public void Update()
     {
@@ -51,22 +72,28 @@ public class Texts : Text_Base
         {
             OnClickNext();
         }
+
+        nextButton.SetActive(canNextTalk);
     }
 
     public void SetText() // gameManager의 SetSlowTime이 실행된 상태면 텍스트 설정이 느리게 되는 버그
     {
+        TextEventObject[] currentEvents = talkManager.CurrentEvents.ToArray();
+
+        for (int i = 0; i < currentEvents.Length; i++)
+        {
+            currentEvents[i].CanDoEvent = true;
+        }
+
+        canNextTalk = texts[currentTextNum].canNextTalk;
+
         SetSpriteRenderers();
 
         text.text = "";
 
         text.DOText(texts[currentTextNum].contents, 0.5f);
 
-        foreach (GameObject obj in texts[currentTextNum].eventObjects)
-        {
-            obj.SetActive(true);
-        }
-
-        if(texts[currentTextNum].cameraFollowPos != null)
+        if (texts[currentTextNum].cameraFollowPos != null)
         {
             gameManager.cinemachineVirtualCamera.Follow = texts[currentTextNum].cameraFollowPos;
         }
@@ -120,25 +147,30 @@ public class Texts : Text_Base
 
     public void OnClickNext()
     {
-        if (texts[currentTextNum].canNextTalk)
+        if (canNextTalk)
         {
-            foreach (GameObject obj in texts[currentTextNum].eventObjects)
-            {
-                obj.SetActive(false);
-            }
-
             currentTextNum++;
 
             if (currentTextNum < texts.Count)
             {
                 currentTextNum = Mathf.Clamp(currentTextNum, 0, texts.Count - 1);
+                canNextTalk = texts[currentTextNum].canNextTalk;
 
                 SetText();
             }
             else
             {
+                gameManager.cinemachineVirtualCamera.Follow = gameManager.player.transform;
+                
                 currentTextNum = 0;
                 doFirstText = true;
+                
+                while(talkManager.CurrentEvents.Count > 0)
+                {
+                    talkManager.CurrentEvents.Dequeue().gameObject.SetActive(false);
+                }
+                
+
                 talkManager.currentTextBoxesParent.DeSpawnTextBox();
 
                 if (endGameAtEndTalk)

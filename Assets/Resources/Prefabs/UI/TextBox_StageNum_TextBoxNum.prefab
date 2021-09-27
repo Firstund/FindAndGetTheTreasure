@@ -275,9 +275,11 @@ MonoBehaviour:
   text: {fileID: 98518312303491304}
   LSpriteRenderer: {fileID: 98518312733871346}
   RSpriteRenderer: {fileID: 98518312625873330}
+  nextButton: {fileID: 98518312110453820}
   currentTextNum: 0
   endGameAtEndTalk: 0
   gameClearAtEndGame: 0
+  canNextTalk: 1
 --- !u!1 &98518312411333622
 GameObject:
   m_ObjectHideFlags: 0

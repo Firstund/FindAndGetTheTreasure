@@ -2,20 +2,78 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TextEventObject : MonoBehaviour
+public class TextEventObject : TextEventObject_Base
 {
     private Texts textsScript = null;
 
     [SerializeField]
-    private float moveSpeed = 3f;
-    [SerializeField]
-    private Transform moveTargetPos = null;
-    [SerializeField]
-    private bool setCanNextAtThisEventEnd = false;
+    private List<SEventObjData> eventDatas = new List<SEventObjData>();
+    private Animator anim = null;
+    private int eventNum = -1;
+    private Vector2 originPos = Vector2.zero;
+
+    private bool canDoEvent = false;
+    public bool CanDoEvent
+    {
+        get
+        {
+            return canDoEvent;
+        }
+        set
+        {
+            if (value)
+            {
+                eventNum++;
+                originPos = transform.position;
+            }
+
+            canDoEvent = value;
+        }
+    }
 
     private void Start()
     {
-        textsScript = transform.parent.transform.parent.transform.parent.GetComponentInChildren<Texts>();
+        anim = GetComponent<Animator>();
+
+        originPos = transform.position;
     }
-    // 오브젝트가 이동하는 코드
+    private void OnEnable()
+    {
+        textsScript = FindObjectOfType<Texts>(true);
+    }
+    private void Update()
+    {
+        if (canDoEvent)
+        {
+            DoEvent();
+        }
+    }
+
+    private void DoEvent()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, originPos + eventDatas[eventNum].moveTargetPos, eventDatas[eventNum].moveSpeed * Time.deltaTime);
+
+        if (eventDatas[eventNum].animName != "")
+        {
+            anim.Play(eventDatas[eventNum].animName);
+        }
+        else
+        {
+            anim.SetTrigger("GoToFirst");
+        }
+
+        float distance = Vector2.Distance(transform.position, originPos + eventDatas[eventNum].moveTargetPos);
+
+        if (distance <= 0.1f && eventDatas[eventNum].setCanNextTalkByMoves)
+        {
+            OnEventEnd();
+        }
+    }
+
+    private void OnEventEnd()
+    {
+        canDoEvent = false;
+        anim.SetTrigger("GoToFirst");
+        textsScript.canNextTalk = eventDatas[eventNum].setCanNextAtThisEventEnds;
+    }
 }

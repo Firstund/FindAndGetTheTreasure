@@ -8,7 +8,6 @@ public abstract class Text_Base : MonoBehaviour
     [Serializable]
     protected struct SText
     {
-        public GameObject[] eventObjects;
         public Sprite LSprite;
         public Sprite RSprite;
         public Transform cameraFollowPos; // 해당 대화를 진행할 때 카메라가 보고있을 장소, 딱히 변하지 않으면 그냥 비워둔다.

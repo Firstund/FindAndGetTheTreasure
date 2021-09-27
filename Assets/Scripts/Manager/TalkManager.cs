@@ -10,6 +10,22 @@ public class TalkManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> textBoxesParent;
 
+    [SerializeField]
+    private Queue<TextEventObject> currentEvents = new Queue<TextEventObject>();
+    public Queue<TextEventObject> CurrentEvents
+    {
+        get { return currentEvents; }
+    }
+    [SerializeField]
+    private TextEventObject[] test;
+
+    [SerializeField]
+    private Transform eventObjectTrm = null;
+    public Transform EventObjectTrm
+    {
+        get { return eventObjectTrm; }
+    }
+
     private TextBoxesParent _currentTextBoxesParent;
     public TextBoxesParent currentTextBoxesParent
     {
@@ -28,7 +44,10 @@ public class TalkManager : MonoBehaviour
         gameManager.SpawnStages += x => SpawnTextBoxes(x - 1);
         gameManager.GameEnd += a => DeSpawnTextBoxes();
     }
-    private void OnDisable() 
+    private void Update() {
+        test = currentEvents.ToArray();
+    }
+    private void OnDisable()
     {
         gameManager.SpawnStages -= x => SpawnTextBoxes(x - 1);
         gameManager.GameEnd -= a => DeSpawnTextBoxes();
