@@ -15,10 +15,10 @@ public class GameManager : MonoBehaviour
             if (instance == null)
             {
                 instance = FindObjectOfType<GameManager>();
-                if (instance == null)
+                
+                if(instance == null)
                 {
-                    GameObject temp = new GameObject("GameManager");
-                    instance = temp.AddComponent<GameManager>();
+                    Debug.LogError("GameManager is disappear!");
                 }
             }
 

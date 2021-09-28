@@ -18,7 +18,7 @@ public class TalkableObject : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
-        talkManager = FindObjectOfType<TalkManager>();
+        talkManager = TalkManager.Instance;
     }
     void Update()
     {
@@ -31,7 +31,10 @@ public class TalkableObject : MonoBehaviour
     {
         if (Input.GetButtonDown("Attack") && distance <= talkableDistance)
         {
-            talkManager.currentTextBoxesParent.SpawnTextBox(spawnTextBoxIndex);
+            talkManager.currentTextBoxesParent.SpawnTextBox(spawnTextBoxIndex); // 이 오브젝트도 대화창 이벤트시 SetActive(false)로 한다.
+            talkManager.CurrentTalkableObject = this;
+            
+            gameObject.SetActive(false);
         }
     }
 }

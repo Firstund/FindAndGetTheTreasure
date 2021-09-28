@@ -5,6 +5,24 @@ using UnityEngine;
 
 public class TalkManager : MonoBehaviour
 {
+    private static TalkManager instance = null;
+    public static TalkManager Instance
+    {
+        get{
+            if(instance == null)
+            {
+                instance = FindObjectOfType<TalkManager>();
+
+                if(instance == null)
+                {
+                    Debug.LogError("TalkManager is disappear!");
+                }
+            }
+
+            return instance;
+        }
+    }
+
     private GameManager gameManager = null;
     private DontDestroyOnLoadManager dontDestroyOnLoadManager = null;
     [SerializeField]
@@ -31,6 +49,13 @@ public class TalkManager : MonoBehaviour
     {
         get { return _currentTextBoxesParent; }
     }
+    private TalkableObject currentTalkableObject = null;
+    public TalkableObject CurrentTalkableObject
+    {
+        get { return currentTalkableObject; }
+        set { currentTalkableObject = value; }
+    }
+
     private void Awake()
     {
         gameManager = GameManager.Instance;
@@ -44,7 +69,8 @@ public class TalkManager : MonoBehaviour
         gameManager.SpawnStages += x => SpawnTextBoxes(x - 1);
         gameManager.GameEnd += a => DeSpawnTextBoxes();
     }
-    private void Update() {
+    private void Update()
+    {
         test = currentEvents.ToArray();
     }
     private void OnDisable()

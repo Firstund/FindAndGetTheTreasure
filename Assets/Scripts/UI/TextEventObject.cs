@@ -8,7 +8,10 @@ public class TextEventObject : TextEventObject_Base
 
     [SerializeField]
     private List<SEventObjData> eventDatas = new List<SEventObjData>();
+
     private Animator anim = null;
+    private SpriteRenderer spriteRenderer = null;
+
     private int eventNum = -1;
     private Vector2 originPos = Vector2.zero;
 
@@ -34,6 +37,7 @@ public class TextEventObject : TextEventObject_Base
     private void Start()
     {
         anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         originPos = transform.position;
     }
@@ -51,6 +55,8 @@ public class TextEventObject : TextEventObject_Base
 
     private void DoEvent()
     {
+        spriteRenderer.flipX = eventDatas[eventNum].flipX;
+
         transform.position = Vector2.MoveTowards(transform.position, originPos + eventDatas[eventNum].moveTargetPos, eventDatas[eventNum].moveSpeed * Time.deltaTime);
 
         if (eventDatas[eventNum].animName != "")

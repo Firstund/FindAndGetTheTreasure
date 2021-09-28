@@ -18,7 +18,7 @@ public class Texts : Text_Base
         public Vector2 eventObjSpawnPos;
     }
 
-    [Header("해당 대화 이벤트에서 사용할 EventObject들")]
+    [Header("해당 대화 이벤트에서 사용할 EventObject들, 첫번째는 플레이어")]
     [SerializeField]
     private List<SEventObjSpawnData> eventObjSpawnData = new List<SEventObjSpawnData>();
 
@@ -34,6 +34,8 @@ public class Texts : Text_Base
 
     [SerializeField]
     private GameObject nextButton = null;
+    [SerializeField]
+    private GameObject currentTalkableObj = null;
 
     [SerializeField]
     private int currentTextNum = 0;
@@ -47,24 +49,17 @@ public class Texts : Text_Base
     private bool doFirstText = true;
     public bool canNextTalk = true;
 
-    void Start()
+    void Awake()
     {
         gameManager = GameManager.Instance;
-        talkManager = FindObjectOfType<TalkManager>();
-
-        foreach (SEventObjSpawnData objData in eventObjSpawnData)
-        {
-            objData.eventObject.SetActive(true);
-            objData.eventObject.transform.position = objData.eventObjSpawnPos;
-
-            talkManager.CurrentEvents.Enqueue(objData.eventObject.GetComponent<TextEventObject>());
-        }
+        talkManager = TalkManager.Instance;
     }
     public void Update()
     {
         if (doFirstText)
         {
             SetText();
+            gameManager.player.gameObject.SetActive(false);
             doFirstText = false;
         }
 
@@ -74,6 +69,16 @@ public class Texts : Text_Base
         }
 
         nextButton.SetActive(canNextTalk);
+    }
+    private void OnEnable()
+    {
+        foreach (SEventObjSpawnData objData in eventObjSpawnData)
+        {
+            objData.eventObject.SetActive(true);
+            objData.eventObject.transform.position = objData.eventObjSpawnPos;
+
+            talkManager.CurrentEvents.Enqueue(objData.eventObject.GetComponent<TextEventObject>());
+        }
     }
 
     public void SetText() // gameManager의 SetSlowTime이 실행된 상태면 텍스트 설정이 느리게 되는 버그
@@ -160,16 +165,20 @@ public class Texts : Text_Base
             }
             else
             {
+                talkManager.CurrentTalkableObject.gameObject.SetActive(true);
+                talkManager.CurrentTalkableObject = null;
+
+                gameManager.player.gameObject.SetActive(true);
                 gameManager.cinemachineVirtualCamera.Follow = gameManager.player.transform;
-                
+                gameManager.player.transform.position = eventObjSpawnData[0].eventObject.transform.position;
+
                 currentTextNum = 0;
                 doFirstText = true;
-                
-                while(talkManager.CurrentEvents.Count > 0)
+
+                while (talkManager.CurrentEvents.Count > 0)
                 {
                     talkManager.CurrentEvents.Dequeue().gameObject.SetActive(false);
                 }
-                
 
                 talkManager.currentTextBoxesParent.DeSpawnTextBox();
 
