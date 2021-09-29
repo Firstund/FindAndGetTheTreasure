@@ -44,6 +44,8 @@ public class TextEventObject : TextEventObject_Base
     private void OnEnable()
     {
         textsScript = FindObjectOfType<Texts>(true);
+
+        eventNum = -1;
     }
     private void Update()
     {

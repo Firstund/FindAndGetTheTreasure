@@ -3652,7 +3652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: eventObjSpawnData.Array.data[1].eventObjSpawnPos.x
-      value: -2
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 98518312725156332, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: m_Name
@@ -3827,7 +3827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventDatas:
   - moveSpeed: 3
-    moveTargetPos: {x: -3, y: 0}
+    moveTargetPos: {x: -0.5, y: 0}
     animName: TestAnim_TalkEvent
     setCanNextTalkByMoves: 0
     setCanNextAtThisEventEnds: 1
@@ -4011,7 +4011,7 @@ MonoBehaviour:
     setCanNextAtThisEventEnds: 0
     flipX: 1
   - moveSpeed: 1
-    moveTargetPos: {x: 3, y: 0}
+    moveTargetPos: {x: 2, y: 0}
     animName: UmikoWalk
     setCanNextTalkByMoves: 1
     setCanNextAtThisEventEnds: 1

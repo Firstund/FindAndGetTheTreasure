@@ -18,7 +18,7 @@ public class Texts : Text_Base
         public Vector2 eventObjSpawnPos;
     }
 
-    [Header("해당 대화 이벤트에서 사용할 EventObject들, 첫번째는 플레이어")]
+    [Header("해당 대화 이벤트에서 사용할 EventObject들, 첫번째는 플레이어의 EventObject")]
     [SerializeField]
     private List<SEventObjSpawnData> eventObjSpawnData = new List<SEventObjSpawnData>();
 
@@ -59,7 +59,10 @@ public class Texts : Text_Base
         if (doFirstText)
         {
             SetText();
+
+            eventObjSpawnData[0].eventObject.transform.position = new Vector2(eventObjSpawnData[0].eventObject.transform.position.x, gameManager.player.currentPosition.y);
             gameManager.player.gameObject.SetActive(false);
+            
             doFirstText = false;
         }
 
