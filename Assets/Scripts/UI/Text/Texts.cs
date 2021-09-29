@@ -63,7 +63,10 @@ public class Texts : Text_Base
         {
             SetText();
 
-            eventObjSpawnData[0].eventObject.transform.position = new Vector2(eventObjSpawnData[0].eventObject.transform.position.x, gameManager.player.currentPosition.y);
+            if (eventObjSpawnData[0].eventObject != null)
+            {
+                eventObjSpawnData[0].eventObject.transform.position = new Vector2(eventObjSpawnData[0].eventObject.transform.position.x, gameManager.player.currentPosition.y);
+            }
             gameManager.player.gameObject.SetActive(false);
 
             doFirstText = false;
@@ -172,6 +175,7 @@ public class Texts : Text_Base
             else
             {
                 talkManager.CurrentTalkableObject.gameObject.SetActive(true);
+                talkManager.CurrentTalkableObject.StartFadeIn();
                 talkManager.CurrentTalkableObject = null;
 
                 gameManager.player.gameObject.SetActive(true);
@@ -183,7 +187,7 @@ public class Texts : Text_Base
 
                 while (talkManager.CurrentEvents.Count > 0)
                 {
-                    talkManager.CurrentEvents.Dequeue().gameObject.SetActive(false);
+                    talkManager.CurrentEvents.Dequeue().StartFadeOut();
                 }
 
                 talkManager.currentTextBoxesParent.DeSpawnTextBox();

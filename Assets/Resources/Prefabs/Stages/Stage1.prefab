@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   talkableDistance: 0.5
+  fadeInTime: 0.5
   spawnTextBoxIndex: 0
 --- !u!1 &2984528121756639881
 GameObject:
@@ -3487,6 +3488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   talkableDistance: 0.5
+  fadeInTime: 3
   spawnTextBoxIndex: 1
 --- !u!1 &8815678874798217113
 GameObject:

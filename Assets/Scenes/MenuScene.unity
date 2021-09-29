@@ -1560,6 +1560,10 @@ PrefabInstance:
       value: "\uCC3E\uC558\uB2E4. \uCCAB\uBC88\uC9F8 \uBCF4\uBB3C\uC778\uAC00?"
       objectReference: {fileID: 0}
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
+      propertyPath: texts.Array.data[0].canNextTalk
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: texts.Array.data[0].isPlayerSay
       value: 1
       objectReference: {fileID: 0}
@@ -3850,6 +3854,7 @@ MonoBehaviour:
     setCanNextTalkByMoves: 0
     setCanNextAtThisEventEnds: 0
     flipX: 1
+  fadeOutTime: 0.5
 --- !u!95 &2024952597517370415
 Animator:
   serializedVersion: 3
@@ -4028,3 +4033,4 @@ MonoBehaviour:
     setCanNextTalkByMoves: 1
     setCanNextAtThisEventEnds: 1
     flipX: 0
+  fadeOutTime: 0
