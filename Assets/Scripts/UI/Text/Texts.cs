@@ -33,7 +33,8 @@ public class Texts : Text_Base
     private Image RSpriteRenderer = null;
 
     [SerializeField]
-    private GameObject nextButton = null;
+    private GameObject nextButtonObj = null;
+    private Text nextButtonTxt = null;
     [SerializeField]
     private GameObject currentTalkableObj = null;
 
@@ -53,6 +54,8 @@ public class Texts : Text_Base
     {
         gameManager = GameManager.Instance;
         talkManager = TalkManager.Instance;
+
+        nextButtonTxt = nextButtonObj.GetComponentInChildren<Text>();
     }
     public void Update()
     {
@@ -62,7 +65,7 @@ public class Texts : Text_Base
 
             eventObjSpawnData[0].eventObject.transform.position = new Vector2(eventObjSpawnData[0].eventObject.transform.position.x, gameManager.player.currentPosition.y);
             gameManager.player.gameObject.SetActive(false);
-            
+
             doFirstText = false;
         }
 
@@ -71,7 +74,7 @@ public class Texts : Text_Base
             OnClickNext();
         }
 
-        nextButton.SetActive(canNextTalk);
+        nextButtonObj.SetActive(canNextTalk);
     }
     private void OnEnable()
     {
@@ -189,6 +192,15 @@ public class Texts : Text_Base
                 {
                     gameManager.GameEnd(gameClearAtEndGame);
                 }
+            }
+
+            if (currentTextNum < texts.Count - 1)
+            {
+                nextButtonTxt.text = "다음";
+            }
+            else
+            {
+                nextButtonTxt.text = "대화 종료";
             }
         }
     }

@@ -225,9 +225,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2fa6271bb7d65f4dad2f4a6e19f608a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventObjSpawnData: []
   texts:
-  - eventObjects: []
-    LSprite: {fileID: 21300000, guid: 169d48a3f79a7f8499b08b66525c471c, type: 3}
+  - LSprite: {fileID: 21300000, guid: 169d48a3f79a7f8499b08b66525c471c, type: 3}
     RSprite: {fileID: 0}
     cameraFollowPos: {fileID: 0}
     contents: "\uC774 \uD14D\uC2A4\uD2B8\uAC00 \uAE34dddd \uD14D\uC2A4\uD2B8\uC778\uC9C0
@@ -238,8 +238,7 @@ MonoBehaviour:
       \uAC74\uC5D0 \uB300\uD558\uC5EC"
     isPlayerSay: 0
     canNextTalk: 0
-  - eventObjects: []
-    LSprite: {fileID: 21300000, guid: 169d48a3f79a7f8499b08b66525c471c, type: 3}
+  - LSprite: {fileID: 21300000, guid: 169d48a3f79a7f8499b08b66525c471c, type: 3}
     RSprite: {fileID: 0}
     cameraFollowPos: {fileID: 0}
     contents: "\uC774 \uD14D\uC2A4\uD2B8\uB294 \uD14C\uC2A4dddd\uD2B8\uC6A9 \uD50C\uB808\uC774\uC5B4
@@ -249,23 +248,20 @@ MonoBehaviour:
       \uAE38\uC5B4\uC9C4 \uAC74\uC5D0 \uB300\uD558\uC5EC"
     isPlayerSay: 1
     canNextTalk: 0
-  - eventObjects: []
-    LSprite: {fileID: 21300000, guid: 169d48a3f79a7f8499b08b66525c471c, type: 3}
+  - LSprite: {fileID: 21300000, guid: 169d48a3f79a7f8499b08b66525c471c, type: 3}
     RSprite: {fileID: 0}
     cameraFollowPos: {fileID: 0}
     contents: "\uC774\uD14D\uC2A4\uD2B8\uB294 \uC9E7\uC740 \uD14D\uC2A4\uD2B8 \uC544\uBB34\uB9AC
       \uC0DD\uAC01\uD574\uBCF4\uB3E0 \uC9E7"
     isPlayerSay: 0
     canNextTalk: 0
-  - eventObjects: []
-    LSprite: {fileID: 21300000, guid: 169d48a3f79a7f8499b08b66525c471c, type: 3}
+  - LSprite: {fileID: 21300000, guid: 169d48a3f79a7f8499b08b66525c471c, type: 3}
     RSprite: {fileID: 0}
     cameraFollowPos: {fileID: 0}
     contents: "\uC774 \uD14D\uC2A4\uD2B8\uB3C4 \uC0C1\uB2F9\uD788 \uC9E7\uC740 \uD14D\uC2A4\u314C"
     isPlayerSay: 1
     canNextTalk: 0
-  - eventObjects: []
-    LSprite: {fileID: 21300000, guid: 169d48a3f79a7f8499b08b66525c471c, type: 3}
+  - LSprite: {fileID: 21300000, guid: 169d48a3f79a7f8499b08b66525c471c, type: 3}
     RSprite: {fileID: -4845280888193106427, guid: 152e4bb3e98c71740a0a65df6b19ba59, type: 3}
     cameraFollowPos: {fileID: 0}
     contents: "\uD14C\uC2A4\uD2B8\uC6A9 \uB9C8\uC9C0\uB9C9 \uD14D\uC2A4\uD2B8\uB2E4
@@ -275,7 +271,8 @@ MonoBehaviour:
   text: {fileID: 98518312303491304}
   LSpriteRenderer: {fileID: 98518312733871346}
   RSpriteRenderer: {fileID: 98518312625873330}
-  nextButton: {fileID: 98518312110453820}
+  nextButtonObj: {fileID: 98518312110453820}
+  currentTalkableObj: {fileID: 0}
   currentTextNum: 0
   endGameAtEndTalk: 0
   gameClearAtEndGame: 0
