@@ -140,7 +140,6 @@ MonoBehaviour:
   playerRespanwTrm: {fileID: 0}
   respawnDelay: 2
   cinemachineVirtualCamera: {fileID: 0}
-  TestSoundBox: {fileID: 6277426176205683575, guid: 6390e6faafda6dc4f9c95e9dbdd211f0, type: 3}
 --- !u!1 &2962355976921119776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,7 +1401,7 @@ GameObject:
   - component: {fileID: 4289256258498944741}
   m_Layer: 6
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: GROUND
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

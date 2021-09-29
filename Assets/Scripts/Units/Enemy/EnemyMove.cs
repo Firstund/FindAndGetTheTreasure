@@ -38,6 +38,7 @@ public class EnemyMove : EnemyStatus
     private bool isPursue = false;
     private bool isDead = false;
     private bool isHurt = false;
+    private bool isInWall = false;
     private bool searchMove = true;
     private bool canAttack = true;
 
@@ -56,6 +57,8 @@ public class EnemyMove : EnemyStatus
 
     private Color color = new Color(1f, 0f, 1f, 0.5f);
     private Color color_origin = new Color(1f, 1f, 1f, 1f);
+
+    private RaycastHit2D wallHit = new RaycastHit2D();
 
     private float firstGravity = 0f;
     private float firstMass = 0f;
@@ -236,6 +239,41 @@ public class EnemyMove : EnemyStatus
         enemyStat.hp = enemyStat.firstHp;
         isDead = false;
     }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(enemyStat.isAirEnemy)
+        {
+            if(other.gameObject.tag == "GROUND")
+            {
+                isInWall = true;
+                isSearching = false;
+
+                Ray2D ray = new Ray2D();
+
+                ray.origin = transform.position;
+                ray.direction = other.transform.position;
+
+                wallHit = Physics2D.Raycast(ray.origin, ray.direction, 2f, whatIsGround);
+            }
+        }
+    }
+    private void OnCollisionExit2D(Collision2D other) 
+    {
+        isInWall = false;
+    }
+
+    private void MoveEnemy(Vector2 targetPos, float speed)
+    {
+        if (gameManager.SlowTimeSomeObjects)
+        {
+            currentPosition = Vector2.MoveTowards(currentPosition, targetPos, speed / gameManager.SlowTimeNum * Time.fixedDeltaTime);
+        }
+        else
+        {
+            currentPosition = Vector2.MoveTowards(currentPosition, targetPos, speed * Time.fixedDeltaTime);
+        }
+    }
+
     private void FlipCheck(Vector2 targetPosition)
     {
         spriteRenderer.flipX = enemyStat.searchCharacter.CheckFlip(targetPosition);
@@ -246,16 +284,75 @@ public class EnemyMove : EnemyStatus
         {
             anim.Play("Move");
 
-            if (gameManager.SlowTimeSomeObjects)
+            MoveEnemy(playerPosition, enemyStat.pursueSpeed);
+
+            FlipCheck(playerPosition);
+        }
+    }
+    private void Searching()
+    {
+        float distance;
+        if (isSearching)
+        {
+            if (searchMove && !isInWall)
             {
-                currentPosition = Vector2.MoveTowards(currentPosition, playerPosition, enemyStat.pursueSpeed / gameManager.SlowTimeNum * Time.fixedDeltaTime);
+                anim.Play("Move");
+
+                MoveEnemy(searchTargetPosition, enemyStat.searchSpeed);
+
+                if (enemyStat.isAirEnemy)
+                {
+                    distance = Vector2.Distance(currentPosition, searchTargetPosition);
+                }
+                else
+                {
+                    Vector2 _currentPosition = currentPosition;
+                    _currentPosition.y = searchTargetPosition.y;
+
+                    distance = Vector2.Distance(_currentPosition, searchTargetPosition);
+                }
+
+                if (distance <= searchResetDistance)
+                {
+                    searchMove = false;
+                    SearchPositionSet();
+                    Invoke("SearMoveReset", searchResetDelay);
+                }
+            }
+            else if(isInWall)
+            {
+                anim.Play("Move");
+
+                Vector2 targetPos = transform.position;
+
+                if(transform.position.x - wallHit.point.x >= 0f)
+                {
+                    targetPos.x += 1f;
+                }
+                else
+                {
+                    targetPos.x -= 1f;
+                }
+
+                if(transform.position.y - wallHit.point.y >= 0f)
+                {
+                    targetPos.y += 1f;
+                }
+                else
+                {
+                    targetPos.y -= 1f;
+                }
+
+                MoveEnemy(targetPos, enemyStat.searchSpeed);
+
+                FlipCheck(targetPos);
             }
             else
             {
-                currentPosition = Vector2.MoveTowards(currentPosition, playerPosition, enemyStat.pursueSpeed * Time.fixedDeltaTime);
+                anim.Play("Idle");
             }
 
-            FlipCheck(playerPosition);
+            FlipCheck(searchTargetPosition);
         }
     }
     private void Attack()
@@ -343,51 +440,6 @@ public class EnemyMove : EnemyStatus
     {
         isHurt = false;
     }
-    private void Searching()
-    {
-        float distance;
-        if (isSearching)
-        {
-            if (searchMove)
-            {
-                anim.Play("Move");
-
-                if (gameManager.SlowTimeSomeObjects)
-                {
-                    currentPosition = Vector2.MoveTowards(currentPosition, searchTargetPosition, enemyStat.searchSpeed / gameManager.SlowTimeNum * Time.fixedDeltaTime);
-                }
-                else
-                {
-                    currentPosition = Vector2.MoveTowards(currentPosition, searchTargetPosition, enemyStat.searchSpeed * Time.fixedDeltaTime);
-                }
-
-                if (enemyStat.isAirEnemy)
-                {
-                    distance = Vector2.Distance(currentPosition, searchTargetPosition);
-                }
-                else
-                {
-                    Vector2 _currentPosition = currentPosition;
-                    _currentPosition.y = searchTargetPosition.y;
-
-                    distance = Vector2.Distance(_currentPosition, searchTargetPosition);
-                }
-
-                if (distance <= searchResetDistance)
-                {
-                    searchMove = false;
-                    SearchPositionSet();
-                    Invoke("SearMoveReset", searchResetDelay);
-                }
-            }
-            else
-            {
-                anim.Play("Idle");
-            }
-
-            FlipCheck(searchTargetPosition);
-        }
-    }
     private void SearchPositionSet()
     {
         bool hitGround;
@@ -417,8 +469,9 @@ public class EnemyMove : EnemyStatus
             {
                 hitGround = Physics2D.Raycast(endPosition, Vector2.down, transform.localScale.y + 0.5f, whatIsGround);
             }
-
+            
             searchTargetPosition = stageManager.PositionCantCrossWall(currentPosition, endPosition, (currentPosition.x > endPosition.x), whatIsGround);
+
         } while (!hitGround);
     }
     private void SearMoveReset()
