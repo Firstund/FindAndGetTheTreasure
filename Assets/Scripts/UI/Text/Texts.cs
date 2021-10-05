@@ -63,7 +63,7 @@ public class Texts : Text_Base
         {
             SetText();
 
-            if (eventObjSpawnData[0].eventObject != null)
+            if (eventObjSpawnData.Count > 0)
             {
                 eventObjSpawnData[0].eventObject.transform.position = new Vector2(eventObjSpawnData[0].eventObject.transform.position.x, gameManager.player.currentPosition.y);
             }
@@ -174,13 +174,20 @@ public class Texts : Text_Base
             }
             else
             {
-                talkManager.CurrentTalkableObject.gameObject.SetActive(true);
-                talkManager.CurrentTalkableObject.StartFadeIn();
-                talkManager.CurrentTalkableObject = null;
+                if (talkManager.CurrentTalkableObject != null)
+                {
+                    talkManager.CurrentTalkableObject.gameObject.SetActive(true);
+                    talkManager.CurrentTalkableObject.StartFadeIn();
+                    talkManager.CurrentTalkableObject = null;
+                }
 
                 gameManager.player.gameObject.SetActive(true);
                 gameManager.cinemachineVirtualCamera.Follow = gameManager.player.transform;
-                gameManager.player.transform.position = eventObjSpawnData[0].eventObject.transform.position;
+
+                if (eventObjSpawnData.Count > 0)
+                {
+                    gameManager.player.transform.position = eventObjSpawnData[0].eventObject.transform.position;
+                }
 
                 currentTextNum = 0;
                 doFirstText = true;
