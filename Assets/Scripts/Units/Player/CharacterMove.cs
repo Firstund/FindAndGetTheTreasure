@@ -140,7 +140,7 @@ public class CharacterMove : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
-        stageManager = FindObjectOfType<StageManager>();
+        stageManager = StageManager.Instance;
 
         stageManager.SetPlayerRespawnPosition(transform.position);
 

@@ -13,7 +13,7 @@ public class SoundBoxScript : MonoBehaviour
     private bool soundPlayed = false;
     void Start()
     {
-        stageManager = FindObjectOfType<StageManager>();
+        stageManager = StageManager.Instance;
 
         playTimer = playTime;
     }

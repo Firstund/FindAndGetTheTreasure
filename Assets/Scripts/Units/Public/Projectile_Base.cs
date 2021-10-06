@@ -24,7 +24,8 @@ public abstract class Projectile_Base : MonoBehaviour
     protected void Start()
     {
         gameManager = GameManager.Instance;
-        stageManager = FindObjectOfType<StageManager>();
+        stageManager = StageManager.Instance;
+        
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         originSpeed = speed;

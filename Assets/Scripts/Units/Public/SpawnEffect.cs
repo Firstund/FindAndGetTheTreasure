@@ -13,7 +13,7 @@ public class SpawnEffect : MonoBehaviour
 
     private void Start()
     {
-        stageManager = FindObjectOfType<StageManager>();
+       stageManager = StageManager.Instance;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
     }

@@ -18,7 +18,7 @@ public class PlayerProjectile : Projectile_Base, IProjectile
     {
         if (stageManager == null)
         {
-            stageManager = FindObjectOfType<StageManager>();
+            stageManager = StageManager.Instance;
         }
 
         Enemys.Clear();

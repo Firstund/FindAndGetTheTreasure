@@ -17,7 +17,7 @@ public class SpawnEnemy : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
-        stageManager = FindObjectOfType<StageManager>();
+        stageManager = StageManager.Instance;
     }
     void FixedUpdate()
     {

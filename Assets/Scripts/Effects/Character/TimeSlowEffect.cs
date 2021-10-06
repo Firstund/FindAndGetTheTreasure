@@ -5,12 +5,22 @@ using UnityEngine;
 public class TimeSlowEffect : MonoBehaviour
 
 {
+    private GameManager gameManager = null;
     [SerializeField]
     private float maxSize = 20f;
     [SerializeField]
     private float fadeInTime = 0.3f;
     private float fadeInTimer = 0f;
 
+    private void Awake() 
+    {
+        gameManager = GameManager.Instance;
+
+        gameManager.SetFalseSlowTimeSomeObjects += () =>
+        {
+            gameObject.SetActive(false);
+        };
+    }
     void Update()
     {
         if (fadeInTimer < fadeInTime)

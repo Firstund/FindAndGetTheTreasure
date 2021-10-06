@@ -75,8 +75,7 @@ public class EnemyMove : EnemyStatus
     }
     void Start()
     {
-        stageManager = FindObjectOfType<StageManager>();
-
+        stageManager = StageManager.Instance;
         currentPosition = transform.position;
         SearchPositionSet();
 
@@ -87,38 +86,41 @@ public class EnemyMove : EnemyStatus
 
     void Update()
     {
-        if (!(isDead || gameManager.stopTime))
+        if (!enemyStat.IsOutCamera)
         {
-            if (!stopMyself)
+            if (!(isDead || gameManager.stopTime))
             {
-                CheckStatus();
+                if (!stopMyself)
+                {
+                    CheckStatus();
 
-                SetIsPursue();
-                SetSearchResetTimer();
+                    SetIsPursue();
+                    SetSearchResetTimer();
+                }
+
+                CheckDead();
+            }
+            else if (gameManager.stopTime)
+            {
+                anim.Play("Idle");
             }
 
-            CheckDead();
-        }
-        else if (gameManager.stopTime)
-        {
-            anim.Play("Idle");
-        }
+            if (stopMyselfTimer > 0f)
+            {
+                stopMyselfTimer -= Time.deltaTime;
 
-        if (stopMyselfTimer > 0f)
-        {
-            stopMyselfTimer -= Time.deltaTime;
+                spriteRenderer.color = color;
+            }
+            else
+            {
+                stopMyself = false;
+                spriteRenderer.color = color_origin;
+            }
 
-            spriteRenderer.color = color;
-        }
-        else
-        {
-            stopMyself = false;
-            spriteRenderer.color = color_origin;
-        }
-
-        if(isDead)
-        {
-            Dead();
+            if (isDead)
+            {
+                Dead();
+            }
         }
     }
 
@@ -195,21 +197,24 @@ public class EnemyMove : EnemyStatus
 
     private void FixedUpdate()
     {
-        if (gameManager.SlowTimeSomeObjects && gameManager.CurrentSlowTimePerSlowTime == 0)
+        if (!enemyStat.IsOutCamera)
         {
-            DoFixedUpdate();
+            if (gameManager.SlowTimeSomeObjects && gameManager.CurrentSlowTimePerSlowTime == 0)
+            {
+                DoFixedUpdate();
 
-            anim.speed = 1f / gameManager.SlowTimeNum;
-            rigid.gravityScale = firstGravity / gameManager.SlowTimeNum;
-            rigid.mass = firstMass / gameManager.SlowTimeNum;
-        }
-        else if (!gameManager.SlowTimeSomeObjects)
-        {
-            DoFixedUpdate();
+                anim.speed = 1f / gameManager.SlowTimeNum;
+                rigid.gravityScale = firstGravity / gameManager.SlowTimeNum;
+                rigid.mass = firstMass / gameManager.SlowTimeNum;
+            }
+            else if (!gameManager.SlowTimeSomeObjects)
+            {
+                DoFixedUpdate();
 
-            anim.speed = 1f;
-            rigid.gravityScale = firstGravity;
-            rigid.mass = firstMass;
+                anim.speed = 1f;
+                rigid.gravityScale = firstGravity;
+                rigid.mass = firstMass;
+            }
         }
     }
 
@@ -241,9 +246,9 @@ public class EnemyMove : EnemyStatus
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(enemyStat.isAirEnemy)
+        if (enemyStat.isAirEnemy)
         {
-            if(other.gameObject.tag == "GROUND")
+            if (other.gameObject.tag == "GROUND")
             {
                 isInWall = true;
                 isSearching = false;
@@ -257,7 +262,7 @@ public class EnemyMove : EnemyStatus
             }
         }
     }
-    private void OnCollisionExit2D(Collision2D other) 
+    private void OnCollisionExit2D(Collision2D other)
     {
         isInWall = false;
     }
@@ -319,13 +324,13 @@ public class EnemyMove : EnemyStatus
                     Invoke("SearMoveReset", searchResetDelay);
                 }
             }
-            else if(isInWall)
+            else if (isInWall)
             {
                 anim.Play("Move");
 
                 Vector2 targetPos = transform.position;
 
-                if(transform.position.x - wallHit.point.x >= 0f)
+                if (transform.position.x - wallHit.point.x >= 0f)
                 {
                     targetPos.x += 1f;
                 }
@@ -334,7 +339,7 @@ public class EnemyMove : EnemyStatus
                     targetPos.x -= 1f;
                 }
 
-                if(transform.position.y - wallHit.point.y >= 0f)
+                if (transform.position.y - wallHit.point.y >= 0f)
                 {
                     targetPos.y += 1f;
                 }
@@ -469,7 +474,7 @@ public class EnemyMove : EnemyStatus
             {
                 hitGround = Physics2D.Raycast(endPosition, Vector2.down, transform.localScale.y + 0.5f, whatIsGround);
             }
-            
+
             searchTargetPosition = stageManager.PositionCantCrossWall(currentPosition, endPosition, (currentPosition.x > endPosition.x), whatIsGround);
 
         } while (!hitGround);

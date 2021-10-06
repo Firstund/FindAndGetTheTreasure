@@ -54,7 +54,7 @@ public class Reflect : MonoBehaviour
     }
     void Start()
     {
-        stageManager = FindObjectOfType<StageManager>();
+        stageManager = StageManager.Instance;
 
         playerInput = GetComponent<PlayerInput>();
         anim = GetComponent<Animator>();

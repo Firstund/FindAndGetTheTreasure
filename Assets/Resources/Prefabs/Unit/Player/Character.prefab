@@ -6615,6 +6615,7 @@ GameObject:
   - component: {fileID: 9044287388241435654}
   - component: {fileID: 7164106570128758197}
   - component: {fileID: 1299926012982945706}
+  - component: {fileID: 3722010017690601311}
   m_Layer: 3
   m_Name: CanGoBackTime
   m_TagString: Untagged
@@ -6692,6 +6693,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow: {fileID: 5143956853646980547}
+--- !u!114 &3722010017690601311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7000624771511651774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fef9abff67867294f9741b2f9d66285e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7539817539281981653
 GameObject:
   m_ObjectHideFlags: 0

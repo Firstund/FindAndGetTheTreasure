@@ -28,12 +28,14 @@ public class EnemyStat : EnemyStatus
     private float _firstHp = 0f;
     public float firstHp
     {
-        get { 
-        if(_firstHp == 0f)
+        get
         {
-            _firstHp = hp;
+            if (_firstHp == 0f)
+            {
+                _firstHp = hp;
+            }
+            return _firstHp;
         }
-        return  _firstHp; }
     }
     [SerializeField]
     private float _ap = 1f;
@@ -107,6 +109,10 @@ public class EnemyStat : EnemyStatus
     private float despawnTimer = 10f;
     private float firstDespawnTimer = 0f;
     private bool isOutCamera = false;
+    public bool IsOutCamera
+    {
+        get { return isOutCamera; }
+    }
 
     private void Awake()
     {
@@ -120,14 +126,33 @@ public class EnemyStat : EnemyStatus
     }
     void Start()
     {
-        stageManager = FindObjectOfType<StageManager>();
+        stageManager = StageManager.Instance;
     }
 
 
     void Update()
     {
         currentStatus = searchCharacter.CheckStatus(playerPosition.position, isShootProjectile, foundRange, shootRange, attackRange);
+
+        OutCheck();
     }
+
+    private void OutCheck()
+    {
+        Vector3 viewPortPos = Camera.main.WorldToViewportPoint(transform.position);
+
+        Debug.Log(viewPortPos);
+
+        if (viewPortPos.x < 0f || viewPortPos.x > 1f || viewPortPos.y < 0f || viewPortPos.y > 1f)
+        {
+            OnOutOfCamera();
+        }
+        else
+        {
+            OnInOfCamera();
+        }
+    }
+
     void FixedUpdate()
     {
         DespawnByOutCamera();
@@ -146,12 +171,12 @@ public class EnemyStat : EnemyStatus
         }
     }
 
-    private void OnBecameVisible()
+    private void OnInOfCamera()
     {
         isOutCamera = false;
         despawnTimer = firstDespawnTimer;
     }
-    private void OnBecameInvisible()
+    private void OnOutOfCamera()
     {
         isOutCamera = true;
     }

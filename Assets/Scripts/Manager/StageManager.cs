@@ -6,6 +6,25 @@ using Cinemachine;
 
 public class StageManager : MonoBehaviour
 {
+    private static StageManager instance = null;
+    public static StageManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<StageManager>();
+
+                if (instance == null)
+                {
+                    GameObject temp = new GameObject("StageManager");
+                    instance = temp.AddComponent<StageManager>();
+                }
+            }
+
+            return instance;
+        }
+    }
     private GameManager gameManager = null;
     private List<GameObject> enemys = new List<GameObject>();
     public List<GameObject> Enemys
