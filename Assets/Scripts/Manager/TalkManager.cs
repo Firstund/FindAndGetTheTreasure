@@ -8,12 +8,13 @@ public class TalkManager : MonoBehaviour
     private static TalkManager instance = null;
     public static TalkManager Instance
     {
-        get{
-            if(instance == null)
+        get
+        {
+            if (instance == null)
             {
                 instance = FindObjectOfType<TalkManager>();
 
-                if(instance == null)
+                if (instance == null)
                 {
                     Debug.LogError("TalkManager is disappear!");
                 }
@@ -80,14 +81,24 @@ public class TalkManager : MonoBehaviour
     }
     private void SpawnTextBoxes(int index)
     {
-        textBoxesParent[index].SetActive(true); // 메뉴로 돌아왔다가 다시 스테이지 접근에 시도하면 textBoxesParent가 null이 되는 현상 발생
+        if (textBoxesParent.Count > 0)
+        {
+            if (textBoxesParent[index] != null)
+            {
 
-        _currentTextBoxesParent = textBoxesParent[index].GetComponent<TextBoxesParent>();
+                textBoxesParent[index].SetActive(true); // 메뉴로 돌아왔다가 다시 스테이지 접근에 시도하면 textBoxesParent가 null이 되는 현상 발생
+
+                _currentTextBoxesParent = textBoxesParent[index].GetComponent<TextBoxesParent>();
+            }
+        }
     }
     public void DeSpawnTextBoxes()
     {
-        currentTextBoxesParent.gameObject.SetActive(false);
+        if (currentTextBoxesParent != null)
+        {
+            currentTextBoxesParent.gameObject.SetActive(false);
 
-        _currentTextBoxesParent = null;
+            _currentTextBoxesParent = null;
+        }
     }
 }

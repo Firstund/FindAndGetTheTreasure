@@ -97,11 +97,17 @@ public class Reflect : MonoBehaviour
 
         shootAnlgePlus = 0f;
 
-        stageManager.DesapwnSoundBox(currentEffectSoundBox);
+        if (currentEffectSoundBox != null)
+        {
+            stageManager.DesapwnSoundBox(currentEffectSoundBox);
+        }
 
         for (int i = 0; i < 2; i++)
         {
-            projectileShootLine.SetPosition(i, Vector2.zero);
+            if (projectileShootLine != null)
+            {
+                projectileShootLine.SetPosition(i, Vector2.zero);
+            }
         }
     }
 
@@ -134,7 +140,7 @@ public class Reflect : MonoBehaviour
         if (isAttack)
         {
             Instantiate(projectile, shootTrm.position, Quaternion.Euler(0f, 0f, shootAnlgePlus)).GetComponent<PlayerProjectile>().SpawnSet(projectileShootRange, projectileDamage, Vector2.right);
-            
+
             SpawnDespawnEffects(false);
 
             shootTrm.rotation = Quaternion.identity;

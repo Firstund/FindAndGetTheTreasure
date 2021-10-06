@@ -109,6 +109,11 @@ public class GameManager : MonoBehaviour
             slowTimeSomeObjects = value;
         }
     }
+    private bool isGameEnd = false;
+    public bool IsGameEnd
+    {
+        get{return isGameEnd;}
+    }
 
     [SerializeField]
     private int slowTimeNum = 20; // 몇몇 오브젝트들만 느려지는 코드를 실행시킬 때 1/n으로 속도를 조정
@@ -191,6 +196,7 @@ public class GameManager : MonoBehaviour
 
         SpawnStages = stageNum =>
         {
+            isGameEnd = false;
             SceneManager.LoadScene("StageScene");
 
             if (stageNum < 1)
@@ -203,6 +209,8 @@ public class GameManager : MonoBehaviour
 
         GameEnd = gameClear =>
         {
+            isGameEnd = gameClear;
+
             if (gameClear)
             {
                 // 게임을 클리어했을 때

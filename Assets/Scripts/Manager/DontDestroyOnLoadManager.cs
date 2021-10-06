@@ -36,6 +36,7 @@ public class DontDestroyOnLoadManager : MonoBehaviour
             if(item.name == donDestroyOnLoadObject.name)
             {
                 Destroy(donDestroyOnLoadObject);
+                return;
             }
         }
 

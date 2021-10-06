@@ -40,7 +40,7 @@ public class TalkableObject : MonoBehaviour
 
     private void CheckTalk()
     {
-        if (Input.GetButtonDown("Attack") && distance <= talkableDistance)
+        if (Input.GetButtonDown("Attack") && distance <= talkableDistance && !gameManager.IsGameEnd)
         {
             spriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
 
