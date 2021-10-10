@@ -53,6 +53,8 @@ public class CharacterMove : MonoBehaviour
     [SerializeField]
     private LayerMask whatIsEnemy;
     [SerializeField]
+    private LayerMask whatIsHitable;
+    [SerializeField]
     private LayerMask whatIsPorjectile;
 
     [SerializeField]
@@ -153,6 +155,8 @@ public class CharacterMove : MonoBehaviour
         firstGravity = rigid.gravityScale;
         firstMass = rigid.mass;
 
+        whatIsHitable.value = whatIsEnemy + whatIsGround;
+
         pulley.SetActive(false);
     }
     void Update()
@@ -167,7 +171,7 @@ public class CharacterMove : MonoBehaviour
             RightWallCheck();
             CharacterHangWallCheck();
         }
-        else if (gameManager.stopTime && !characterTimeWarp.isTimeWarp && !reflect.canSettingAngle)
+        else if (gameManager.stopTime && !characterTimeWarp.isTimeWarp && !reflect.CanSettingAngle)
         {
             anim.Play(characterName + "Idle");
         }
@@ -189,10 +193,8 @@ public class CharacterMove : MonoBehaviour
         spriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
     }
 
-
     private void CheckDead()
     {
-
         if (!isDead)
         {
             if (rigid.velocity.y <= dropVelo)
@@ -661,8 +663,8 @@ public class CharacterMove : MonoBehaviour
 
         if (projectileDespawned)
         {
-            reflect.canSettingAngle = true;
-            reflect.canShoot = true;
+            reflect.CanSettingAngle = true;
+            reflect.CanShoot = true;
             reflect.ProjectileDamage = damage;
         }
     }
@@ -718,12 +720,17 @@ public class CharacterMove : MonoBehaviour
 
         for (int i = 0; i < 5; i++)
         {
-            RaycastHit2D[] hit = Physics2D.RaycastAll(rays[i].origin, rays[i].direction, attackRange, whatIsEnemy);
+            RaycastHit2D[] hit = Physics2D.RaycastAll(rays[i].origin, rays[i].direction, attackRange, whatIsHitable);
 
             Debug.DrawRay(rays[i].origin, rays[i].direction, Color.red, 10f);
 
             foreach (var item in hit)
             {
+                if(whatIsGround == (whatIsGround | 1 << item.transform.gameObject.layer))
+                {
+                    break;
+                }
+                 
                 hits.Add(item);
             }
         }
@@ -748,6 +755,7 @@ public class CharacterMove : MonoBehaviour
     }
     private Vector2 SetTargetPositionsForRay(Vector2 startPosition, Vector2 targetPosition)
     {
+        // targetPosition - startPosition
         return (targetPosition - startPosition);
     }
     private void SetAttacking()
@@ -784,7 +792,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void InAirCheck()
     {
-        if (!(isJump || isGround || isHang || staping || attacking || reflect.canSettingAngle))
+        if (!(isJump || isGround || isHang || staping || attacking || reflect.CanSettingAngle))
         {
             if (isHangWall)
             {
@@ -892,7 +900,7 @@ public class CharacterMove : MonoBehaviour
 
     private void LRCheck(float XMove)
     {
-        if (!(isHang || reflect.canSettingAngle))
+        if (!(isHang || reflect.CanSettingAngle))
         {
             if (XMove < 0f)
             {

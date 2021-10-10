@@ -39,7 +39,7 @@ public class CharacterPortal : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!reflect.canSettingAngle)
+        if (!reflect.CanSettingAngle)
         {
             if (playerInput.spawnPortal0 && canSpawnPortal0)
             {

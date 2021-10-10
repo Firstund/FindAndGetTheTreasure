@@ -9,8 +9,35 @@ public class Reflect : MonoBehaviour
 
     private bool isAttack = false;
     private bool timeSlowSoundEffectBoxSpawned = false;
-    public bool canShoot { get; set; }
-    public bool canSettingAngle { get; set; }
+    private bool canReflect = true;
+
+    private bool canShoot = false;
+    public bool CanShoot
+    {
+        get { return canShoot; }
+        set
+        {
+            if (canReflect)
+            {
+                canShoot = value;
+            }
+        }
+    }
+    private bool canSettingAngle = false;
+    public bool CanSettingAngle
+    {
+        get
+        {
+            return canSettingAngle;
+        }
+        set
+        {
+            if (canReflect)
+            {
+                canSettingAngle = value;
+            }
+        }
+    }
 
     [SerializeField]
     private float upDownSpeed = 1f;
@@ -91,8 +118,8 @@ public class Reflect : MonoBehaviour
     private void WhenTimeNotSlow()
     {
         isAttack = false;
-        canShoot = false;
-        canSettingAngle = false;
+        CanShoot = false;
+        CanSettingAngle = false;
         timeSlowSoundEffectBoxSpawned = false;
 
         shootAnlgePlus = 0f;
@@ -113,23 +140,23 @@ public class Reflect : MonoBehaviour
 
     void Update()
     {
-        if (canShoot && playerInput.isAttack)
+        if (CanShoot && playerInput.isAttack)
         {
             isAttack = true;
         }
 
-        projectileShootLine.gameObject.SetActive(canSettingAngle);
-        arrowAtEnd.SetActive(canSettingAngle);
+        projectileShootLine.gameObject.SetActive(CanSettingAngle);
+        arrowAtEnd.SetActive(CanSettingAngle);
     }
     void FixedUpdate()
     {
         shootAngle = transform.position;
 
-        if (canSettingAngle)
+        if (CanSettingAngle)
         {
             SettingAngle();
         }
-        if (canShoot)
+        if (CanShoot)
         {
             gameManager.SlowTimeSomeObjects = true;
             Shoot();

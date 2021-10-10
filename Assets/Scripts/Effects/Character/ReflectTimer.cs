@@ -32,8 +32,8 @@ public class ReflectTimer : MonoBehaviour
         }
         else
         {
-            reflect.canShoot = false;
-            reflect.canSettingAngle = false;
+            reflect.CanShoot = false;
+            reflect.CanSettingAngle = false;
             gameManager.SlowTimeSomeObjects = false;
 
             gameObject.SetActive(false);

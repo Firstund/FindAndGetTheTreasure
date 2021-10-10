@@ -141,8 +141,6 @@ public class EnemyStat : EnemyStatus
     {
         Vector3 viewPortPos = Camera.main.WorldToViewportPoint(transform.position);
 
-        Debug.Log(viewPortPos);
-
         if (viewPortPos.x < 0f || viewPortPos.x > 1f || viewPortPos.y < 0f || viewPortPos.y > 1f)
         {
             OnOutOfCamera();
