@@ -18,6 +18,7 @@ public class TextEventObject : TextEventObject_Base
     private int eventNum = -1;
     private Vector2 originPos = Vector2.zero;
 
+    private bool textEventPlayed = false;
     private bool canDoEvent = false;
     public bool CanDoEvent
     {
@@ -31,6 +32,10 @@ public class TextEventObject : TextEventObject_Base
             {
                 eventNum++;
                 originPos = transform.position;
+            }
+            else
+            {
+                textEventPlayed = value;
             }
 
             canDoEvent = value;
@@ -60,13 +65,33 @@ public class TextEventObject : TextEventObject_Base
     {
         if (canDoEvent)
         {
-            DoEvent();
+            DoMoveEvent();
+
+            if(eventDatas[eventNum].doThisTextEvents.Count > 0 && !textEventPlayed)
+            {
+                foreach(GameObject item in eventDatas[eventNum].doThisTextEvents)
+                {
+                    ITextEvent temp = item.GetComponent<ITextEvent>();
+
+                    if(temp == null)
+                    {
+                        Debug.LogWarning("The TextEventObj of " + gameObject.name + " that name is " + item.name + " has no ITextEvent Interface. This Obj had Destroyed at list, Fix it later.");
+                        eventDatas[eventNum].doThisTextEvents.Remove(item);
+                    }
+                    else
+                    {
+                        temp.DoEvent();
+                    }
+                }
+
+                textEventPlayed = true;
+            }
         }
 
         FadeOut();
     }
 
-    private void DoEvent()
+    private void DoMoveEvent()
     {
         spriteRenderer.flipX = eventDatas[eventNum].flipX;
 
@@ -92,6 +117,8 @@ public class TextEventObject : TextEventObject_Base
     private void OnEventEnd()
     {
         canDoEvent = false;
+        textEventPlayed = false;
+
         anim.SetTrigger("GoToFirst");
         textsScript.canNextTalk = eventDatas[eventNum].setCanNextAtThisEventEnds;
     }
