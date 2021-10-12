@@ -84,6 +84,7 @@ public class Reflect : MonoBehaviour
         stageManager = StageManager.Instance;
 
         playerInput = GetComponent<PlayerInput>();
+
         anim = GetComponent<Animator>();
 
 
@@ -153,7 +154,7 @@ public class Reflect : MonoBehaviour
         shootAngle = transform.position;
 
         if (CanSettingAngle)
-        {
+        {   
             SettingAngle();
         }
         if (CanShoot)

@@ -17,7 +17,7 @@ public class CharacterStatBar : MonoBehaviour
     [SerializeField]
     private float doValueTime = 0.5f;
 
-    [Header("Ap, Dp, Hp중 가장 큰 값")]
+    [Header("세가지 스탯중 가장 큰 값 혹은 그보다 큰 값 입력")]
     [SerializeField]
     private float maxValue = 0f;
     [SerializeField]
@@ -84,7 +84,7 @@ public class CharacterStatBar : MonoBehaviour
             case "dp":
                 if (characterStat != null)
                 {
-                    hpSlider.DOValue(characterStat.dp, doValueTime);
+                    hpSlider.DOValue(characterStat.sp, doValueTime);
                 }
                 break;
         }

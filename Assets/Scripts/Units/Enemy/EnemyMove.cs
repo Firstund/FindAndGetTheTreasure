@@ -43,6 +43,7 @@ public class EnemyMove : EnemyStatus
     private bool canAttack = true;
 
     private bool stopMyself = false;
+    private bool firstSearchPositionSet = false;
 
     [SerializeField]
     private float pursueTime = 3f;
@@ -77,7 +78,12 @@ public class EnemyMove : EnemyStatus
     {
         stageManager = StageManager.Instance;
         currentPosition = transform.position;
-        SearchPositionSet();
+
+        if(enemyStat.isAirEnemy)
+        {
+            firstSearchPositionSet = true;
+            SearchPositionSet();
+        }
 
         searchResetTimer = searchResetTime;
         firstGravity = rigid.gravityScale;
@@ -260,6 +266,11 @@ public class EnemyMove : EnemyStatus
 
                 wallHit = Physics2D.Raycast(ray.origin, ray.direction, 2f, whatIsGround);
             }
+        }
+        else if(!firstSearchPositionSet && other.gameObject.tag == "GROUND")
+        {
+            firstSearchPositionSet = true;
+            SearchPositionSet();
         }
     }
     private void OnCollisionExit2D(Collision2D other)

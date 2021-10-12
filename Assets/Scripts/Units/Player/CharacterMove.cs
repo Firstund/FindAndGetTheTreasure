@@ -3,7 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
+[Serializable]
+public struct SkillUseSpValue
+{
+    public float attack;
+    public float reflect;
+    public float dash;
+    public float dashAttack;
+    public float timeWarp;
+}
 public class CharacterMove : MonoBehaviour
 {
     private GameManager gameManager = null;
@@ -20,8 +30,9 @@ public class CharacterMove : MonoBehaviour
     private PlayerInput playerInput = null;
     private SpawnAfterImage spawnAfterImage = null;
     private CharacterStat characterStat = null;
-    private CharacterTimeWarp characterTimeWarp = null;
     private Reflect reflect = null;
+
+    private CharacterTimeWarp characterTimeWarp = null;
 
     [SerializeField]
     private GameObject pulley = null;
@@ -47,6 +58,14 @@ public class CharacterMove : MonoBehaviour
     [SerializeField]
     private GameObject reflectEffect = null;
     private GameObject currentSlideAtSideWallEffect = null;
+
+    [Header("스킬을 사용할 때 소모되는 SP의 양")]
+    [SerializeField]
+    private SkillUseSpValue skillUseValue;
+    public SkillUseSpValue SkillUseSpValue
+    {
+        get { return skillUseValue; }
+    }
 
     [SerializeField]
     private LayerMask whatIsGround;
@@ -488,12 +507,32 @@ public class CharacterMove : MonoBehaviour
 
             if (attacking)
             {
+                if (characterStat.sp >= skillUseValue.dashAttack)
+                {
+                    characterStat.sp -= skillUseValue.dashAttack;
+                }
+                else
+                {
+                    isDash = false;
+                    return;
+                }
+
                 gameManager.SetSlowTime(0.1f);
                 _dashRange = DashAttack(_dashRange);
             }
             else
             {
                 canDashAttack = false;
+
+                if (characterStat.sp >= skillUseValue.dash)
+                {
+                    characterStat.sp -= skillUseValue.dash;
+                }
+                else
+                {
+                    isDash = false;
+                    return;
+                }
             }
 
             if (spriteRenderer.flipX)
@@ -564,7 +603,7 @@ public class CharacterMove : MonoBehaviour
     {
         if (dashMoving && canSpawnAfterImageByDash)
         {
-            float spawnAfterImageDelay = Random.Range(spawnAfterImage.spawnAfterImageDelayMinimum, spawnAfterImage.spawnAfterImageDelayMaximum);
+            float spawnAfterImageDelay = UnityEngine.Random.Range(spawnAfterImage.spawnAfterImageDelayMinimum, spawnAfterImage.spawnAfterImageDelayMaximum);
             spawnAfterImage.SetAfterImage();
             canSpawnAfterImageByDash = false;
 
@@ -599,6 +638,16 @@ public class CharacterMove : MonoBehaviour
     {
         if (!attacking && !dashMoving && !isHangWall && !staping && isAttack) //isGround에 따라서 GroundAttack과 InAirAttack을 나눌것, dashing == true라면 dashAttack을 할것
         {
+            if (characterStat.sp >= skillUseValue.attack)
+            {
+                characterStat.sp -= skillUseValue.attack;
+            }
+            else
+            {
+                isAttack = false;
+                return;
+            }
+
             spawnEffect.ShowEffect(attackEffect, Vector2.zero);
             if (isGround)
             {
@@ -640,32 +689,37 @@ public class CharacterMove : MonoBehaviour
     }
     private void DespawnProjectileByAttack()
     {
-        bool projectileDespawned = false;
-        float distance;
-        float damage = 0f;
-
-        for (int i = 0; i < stageManager.ProjectilesTrm.childCount; i++)
+        if (skillUseValue.reflect < characterStat.sp)
         {
-            GameObject item = stageManager.ProjectilesTrm.GetChild(i).gameObject;
+            bool projectileDespawned = false;
+            float distance;
+            float damage = 0f;
 
-            if (item.activeSelf)
+            for (int i = 0; i < stageManager.ProjectilesTrm.childCount; i++)
             {
-                distance = Vector2.Distance(currentPosition, item.transform.position);
+                GameObject item = stageManager.ProjectilesTrm.GetChild(i).gameObject;
 
-                if (distance <= characterStat.attackRange)
+                if (item.activeSelf)
                 {
-                    stageManager.DespawnProjectile(item);
-                    damage += 2;
-                    projectileDespawned = true;
+                    distance = Vector2.Distance(currentPosition, item.transform.position);
+
+                    if (distance <= characterStat.attackRange)
+                    {
+                        stageManager.DespawnProjectile(item);
+                        damage += 2;
+                        projectileDespawned = true;
+                    }
                 }
             }
-        }
 
-        if (projectileDespawned)
-        {
-            reflect.CanSettingAngle = true;
-            reflect.CanShoot = true;
-            reflect.ProjectileDamage = damage;
+            if (projectileDespawned)
+            {
+                reflect.CanSettingAngle = true;
+                reflect.CanShoot = true;
+
+                reflect.ProjectileDamage = damage;
+                characterStat.sp -= skillUseValue.reflect;
+            }
         }
     }
     private void GetDashAttackDamage() // 판정관련 오류 있음
@@ -726,11 +780,11 @@ public class CharacterMove : MonoBehaviour
 
             foreach (var item in hit)
             {
-                if(whatIsGround == (whatIsGround | 1 << item.transform.gameObject.layer))
+                if (whatIsGround == (whatIsGround | 1 << item.transform.gameObject.layer))
                 {
                     break;
                 }
-                 
+
                 hits.Add(item);
             }
         }

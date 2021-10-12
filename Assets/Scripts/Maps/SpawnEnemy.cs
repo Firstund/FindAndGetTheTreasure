@@ -10,6 +10,7 @@ public class SpawnEnemy : MonoBehaviour
     [SerializeField]
     private float enemySpawnRange = 5f;
     private bool enemySpawned = false;
+
     [SerializeField]
     private GameObject spawnThis = null;
     private Vector2 currentPosition = Vector2.zero;

@@ -5542,12 +5542,21 @@ MonoBehaviour:
   slideAtSideWall: {fileID: 6449521256822418348, guid: 3e882ce853fb65444a834277d739e54d, type: 3}
   jumpEffect: {fileID: 3275992218428455322, guid: 17657c5b5e7fdcc48be57616642622e5, type: 3}
   reflectEffect: {fileID: 3712944619940778220}
+  skillUseValue:
+    attack: 2
+    reflect: 5
+    dash: 3
+    dashAttack: 3
+    timeWarp: 10
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1216
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 768
+  whatIsHitable:
+    serializedVersion: 2
+    m_Bits: 0
   whatIsPorjectile:
     serializedVersion: 2
     m_Bits: 2048
@@ -5589,6 +5598,9 @@ MonoBehaviour:
   _firstHp: 0
   _ap: 2
   _dp: 2
+  _sp: 20
+  _firstSp: 0
+  _spReSpeedPerSec: 5
   _attackRange: 1
   _speed: 7
   _hangSpeed: 10

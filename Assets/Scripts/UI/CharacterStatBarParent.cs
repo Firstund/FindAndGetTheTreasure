@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterStatBarParent : MonoBehaviour
 {
-    [Header("AP, DP, HP중 가장 큰 값 입력")]
+    [Header("세가지 스탯중 가장 큰 값 혹은 그보다 큰 값 입력")]
     [SerializeField]
     private float maximumStat = 0f;
     [SerializeField]

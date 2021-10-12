@@ -9,6 +9,7 @@ public class CharacterTimeWarp : MonoBehaviour
     private GameManager gameManager = null;
     private PlayerInput playerInput = null;
     private CharacterMove characterMove = null;
+    private CharacterStat characterStat = null;
     private SpawnAfterImage spawnAfterImage = null;
     private SpriteRenderer spriteRenderer = null;
     private Rigidbody2D rigid = null;
@@ -59,6 +60,7 @@ public class CharacterTimeWarp : MonoBehaviour
 
         playerInput = GetComponent<PlayerInput>();
         characterMove = GetComponent<CharacterMove>();
+        characterStat = GetComponent<CharacterStat>();
         spawnAfterImage = GetComponent<SpawnAfterImage>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
@@ -86,7 +88,6 @@ public class CharacterTimeWarp : MonoBehaviour
 
     void Update()
     {
-        // timeWarp 후 굳는 현상 발생
         if (characterMove.DashAttacking && canTimeWaprPositionSet)
         {
             OriginSet();
@@ -101,8 +102,9 @@ public class CharacterTimeWarp : MonoBehaviour
             flipXes[0] = spriteRenderer.flipX;
         }
 
-        if (playerInput.timeWarp && canTimeWarp && !canTimeWaprPositionSet)
+        if (playerInput.timeWarp && canTimeWarp && !canTimeWaprPositionSet && characterMove.SkillUseSpValue.timeWarp < characterStat.sp)
         {
+            characterStat.sp -= characterMove.SkillUseSpValue.timeWarp;
             canTimeWarp = false;
             _isTimeWarp = true;
         }

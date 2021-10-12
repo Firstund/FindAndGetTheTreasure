@@ -2171,6 +2171,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -28
       objectReference: {fileID: 0}
+    - target: {fileID: 4342618107864510366, guid: ad5cec81a20f45c4b8c008a13295f9b4, type: 3}
+      propertyPath: maxValue
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5339032815832272114, guid: ad5cec81a20f45c4b8c008a13295f9b4, type: 3}
+      propertyPath: maxValue
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6858081792053303657, guid: ad5cec81a20f45c4b8c008a13295f9b4, type: 3}
+      propertyPath: maxValue
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5cec81a20f45c4b8c008a13295f9b4, type: 3}
 --- !u!1 &1147683489
@@ -2362,8 +2374,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 988320050}
   m_HandleRect: {fileID: 988320049}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3832,24 +3844,28 @@ MonoBehaviour:
   eventDatas:
   - moveSpeed: 3
     moveTargetPos: {x: -0.5, y: 0}
+    doThisTextEvents: []
     animName: TestAnim_TalkEvent
     setCanNextTalkByMoves: 0
     setCanNextAtThisEventEnds: 1
     flipX: 1
   - moveSpeed: 0
     moveTargetPos: {x: 0, y: 0}
+    doThisTextEvents: []
     animName: 
     setCanNextTalkByMoves: 0
     setCanNextAtThisEventEnds: 0
     flipX: 1
   - moveSpeed: 0
     moveTargetPos: {x: 0, y: 0}
+    doThisTextEvents: []
     animName: TestFireAnim_TalkEvent
     setCanNextTalkByMoves: 0
     setCanNextAtThisEventEnds: 1
     flipX: 1
   - moveSpeed: 0
     moveTargetPos: {x: 0, y: 0}
+    doThisTextEvents: []
     animName: 
     setCanNextTalkByMoves: 0
     setCanNextAtThisEventEnds: 0
@@ -4011,24 +4027,28 @@ MonoBehaviour:
   eventDatas:
   - moveSpeed: 0
     moveTargetPos: {x: 0, y: 0}
+    doThisTextEvents: []
     animName: 
     setCanNextTalkByMoves: 0
     setCanNextAtThisEventEnds: 0
     flipX: 1
   - moveSpeed: 1
     moveTargetPos: {x: 2, y: 0}
+    doThisTextEvents: []
     animName: UmikoWalk
     setCanNextTalkByMoves: 1
     setCanNextAtThisEventEnds: 1
     flipX: 1
   - moveSpeed: 0
     moveTargetPos: {x: 0, y: 0}
+    doThisTextEvents: []
     animName: 
     setCanNextTalkByMoves: 0
     setCanNextAtThisEventEnds: 0
     flipX: 1
   - moveSpeed: 3
     moveTargetPos: {x: 3.5, y: 0}
+    doThisTextEvents: []
     animName: UmikoRun
     setCanNextTalkByMoves: 1
     setCanNextAtThisEventEnds: 1
