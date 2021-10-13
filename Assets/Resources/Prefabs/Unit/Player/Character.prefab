@@ -5545,9 +5545,9 @@ MonoBehaviour:
   skillUseValue:
     attack: 2
     reflect: 5
-    dash: 3
-    dashAttack: 3
-    timeWarp: 10
+    dash: 5
+    dashAttack: 5
+    timeWarp: 15
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1216
