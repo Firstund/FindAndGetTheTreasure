@@ -308,7 +308,7 @@ public class EnemyMove : EnemyStatus
     private void Searching()
     {
         float distance;
-        if (isSearching)
+        if (isSearching && firstSearchPositionSet)
         {
             if (searchMove && !isInWall)
             {
@@ -483,7 +483,7 @@ public class EnemyMove : EnemyStatus
             }
             else
             {
-                hitGround = Physics2D.Raycast(endPosition, Vector2.down, transform.localScale.y + 0.5f, whatIsGround);
+                hitGround = Physics2D.Raycast(endPosition, endPosition - Vector2.down, transform.localScale.y + 0.5f, whatIsGround);
             }
 
             searchTargetPosition = stageManager.PositionCantCrossWall(currentPosition, endPosition, (currentPosition.x > endPosition.x), whatIsGround);
