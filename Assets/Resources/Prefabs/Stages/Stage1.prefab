@@ -3067,8 +3067,12 @@ PrefabInstance:
       value: EventTriggerArea
       objectReference: {fileID: 0}
     - target: {fileID: 4742154734639086062, guid: ae1af3108c5c4054a8f3020ef115f4f9, type: 3}
-      propertyPath: conditions.enterThisArea
+      propertyPath: triggerLooping
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742154734639086062, guid: ae1af3108c5c4054a8f3020ef115f4f9, type: 3}
+      propertyPath: conditions.enterThisArea
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4742154734639086062, guid: ae1af3108c5c4054a8f3020ef115f4f9, type: 3}
       propertyPath: conditions.getKey.Array.size

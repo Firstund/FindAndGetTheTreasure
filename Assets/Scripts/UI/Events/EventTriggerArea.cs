@@ -25,6 +25,9 @@ public class EventTriggerArea : MonoBehaviour
     [SerializeField]
     private Conditions conditions;
 
+    [SerializeField]
+    private bool triggerLooping = false;
+
     private bool playerEnterThisArea = false;
     private bool playerStayThisArea = false;
     private bool getKey = false;
@@ -39,7 +42,7 @@ public class EventTriggerArea : MonoBehaviour
     }
     void Update()
     {
-        if (playerEnterThisArea || playerStayThisArea || getKey)
+        if (conditions.enterThisArea || conditions.stayThisArea.stayThisArea || conditions.getKey.Length > 0)
         {
             GetKeyDownCheck();
             PlayerStayTimerCheck();
@@ -87,6 +90,11 @@ public class EventTriggerArea : MonoBehaviour
     private void DoEvent()
     {
         Debug.Log("DoEvent!");
+
+        if(!triggerLooping)
+        {
+            enabled = false;
+        }
     }
 
     private void GetKeyDownCheck()
