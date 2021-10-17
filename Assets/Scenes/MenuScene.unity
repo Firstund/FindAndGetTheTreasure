@@ -387,6 +387,7 @@ MonoBehaviour:
   - {fileID: 781002138}
   - {fileID: 1187645791}
   - {fileID: 1187364809}
+  - {fileID: 1980131367}
 --- !u!1001 &75532223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3438,7 +3439,6 @@ MonoBehaviour:
   _player: {fileID: 0}
   _characterStat: {fileID: 0}
   slowTimeSomeObjectsTime: 3
-  slowTimeSOmeObjectsTime: 5
   slowTimeNum: 100
 --- !u!4 &1564100276
 Transform:
@@ -3749,6 +3749,11 @@ Transform:
   m_Father: {fileID: 519420032}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1980131367 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 98518312725156332, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
+  m_PrefabInstance: {fileID: 651173130}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1982489712
 GameObject:
   m_ObjectHideFlags: 3
@@ -3949,6 +3954,10 @@ PrefabInstance:
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: texts.Array.data[4].contents
       value: "\uBB34\uC2DC\uD558\uC790"
+      objectReference: {fileID: 0}
+    - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
+      propertyPath: despawnPlayerObjWhenTextEvent
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: eventObjSpawnPoses.Array.size
