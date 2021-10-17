@@ -21,6 +21,10 @@ public class CharacterMove : MonoBehaviour
 
     private string characterName;
     private Rigidbody2D rigid = null;
+    public Rigidbody2D Rigid
+    {
+        get { return rigid; }
+    }
     private BoxCollider2D boxCol2D = null;
     private Animator anim = null;
     public SpriteRenderer spriteRenderer { get; private set; }
@@ -102,9 +106,38 @@ public class CharacterMove : MonoBehaviour
     [SerializeField]
     private float dropVelo = -70f; // 낙사
 
-
+    [SerializeField]
+    private float powerTimeWhenIsHangFalse = 5f;
+    private float powerTimer = 0f;
     private bool isJump = false;
     private bool isHang = false;
+    private bool IsHang
+    {
+        get
+        {
+            return isHang;
+        }
+        set
+        {
+            if (value)
+            {
+                powerTimer = 0f;
+            }
+            else if (!gameManager.SlowTimeSomeObjects)
+            {
+                giveLeftPowerWhenIsHangFalse = spriteRenderer.flipX;
+
+                WhenIsHangFalse();
+            }
+            else
+            {
+                powerTimer = 0f;
+            }
+
+            isHang = value;
+        }
+    }
+    private bool giveLeftPowerWhenIsHangFalse = false;
     private bool isDash = false;
     private bool isDead = false;
     private bool isAttack = false;
@@ -189,6 +222,7 @@ public class CharacterMove : MonoBehaviour
             LeftWallCheck();
             RightWallCheck();
             CharacterHangWallCheck();
+            IsHangFalseGivePower();
         }
         else if (gameManager.stopTime && !characterTimeWarp.isTimeWarp && !reflect.CanSettingAngle)
         {
@@ -211,7 +245,30 @@ public class CharacterMove : MonoBehaviour
         characterStat.hp = characterStat.firstHp;
         spriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
     }
+    private void WhenIsHangFalse()
+    {
+        powerTimer = powerTimeWhenIsHangFalse;
+    }
+    private void IsHangFalseGivePower()
+    {
+        if (powerTimer > 0f)
+        {
+            if (giveLeftPowerWhenIsHangFalse)
+            {
+                rigid.velocity = new Vector2(Mathf.Lerp(0f, 1f, powerTimer / powerTimeWhenIsHangFalse), rigid.velocity.y);
+            }
+            else
+            {
+                rigid.velocity = new Vector2(Mathf.Lerp(0f, -1f, powerTimer / powerTimeWhenIsHangFalse), rigid.velocity.y);
+            }
 
+            powerTimer -= Time.deltaTime;
+        }
+        else
+        {
+            powerTimer = 0f;
+        }
+    }
     private void CheckDead()
     {
         if (!isDead)
@@ -253,27 +310,33 @@ public class CharacterMove : MonoBehaviour
             attacking = false;
             if (upWall && !isGround)
             {
-                if (!isHang)
+                if (!IsHang)
                 {
-                    isHang = true;
+                    IsHang = true;
                     whenOutHangMoveStarted = false;
                     isJump = false;
                 }
                 else
                 {
-                    isHang = false;
+                    IsHang = false;
                 }
             }
             else
             {
                 isJump = true;
-                isHang = false;
+                if (IsHang)
+                {
+                    IsHang = false;
+                }
             }
         }
 
         if (!upWall)
         {
-            isHang = false;
+            if (IsHang)
+            {
+                IsHang = false;
+            }
         }
 
         if (playerInput.isDash)
@@ -296,28 +359,43 @@ public class CharacterMove : MonoBehaviour
     {
         currentPosition = transform.position;
 
-        if (gameManager.SlowTimeSomeObjects && gameManager.CurrentSlowTimePerSlowTime == 0)
+        if (gameManager.stopTime)
         {
-            DoFixedUpdate();
-
-            anim.speed = 1f / gameManager.SlowTimeNum;
-
             rigid.gravityScale = 0f;
             rigid.mass = 0f;
             rigid.velocity = Vector2.zero;
         }
-        else if (!gameManager.SlowTimeSomeObjects)
+        else
         {
-            DoFixedUpdate();
-
-            anim.speed = 1f;
-
-            if (!isHang)
-            {
-                rigid.gravityScale = firstGravity;
-            }
-
+            rigid.gravityScale = firstGravity;
             rigid.mass = firstMass;
+        }
+
+        if (!gameManager.stopTime)
+        {
+            if (gameManager.SlowTimeSomeObjects && gameManager.CurrentSlowTimePerSlowTime == 0)
+            {
+                DoFixedUpdate();
+
+                anim.speed = 1f / gameManager.SlowTimeNum;
+
+                rigid.gravityScale = 0f;
+                rigid.mass = 0f;
+                rigid.velocity = Vector2.zero;
+            }
+            else if (!gameManager.SlowTimeSomeObjects)
+            {
+                DoFixedUpdate();
+
+                anim.speed = 1f;
+
+                if (!IsHang)
+                {
+                    rigid.gravityScale = firstGravity;
+                }
+
+                rigid.mass = firstMass;
+            }
         }
 
 
@@ -341,7 +419,7 @@ public class CharacterMove : MonoBehaviour
             if (gameManager.SlowTimeSomeObjects)
             {
                 isJump = false;
-                isHang = false;
+                IsHang = false;
                 isAttack = false;
                 attacking = false;
 
@@ -398,7 +476,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void Hang()
     {
-        if (isHang)
+        if (IsHang)
         {
             pulleySpriteRenderer.flipX = spriteRenderer.flipX;
             pulley.SetActive(true);
@@ -498,7 +576,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void Dash(float XMove)
     {
-        if (XMove != 0 && isDash && !isHang && !staping && !dashMoving && canDash)
+        if (XMove != 0 && isDash && !IsHang && !staping && !dashMoving && canDash)
         {
             float _dashRange = dashRange;
             dashPosition = GroundChecker.position;
@@ -663,7 +741,6 @@ public class CharacterMove : MonoBehaviour
                 anim.Play(characterName + "InAirAttack");
 
                 isAttack = false;
-                isHang = false;
             }
 
             GetDamage();
@@ -846,7 +923,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void InAirCheck()
     {
-        if (!(isJump || isGround || isHang || staping || attacking || reflect.CanSettingAngle))
+        if (!(isJump || isGround || IsHang || staping || attacking || reflect.CanSettingAngle))
         {
             if (isHangWall)
             {
@@ -863,11 +940,11 @@ public class CharacterMove : MonoBehaviour
 
     private void MoveX(float XMove)
     {
-        if (!isHang)
+        if (!IsHang && powerTimer <= 0f)
         {
             rigid.velocity = new Vector2(XMove * characterStat.speed, rigid.velocity.y);
         }
-        else
+        else if (powerTimer <= 0f)
         {
             if (spriteRenderer.flipX)
             {
@@ -893,6 +970,9 @@ public class CharacterMove : MonoBehaviour
             staping = true;
             anim.Play(characterName + "Stap");
 
+            spawnEffect.ShowEffect(jumpEffect, transform.position);
+            stageManager.SpawnSoundBox(jumpSoundBox);
+
             if (rigid.velocity.y <= -20f)
             {
                 if (canHurt)
@@ -912,6 +992,7 @@ public class CharacterMove : MonoBehaviour
         if (isGround)
         {
             WhenOutHangMoveSet();
+            powerTimer = 0f;
             staping = false;
         }
 
@@ -954,7 +1035,7 @@ public class CharacterMove : MonoBehaviour
 
     private void LRCheck(float XMove)
     {
-        if (!(isHang || reflect.CanSettingAngle))
+        if (!(IsHang || reflect.CanSettingAngle))
         {
             if (XMove < 0f)
             {

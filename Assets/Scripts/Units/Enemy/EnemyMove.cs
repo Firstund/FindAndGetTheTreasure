@@ -79,7 +79,7 @@ public class EnemyMove : EnemyStatus
         stageManager = StageManager.Instance;
         currentPosition = transform.position;
 
-        if(enemyStat.isAirEnemy)
+        if (enemyStat.isAirEnemy)
         {
             firstSearchPositionSet = true;
             SearchPositionSet();
@@ -205,6 +205,18 @@ public class EnemyMove : EnemyStatus
     {
         if (!enemyStat.IsOutCamera)
         {
+            if (gameManager.stopTime)
+            {
+                rigid.gravityScale = 0f;
+                rigid.mass = 0f;
+                rigid.velocity = Vector2.zero;
+            }
+            else
+            {
+                rigid.gravityScale = firstGravity;
+                rigid.mass = firstMass;
+            }
+
             if (gameManager.SlowTimeSomeObjects && gameManager.CurrentSlowTimePerSlowTime == 0)
             {
                 DoFixedUpdate();
@@ -267,7 +279,7 @@ public class EnemyMove : EnemyStatus
                 wallHit = Physics2D.Raycast(ray.origin, ray.direction, 2f, whatIsGround);
             }
         }
-        else if(!firstSearchPositionSet && other.gameObject.tag == "GROUND")
+        else if (!firstSearchPositionSet && other.gameObject.tag == "GROUND")
         {
             firstSearchPositionSet = true;
             SearchPositionSet();

@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
             if (instance == null)
             {
                 instance = FindObjectOfType<GameManager>();
-                
-                if(instance == null)
+
+                if (instance == null)
                 {
                     Debug.LogError("GameManager is disappear!");
                 }
@@ -68,6 +68,11 @@ public class GameManager : MonoBehaviour
     private float firstSlowTimeByLerp = 0f;
     [SerializeField]
     private float slowTimeSomeObjectsTime = 3f;
+    public float SlowTimeSomeObjectsTime
+    {
+        get { return slowTimeSomeObjectsTime; }
+        set { slowTimeSomeObjectsTime = value; }
+    }
     private float slowTimeSomeObjectsTimer = 0f;
 
     private int _currentStage = 0;
@@ -89,8 +94,6 @@ public class GameManager : MonoBehaviour
     {
         get { return _stopTime; }
     }
-    [SerializeField]
-    private float slowTimeSOmeObjectsTime = 5f;
     private bool slowTimeSomeObjects = false;
     public bool SlowTimeSomeObjects
     {
@@ -112,7 +115,7 @@ public class GameManager : MonoBehaviour
     private bool isGameEnd = false;
     public bool IsGameEnd
     {
-        get{return isGameEnd;}
+        get { return isGameEnd; }
     }
 
     [SerializeField]

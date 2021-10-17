@@ -41,6 +41,10 @@ public class Texts : Text_Base
     [SerializeField]
     private int currentTextNum = 0;
 
+    [Header("이 값이 true면 TextEvent가 진행될 때 GameManager의 Player Object를 Despawn한다.")]
+    [SerializeField]
+    private bool despawnPlayerObjWhenTextEvent = false;
+
     [Header("이 값이 true면 대화가 끝났을 때 게임종료처리")]
     [SerializeField]
     private bool endGameAtEndTalk = false;
@@ -67,7 +71,15 @@ public class Texts : Text_Base
             {
                 eventObjSpawnData[0].eventObject.transform.position = new Vector2(eventObjSpawnData[0].eventObject.transform.position.x, gameManager.player.currentPosition.y);
             }
-            gameManager.player.gameObject.SetActive(false);
+
+            if (despawnPlayerObjWhenTextEvent)
+            {
+                gameManager.player.gameObject.SetActive(false);
+            }
+            else
+            {
+                gameManager.player.Rigid.velocity = Vector2.zero;
+            }
 
             doFirstText = false;
         }
