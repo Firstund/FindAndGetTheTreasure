@@ -67,13 +67,13 @@ public class TextEventObject : TextEventObject_Base
         {
             DoMoveEvent();
 
-            if(eventDatas[eventNum].doThisTextEvents.Count > 0 && !textEventPlayed)
+            if (eventDatas[eventNum].doThisTextEvents.Count > 0 && !textEventPlayed)
             {
-                foreach(GameObject item in eventDatas[eventNum].doThisTextEvents)
+                eventDatas[eventNum].doThisTextEvents.ForEach(item =>
                 {
                     ITextEvent temp = item.GetComponent<ITextEvent>();
 
-                    if(temp == null)
+                    if (temp == null)
                     {
                         Debug.LogWarning("The TextEventObj of " + gameObject.name + " that name is " + item.name + " has no ITextEvent Interface. This Obj had Destroyed at list, Fix it later.");
                         eventDatas[eventNum].doThisTextEvents.Remove(item);
@@ -82,7 +82,7 @@ public class TextEventObject : TextEventObject_Base
                     {
                         temp.DoEvent();
                     }
-                }
+                });
 
                 textEventPlayed = true;
             }

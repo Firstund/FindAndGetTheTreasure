@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System;
+using System.Linq;
+
+using UnityEngine;
 
 [Serializable]
 public struct Conditions_StayThisArea
@@ -22,11 +24,16 @@ public class EventTriggerArea : MonoBehaviour
     // 형태로 받아와서 이벤트 조건을 적용, 실행시킬것
     // 이벤트 실행에 의한 동작도 포함
     // TODO: 해당 이벤트가 실행되고 나서 SetActive가 True가 되는 EventTriggerArea들의 List를 만들것.
+    private GameManager gameManager = null;
 
     [SerializeField]
     private Conditions conditions;
     [SerializeField]
     private GameObject eventTriggerObj = null;
+
+    [Header("이 이벤트가 활성화 되고 나서 활성화 될 EventTriggerArea들")]
+    [SerializeField]
+    private List<EventTriggerArea> eventTriggerAreaList = new List<EventTriggerArea>();
 
     [SerializeField]
     private bool triggerLooping = false;
@@ -38,7 +45,20 @@ public class EventTriggerArea : MonoBehaviour
     private bool doEvent = false;
     private bool playerIn = false;
 
+    public bool enableOnStart { private get; set; }
+
     private float playerStayTimer = 0f;
+
+    private void Awake()
+    {
+        eventTriggerAreaList.ForEach(e => e.enableOnStart = true);
+    }
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+
+        enabled = !enableOnStart;
+    }
 
     void Update()
     {
@@ -48,7 +68,7 @@ public class EventTriggerArea : MonoBehaviour
             PlayerStayTimerCheck();
             CheckDoEvent();
 
-            if (doEvent)
+            if (doEvent && !gameManager.stopTime)
             {
                 DoEvent();
             }
@@ -99,6 +119,17 @@ public class EventTriggerArea : MonoBehaviour
 
         eventTrigger.DoEvent();
 
+        eventTriggerAreaList.ForEach(e => e.enabled = true);
+
+        if (!triggerLooping)
+        {
+            enabled = false;
+        }
+    }
+    public void OnEndEvent()
+    {
+        eventTriggerAreaList.ForEach(e => e.enabled = true);
+
         if (!triggerLooping)
         {
             enabled = false;
@@ -111,14 +142,13 @@ public class EventTriggerArea : MonoBehaviour
         {
             getKey = true;
 
-            foreach (var item in conditions.getKey)
+            conditions.getKey.ForEach(item =>
             {
                 if (!Input.GetKey(item))
                 {
                     getKey = false;
-                    break;
                 }
-            }
+            });
         }
         else
         {

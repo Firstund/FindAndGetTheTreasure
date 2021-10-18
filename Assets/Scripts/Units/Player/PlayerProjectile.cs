@@ -22,10 +22,8 @@ public class PlayerProjectile : Projectile_Base, IProjectile
         }
 
         Enemys.Clear();
-        foreach (var item in stageManager.Enemys)
-        {
-            Enemys.Add(item);
-        }
+
+        stageManager.Enemys.ForEach(item => Enemys.Add(item));
     }
     public void SpawnSet(float shootR, float dm, Vector2 angle)
     {
@@ -64,9 +62,6 @@ public class PlayerProjectile : Projectile_Base, IProjectile
 
                     Enemys.Remove(item);
                     break;
-
-                    // isDestroy = true;
-                    // stageManager.DespawnProjectile(gameObject);
                 }
             }
         }

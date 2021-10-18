@@ -9,6 +9,7 @@ using DG.Tweening;
 public class Texts : Text_Base
 {
     private GameManager gameManager = null;
+    private StageManager stagemanager = null;
     private TalkManager talkManager = null;
 
     [Serializable]
@@ -41,9 +42,15 @@ public class Texts : Text_Base
     [SerializeField]
     private int currentTextNum = 0;
 
+    private float doTextSpeed = 30f; // 초당 출력하는 글자의 수
+    private float doTextEndTimer = 0f;
+
     [Header("이 값이 true면 TextEvent가 진행될 때 GameManager의 Player Object를 Despawn한다.")]
     [SerializeField]
     private bool despawnPlayerObjWhenTextEvent = false;
+    [Header("이 값이 true면 TextEvent가 진행될 때 PlayerRespwnPosition을 이곳으로 바꾼다.")]
+    [SerializeField]
+    private bool SetPlayerRespawnPosition = true;
 
     [Header("이 값이 true면 대화가 끝났을 때 게임종료처리")]
     [SerializeField]
@@ -52,17 +59,21 @@ public class Texts : Text_Base
     [SerializeField]
     private bool gameClearAtEndGame = false;
     private bool doFirstText = true;
+    private bool doTextEnd = false;
     public bool canNextTalk = true;
 
     void Awake()
     {
         gameManager = GameManager.Instance;
+        stagemanager = StageManager.Instance;
         talkManager = TalkManager.Instance;
 
         nextButtonTxt = nextButtonObj.GetComponentInChildren<Text>();
     }
     public void Update()
     {
+        DoTextEndCheck();
+
         if (doFirstText)
         {
             SetText();
@@ -86,20 +97,66 @@ public class Texts : Text_Base
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            OnClickNext();
+            if (doTextEnd)
+            {
+                OnClickNext();
+            }
+            else if (!texts[currentTextNum].cantSkipText)
+            {
+                SkipText();
+            }
         }
 
-        nextButtonObj.SetActive(canNextTalk);
+        nextButtonObj.SetActive(canNextTalk && doTextEnd);
     }
+
+    private void SkipText()
+    {
+        text.text = "";
+
+        if (texts[currentTextNum].startOtherTextEventOnPlayerSkip && !doTextEnd)
+        {
+            int pasteTextNum = currentTextNum;
+            TextEnd();
+
+            talkManager.currentTextBoxesParent.SpawnTextBox(texts[pasteTextNum].otherTextEventIndex);
+        }
+
+        OnClickNext();
+    }
+
+    private void TextEnd()
+    {
+        if (talkManager.CurrentTalkableObject != null)
+        {
+            talkManager.CurrentTalkableObject.gameObject.SetActive(true);
+            talkManager.CurrentTalkableObject.StartFadeIn();
+            talkManager.CurrentTalkableObject = null;
+        }
+
+        gameManager.player.gameObject.SetActive(true);
+        gameManager.cinemachineVirtualCamera.Follow = gameManager.player.transform;
+
+        if (eventObjSpawnData.Count > 0)
+        {
+            gameManager.player.transform.position = eventObjSpawnData[0].eventObject.transform.position;
+        }
+
+        currentTextNum = 0;
+        doFirstText = true;
+
+        talkManager.currentTextBoxesParent.DeSpawnTextBox();
+    }
+
     private void OnEnable()
     {
-        foreach (SEventObjSpawnData objData in eventObjSpawnData)
+        eventObjSpawnData.ForEach(objData =>
         {
             objData.eventObject.SetActive(true);
             objData.eventObject.transform.position = objData.eventObjSpawnPos;
 
             talkManager.CurrentEvents.Enqueue(objData.eventObject.GetComponent<TextEventObject>());
-        }
+        });
     }
 
     public void SetText() // gameManager의 SetSlowTime이 실행된 상태면 텍스트 설정이 느리게 되는 버그
@@ -117,7 +174,12 @@ public class Texts : Text_Base
 
         text.text = "";
 
-        text.DOText(texts[currentTextNum].contents, 0.5f);
+        doTextEnd = false;
+
+        float doTextTime = (1 / doTextSpeed) * texts[currentTextNum].contents.Length;
+        doTextEndTimer = doTextTime;
+
+        text.DOText(texts[currentTextNum].contents, doTextTime);
 
         if (texts[currentTextNum].cameraFollowPos != null)
         {
@@ -127,13 +189,29 @@ public class Texts : Text_Base
         {
             gameManager.cinemachineVirtualCamera.Follow = gameManager.player.transform;
         }
+
+        if(SetPlayerRespawnPosition)
+        {
+            stagemanager.SetPlayerRespawnPosition(gameManager.player.transform.position);
+        }
+    }
+    private void DoTextEndCheck()
+    {
+        if (doTextEndTimer > 0f)
+        {
+            doTextEndTimer -= Time.deltaTime;
+
+            if (doTextEndTimer < 0f)
+            {
+                doTextEnd = true;
+            }
+        }
     }
 
     private void SetSpriteRenderers()
     {
         LSpriteRenderer.sprite = texts[currentTextNum].LSprite;
         RSpriteRenderer.sprite = texts[currentTextNum].RSprite;
-
 
         // 왼쪽 혹은 오른쪽에 위치하는 sprite가 null일경우 alpha를 0f로 줄여줌
         if (LSpriteRenderer.sprite == null)
@@ -186,30 +264,13 @@ public class Texts : Text_Base
             }
             else
             {
-                if (talkManager.CurrentTalkableObject != null)
-                {
-                    talkManager.CurrentTalkableObject.gameObject.SetActive(true);
-                    talkManager.CurrentTalkableObject.StartFadeIn();
-                    talkManager.CurrentTalkableObject = null;
-                }
-
-                gameManager.player.gameObject.SetActive(true);
-                gameManager.cinemachineVirtualCamera.Follow = gameManager.player.transform;
-
-                if (eventObjSpawnData.Count > 0)
-                {
-                    gameManager.player.transform.position = eventObjSpawnData[0].eventObject.transform.position;
-                }
-
-                currentTextNum = 0;
-                doFirstText = true;
+                TextEnd();
 
                 while (talkManager.CurrentEvents.Count > 0)
                 {
                     talkManager.CurrentEvents.Dequeue().StartFadeOut();
                 }
 
-                talkManager.currentTextBoxesParent.DeSpawnTextBox();
 
                 if (endGameAtEndTalk)
                 {

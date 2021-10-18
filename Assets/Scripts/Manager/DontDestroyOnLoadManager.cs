@@ -7,12 +7,13 @@ public class DontDestroyOnLoadManager : MonoBehaviour
     private static DontDestroyOnLoadManager instance;
     public static DontDestroyOnLoadManager Instance
     {
-        get{
-            if(instance == null)
+        get
+        {
+            if (instance == null)
             {
                 instance = FindObjectOfType<DontDestroyOnLoadManager>();
 
-                if(instance == null)
+                if (instance == null)
                 {
                     GameObject temp = new GameObject("DontDestroyOnLoadManager");
                     instance = temp.AddComponent<DontDestroyOnLoadManager>();
@@ -31,14 +32,14 @@ public class DontDestroyOnLoadManager : MonoBehaviour
     }
     public void DoNotDestroyOnLoad(GameObject donDestroyOnLoadObject)
     {
-        foreach(var item in dontDestroyOnLoadObjectList)
+        dontDestroyOnLoadObjectList.ForEach(item =>
         {
-            if(item.name == donDestroyOnLoadObject.name)
+            if (item.name == donDestroyOnLoadObject.name)
             {
                 Destroy(donDestroyOnLoadObject);
                 return;
             }
-        }
+        });
 
         dontDestroyOnLoadObjectList.Add(donDestroyOnLoadObject);
         DontDestroyOnLoad(donDestroyOnLoadObject);

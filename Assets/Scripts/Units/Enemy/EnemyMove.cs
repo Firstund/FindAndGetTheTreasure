@@ -96,6 +96,11 @@ public class EnemyMove : EnemyStatus
         {
             if (!(isDead || gameManager.stopTime))
             {
+                if (anim.speed == 0f)
+                {
+                    anim.speed = 1f;
+                }
+
                 if (!stopMyself)
                 {
                     CheckStatus();
@@ -108,7 +113,7 @@ public class EnemyMove : EnemyStatus
             }
             else if (gameManager.stopTime)
             {
-                anim.Play("Idle");
+                anim.speed = 0f;
             }
 
             if (stopMyselfTimer > 0f)

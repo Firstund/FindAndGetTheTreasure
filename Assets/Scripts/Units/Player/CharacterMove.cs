@@ -215,6 +215,11 @@ public class CharacterMove : MonoBehaviour
     {
         if (!(isDead || gameManager.stopTime || characterTimeWarp.isTimeWarp))
         {
+            if(anim.speed == 0f)
+            {
+                anim.speed = 1f;
+            }
+
             CheckStatus();
 
             GroundCheck();
@@ -226,7 +231,7 @@ public class CharacterMove : MonoBehaviour
         }
         else if (gameManager.stopTime && !characterTimeWarp.isTimeWarp && !reflect.CanSettingAngle)
         {
-            anim.Play(characterName + "Idle");
+            anim.speed = 0f;
         }
 
         SetAnimByTimeWarp();
@@ -255,11 +260,13 @@ public class CharacterMove : MonoBehaviour
         {
             if (giveLeftPowerWhenIsHangFalse)
             {
-                rigid.velocity = new Vector2(Mathf.Lerp(0f, 1f, powerTimer / powerTimeWhenIsHangFalse), rigid.velocity.y);
+                // rigid.velocity = new Vector2(Mathf.Lerp(0f, 1f, powerTimer / powerTimeWhenIsHangFalse), rigid.velocity.y);
+                rigid.AddForce(new Vector2(Mathf.Lerp(0f, 1f, powerTimer / powerTimeWhenIsHangFalse), 0f));
             }
             else
             {
-                rigid.velocity = new Vector2(Mathf.Lerp(0f, -1f, powerTimer / powerTimeWhenIsHangFalse), rigid.velocity.y);
+                // rigid.velocity = new Vector2(Mathf.Lerp(0f, -1f, powerTimer / powerTimeWhenIsHangFalse), rigid.velocity.y);
+                rigid.AddForce(new Vector2(Mathf.Lerp(0f, -1f, powerTimer / powerTimeWhenIsHangFalse), 0f));
             }
 
             powerTimer -= Time.deltaTime;
@@ -445,8 +452,6 @@ public class CharacterMove : MonoBehaviour
 
                 reflectEffect.SetActive(false);
             }
-
-
         }
     }
 
@@ -751,7 +756,7 @@ public class CharacterMove : MonoBehaviour
         bool soundPlayed = false;
         Collider2D[] a = Physics2D.OverlapCircleAll(currentPosition, characterStat.attackRange, whatIsEnemy);
 
-        foreach (var item in a)
+        a.ForEach(item =>
         {
             if (!soundPlayed)
             {
@@ -762,7 +767,7 @@ public class CharacterMove : MonoBehaviour
             EnemyMove enemyMove = item.GetComponent<EnemyMove>();
 
             enemyMove.Hurt(characterStat.ap);
-        }
+        });
     }
     private void DespawnProjectileByAttack()
     {
@@ -855,20 +860,18 @@ public class CharacterMove : MonoBehaviour
 
             Debug.DrawRay(rays[i].origin, rays[i].direction, Color.red, 10f);
 
-            foreach (var item in hit)
+            hit.ForEach(item =>
             {
-                if (whatIsGround == (whatIsGround | 1 << item.transform.gameObject.layer))
+                if (whatIsGround != (whatIsGround | 1 << item.transform.gameObject.layer))
                 {
-                    break;
+                    hits.Add(item);
                 }
-
-                hits.Add(item);
-            }
+            });
         }
 
         hits = hits.Distinct().ToList();
 
-        foreach (var item in hits)
+        hits.ForEach(item =>
         {
             EnemyMove enemyMove = item.transform.GetComponent<EnemyMove>();
 
@@ -882,7 +885,7 @@ public class CharacterMove : MonoBehaviour
 
                 enemyMove.Hurt(characterStat.ap);
             }
-        }
+        });
     }
     private Vector2 SetTargetPositionsForRay(Vector2 startPosition, Vector2 targetPosition)
     {
