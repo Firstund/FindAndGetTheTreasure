@@ -477,11 +477,18 @@ public class EnemyMove : EnemyStatus
     {
         bool hitGround;
 
+        int loopNum = 0;
+
         do
         {
             searchResetTimer = searchResetTime;
 
             Vector2 endPosition = currentPosition;
+
+            if(loopNum >= 10)
+            {
+                break;
+            }
 
             float _searchX = Random.Range(-searchRangeX, searchRangeX);
 
@@ -504,6 +511,8 @@ public class EnemyMove : EnemyStatus
             }
 
             searchTargetPosition = stageManager.PositionCantCrossWall(currentPosition, endPosition, (currentPosition.x > endPosition.x), whatIsGround);
+
+            loopNum++;
 
         } while (!hitGround);
     }

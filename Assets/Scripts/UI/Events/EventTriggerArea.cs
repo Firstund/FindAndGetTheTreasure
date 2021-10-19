@@ -47,6 +47,7 @@ public class EventTriggerArea : MonoBehaviour
 
     public bool enableOnStart { private get; set; }
 
+    private bool playerStayTimerIsPlaying = false;
     private float playerStayTimer = 0f;
 
     private void Awake()
@@ -56,6 +57,8 @@ public class EventTriggerArea : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.Instance;
+
+        playerStayTimer = conditions.stayThisArea.staySec;
 
         enabled = !enableOnStart;
     }
@@ -67,6 +70,18 @@ public class EventTriggerArea : MonoBehaviour
             GetKeyDownCheck();
             PlayerStayTimerCheck();
             CheckDoEvent();
+
+            if (conditions.getKey.Length > 0 && !playerStayTimerIsPlaying)
+            {
+                if (getKey)
+                {
+                    playerStayTimer = 0f;
+                }
+            }
+            else if (!playerStayTimerIsPlaying)
+            {
+                playerStayTimer = 0f;
+            }
 
             if (doEvent && !gameManager.stopTime)
             {
@@ -82,16 +97,18 @@ public class EventTriggerArea : MonoBehaviour
 
     private void PlayerStayTimerCheck()
     {
-        if (playerIn)
+        if (playerIn && !gameManager.stopTime)
         {
             if (playerStayTimer < conditions.stayThisArea.staySec)
             {
                 playerStayTimer += Time.deltaTime;
 
+                playerStayTimerIsPlaying = true;
                 playerStayThisArea = false;
             }
             else
             {
+                playerStayTimerIsPlaying = false;
                 playerStayThisArea = true;
             }
         }
@@ -109,22 +126,25 @@ public class EventTriggerArea : MonoBehaviour
 
     private void DoEvent()
     {
-        IEventTrigger eventTrigger = eventTriggerObj.GetComponent<IEventTrigger>();
-
-        if (eventTrigger == null)
+        if (eventTriggerObj != null)
         {
-            Debug.LogError(eventTriggerObj + " has no IEventTrigger!");
-            return;
+            IEventTrigger eventTrigger = eventTriggerObj.GetComponent<IEventTrigger>();
+
+            if (eventTrigger == null)
+            {
+                Debug.LogError(eventTriggerObj + " has no IEventTrigger!");
+                return;
+            }
+
+            eventTrigger.DoEvent();
         }
 
-        eventTrigger.DoEvent();
+            eventTriggerAreaList.ForEach(e => e.enabled = true);
 
-        eventTriggerAreaList.ForEach(e => e.enabled = true);
-
-        if (!triggerLooping)
-        {
-            enabled = false;
-        }
+            if (!triggerLooping)
+            {
+                enabled = false;
+            }
     }
     public void OnEndEvent()
     {
@@ -186,6 +206,7 @@ public class EventTriggerArea : MonoBehaviour
 
             playerIn = false;
             playerStayThisArea = false;
+            playerStayTimerIsPlaying = false;
             playerStayTimer = 0f;
         }
     }
