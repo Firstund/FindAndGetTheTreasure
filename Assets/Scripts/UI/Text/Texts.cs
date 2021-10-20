@@ -120,6 +120,8 @@ public class Texts : Text_Base
             TextEnd();
 
             talkManager.currentTextBoxesParent.SpawnTextBox(texts[pasteTextNum].otherTextEventIndex);
+
+            return;
         }
 
         OnClickNext();
@@ -127,12 +129,9 @@ public class Texts : Text_Base
 
     private void TextEnd()
     {
-        eventObjSpawnData.ForEach(objData =>
-        {
-            objData.eventObject.SetActive(false);
+        eventObjSpawnData.ForEach(objData => objData.eventObject.SetActive(false));
 
-            talkManager.CurrentEvents.Remove(objData.eventObject.GetComponent<TextEventObject>());
-        });
+        talkManager.CurrentEvents.Clear();
 
         if (talkManager.CurrentTalkableObject != null)
         {
@@ -145,7 +144,6 @@ public class Texts : Text_Base
         gameManager.cinemachineVirtualCamera.Follow = gameManager.player.transform;
 
         currentTextNum = 0;
-        doFirstText = true;
 
         talkManager.currentTextBoxesParent.DeSpawnTextBox();
     }
@@ -164,11 +162,16 @@ public class Texts : Text_Base
             talkManager.CurrentEvents.Add(objData.eventObject.GetComponent<TextEventObject>());
 
         });
+
+        doFirstText = true;
     }
 
     public void SetText() // gameManager의 SetSlowTime이 실행된 상태면 텍스트 설정이 느리게 되는 버그
     {
-        talkManager.CurrentEvents.ForEach((item) => item.CanDoEvent = true); // hiddenText로 넘어갈 때 두번실행됌
+        if (!doFirstText)
+        {
+            talkManager.CurrentEvents.ForEach((item) => item.CanDoEvent = true); // hiddenText로 넘어갈 때 두번실행됌
+        }
 
         canNextTalk = texts[currentTextNum].canNextTalk;
 

@@ -15,7 +15,7 @@ public class TextEventObject : TextEventObject_Base
     private Animator anim = null;
     private SpriteRenderer spriteRenderer = null;
 
-    private int eventNum = -1;
+    private int eventNum = 0;
     private Vector2 originPos = Vector2.zero;
 
     [SerializeField]
@@ -26,7 +26,7 @@ public class TextEventObject : TextEventObject_Base
     }
 
     private bool textEventPlayed = false;
-    private bool canDoEvent = false;
+    private bool canDoEvent = true;
     public bool CanDoEvent
     {
         get
@@ -37,7 +37,6 @@ public class TextEventObject : TextEventObject_Base
         {
             if (value)
             {
-                Debug.Log("aaa");
                 eventNum++;
                 originPos = transform.position;
             }
@@ -69,7 +68,7 @@ public class TextEventObject : TextEventObject_Base
 
         spriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
 
-        eventNum = -1;
+        eventNum = 0;
     }
     private void PosSet()
     {
@@ -114,7 +113,14 @@ public class TextEventObject : TextEventObject_Base
     {
         eventNum = Mathf.Clamp(eventNum, 0, eventDatas.Count - 1);
 
-        spriteRenderer.flipX = eventDatas[eventNum].flipX;
+        if (isStartAtPlayer)
+        {
+            spriteRenderer.flipX = GameManager.Instance.player.spriteRenderer.flipX;
+        }
+        else
+        {
+            spriteRenderer.flipX = eventDatas[eventNum].flipX;
+        }
 
         transform.position = Vector2.MoveTowards(transform.position, originPos + eventDatas[eventNum].moveTargetPos, eventDatas[eventNum].moveSpeed * Time.deltaTime);
 
