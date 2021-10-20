@@ -18,6 +18,13 @@ public class TextEventObject : TextEventObject_Base
     private int eventNum = -1;
     private Vector2 originPos = Vector2.zero;
 
+    [SerializeField]
+    private bool isStartAtPlayer = false;
+    public bool IsStartAtPlayer
+    {
+        get { return isStartAtPlayer; }
+    }
+
     private bool textEventPlayed = false;
     private bool canDoEvent = false;
     public bool CanDoEvent
@@ -51,15 +58,26 @@ public class TextEventObject : TextEventObject_Base
     }
     private void Start()
     {
-        originPos = transform.position;
+        PosSet();
     }
+
     private void OnEnable()
     {
         textsScript = FindObjectOfType<Texts>(true);
+        PosSet();
 
         spriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
 
         eventNum = -1;
+    }
+    private void PosSet()
+    {
+        if (isStartAtPlayer)
+        {
+            transform.position = GameManager.Instance.player.transform.position;
+        }
+
+        originPos = transform.position;
     }
     private void Update()
     {
@@ -93,6 +111,7 @@ public class TextEventObject : TextEventObject_Base
 
     private void DoMoveEvent()
     {
+        eventNum = Mathf.Clamp(eventNum, 0, eventDatas.Count - 1);
         spriteRenderer.flipX = eventDatas[eventNum].flipX;
 
         transform.position = Vector2.MoveTowards(transform.position, originPos + eventDatas[eventNum].moveTargetPos, eventDatas[eventNum].moveSpeed * Time.deltaTime);
@@ -138,6 +157,8 @@ public class TextEventObject : TextEventObject_Base
         else if (fadeOutStarted)
         {
             fadeOutStarted = false;
+
+            TalkManager.Instance.CurrentEvents.Remove(this);
             gameObject.SetActive(false);
         }
     }

@@ -30,8 +30,8 @@ public class TalkManager : MonoBehaviour
     private List<GameObject> textBoxesParent;
 
     [SerializeField]
-    private Queue<TextEventObject> currentEvents = new Queue<TextEventObject>();
-    public Queue<TextEventObject> CurrentEvents
+    private List<TextEventObject> currentEvents = new List<TextEventObject>();
+    public List<TextEventObject> CurrentEvents
     {
         get { return currentEvents; }
     }

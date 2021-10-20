@@ -153,21 +153,20 @@ public class Texts : Text_Base
         eventObjSpawnData.ForEach(objData =>
         {
             objData.eventObject.SetActive(true);
-            objData.eventObject.transform.position = objData.eventObjSpawnPos;
 
-            talkManager.CurrentEvents.Enqueue(objData.eventObject.GetComponent<TextEventObject>());
+            if (!objData.eventObject.GetComponent<TextEventObject>().IsStartAtPlayer)
+            {
+                objData.eventObject.transform.position = objData.eventObjSpawnPos;
+            }
+
+            talkManager.CurrentEvents.Add(objData.eventObject.GetComponent<TextEventObject>());
+
+            talkManager.CurrentEvents.ForEach((item) => item.CanDoEvent = true);
         });
     }
 
     public void SetText() // gameManager의 SetSlowTime이 실행된 상태면 텍스트 설정이 느리게 되는 버그
     {
-        TextEventObject[] currentEvents = talkManager.CurrentEvents.ToArray();
-
-        for (int i = 0; i < currentEvents.Length; i++)
-        {
-            currentEvents[i].CanDoEvent = true;
-        }
-
         canNextTalk = texts[currentTextNum].canNextTalk;
 
         SetSpriteRenderers();
@@ -190,7 +189,7 @@ public class Texts : Text_Base
             gameManager.cinemachineVirtualCamera.Follow = gameManager.player.transform;
         }
 
-        if(SetPlayerRespawnPosition)
+        if (SetPlayerRespawnPosition)
         {
             stagemanager.SetPlayerRespawnPosition(gameManager.player.transform.position);
         }
@@ -266,10 +265,10 @@ public class Texts : Text_Base
             {
                 TextEnd();
 
-                while (talkManager.CurrentEvents.Count > 0)
+                talkManager.CurrentEvents.ForEach((item) =>
                 {
-                    talkManager.CurrentEvents.Dequeue().StartFadeOut();
-                }
+                    item.StartFadeOut();
+                });
 
 
                 if (endGameAtEndTalk)
