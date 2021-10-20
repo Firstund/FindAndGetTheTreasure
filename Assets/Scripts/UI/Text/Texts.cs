@@ -42,7 +42,7 @@ public class Texts : Text_Base
     [SerializeField]
     private int currentTextNum = 0;
 
-    private float doTextSpeed = 30f; // 초당 출력하는 글자의 수
+    private float doTextSpeed = 100f; // 초당 출력하는 글자의 수
     private float doTextEndTimer = 0f;
 
     [Header("이 값이 true면 TextEvent가 진행될 때 GameManager의 Player Object를 Despawn한다.")]
@@ -127,6 +127,13 @@ public class Texts : Text_Base
 
     private void TextEnd()
     {
+        eventObjSpawnData.ForEach(objData =>
+        {
+            objData.eventObject.SetActive(false);
+
+            talkManager.CurrentEvents.Remove(objData.eventObject.GetComponent<TextEventObject>());
+        });
+
         if (talkManager.CurrentTalkableObject != null)
         {
             talkManager.CurrentTalkableObject.gameObject.SetActive(true);
@@ -136,11 +143,6 @@ public class Texts : Text_Base
 
         gameManager.player.gameObject.SetActive(true);
         gameManager.cinemachineVirtualCamera.Follow = gameManager.player.transform;
-
-        if (eventObjSpawnData.Count > 0)
-        {
-            gameManager.player.transform.position = eventObjSpawnData[0].eventObject.transform.position;
-        }
 
         currentTextNum = 0;
         doFirstText = true;
@@ -161,12 +163,13 @@ public class Texts : Text_Base
 
             talkManager.CurrentEvents.Add(objData.eventObject.GetComponent<TextEventObject>());
 
-            talkManager.CurrentEvents.ForEach((item) => item.CanDoEvent = true);
         });
     }
 
     public void SetText() // gameManager의 SetSlowTime이 실행된 상태면 텍스트 설정이 느리게 되는 버그
     {
+        talkManager.CurrentEvents.ForEach((item) => item.CanDoEvent = true); // hiddenText로 넘어갈 때 두번실행됌
+
         canNextTalk = texts[currentTextNum].canNextTalk;
 
         SetSpriteRenderers();

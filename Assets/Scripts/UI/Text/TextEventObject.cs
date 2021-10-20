@@ -37,6 +37,7 @@ public class TextEventObject : TextEventObject_Base
         {
             if (value)
             {
+                Debug.Log("aaa");
                 eventNum++;
                 originPos = transform.position;
             }
@@ -112,16 +113,19 @@ public class TextEventObject : TextEventObject_Base
     private void DoMoveEvent()
     {
         eventNum = Mathf.Clamp(eventNum, 0, eventDatas.Count - 1);
+
         spriteRenderer.flipX = eventDatas[eventNum].flipX;
 
         transform.position = Vector2.MoveTowards(transform.position, originPos + eventDatas[eventNum].moveTargetPos, eventDatas[eventNum].moveSpeed * Time.deltaTime);
 
         if (eventDatas[eventNum].animName != "")
         {
+            spriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
             anim.Play(eventDatas[eventNum].animName);
         }
         else
         {
+            spriteRenderer.color = new Vector4(1f, 1f, 1f, 0f);
             anim.SetTrigger("GoToFirst");
         }
 
@@ -158,7 +162,6 @@ public class TextEventObject : TextEventObject_Base
         {
             fadeOutStarted = false;
 
-            TalkManager.Instance.CurrentEvents.Remove(this);
             gameObject.SetActive(false);
         }
     }

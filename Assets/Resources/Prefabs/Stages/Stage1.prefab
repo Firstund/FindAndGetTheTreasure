@@ -5240,6 +5240,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7849156080315921613}
     m_Modifications:
+    - target: {fileID: 524733670752210628, guid: f243d7def3c56804d94f53d89964f46c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 22.885939
+      objectReference: {fileID: 0}
+    - target: {fileID: 524733670752210628, guid: f243d7def3c56804d94f53d89964f46c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.875
+      objectReference: {fileID: 0}
+    - target: {fileID: 524733670752210628, guid: f243d7def3c56804d94f53d89964f46c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -15.914
+      objectReference: {fileID: 0}
     - target: {fileID: 5293386144212182963, guid: f243d7def3c56804d94f53d89964f46c, type: 3}
       propertyPath: m_Name
       value: TextEventTrigger_MoveTutorial
