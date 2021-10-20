@@ -804,7 +804,7 @@ PrefabInstance:
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: eventObjSpawnData.Array.data[0].eventObject
       value: 
-      objectReference: {fileID: 1498653872}
+      objectReference: {fileID: 1145460111}
     - target: {fileID: 98518312725156332, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: m_Name
       value: TextBox_1_3_MoveTutorialHiddenText
