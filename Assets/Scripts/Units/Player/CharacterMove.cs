@@ -49,6 +49,8 @@ public class CharacterMove : MonoBehaviour
     private GameObject hurtSoundBox = null;
     [SerializeField]
     private GameObject jumpSoundBox = null;
+    [SerializeField]
+    private GameObject stapSoundBox = null;
 
     [Header("여기부터 이펙트들")]
     [SerializeField]
@@ -59,6 +61,8 @@ public class CharacterMove : MonoBehaviour
     private GameObject slideAtSideWall = null;
     [SerializeField]
     private GameObject jumpEffect = null;
+    [SerializeField]
+    private GameObject stapEffect = null;
     [SerializeField]
     private GameObject reflectEffect = null;
     private GameObject currentSlideAtSideWallEffect = null;
@@ -973,8 +977,11 @@ public class CharacterMove : MonoBehaviour
             staping = true;
             anim.Play(characterName + "Stap");
 
-            spawnEffect.ShowEffect(jumpEffect, transform.position);
-            stageManager.SpawnSoundBox(jumpSoundBox);
+            Vector2 spawnPos = transform.position;
+            spawnPos.y--;
+
+            spawnEffect.ShowEffect(stapEffect, spawnPos);
+            stageManager.SpawnSoundBox(stapSoundBox);
 
             if (rigid.velocity.y <= -20f)
             {

@@ -5537,10 +5537,12 @@ MonoBehaviour:
   attackSoundBox: {fileID: 6815060912298649864, guid: c6dc2a82fe465304d8bffe80eebd9746, type: 3}
   hurtSoundBox: {fileID: 758409182668700053, guid: eebc025157ad5704cbfec068c1fd5b72, type: 3}
   jumpSoundBox: {fileID: 8538887207857704578, guid: 5a4695ff55e895f4a91bab8193165629, type: 3}
+  stapSoundBox: {fileID: 8538887207857704578, guid: d4836f3261475134298f70256d269e64, type: 3}
   attackEffect: {fileID: 2650916574421451465, guid: 3343c6ae7106e4e45870f9f12dd67316, type: 3}
   dashAttackEffect: {fileID: 3136435146279858430, guid: 958cdaf14433d3d47b3c40003c875f1d, type: 3}
   slideAtSideWall: {fileID: 6449521256822418348, guid: 3e882ce853fb65444a834277d739e54d, type: 3}
   jumpEffect: {fileID: 3275992218428455322, guid: 17657c5b5e7fdcc48be57616642622e5, type: 3}
+  stapEffect: {fileID: 3275992218428455322, guid: ded14106cb8c80b41ac8fc3f74f1a45f, type: 3}
   reflectEffect: {fileID: 3712944619940778220}
   skillUseValue:
     attack: 2

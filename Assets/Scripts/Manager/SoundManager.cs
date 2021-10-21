@@ -33,6 +33,11 @@ public class SoundManager : MonoBehaviour
     private float mainBGMPitchStart = 0f;
     private float mainBGMPitchTarget = 0f;
 
+    private float mainBGMVolumeTimer = 0f;
+    private float mainBGMVolumeTimerOrigin = 0f;
+    private float mainBGMVolumeStart = 0f;
+    private float mainBGMVolumeTarget = 0f;
+
     [SerializeField]
     private List<AudioSource> jumpEffectAudis = new List<AudioSource>();
     public List<AudioSource> JumpEffectAudis = new List<AudioSource>();
@@ -47,6 +52,7 @@ public class SoundManager : MonoBehaviour
     private void Update()
     {
         SetPitch();
+        SetVolume();
     }
 
     private void SetPitch()
@@ -62,6 +68,19 @@ public class SoundManager : MonoBehaviour
             mainBGM.pitch = 1f;
         }
     }
+    private void SetVolume()
+    {
+        if(mainBGMVolumeTimer > 0f)
+        {
+            mainBGMVolumeTimer -= Time.deltaTime;
+
+            mainBGM.volume = Mathf.Lerp(mainBGMVolumeStart, mainBGMVolumeTarget, mainBGMVolumeTimer / mainBGMVolumeTimerOrigin);
+        }
+        else
+        {
+            mainBGM.volume = 1f;
+        }
+    }
 
     public void SetMainBGMPitchByLerp(float start, float target, float time)
     {
@@ -71,5 +90,16 @@ public class SoundManager : MonoBehaviour
         mainBGMPitchStart = start;
         mainBGMPitchTarget = target;
     }
+    public void SetMainBGMVolumeByLerp(float start, float target, float time)
+    {
+        mainBGMVolumeTimer = time;
+        mainBGMVolumeTimerOrigin = mainBGMVolumeTimer;
 
+        mainBGMVolumeStart = start;
+        mainBGMVolumeTarget = target;
+    }
+    public void SetMainBGMVolume(float volume)
+    {
+        mainBGM.volume = volume;
+    }
 }

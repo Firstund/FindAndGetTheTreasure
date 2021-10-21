@@ -111,6 +111,7 @@ public class CharacterTimeWarp : MonoBehaviour
             _isTimeWarp = true;
 
             soundManager.SetMainBGMPitchByLerp(1, -7, timeWarpDoTime);
+            soundManager.SetMainBGMVolumeByLerp(1f, 0.2f, timeWarpDoTime);
         }
 
         timeWarpPositionEffect.SetActive(canTimeWarp);
