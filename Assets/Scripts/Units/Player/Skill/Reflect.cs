@@ -6,6 +6,7 @@ public class Reflect : MonoBehaviour
 {
     private GameManager gameManager = null;
     private StageManager stageManager = null;
+    private SoundManager soundManager = null;
 
     private bool isAttack = false;
     private bool timeSlowSoundEffectBoxSpawned = false;
@@ -35,6 +36,7 @@ public class Reflect : MonoBehaviour
             if (canReflect)
             {
                 canSettingAngle = value;
+                // soundManager.SetMainBGMPitchByLerp(1, -5, refelctTimer.GetComponent<ReflectTimer>().getTime);
             }
         }
     }
@@ -78,6 +80,7 @@ public class Reflect : MonoBehaviour
     private void Awake()
     {
         gameManager = GameManager.Instance;
+        soundManager = SoundManager.Instance;
     }
     void Start()
     {

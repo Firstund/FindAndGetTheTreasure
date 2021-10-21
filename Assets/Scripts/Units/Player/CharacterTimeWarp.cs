@@ -7,6 +7,7 @@ using DG.Tweening;
 public class CharacterTimeWarp : MonoBehaviour
 {
     private GameManager gameManager = null;
+    private SoundManager soundManager = null;
     private PlayerInput playerInput = null;
     private CharacterMove characterMove = null;
     private CharacterStat characterStat = null;
@@ -57,6 +58,7 @@ public class CharacterTimeWarp : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
+        soundManager = SoundManager.Instance;
 
         playerInput = GetComponent<PlayerInput>();
         characterMove = GetComponent<CharacterMove>();
@@ -107,6 +109,8 @@ public class CharacterTimeWarp : MonoBehaviour
             characterStat.sp -= characterMove.SkillUseSpValue.timeWarp;
             canTimeWarp = false;
             _isTimeWarp = true;
+
+            soundManager.SetMainBGMPitchByLerp(1, -7, timeWarpDoTime);
         }
 
         timeWarpPositionEffect.SetActive(canTimeWarp);
