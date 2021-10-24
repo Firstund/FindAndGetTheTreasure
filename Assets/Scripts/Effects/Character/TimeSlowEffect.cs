@@ -15,11 +15,6 @@ public class TimeSlowEffect : MonoBehaviour
     private void Awake() 
     {
         gameManager = GameManager.Instance;
-
-        gameManager.SetFalseSlowTimeSomeObjects += () =>
-        {
-            gameObject.SetActive(false);
-        };
     }
     void Update()
     {
@@ -39,5 +34,17 @@ public class TimeSlowEffect : MonoBehaviour
     {
         transform.localScale = new Vector3(0f, 0f, 1f);
         fadeInTimer = 0f;
+
+        gameManager.SetFalseSlowTimeSomeObjects += () =>
+        {
+            gameObject.SetActive(false);
+        };
+    }
+    private void OnDisable() 
+    {
+        gameManager.SetFalseSlowTimeSomeObjects -= () =>
+        {
+            gameObject.SetActive(false);
+        };
     }
 }
