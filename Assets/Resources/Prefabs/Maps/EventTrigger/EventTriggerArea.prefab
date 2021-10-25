@@ -76,3 +76,9 @@ MonoBehaviour:
       stayThisArea: 0
       staySec: 0
     getKey: 1201000011010000
+  eventTriggerObj: {fileID: 0}
+  targetObjLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  eventTriggerAreaList: []
+  triggerLooping: 0

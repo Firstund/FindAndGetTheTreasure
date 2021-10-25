@@ -30,6 +30,8 @@ public class EventTriggerArea : MonoBehaviour
     private Conditions conditions;
     [SerializeField]
     private GameObject eventTriggerObj = null;
+    [SerializeField]
+    private LayerMask targetObjLayer;
 
     [Header("이 이벤트가 활성화 되고 나서 활성화 될 EventTriggerArea들")]
     [SerializeField]
@@ -179,7 +181,7 @@ public class EventTriggerArea : MonoBehaviour
     {
         if (conditions.enterThisArea)
         {
-            if (1 << other.gameObject.layer == LayerMask.GetMask("PLAYER"))
+            if (1 << other.gameObject.layer == targetObjLayer)
             {
                 playerEnterThisArea = true;
             }
@@ -187,7 +189,7 @@ public class EventTriggerArea : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (1 << other.gameObject.layer == LayerMask.GetMask("PLAYER"))
+        if (1 << other.gameObject.layer == targetObjLayer)
         {
             if (conditions.stayThisArea.stayThisArea)
             {
@@ -197,7 +199,7 @@ public class EventTriggerArea : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (1 << other.gameObject.layer == LayerMask.GetMask("PLAYER"))
+        if (1 << other.gameObject.layer == targetObjLayer)
         {
             if (conditions.enterThisArea)
             {
