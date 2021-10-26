@@ -202,6 +202,11 @@ public class CharacterMove : MonoBehaviour
 
         stageManager.SetPlayerRespawnPosition(transform.position);
 
+        stageManager.PlayerRespawn += () =>
+        {
+            characterStat.hp = characterStat.firstHp;
+        };
+
         if (playerInput == null)
         {
             playerInput = gameObject.AddComponent<PlayerInput>();
@@ -212,6 +217,8 @@ public class CharacterMove : MonoBehaviour
         firstMass = rigid.mass;
 
         whatIsHitable.value = whatIsEnemy + whatIsGround;
+
+        characterStat.hp = characterStat.firstHp;
 
         pulley.SetActive(false);
     }
@@ -251,7 +258,6 @@ public class CharacterMove : MonoBehaviour
         isDead = false;
         attacking = false;
 
-        characterStat.hp = characterStat.firstHp;
         spriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
     }
     private void WhenIsHangFalse()

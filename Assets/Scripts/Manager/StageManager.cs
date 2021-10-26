@@ -71,6 +71,7 @@ public class StageManager : MonoBehaviour
     private CinemachineVirtualCamera cinemachineVirtualCamera = null;
 
     private Func<float, float> TimerCheck;
+    public event Action PlayerRespawn;
 
     private void Awake()
     {
@@ -91,6 +92,12 @@ public class StageManager : MonoBehaviour
 
             return t;
 
+        };
+
+        PlayerRespawn = () =>
+        {
+            gameManager.player.gameObject.SetActive(true);
+            gameManager.player.transform.position = PlayerRespawnTrm.position;
         };
 
     }
@@ -284,11 +291,10 @@ public class StageManager : MonoBehaviour
     }
     public void Respawn()
     {
-        Invoke("PlayerRespawn", respawnDelay);
+        Invoke("RespawnPlayer", respawnDelay);
     }
-    public void PlayerRespawn()
+    public void RespawnPlayer()
     {
-        gameManager.player.gameObject.SetActive(true);
-        gameManager.player.transform.position = PlayerRespawnTrm.position;
+        PlayerRespawn();
     }
 }
