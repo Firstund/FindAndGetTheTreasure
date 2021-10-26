@@ -13,16 +13,16 @@ TextureImporter:
     second: Pepper publish._2
   - first:
       213: 1627113485811588198
-    second: Pepper publish._3
+    second: Pepper publish._Icon
   - first:
       213: 1213466930230243087
-    second: Pepper publish._4
+    second: Dofina_WalkR0
   - first:
       213: 2850284302858137940
-    second: Pepper publish._5
+    second: Dofina_WalkR1
   - first:
       213: -851053162531539100
-    second: Pepper publish._6
+    second: Dofina_WalkR2
   - first:
       213: -4803938466359678493
     second: Pepper publish._7
@@ -34,13 +34,13 @@ TextureImporter:
     second: Pepper publish._9
   - first:
       213: -8176845566098919731
-    second: Pepper publish._10
+    second: Dofina_WalkL0
   - first:
       213: 1450291684337545898
-    second: Pepper publish._11
+    second: Dofina_WalkL1
   - first:
       213: -822019729757235961
-    second: Pepper publish._12
+    second: Dofina_WalkL2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -150,7 +150,7 @@ TextureImporter:
         width: 18
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -171,7 +171,7 @@ TextureImporter:
         width: 18
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -192,7 +192,7 @@ TextureImporter:
         width: 18
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -205,15 +205,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pepper publish._3
+      name: Pepper publish._Icon
       rect:
         serializedVersion: 2
-        x: 80
-        y: 9
-        width: 92
-        height: 102
+        x: 73
+        y: 0
+        width: 106
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -226,7 +226,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pepper publish._4
+      name: Dofina_WalkR0
       rect:
         serializedVersion: 2
         x: 6
@@ -234,7 +234,7 @@ TextureImporter:
         width: 12
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -247,7 +247,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pepper publish._5
+      name: Dofina_WalkR1
       rect:
         serializedVersion: 2
         x: 30
@@ -255,7 +255,7 @@ TextureImporter:
         width: 12
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -268,7 +268,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pepper publish._6
+      name: Dofina_WalkR2
       rect:
         serializedVersion: 2
         x: 54
@@ -276,7 +276,7 @@ TextureImporter:
         width: 12
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -297,7 +297,7 @@ TextureImporter:
         width: 18
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -318,7 +318,7 @@ TextureImporter:
         width: 18
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -339,7 +339,7 @@ TextureImporter:
         width: 18
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -352,7 +352,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pepper publish._10
+      name: Dofina_WalkL0
       rect:
         serializedVersion: 2
         x: 6
@@ -360,7 +360,7 @@ TextureImporter:
         width: 12
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -373,7 +373,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pepper publish._11
+      name: Dofina_WalkL1
       rect:
         serializedVersion: 2
         x: 30
@@ -381,7 +381,7 @@ TextureImporter:
         width: 12
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -394,7 +394,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pepper publish._12
+      name: Dofina_WalkL2
       rect:
         serializedVersion: 2
         x: 54
@@ -402,7 +402,7 @@ TextureImporter:
         width: 12
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
