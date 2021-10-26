@@ -5776,6 +5776,7 @@ MonoBehaviour:
   refelctTimer: {fileID: 2393118789511467043}
   timeSlowEffectObj: {fileID: 5572123978931887289}
   timeSlowEffectSoundBox: {fileID: 8538887207857704578, guid: 7257171e1d63ec74a9196cf49ea6a104, type: 3}
+  timeSlowEffectSoundBox2: {fileID: 8538887207857704578, guid: 7716689f5f022ee40869e7b91256407a, type: 3}
   projectileShootLine: {fileID: 7277472147057837386}
   anim: {fileID: 0}
   shootTrm: {fileID: 5143956854996559995}

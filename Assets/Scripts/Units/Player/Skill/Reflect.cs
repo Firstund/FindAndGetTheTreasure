@@ -57,6 +57,8 @@ public class Reflect : MonoBehaviour
 
     [SerializeField]
     private GameObject timeSlowEffectSoundBox = null;
+    [SerializeField]
+    private GameObject timeSlowEffectSoundBox2 = null;
     private GameObject currentEffectSoundBox = null;
 
     [SerializeField]
@@ -182,7 +184,8 @@ public class Reflect : MonoBehaviour
     {
         if (!timeSlowSoundEffectBoxSpawned)
         {
-            currentEffectSoundBox = stageManager.SpawnSoundBox(timeSlowEffectSoundBox);
+            stageManager.SpawnSoundBox(timeSlowEffectSoundBox);
+            currentEffectSoundBox = stageManager.SpawnSoundBox(timeSlowEffectSoundBox2);
 
             SpawnDespawnEffects(true);
 
