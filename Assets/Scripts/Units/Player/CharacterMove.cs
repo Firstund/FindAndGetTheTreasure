@@ -219,7 +219,7 @@ public class CharacterMove : MonoBehaviour
     {
         if (!(isDead || gameManager.stopTime || characterTimeWarp.isTimeWarp))
         {
-            if(anim.speed == 0f)
+            if (anim.speed == 0f)
             {
                 anim.speed = 1f;
             }
@@ -319,7 +319,7 @@ public class CharacterMove : MonoBehaviour
         if (playerInput.isJump && !staping)
         {
             attacking = false;
-            if (upWall && !isGround)
+            if (upWall && !(isGround || leftWall || rightWall))
             {
                 if (!IsHang)
                 {
@@ -951,13 +951,11 @@ public class CharacterMove : MonoBehaviour
         {
             rigid.velocity = new Vector2(XMove * characterStat.speed, rigid.velocity.y);
         }
-        else if (powerTimer <= 0f)
+        else if(IsHang)
         {
             if (spriteRenderer.flipX)
             {
-
                 rigid.velocity = new Vector2(-characterStat.hangSpeed, rigid.velocity.y);
-
             }
             else
             {
@@ -1045,6 +1043,11 @@ public class CharacterMove : MonoBehaviour
 
     private void LRCheck(float XMove)
     {
+        if(playerInput.moveBtnDown)
+        {
+            powerTimer = 0f;
+        }
+
         if (!(IsHang || reflect.CanSettingAngle))
         {
             if (XMove < 0f)

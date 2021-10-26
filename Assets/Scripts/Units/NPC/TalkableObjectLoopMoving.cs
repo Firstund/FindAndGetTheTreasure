@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TalkableObjectLoopMoving : MonoBehaviour
 {
+    private GameManager gameManager = null;
+
     [SerializeField]
     private Vector2 moveRange;
     [SerializeField]
@@ -23,14 +25,19 @@ public class TalkableObjectLoopMoving : MonoBehaviour
     }
 
     private SpriteRenderer spriteRenderer = null;
+    private Animator anim = null;
 
     private Vector2 currentPosition = Vector2.zero;
 
     void Start()
     {
+        gameManager = GameManager.Instance;
+
         originPos = transform.position;
         targetPos = originPos + moveRange;
+
         spriteRenderer = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
 
         if (moveRange.x > 0f)
         {
@@ -46,7 +53,15 @@ public class TalkableObjectLoopMoving : MonoBehaviour
     {
         currentPosition = transform.position;
 
-        Move();
+        if (!gameManager.stopTime)
+        {
+            anim.speed = 1f;
+            Move();
+        }
+        else
+        {
+            anim.speed = 0f;
+        }
 
         transform.position = currentPosition;
     }
