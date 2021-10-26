@@ -135,8 +135,11 @@ public class Texts : Text_Base
 
         if (talkManager.CurrentTalkableObject != null)
         {
-            talkManager.CurrentTalkableObject.gameObject.SetActive(true);
-            talkManager.CurrentTalkableObject.StartFadeIn();
+            if (!talkManager.CurrentTalkableObject.gameObject.activeSelf)
+            {
+                talkManager.CurrentTalkableObject.gameObject.SetActive(true);
+                talkManager.CurrentTalkableObject.StartFadeIn();
+            }
             talkManager.CurrentTalkableObject = null;
         }
 

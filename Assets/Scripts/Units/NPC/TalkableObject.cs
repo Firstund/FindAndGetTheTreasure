@@ -21,6 +21,8 @@ public class TalkableObject : MonoBehaviour
     [SerializeField]
     private int spawnTextBoxIndex = 0;
 
+    [SerializeField]
+    private bool despawnWhenTextEvent = false;
     private bool fadeInStarted = false;
 
     void Start()
@@ -47,7 +49,7 @@ public class TalkableObject : MonoBehaviour
             talkManager.currentTextBoxesParent.SpawnTextBox(spawnTextBoxIndex); // 이 오브젝트도 대화창 이벤트시 SetActive(false)로 한다.
             talkManager.CurrentTalkableObject = this;
             
-            gameObject.SetActive(false);
+            gameObject.SetActive(!despawnWhenTextEvent);
         }
     }
     public void StartFadeIn()
