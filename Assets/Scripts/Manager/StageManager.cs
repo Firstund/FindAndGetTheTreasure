@@ -31,7 +31,8 @@ public class StageManager : MonoBehaviour
     {
         get { return enemys; }
     }
-
+    [SerializeField]
+    private Material stageSkyBox = null;
     [SerializeField]
     private Transform _enemys = null;
 
@@ -99,7 +100,6 @@ public class StageManager : MonoBehaviour
             gameManager.player.gameObject.SetActive(true);
             gameManager.player.transform.position = PlayerRespawnTrm.position;
         };
-
     }
 
     void Start()
@@ -110,6 +110,11 @@ public class StageManager : MonoBehaviour
         cinemachineVirtualCamera.m_Follow = gameManager.player.transform;
 
         originOrthographicSize = cinemachineVirtualCamera.m_Lens.OrthographicSize;
+
+        if (stageSkyBox != null)
+        {
+            Camera.main.GetComponent<Skybox>().material = stageSkyBox;
+        }
     }
 
     void Update()
