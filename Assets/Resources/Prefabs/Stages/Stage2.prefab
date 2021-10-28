@@ -13751,7 +13751,7 @@ GameObject:
   - component: {fileID: 7523624113114499573}
   - component: {fileID: 6861827338779959412}
   - component: {fileID: 5513108091997428125}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: StageCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
