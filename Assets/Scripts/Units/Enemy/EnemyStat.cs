@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStat : EnemyStatus
+public class EnemyStat : EnemyStatus, IDespawnableByOutCamera
 {
     private GameManager gameManager = null;
     private StageManager stageManager = null;
+    private ObjectOutCheck objectOutCheck = null;
     public SearchCharacter searchCharacter { get; private set; }
     public Status currentStatus { get; private set; }
 
@@ -97,9 +98,7 @@ public class EnemyStat : EnemyStatus
         get { return _shootRange; }
     }
 
-    [Header("스테이터스 변경을 위한 플레이어 포지션값")]
-    [SerializeField]
-    private Transform _playerPosition = null;
+    private Transform _playerPosition = null; // 스테이터스 변경을 위한 플레이어 포지션값
     public Transform playerPosition
     {
         get { return _playerPosition; }
@@ -108,10 +107,9 @@ public class EnemyStat : EnemyStatus
     [SerializeField]
     private float despawnTimer = 10f;
     private float firstDespawnTimer = 0f;
-    private bool isOutCamera = false;
     public bool IsOutCamera
     {
-        get { return isOutCamera; }
+        get { return objectOutCheck.IsOutCamera; }
     }
 
     private void Awake()
@@ -127,28 +125,20 @@ public class EnemyStat : EnemyStatus
     void Start()
     {
         stageManager = StageManager.Instance;
-    }
 
+        objectOutCheck = GetComponent<ObjectOutCheck>();
+
+        if(objectOutCheck == null)
+        {
+            objectOutCheck = gameObject.AddComponent<ObjectOutCheck>();
+            
+            Debug.LogWarning(gameObject.name + "has no ObjectOutCheck Script.");
+        }
+    }
 
     void Update()
     {
         currentStatus = searchCharacter.CheckStatus(playerPosition.position, isShootProjectile, foundRange, shootRange, attackRange);
-
-        OutCheck();
-    }
-
-    private void OutCheck()
-    {
-        Vector3 viewPortPos = Camera.main.WorldToViewportPoint(transform.position);
-
-        if (viewPortPos.x < 0f || viewPortPos.x > 1f || viewPortPos.y < 0f || viewPortPos.y > 1f)
-        {
-            OnOutOfCamera();
-        }
-        else
-        {
-            OnInOfCamera();
-        }
     }
 
     void FixedUpdate()
@@ -156,9 +146,9 @@ public class EnemyStat : EnemyStatus
         DespawnByOutCamera();
     }
 
-    private void DespawnByOutCamera()
+    public void DespawnByOutCamera()
     {
-        if (isOutCamera)
+        if (objectOutCheck.IsOutCamera)
         {
             despawnTimer -= Time.fixedDeltaTime;
         }
@@ -168,15 +158,4 @@ public class EnemyStat : EnemyStatus
             stageManager.DespawnEnemy(gameObject);
         }
     }
-
-    private void OnInOfCamera()
-    {
-        isOutCamera = false;
-        despawnTimer = firstDespawnTimer;
-    }
-    private void OnOutOfCamera()
-    {
-        isOutCamera = true;
-    }
-
 }

@@ -92,7 +92,7 @@ public class EnemyMove : EnemyStatus
 
     void Update()
     {
-        if (!enemyStat.IsOutCamera)
+        if (!enemyStat.IsOutCamera) // 카메라 밖으로 나간 처리 후 일정 시간이 지나야 멈추도록 바꾸자
         {
             if (!(isDead || gameManager.stopTime))
             {

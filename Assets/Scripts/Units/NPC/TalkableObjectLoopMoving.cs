@@ -5,14 +5,17 @@ using UnityEngine;
 public class TalkableObjectLoopMoving : MonoBehaviour
 {
     private GameManager gameManager = null;
+    private ObjectOutCheck objectOutCheck = null;
 
     [SerializeField]
     private Vector2 moveRange;
+
     [SerializeField]
     private float moveSpeed = 1f;
 
     private Vector2 originPos = Vector2.zero;
     private Vector2 targetPos = Vector2.zero;
+
     private bool moveToTargetPos = true;
 
     private bool MoveToTargetPos
@@ -39,6 +42,20 @@ public class TalkableObjectLoopMoving : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 
+        DirectionCheck();
+
+        objectOutCheck = GetComponent<ObjectOutCheck>();
+
+        if (objectOutCheck == null)
+        {
+            objectOutCheck = gameObject.AddComponent<ObjectOutCheck>();
+
+            Debug.LogWarning(gameObject.name + "has no ObjectOutCheck Script.");
+        }
+    }
+
+    private void DirectionCheck()
+    {
         if (moveRange.x > 0f)
         {
             spriteRenderer.flipX = false;
@@ -51,19 +68,22 @@ public class TalkableObjectLoopMoving : MonoBehaviour
 
     void Update()
     {
-        currentPosition = transform.position;
-
-        if (!gameManager.stopTime)
+        if (!objectOutCheck.IsOutCamera)
         {
-            anim.speed = 1f;
-            Move();
-        }
-        else
-        {
-            anim.speed = 0f;
-        }
+            currentPosition = transform.position;
 
-        transform.position = currentPosition;
+            if (!gameManager.stopTime)
+            {
+                anim.speed = 1f;
+                Move();
+            }
+            else
+            {
+                anim.speed = 0f;
+            }
+
+            transform.position = currentPosition;
+        }
     }
 
     private void Move()

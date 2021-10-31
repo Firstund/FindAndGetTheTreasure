@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3647104476763481179}
   - component: {fileID: 3647104476763481176}
   - component: {fileID: 3647104476763481177}
+  - component: {fileID: 3645754173008469575}
   - component: {fileID: 3647104476763481174}
   - component: {fileID: 3647104476763481175}
   - component: {fileID: 3647104476763481172}
@@ -206,6 +207,18 @@ MonoBehaviour:
   _shootRange: 5
   _playerPosition: {fileID: 0}
   despawnTimer: 500
+--- !u!114 &3645754173008469575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3647104476763481170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59fe6c60eea78542979da09c24dd1b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3647104476763481174
 MonoBehaviour:
   m_ObjectHideFlags: 0
