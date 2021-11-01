@@ -282,7 +282,7 @@ public class Texts : Text_Base
 
                 if (endGameAtEndTalk)
                 {
-                    gameManager.GameEnd(gameClearAtEndGame);
+                    gameManager.StageEnd(gameClearAtEndGame);
                 }
             }
 

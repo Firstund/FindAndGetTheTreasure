@@ -31,7 +31,7 @@ public class Portal : MonoBehaviour
 
     void Update()
     {
-        if (thisPortalNum == 0)
+        if (thisPortalNum % 2 == 0)
         {
             anim.Play("Portal_B");
         }

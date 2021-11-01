@@ -23,14 +23,14 @@ public class GameEndScript : MonoBehaviour
     }
     private void OnEnable() 
     {
-        gameManager.GameEnd += gameClear =>
+        gameManager.StageEnd += gameClear =>
         {
             WhenGameEnd();
         };
     }
     private void OnDisable() 
     {
-        gameManager.GameEnd -= gameClear =>
+        gameManager.StageEnd -= gameClear =>
         {
             WhenGameEnd();
         };

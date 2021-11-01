@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
     public Action StopSlowTimeByLerp;
     public event Action SetFalseSlowTimeSomeObjects;
     public event Action<int> SpawnStages;
-    public Action<bool> GameEnd;
+    public Action<bool> StageEnd;
 
     private bool _stopTime = false;
     public bool stopTime
@@ -220,7 +220,7 @@ public class GameManager : MonoBehaviour
             _currentStage = stageNum;
         };
 
-        GameEnd = gameClear =>
+        StageEnd = gameClear =>
         {
             isGameEnd = gameClear;
 
