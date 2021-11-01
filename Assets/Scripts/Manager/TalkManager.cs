@@ -67,7 +67,7 @@ public class TalkManager : MonoBehaviour
 
         dontDestroyOnLoadManager.DoNotDestroyOnLoad(gameObject);
 
-        gameManager.SpawnStages += x => SpawnTextBoxes(x - 1);
+        gameManager.SpawnStages += stageNum => SpawnTextBoxes(stageNum);
         gameManager.StageEnd += a => DeSpawnTextBoxes();
     }
     private void Update()
@@ -76,7 +76,7 @@ public class TalkManager : MonoBehaviour
     }
     private void OnDisable()
     {
-        gameManager.SpawnStages -= x => SpawnTextBoxes(x - 1);
+        gameManager.SpawnStages -= stageNum => SpawnTextBoxes(stageNum);
         gameManager.StageEnd -= a => DeSpawnTextBoxes();
     }
     private void SpawnTextBoxes(int index)

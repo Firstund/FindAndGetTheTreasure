@@ -85,10 +85,10 @@ public class GameManager : MonoBehaviour
     }
     private float slowTimeSomeObjectsTimer = 0f;
 
-    private int _currentStage = 0;
-    public int currentStage
+    private int _currentStageNum = 0;
+    public int currentStageNum
     {
-        get { return _currentStage; }
+        get { return _currentStageNum; }
     }
 
     private Func<float, float> TimeSlow;
@@ -212,12 +212,12 @@ public class GameManager : MonoBehaviour
             isGameEnd = false;
             SceneManager.LoadScene("StageScene");
 
-            if (stageNum < 1)
+            if (stageNum < 0)
             {
-                stageNum = 1;
+                stageNum = 0;
             }
 
-            _currentStage = stageNum;
+            _currentStageNum = stageNum;
         };
 
         StageEnd = gameClear =>

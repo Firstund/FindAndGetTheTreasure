@@ -10,7 +10,7 @@ public class SpawnStageManager : MonoBehaviour
     {
         gameManager = GameManager.Instance;
 
-        currentStage = Instantiate(gameManager.stages[gameManager.currentStage - 1]);
+        currentStage = Instantiate(gameManager.stages[gameManager.currentStageNum]);
     }
 
     public void SpawnNewStage(int stageNum) // 스테이지 안에서 다른 스테이지를 부를 때 사용
