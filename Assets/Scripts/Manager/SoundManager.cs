@@ -48,6 +48,9 @@ public class SoundManager : MonoBehaviour
     private void Start() 
     {
         dontDestroyOnLoadManager.DoNotDestroyOnLoad(gameObject);
+
+        SetMainBGMVolumeByLerp(1, 0, 5);
+        SetMainBGMPitch(1f);
     }
     private void Update()
     {
@@ -57,43 +60,40 @@ public class SoundManager : MonoBehaviour
 
     private void SetPitch()
     {
-        if (mainBGMPitchTimer > 0f)
+        if (mainBGMPitchTimer < mainBGMPitchTimerOrigin)
         {
-            mainBGMPitchTimer -= Time.deltaTime;
+            mainBGMPitchTimer += Time.deltaTime;
 
             mainBGM.pitch = Mathf.Lerp(mainBGMPitchStart, mainBGMPitchTarget, mainBGMPitchTimer / mainBGMPitchTimerOrigin);
-        }
-        else
-        {
-            mainBGM.pitch = 1f;
         }
     }
     private void SetVolume()
     {
-        if(mainBGMVolumeTimer > 0f)
+        if(mainBGMVolumeTimer < mainBGMVolumeTimerOrigin)
         {
-            mainBGMVolumeTimer -= Time.deltaTime;
+            mainBGMVolumeTimer += Time.deltaTime;
 
             mainBGM.volume = Mathf.Lerp(mainBGMVolumeStart, mainBGMVolumeTarget, mainBGMVolumeTimer / mainBGMVolumeTimerOrigin);
-        }
-        else
-        {
-            mainBGM.volume = 1f;
         }
     }
 
     public void SetMainBGMPitchByLerp(float start, float target, float time)
     {
-        mainBGMPitchTimer = time;
-        mainBGMPitchTimerOrigin = mainBGMPitchTimer;
+        mainBGMPitchTimer = 0f;
+        mainBGMPitchTimerOrigin = time;
 
         mainBGMPitchStart = start;
         mainBGMPitchTarget = target;
     }
+    public void SetMainBGMPitch(float pitch)
+    {
+        mainBGM.pitch = pitch;
+        mainBGMPitchTimer = mainBGMPitchTimerOrigin;
+    }
     public void SetMainBGMVolumeByLerp(float start, float target, float time)
     {
-        mainBGMVolumeTimer = time;
-        mainBGMVolumeTimerOrigin = mainBGMVolumeTimer;
+        mainBGMVolumeTimer = 0f;
+        mainBGMVolumeTimerOrigin = time;
 
         mainBGMVolumeStart = start;
         mainBGMVolumeTarget = target;
@@ -101,5 +101,6 @@ public class SoundManager : MonoBehaviour
     public void SetMainBGMVolume(float volume)
     {
         mainBGM.volume = volume;
+        mainBGMVolumeTimer = mainBGMVolumeTimerOrigin;
     }
 }

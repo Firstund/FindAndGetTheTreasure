@@ -37,6 +37,8 @@ public class DamagableObstacle : MonoBehaviour
 
         if (playerDamage)
         {
+            // 여기 제어문 문제있음
+            
             if ((playerDirection[0] && direction[0]) ||
                 (playerDirection[1] && direction[1]) ||
                 (playerDirection[2] && direction[2]) ||
@@ -49,8 +51,10 @@ public class DamagableObstacle : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
+        Debug.Log("aa");
         if (1 << col.gameObject.layer == LayerMask.GetMask("PLAYER")) // 플레이어 캐릭터인지 체크
         {
+            Debug.Log("bb");
             playerDamage = true;
         }
     }
