@@ -205,7 +205,6 @@ MonoBehaviour:
   _foundRange: 4
   _attackRange: 0.5
   _shootRange: 5
-  _playerPosition: {fileID: 0}
   despawnTimer: 500
 --- !u!114 &3645754173008469575
 MonoBehaviour:
@@ -219,6 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d59fe6c60eea78542979da09c24dd1b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOutTime: 2.5
 --- !u!114 &3647104476763481174
 MonoBehaviour:
   m_ObjectHideFlags: 0

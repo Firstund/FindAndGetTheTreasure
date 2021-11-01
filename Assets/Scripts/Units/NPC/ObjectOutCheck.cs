@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ObjectOutCheck : MonoBehaviour
 {
+    [SerializeField]
+    private float isOutTime = 1f;
+    private float isOutTimer = 0f;
+
     private bool isOutCamera = false;
     public bool IsOutCamera
     {
@@ -19,7 +23,19 @@ public class ObjectOutCheck : MonoBehaviour
 
         if (viewPortPos.x < 0f || viewPortPos.x > 1f || viewPortPos.y < 0f || viewPortPos.y > 1f)
         {
-            OnOutOfCamera();
+            if (isOutTimer > 0f)
+            {
+                isOutTimer -= Time.deltaTime;
+
+                if(isOutTimer <= 0f)
+                {
+                    isOutCamera = true;
+                }
+            }
+            else
+            {
+                OnOutOfCamera();
+            }
         }
         else
         {
@@ -29,9 +45,11 @@ public class ObjectOutCheck : MonoBehaviour
     private void OnInOfCamera()
     {
         isOutCamera = false;
+        isOutTimer = 0f;
     }
     private void OnOutOfCamera()
     {
-        isOutCamera = true;
+        // isOutCamera = true;
+        isOutTimer = isOutTime;
     }
 }
