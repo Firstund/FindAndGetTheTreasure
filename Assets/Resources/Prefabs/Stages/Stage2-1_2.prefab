@@ -2632,6 +2632,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle_U_Castle_0 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1481006937391222430, guid: f326f5decb7595840baf95b0ca3d78f6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6091733916864888939, guid: f326f5decb7595840baf95b0ca3d78f6, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2700,7 +2704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6091733916864888939, guid: f326f5decb7595840baf95b0ca3d78f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.778
+      value: 2.568
       objectReference: {fileID: 0}
     - target: {fileID: 6091733916864888939, guid: f326f5decb7595840baf95b0ca3d78f6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2986,6 +2990,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle_U_Castle_0 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1481006937391222430, guid: f326f5decb7595840baf95b0ca3d78f6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6091733916864888939, guid: f326f5decb7595840baf95b0ca3d78f6, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3090,7 +3098,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5143956854824626258, guid: ce39850188d3ea74f96c6a467d013132, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.07
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5143956854824626258, guid: ce39850188d3ea74f96c6a467d013132, type: 3}
       propertyPath: m_LocalPosition.z

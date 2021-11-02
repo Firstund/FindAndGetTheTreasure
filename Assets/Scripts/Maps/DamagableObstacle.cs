@@ -28,17 +28,15 @@ public class DamagableObstacle : MonoBehaviour
     void FixedUpdate()
     {
         // 테스트용
-        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.left + Vector2.up), Color.red, 10f);
-        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.left + Vector2.down), Color.red, 10f);
-        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.right + Vector2.up), Color.red, 10f);
-        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.right + Vector2.down), Color.red, 10f);
+        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.left + Vector2.up) * 10f, Color.red, 10f);
+        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.left + Vector2.down) * 10f, Color.red, 10f);
+        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.right + Vector2.up) * 10f, Color.red, 10f);
+        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.right + Vector2.down) * 10f, Color.red, 10f);
 
         CheckDirection();
 
         if (playerDamage)
         {
-            // 여기 제어문 문제있음
-            
             if ((playerDirection[0] && direction[0]) ||
                 (playerDirection[1] && direction[1]) ||
                 (playerDirection[2] && direction[2]) ||
@@ -51,10 +49,8 @@ public class DamagableObstacle : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("aa");
         if (1 << col.gameObject.layer == LayerMask.GetMask("PLAYER")) // 플레이어 캐릭터인지 체크
         {
-            Debug.Log("bb");
             playerDamage = true;
         }
     }
@@ -95,7 +91,7 @@ public class DamagableObstacle : MonoBehaviour
         {
             playerDirection[3] = true;
             playerDirection[2] = false;
-        }
+        } 
         else
         {
             playerDirection[3] = false;
@@ -104,10 +100,16 @@ public class DamagableObstacle : MonoBehaviour
     }
     private float GetPlayerYOnLineGraph(float a, float playerX)
     {
-        return a * playerX + (transform.position.y + transform.position.x);
+        float returnY = a * playerX + transform.position.y - (a * transform.position.x);
+        Debug.DrawLine(transform.position, new Vector2(playerX, returnY), Color.blue);
+        return returnY;
     }
     private float GetPlayerXOnLineGraph(float a, float playerY)
     {
-        return ((playerY - transform.position.y) / a) + transform.position.x;
+        float returnX = ((playerY - transform.position.y + (a * transform.position.x)) / a);
+
+        Debug.DrawLine(transform.position, new Vector2(returnX, playerY), Color.green);
+
+        return returnX;
     }
 }
