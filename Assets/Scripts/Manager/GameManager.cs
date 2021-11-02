@@ -14,6 +14,14 @@ public static class ScriptHelper
             action(item);
         }
     }
+    public static Vector2 Sum(this Vector2 vec1, Vector2 vec2)
+    {
+        return new Vector2(vec1.x + vec2.x, vec1.y + vec2.y);
+    }
+    public static Vector3 Sum(this Vector3 vec1, Vector3 vec2)
+    {
+        return new Vector3(vec1.x + vec2.x, vec1.y + vec2.y, vec1.z + vec2.z);
+    }
 }
 public class GameManager : MonoBehaviour
 {
