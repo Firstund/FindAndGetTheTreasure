@@ -49,7 +49,7 @@ public class SoundManager : MonoBehaviour
     {
         dontDestroyOnLoadManager.DoNotDestroyOnLoad(gameObject);
 
-        SetMainBGMVolumeByLerp(1, 0, 5);
+        // SetMainBGMVolumeByLerp(1, 0, 5);
         SetMainBGMPitch(1f);
     }
     private void Update()

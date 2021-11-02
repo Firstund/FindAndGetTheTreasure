@@ -91,7 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4289256257823219714}
   m_Layer: 0
-  m_Name: Stage_Base_Index
+  m_Name: Stage, StageIndex_StageName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

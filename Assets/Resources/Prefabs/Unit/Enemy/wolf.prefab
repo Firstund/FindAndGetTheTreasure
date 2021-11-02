@@ -128,7 +128,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -174,7 +174,7 @@ MonoBehaviour:
   searchResetDistance: 0.5
   searchRangeX: 5
   searchRangeY: 1
-  projectile: {fileID: 7053485288860369376, guid: 0b36cff4c5c464548bf079f656ed1a96, type: 3}
+  projectile: {fileID: 0}
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8
@@ -201,7 +201,7 @@ MonoBehaviour:
   _searchSpeed: 1
   _pursueSpeed: 5
   _attackDelay: 1
-  _isShootProjectile: 1
+  _isShootProjectile: 0
   _foundRange: 8
   _attackRange: 1
   _shootRange: 10

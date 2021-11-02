@@ -116,6 +116,15 @@ public class EnemyStat : EnemyStatus, IDespawnableByOutCamera
     {
         searchCharacter = GetComponent<SearchCharacter>();
 
+        objectOutCheck = GetComponent<ObjectOutCheck>();
+
+        if(objectOutCheck == null)
+        {
+            objectOutCheck = gameObject.AddComponent<ObjectOutCheck>();
+            
+            Debug.LogWarning(gameObject.name + "has no ObjectOutCheck Script.");
+        }
+
         gameManager = GameManager.Instance;
 
         _playerPosition = gameManager.player.transform;
@@ -126,14 +135,7 @@ public class EnemyStat : EnemyStatus, IDespawnableByOutCamera
     {
         stageManager = StageManager.Instance;
 
-        objectOutCheck = GetComponent<ObjectOutCheck>();
-
-        if(objectOutCheck == null)
-        {
-            objectOutCheck = gameObject.AddComponent<ObjectOutCheck>();
-            
-            Debug.LogWarning(gameObject.name + "has no ObjectOutCheck Script.");
-        }
+        
     }
 
     void Update()
