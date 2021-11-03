@@ -130,14 +130,14 @@ public class StageManager : MonoBehaviour
         if (shootObject == null)
         {
             GameObject a = Instantiate(shootIt, projectilesTrm);
-            a.GetComponent<EnemyProjectile>().SpawnSet(shootRange, enemyStat.ap, shootDir);
             a.transform.position = spawnPosition;
+            a.GetComponent<EnemyProjectile>().SpawnSet(shootRange, enemyStat.ap, shootDir);
         }
         else
         {
             shootObject.SetActive(true);
-            shootObject.GetComponent<EnemyProjectile>().SpawnSet(shootRange, enemyStat.ap, shootDir);
             shootObject.transform.position = spawnPosition;
+            shootObject.GetComponent<EnemyProjectile>().SpawnSet(shootRange, enemyStat.ap, shootDir);
             projectiles.Remove(shootObject);
         }
     }

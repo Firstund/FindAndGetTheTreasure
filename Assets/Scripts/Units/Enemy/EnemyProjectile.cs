@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnemyProjectile : Projectile_Base, IProjectile
 {
+    //TODO: 쏘면 플레레이어의 현재 위치로 날아가는 위치를 고정할 것인가에 관한 bool 변수와, 플레이어의 현재위치를 날아갈 방향으로 정하는 코드 작성
+    [SerializeField]
+    private bool isMoveToPlayer = false;
+
     void FixedUpdate()
     {
         if (gameManager.SlowTimeSomeObjects && gameManager.CurrentSlowTimePerSlowTime == 0)
@@ -12,7 +16,7 @@ public class EnemyProjectile : Projectile_Base, IProjectile
 
             DoFixedUpdate();
         }
-        else if(!gameManager.SlowTimeSomeObjects)
+        else if (!gameManager.SlowTimeSomeObjects)
         {
             speed = originSpeed;
 
@@ -24,7 +28,6 @@ public class EnemyProjectile : Projectile_Base, IProjectile
     {
         Move();
         Despawn();
-        GetDamage();
     }
 
     public void SpawnSet(float shootR, float dm, Vector2 angle)
@@ -33,42 +36,58 @@ public class EnemyProjectile : Projectile_Base, IProjectile
         isDestroy = false;
         shootRange = shootR;
         damage = dm;
-        shootAngle = angle;
+
+        if (isMoveToPlayer)
+        {
+            shootAngle = GameManager.Instance.player.currentPosition - (Vector2)transform.position;
+            shootAngle = shootAngle.normalized;
+        }
+        else
+        {
+            shootAngle = angle;
+        }
     }
     public void Move()
     {
         transform.Translate(shootAngle * speed * Time.fixedDeltaTime);
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            GetDamage();
+        }
+    }
     public void GetDamage()
     {
-        float distance = Vector2.Distance(gameManager.player.currentPosition, transform.position);
+        CharacterMove characterMove = gameManager.player.GetComponent<CharacterMove>();
 
-        if (distance <= hitRange)
+        if (characterMove.canHurt)
         {
-            CharacterMove characterMove = gameManager.player.GetComponent<CharacterMove>();
-
-            if (characterMove.canHurt)
-            {
-                characterMove.Hurt(damage);
-            }
-
-            isDestroy = true;
-            stageManager.DespawnProjectile(gameObject);
+            characterMove.Hurt(damage);
         }
+
+        DespawnProjectile();
     }
     public void Despawn()
     {
         if (!isDestroy)
         {
-            float distance = Vector2.Distance(firstPosition, transform.position);
+            float distance = 0f;
+
+            distance = Vector2.Distance(firstPosition, transform.position);
 
             if (distance >= shootRange)
             {
-
-                isDestroy = true;
-
-                stageManager.DespawnProjectile(gameObject);
+                DespawnProjectile();
             }
         }
+    }
+
+    private void DespawnProjectile()
+    {
+        isDestroy = true;
+
+        stageManager.DespawnProjectile(gameObject);
     }
 }

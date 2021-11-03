@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 215773991912648977}
   m_Layer: 8
   m_Name: wolf
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -195,11 +195,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isAirEnemy: 0
-  _hp: 3
+  _hp: 4
   _ap: 1
   _dp: 1
   _searchSpeed: 1
-  _pursueSpeed: 5
+  _pursueSpeed: 7
   _attackDelay: 1
   _isShootProjectile: 0
   _foundRange: 8

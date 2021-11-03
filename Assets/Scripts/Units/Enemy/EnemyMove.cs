@@ -510,7 +510,7 @@ public class EnemyMove : EnemyStatus
                 hitGround = Physics2D.Raycast(endPosition, endPosition - Vector2.down, transform.localScale.y + 0.5f, whatIsGround);
             }
 
-            searchTargetPosition = stageManager.PositionCantCrossWall(currentPosition, endPosition, (currentPosition.x > endPosition.x), whatIsGround);
+            searchTargetPosition = StageManager.Instance.PositionCantCrossWall(currentPosition, endPosition, (currentPosition.x > endPosition.x), whatIsGround);
 
             loopNum++;
 

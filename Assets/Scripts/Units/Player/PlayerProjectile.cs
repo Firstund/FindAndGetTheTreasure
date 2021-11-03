@@ -6,13 +6,15 @@ public class PlayerProjectile : Projectile_Base, IProjectile
 {
     [SerializeField]
     private GameObject attackSoundBox = null;
+    private GameObject targetEnemy = null;
+
     private bool soundBoxSpawned = false;
     private List<GameObject> Enemys = new List<GameObject>();
+
     void Update()
     {
         Move();
         Despawn();
-        GetDamage();
     }
     private void OnEnable()
     {
@@ -37,33 +39,30 @@ public class PlayerProjectile : Projectile_Base, IProjectile
     {
         transform.Translate(shootAngle * speed * Time.fixedDeltaTime);
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            targetEnemy = other.gameObject;
+            GetDamage();
+        }
+    }
     public void GetDamage()
     {
-        float distance = 0f;
-
-        foreach (var item in Enemys)
+        if (targetEnemy.activeSelf)
         {
-            if (item.activeSelf)
+            EnemyMove enemyMove = targetEnemy.GetComponent<EnemyMove>();
+
+            enemyMove.Hurt(damage);
+
+            if (!soundBoxSpawned)
             {
-                distance = Vector2.Distance(item.transform.position, transform.position);
+                stageManager.SpawnSoundBox(attackSoundBox);
 
-                if (distance <= hitRange)
-                {
-                    EnemyMove enemyMove = item.GetComponent<EnemyMove>();
-
-                    enemyMove.Hurt(damage);
-
-                    if (!soundBoxSpawned)
-                    {
-                        stageManager.SpawnSoundBox(attackSoundBox);
-
-                        soundBoxSpawned = true;
-                    }
-
-                    Enemys.Remove(item);
-                    break;
-                }
+                soundBoxSpawned = true;
             }
+
+            Enemys.Remove(targetEnemy);
         }
     }
     public void Despawn()

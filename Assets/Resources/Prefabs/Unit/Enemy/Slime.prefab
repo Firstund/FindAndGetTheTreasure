@@ -19,10 +19,11 @@ GameObject:
   - component: {fileID: 8850736437412420418}
   - component: {fileID: 1382827134381913729}
   - component: {fileID: 6195501080361516180}
+  - component: {fileID: 5514147548884566409}
   - component: {fileID: 215773991912648977}
   m_Layer: 8
   m_Name: Slime
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,7 +146,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03333375, y: -0.023810029}
+  m_Offset: {x: -0.0003052652, y: -0.086700365}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -156,7 +157,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4114257, y: 0.2771423}
+  m_Size: {x: 0.30319583, y: 0.28884283}
   m_EdgeRadius: 0
 --- !u!114 &6785442958218809835
 MonoBehaviour:
@@ -174,7 +175,7 @@ MonoBehaviour:
   searchResetDistance: 0.5
   searchRangeX: 5
   searchRangeY: 1
-  projectile: {fileID: 7053485288860369376, guid: 0b36cff4c5c464548bf079f656ed1a96, type: 3}
+  projectile: {fileID: 7053485288860369376, guid: be60058f717a22a458c30974d2a85782, type: 3}
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8
@@ -195,16 +196,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isAirEnemy: 0
-  _hp: 4
+  _hp: 3
   _ap: 1.5
   _dp: 1
   _searchSpeed: 1
   _pursueSpeed: 5
   _attackDelay: 1
   _isShootProjectile: 1
-  _foundRange: 6
-  _attackRange: 1
-  _shootRange: 4
+  _foundRange: 10
+  _attackRange: 0
+  _shootRange: 8
   despawnTimer: 500
 --- !u!114 &4153887538585567277
 MonoBehaviour:
@@ -262,7 +263,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 1, g: 0, b: 0, a: 1}
-  radious: 1
+  radious: 0
+--- !u!114 &5514147548884566409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4328007662228306038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c391bde66b9b2a4b889f22fa9b37bfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0.8679245, g: 0, b: 0.676221, a: 1}
+  radious: 8
 --- !u!114 &215773991912648977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,4 +291,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0.27450982, b: 1, a: 1}
-  radious: 8
+  radious: 10
