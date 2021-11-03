@@ -39,4 +39,9 @@ public class SpawnEnemy : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, enemySpawnRange);
+    }
 }

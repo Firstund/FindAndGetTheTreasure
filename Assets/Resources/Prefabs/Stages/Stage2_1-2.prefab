@@ -7213,9 +7213,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 482394432101581873, guid: 29b2bc9130e808746b027b01728fafa7, type: 3}
+      propertyPath: enemySpawnRange
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 482394432101581874, guid: 29b2bc9130e808746b027b01728fafa7, type: 3}
       propertyPath: m_Name
       value: WolfSpawnBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 692747897036420649, guid: 29b2bc9130e808746b027b01728fafa7, type: 3}
+      propertyPath: radious
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29b2bc9130e808746b027b01728fafa7, type: 3}
