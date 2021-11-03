@@ -115,4 +115,9 @@ public class TalkableObjectLoopMoving : MonoBehaviour
             }
         }
     }
+    private void OnDrawGizmosSelected() 
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position.Sum(moveRange));
+    }
 }

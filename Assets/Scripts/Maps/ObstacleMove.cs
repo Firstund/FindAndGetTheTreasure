@@ -84,4 +84,9 @@ public class ObstacleMove : MonoBehaviour
             crashedWithPlayer = false;
         }
     }
+    private void OnDrawGizmosSelected() 
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position.Sum(targetPos));
+    }
 }

@@ -197,7 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isAirEnemy: 0
   _hp: 3
-  _ap: 1.5
+  _ap: 0.2
   _dp: 1
   _searchSpeed: 1
   _pursueSpeed: 5
