@@ -5570,7 +5570,7 @@ MonoBehaviour:
   dashStopRange: 0.1
   dashDoTime: 0.04
   dashResetTime: 0.25
-  dropVelo: -70
+  dropVelo: -20
   powerTimeWhenIsHangFalse: 5
 --- !u!114 &5143956853646980548
 MonoBehaviour:

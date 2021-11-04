@@ -108,7 +108,7 @@ public class CharacterMove : MonoBehaviour
     private float dashResetTime = 1f;
 
     [SerializeField]
-    private float dropVelo = -30f; // 낙사
+    private float dropVelo = 10f; // 낙사
 
     [SerializeField]
     private float powerTimeWhenIsHangFalse = 5f;

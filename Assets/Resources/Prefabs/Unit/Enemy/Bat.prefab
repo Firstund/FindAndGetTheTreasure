@@ -199,10 +199,10 @@ MonoBehaviour:
   _ap: 1
   _dp: 1
   _searchSpeed: 1
-  _pursueSpeed: 2.5
+  _pursueSpeed: 3
   _attackDelay: 1
   _isShootProjectile: 0
-  _foundRange: 4
+  _foundRange: 7
   _attackRange: 0.5
   _shootRange: 5
   despawnTimer: 500

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7053485288860369407}
   - component: {fileID: 8019624195745091298}
   m_Layer: 11
-  m_Name: TestMoveToPlayerProjectile
+  m_Name: SlimeProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

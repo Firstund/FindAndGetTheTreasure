@@ -30,7 +30,13 @@ public class ObstacleMove : MonoBehaviour
         moveTime = Vector2.Distance(originPos, targetPos) / moveSpeed;
     }
 
-    void Update()
+    void FixedUpdate()
+    {
+        // GameManager에 의한 시간에 종속될것
+        DoFixedUpdate();
+    }
+
+    private void DoFixedUpdate()
     {
         Vector2 newPos = Vector2.zero;
 
@@ -38,7 +44,7 @@ public class ObstacleMove : MonoBehaviour
         {
             if (moveTimer > 0f)
             {
-                moveTimer -= Time.deltaTime;
+                moveTimer -= Time.fixedDeltaTime;
             }
             else
             {
@@ -49,7 +55,7 @@ public class ObstacleMove : MonoBehaviour
         {
             if (moveTimer < moveTime)
             {
-                moveTimer += Time.deltaTime;
+                moveTimer += Time.fixedDeltaTime;
             }
             else
             {

@@ -392,20 +392,26 @@ public class EnemyMove : EnemyStatus
     {
         if (canAttack && isAttack)
         {
-            canAttack = false;
             anim.Play("Attack");
+
             FlipCheck(playerPosition);
-            Invoke("AttackRe", enemyStat.attackDelay);
+        }
+        else
+        {
+            isAttack = false;
         }
     }
     private void Shoot()
     {
         if (canAttack && isShoot)
         {
-            canAttack = false;
             anim.Play("Shoot");
+
             FlipCheck(playerPosition);
-            Invoke("AttackRe", enemyStat.attackDelay);
+        }
+        else
+        {
+            isShoot = false;
         }
     }
     private void Dead()
@@ -424,21 +430,35 @@ public class EnemyMove : EnemyStatus
     }
     private void ShootProjectile()
     {
-        stageManager.ShootProjectile(projectile, enemyStat, spriteRenderer.flipX, currentPosition, enemyStat.shootRange);
+        if (canAttack)
+        {
+            canAttack = false;
+
+            stageManager.ShootProjectile(projectile, enemyStat, spriteRenderer.flipX, currentPosition, enemyStat.shootRange);
+
+            Invoke("AttackRe", enemyStat.attackDelay);
+        }
     }
     private void GetDamage()
     {
-        bool a = Physics2D.OverlapCircle(currentPosition, enemyStat.attackRange, whatIsPlayer);
-
-        if (a)
+        if (canAttack)
         {
-            Collider2D player_Col = Physics2D.OverlapCircle(currentPosition, enemyStat.attackRange, whatIsPlayer);
-            CharacterMove characterMove = player_Col.gameObject.GetComponent<CharacterMove>();
+            canAttack = false;
 
-            if (characterMove.canHurt)
+            bool a = Physics2D.OverlapCircle(currentPosition, enemyStat.attackRange, whatIsPlayer);
+
+            if (a)
             {
-                characterMove.Hurt(enemyStat.ap);
+                Collider2D player_Col = Physics2D.OverlapCircle(currentPosition, enemyStat.attackRange, whatIsPlayer);
+                CharacterMove characterMove = player_Col.gameObject.GetComponent<CharacterMove>();
+
+                if (characterMove.canHurt)
+                {
+                    characterMove.Hurt(enemyStat.ap);
+                }
             }
+
+            Invoke("AttackRe", enemyStat.attackDelay);
         }
     }
     public void Hurt(float damage)
@@ -485,7 +505,7 @@ public class EnemyMove : EnemyStatus
 
             Vector2 endPosition = currentPosition;
 
-            if(loopNum >= 10)
+            if (loopNum >= 10)
             {
                 break;
             }

@@ -200,8 +200,8 @@ MonoBehaviour:
   _ap: 0.2
   _dp: 1
   _searchSpeed: 1
-  _pursueSpeed: 5
-  _attackDelay: 1
+  _pursueSpeed: 3
+  _attackDelay: 0
   _isShootProjectile: 1
   _foundRange: 10
   _attackRange: 0
