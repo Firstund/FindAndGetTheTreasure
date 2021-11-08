@@ -24,6 +24,7 @@ public class PlayerProjectile : Projectile_Base, IProjectile
         }
 
         Enemys.Clear();
+        soundBoxSpawned = false;
 
         stageManager.Enemys.ForEach(item => Enemys.Add(item));
     }
