@@ -67,6 +67,11 @@ public class CharacterTimeWarp : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
 
+        gameManager.player.whenPlayerDead += () =>
+        {
+            CancelTimeWarp();
+        };
+
         OriginSet();
     }
 
@@ -81,7 +86,6 @@ public class CharacterTimeWarp : MonoBehaviour
             positions[i] = transform.position;
             sprites[i] = spriteRenderer.sprite;
         }
-
 
         timeWarpPositionEffect.transform.position = positions[0];
 
@@ -136,10 +140,15 @@ public class CharacterTimeWarp : MonoBehaviour
         }
         else
         {
-            canTimeWaprPositionSet = true;
-            canTimeWarp = false;
-            moveBackTime = 0f;
+            CancelTimeWarp();
         }
+    }
+
+    private void CancelTimeWarp()
+    {
+        canTimeWaprPositionSet = true;
+        canTimeWarp = false;
+        moveBackTime = 0f;
     }
 
     private void SetPositions()

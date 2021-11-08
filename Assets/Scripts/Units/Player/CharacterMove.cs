@@ -193,6 +193,8 @@ public class CharacterMove : MonoBehaviour
     private float firstGravity = 0f;
     private float firstMass = 0f;
 
+    public event Action whenPlayerDead;
+
 
     // TODO: OnCollision을 이용하여 벽에 붙었을 때 서서히 내려감
 
@@ -210,6 +212,11 @@ public class CharacterMove : MonoBehaviour
         characterTimeWarp = GetComponent<CharacterTimeWarp>();
         spawnEffect = GetComponent<SpawnEffect>();
         reflect = GetComponent<Reflect>();
+
+        whenPlayerDead = () =>
+        {
+
+        };
     }
 
     void Start()
@@ -612,6 +619,8 @@ public class CharacterMove : MonoBehaviour
     }
     private void Destroye()
     {
+        whenPlayerDead();
+
         stageManager.Respawn();
         gameObject.SetActive(false);
     }
