@@ -137,17 +137,17 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField]
-    private int slowTimeNum = 20; // 몇몇 오브젝트들만 느려지는 코드를 실행시킬 때 1/n으로 속도를 조정
-    public int SlowTimeNum
+    private float slowTimeNum = 20; // 몇몇 오브젝트들만 느려지는 코드를 실행시킬 때 1/n으로 속도를 조정
+    public float SlowTimeNum
     {
         get { return slowTimeNum; }
     }
-    private int currentSlowTimeNum = 0;
-    public int CurrentSlowTimeNum
+    private float currentSlowTimeNum = -1f;
+    public float CurrentSlowTimeNum
     {
         get { return currentSlowTimeNum; }
     }
-    public int CurrentSlowTimePerSlowTime
+    public float CurrentSlowTimePerSlowTime
     {
         get { return currentSlowTimeNum / slowTimeNum; }
     }
@@ -265,7 +265,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            currentSlowTimeNum = 0;
+            currentSlowTimeNum = -1f;
         }
     }
     public void SpawnStage(int stage) // 버튼에 사용

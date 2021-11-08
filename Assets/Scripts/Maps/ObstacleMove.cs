@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ObstacleMove : MonoBehaviour
 {
+    private GameManager gameManager = null;
     private CharacterMove player = null;
 
     [Header("현재 위치에서 얼마나 움직일 것인가")]
@@ -23,7 +24,8 @@ public class ObstacleMove : MonoBehaviour
 
     void Start()
     {
-        player = GameManager.Instance.player;
+        gameManager = GameManager.Instance;
+        player = gameManager.player;
         originPos = transform.position;
         targetPos += originPos;
 
@@ -33,7 +35,17 @@ public class ObstacleMove : MonoBehaviour
     void FixedUpdate()
     {
         // GameManager에 의한 시간에 종속될것
-        DoFixedUpdate();
+        if (!gameManager.stopTime)
+        {
+            if (gameManager.SlowTimeSomeObjects && gameManager.CurrentSlowTimePerSlowTime == 0)
+            {
+                DoFixedUpdate();
+            }
+            else if (!gameManager.SlowTimeSomeObjects)
+            {
+                DoFixedUpdate();
+            }
+        }
     }
 
     private void DoFixedUpdate()
@@ -90,7 +102,7 @@ public class ObstacleMove : MonoBehaviour
             crashedWithPlayer = false;
         }
     }
-    private void OnDrawGizmosSelected() 
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position.Sum(targetPos));

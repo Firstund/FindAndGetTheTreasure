@@ -34,6 +34,10 @@ public class CharacterMove : MonoBehaviour
     private PlayerInput playerInput = null;
     private SpawnAfterImage spawnAfterImage = null;
     private CharacterStat characterStat = null;
+    public CharacterStat CharacterStat
+    {
+        get { return characterStat; }
+    }
     private Reflect reflect = null;
 
     private CharacterTimeWarp characterTimeWarp = null;
@@ -108,9 +112,6 @@ public class CharacterMove : MonoBehaviour
     private float dashResetTime = 1f;
 
     [SerializeField]
-    private float dropVelo = 10f; // 낙사
-
-    [SerializeField]
     private float powerTimeWhenIsHangFalse = 5f;
     private float powerTimer = 0f;
     private bool isJump = false;
@@ -157,6 +158,11 @@ public class CharacterMove : MonoBehaviour
     private bool dashMoving = false;
     private bool staping = false;
     private bool attacking = false;
+    public bool Attacking
+    {
+        get { return attacking; }
+        set { attacking = value; }
+    }
     private bool dashAttacking = false;
     public bool DashAttacking
     {
@@ -168,6 +174,11 @@ public class CharacterMove : MonoBehaviour
 
     private bool whenOutHangMove = false;
     private bool whenOutHangMoveStarted = false;
+
+    [Header("떨어지기 시작했을 때 이 값만큼 아래로 이동하면, 낙사처리")]
+    [SerializeField]
+    private float dropValue = 5f;
+    private Vector2 whenIsNotInAirPosition = Vector2.zero; // 공중에 떨어져 있지 않을 때의 위치
 
     private Vector2 dashPosition = Vector2.zero;
 
@@ -204,6 +215,7 @@ public class CharacterMove : MonoBehaviour
 
         stageManager.PlayerRespawn += () =>
         {
+            whenIsNotInAirPosition = currentPosition;
             characterStat.hp = characterStat.firstHp;
         };
 
@@ -219,6 +231,9 @@ public class CharacterMove : MonoBehaviour
         whatIsHitable.value = whatIsEnemy + whatIsGround;
 
         characterStat.hp = characterStat.firstHp;
+
+        currentPosition = transform.position;
+        whenIsNotInAirPosition = currentPosition;
 
         pulley.SetActive(false);
     }
@@ -288,9 +303,9 @@ public class CharacterMove : MonoBehaviour
     }
     private void CheckDead()
     {
-        if (!isDead)
+        if (!isDead && !gameManager.stopTime)
         {
-            if (rigid.velocity.y <= dropVelo)
+            if (!isGround && whenIsNotInAirPosition.y - currentPosition.y >= dropValue)
             {
                 Hurt(100);
             }
@@ -331,6 +346,7 @@ public class CharacterMove : MonoBehaviour
                 {
                     IsHang = true;
                     whenOutHangMoveStarted = false;
+                    whenIsNotInAirPosition = currentPosition;
                     isJump = false;
                 }
                 else
@@ -390,15 +406,19 @@ public class CharacterMove : MonoBehaviour
 
         if (!gameManager.stopTime)
         {
-            if (gameManager.SlowTimeSomeObjects && gameManager.CurrentSlowTimePerSlowTime == 0)
+            if (gameManager.SlowTimeSomeObjects)
             {
-                DoFixedUpdate();
+                anim.speed = 0f;
 
-                anim.speed = 1f / gameManager.SlowTimeNum;
+                rigid.gravityScale = firstGravity / gameManager.SlowTimeNum;
+                rigid.mass = firstMass / gameManager.SlowTimeNum;
 
-                rigid.gravityScale = 0f;
-                rigid.mass = 0f;
                 rigid.velocity = Vector2.zero;
+
+                if (gameManager.CurrentSlowTimePerSlowTime == 0)
+                {
+                    DoFixedUpdate();
+                }
             }
             else if (!gameManager.SlowTimeSomeObjects)
             {
@@ -439,7 +459,7 @@ public class CharacterMove : MonoBehaviour
                 IsHang = false;
                 isAttack = false;
                 attacking = false;
-
+                
                 XMove = 0f;
 
                 anim.Play(name + "ReflectR");
@@ -750,9 +770,10 @@ public class CharacterMove : MonoBehaviour
 
                 isAttack = false;
             }
-            else if (!isGround)
+            else
             {
                 attacking = true;
+
                 anim.Play(characterName + "InAirAttack");
 
                 isAttack = false;
@@ -808,6 +829,7 @@ public class CharacterMove : MonoBehaviour
             {
                 reflect.CanSettingAngle = true;
                 reflect.CanShoot = true;
+                attacking = false;
 
                 reflect.ProjectileDamage = damage;
                 characterStat.sp -= skillUseValue.reflect;
@@ -957,7 +979,7 @@ public class CharacterMove : MonoBehaviour
         {
             rigid.velocity = new Vector2(XMove * characterStat.speed, rigid.velocity.y);
         }
-        else if(IsHang)
+        else if (IsHang)
         {
             if (spriteRenderer.flipX)
             {
@@ -1006,9 +1028,13 @@ public class CharacterMove : MonoBehaviour
         if (isGround)
         {
             WhenOutHangMoveSet();
+
             powerTimer = 0f;
+            whenIsNotInAirPosition = currentPosition;
+
             staping = false;
         }
+
 
         isGround = a;
     }
@@ -1034,11 +1060,21 @@ public class CharacterMove : MonoBehaviour
     {
         bool a = Physics2D.OverlapCircle(LeftWallChecker.position, 0.1f, whatIsGround);
 
+        if (a)
+        {
+            whenIsNotInAirPosition = currentPosition;
+        }
+
         leftWall = a;
     }
     private void RightWallCheck()
     {
         bool a = Physics2D.OverlapCircle(RightWallChecker.position, 0.1f, whatIsGround);
+
+        if (a)
+        {
+            whenIsNotInAirPosition = currentPosition;
+        }
 
         rightWall = a;
     }
@@ -1049,7 +1085,7 @@ public class CharacterMove : MonoBehaviour
 
     private void LRCheck(float XMove)
     {
-        if(playerInput.moveBtnDown)
+        if (playerInput.moveBtnDown)
         {
             powerTimer = 0f;
         }

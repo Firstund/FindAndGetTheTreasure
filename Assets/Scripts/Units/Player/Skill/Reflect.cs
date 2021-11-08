@@ -177,7 +177,9 @@ public class Reflect : MonoBehaviour
             SpawnDespawnEffects(false);
 
             shootTrm.rotation = Quaternion.identity;
+
             gameManager.SlowTimeSomeObjects = false;
+            playerInput.isAttack = false;
         }
     }
     public void SettingAngle()
@@ -188,6 +190,8 @@ public class Reflect : MonoBehaviour
             currentEffectSoundBox = stageManager.SpawnSoundBox(timeSlowEffectSoundBox2);
 
             SpawnDespawnEffects(true);
+
+            anim.Play(gameManager.player.CharacterStat.characterName + "ReflectR");
 
             timeSlowSoundEffectBoxSpawned = true;
         }

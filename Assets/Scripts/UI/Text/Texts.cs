@@ -51,6 +51,9 @@ public class Texts : Text_Base
     [Header("이 값이 true면 TextEvent가 진행될 때 PlayerRespwnPosition을 이곳으로 바꾼다.")]
     [SerializeField]
     private bool SetPlayerRespawnPosition = true;
+    [Header("이 값이 true면 TextEvent가 진행됭 때 Player의 EventObject의 y값을 자동으로 줌")]
+    [SerializeField]
+    private bool SetPlayerEventPosY = true;
 
     [Header("이 값이 true면 대화가 끝났을 때 게임종료처리")]
     [SerializeField]
@@ -78,7 +81,7 @@ public class Texts : Text_Base
         {
             SetText();
 
-            if (eventObjSpawnData.Count > 0)
+            if (eventObjSpawnData.Count > 0 && SetPlayerEventPosY)
             {
                 eventObjSpawnData[0].eventObject.transform.position = new Vector2(eventObjSpawnData[0].eventObject.transform.position.x, gameManager.player.currentPosition.y);
             }

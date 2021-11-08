@@ -8618,7 +8618,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -9092,7 +9092,7 @@ MonoBehaviour:
   _player: {fileID: 0}
   _characterStat: {fileID: 0}
   slowTimeSomeObjectsTime: 3
-  slowTimeNum: 100
+  slowTimeNum: 5
 --- !u!4 &1564100276
 Transform:
   m_ObjectHideFlags: 0
@@ -9387,6 +9387,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
+      propertyPath: SetPlayerEventPosY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: SetPlayerRespawnPosition
       value: 1
       objectReference: {fileID: 0}
@@ -9624,7 +9628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: eventObjSpawnData.Array.data[0].eventObjSpawnPos.y
-      value: -400
+      value: -105.1
       objectReference: {fileID: 0}
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: eventObjSpawnData.Array.data[1].eventObjSpawnPos.x

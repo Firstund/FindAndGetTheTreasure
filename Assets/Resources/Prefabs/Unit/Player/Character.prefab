@@ -5570,8 +5570,8 @@ MonoBehaviour:
   dashStopRange: 0.1
   dashDoTime: 0.04
   dashResetTime: 0.25
-  dropVelo: -20
   powerTimeWhenIsHangFalse: 5
+  dropValue: 15
 --- !u!114 &5143956853646980548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5696,7 +5696,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5143956853646980559}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a181ee000c7331a43886171cb62e07d7, type: 3}
   m_Name: 
