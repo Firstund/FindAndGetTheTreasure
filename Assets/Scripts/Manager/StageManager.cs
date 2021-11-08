@@ -26,6 +26,7 @@ public class StageManager : MonoBehaviour
         }
     }
     private GameManager gameManager = null;
+    private SoundManager soundManager = null;
     private List<GameObject> enemys = new List<GameObject>();
     public List<GameObject> Enemys
     {
@@ -33,6 +34,8 @@ public class StageManager : MonoBehaviour
     }
     [SerializeField]
     private Material stageSkyBox = null;
+    [SerializeField]
+    private AudioClip stageMainBGM = null;
     [SerializeField]
     private Transform _enemys = null;
 
@@ -105,9 +108,16 @@ public class StageManager : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
+        soundManager = SoundManager.Instance;
 
         cinemachineVirtualCamera = gameManager.cinemachineVirtualCamera;
         cinemachineVirtualCamera.m_Follow = gameManager.player.transform;
+
+        if (stageMainBGM != null)
+        {
+            soundManager.MainBGM.clip = stageMainBGM;
+            soundManager.MainBGM.Play();
+        }
 
         originOrthographicSize = cinemachineVirtualCamera.m_Lens.OrthographicSize;
 
@@ -151,7 +161,7 @@ public class StageManager : MonoBehaviour
     {
         GameObject shootObject = projectiles.Find(x => (x.name == shootIt.name + "(Clone)") && !x.activeSelf);
 
-        if(shootObject == null)
+        if (shootObject == null)
         {
             GameObject a = Instantiate(shootIt, projectilesTrm);
             a.transform.position = spawnPosition;

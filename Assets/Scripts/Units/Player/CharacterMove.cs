@@ -153,6 +153,12 @@ public class CharacterMove : MonoBehaviour
         get { return _canHurt; }
     }
     private bool isHangWall = false;
+    private bool isReflect = false;
+    public bool IsReflect
+    {
+        get { return isReflect; }
+        set { isReflect = value; }
+    }
     private bool canDash = true;
     private bool canDashAttack = true;
     private bool dashMoving = false;
@@ -239,7 +245,7 @@ public class CharacterMove : MonoBehaviour
     }
     void Update()
     {
-        if (!(isDead || gameManager.stopTime || characterTimeWarp.isTimeWarp))
+        if (!(isDead || gameManager.stopTime || characterTimeWarp.isTimeWarp || isReflect))
         {
             if (anim.speed == 0f)
             {
@@ -255,7 +261,7 @@ public class CharacterMove : MonoBehaviour
             CharacterHangWallCheck();
             IsHangFalseGivePower();
         }
-        else if (gameManager.stopTime && !characterTimeWarp.isTimeWarp && !reflect.CanSettingAngle)
+        else if (gameManager.stopTime && !characterTimeWarp.isTimeWarp && isReflect)
         {
             anim.speed = 0f;
         }
@@ -459,7 +465,7 @@ public class CharacterMove : MonoBehaviour
                 IsHang = false;
                 isAttack = false;
                 attacking = false;
-                
+
                 XMove = 0f;
 
                 anim.Play(name + "ReflectR");
@@ -749,7 +755,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void Attack()
     {
-        if (!attacking && !dashMoving && !isHangWall && !staping && isAttack) //isGround에 따라서 GroundAttack과 InAirAttack을 나눌것, dashing == true라면 dashAttack을 할것
+        if (!attacking && !dashMoving && !isHangWall && !staping && isAttack && !isReflect) //isGround에 따라서 GroundAttack과 InAirAttack을 나눌것, dashing == true라면 dashAttack을 할것
         {
             if (characterStat.sp >= skillUseValue.attack)
             {
@@ -802,7 +808,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void DespawnProjectileByAttack()
     {
-        if (skillUseValue.reflect < characterStat.sp)
+        if (skillUseValue.reflect < characterStat.sp && !isReflect)
         {
             bool projectileDespawned = false;
             float distance;
@@ -830,6 +836,7 @@ public class CharacterMove : MonoBehaviour
                 reflect.CanSettingAngle = true;
                 reflect.CanShoot = true;
                 attacking = false;
+                isReflect = true;
 
                 reflect.ProjectileDamage = damage;
                 characterStat.sp -= skillUseValue.reflect;
@@ -958,7 +965,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void InAirCheck()
     {
-        if (!(isJump || isGround || IsHang || staping || attacking || reflect.CanSettingAngle))
+        if (!(isJump || isGround || IsHang || staping || attacking || isReflect))
         {
             if (isHangWall)
             {
@@ -1090,7 +1097,7 @@ public class CharacterMove : MonoBehaviour
             powerTimer = 0f;
         }
 
-        if (!(IsHang || reflect.CanSettingAngle))
+        if (!(IsHang || isReflect))
         {
             if (XMove < 0f)
             {

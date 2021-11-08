@@ -9,11 +9,11 @@ public class SoundManager : MonoBehaviour
     {
         get
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = FindObjectOfType<SoundManager>();
 
-                if(instance == null)
+                if (instance == null)
                 {
                     GameObject temp = new GameObject("SoundManager");
 
@@ -27,6 +27,11 @@ public class SoundManager : MonoBehaviour
     private DontDestroyOnLoadManager dontDestroyOnLoadManager = null;
     [SerializeField]
     private AudioSource mainBGM = null;
+    public AudioSource MainBGM
+    {
+        get { return mainBGM; }
+        set { mainBGM = value; }
+    }
 
     private float mainBGMPitchTimer = 0f;
     private float mainBGMPitchTimerOrigin = 0f;
@@ -41,11 +46,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private List<AudioSource> jumpEffectAudis = new List<AudioSource>();
     public List<AudioSource> JumpEffectAudis = new List<AudioSource>();
-    private void Awake() 
+    private void Awake()
     {
         dontDestroyOnLoadManager = DontDestroyOnLoadManager.Instance;
     }
-    private void Start() 
+    private void Start()
     {
         dontDestroyOnLoadManager.DoNotDestroyOnLoad(gameObject);
 
@@ -69,7 +74,7 @@ public class SoundManager : MonoBehaviour
     }
     private void SetVolume()
     {
-        if(mainBGMVolumeTimer < mainBGMVolumeTimerOrigin)
+        if (mainBGMVolumeTimer < mainBGMVolumeTimerOrigin)
         {
             mainBGMVolumeTimer += Time.deltaTime;
 

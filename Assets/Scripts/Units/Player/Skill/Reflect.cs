@@ -174,15 +174,22 @@ public class Reflect : MonoBehaviour
         {
             //Instantiate(projectile, shootTrm.position, Quaternion.Euler(0f, 0f, shootAnlgePlus)).GetComponent<PlayerProjectile>().SpawnSet(projectileShootRange, projectileDamage, Vector2.right);
             stageManager.ShootPlayerProjectile(projectile, projectileDamage, shootTrm.position, Quaternion.Euler(0f, 0f, shootAnlgePlus), Vector2.right, projectileShootRange);
-
-            SpawnDespawnEffects(false); ///////// isReflect상태 부활시키자
-
-            shootTrm.rotation = Quaternion.identity;
-
-            gameManager.SlowTimeSomeObjects = false;
-            playerInput.isAttack = false;
+            WhenReflectEnd();
         }
     }
+
+    public void WhenReflectEnd()
+    {
+        SpawnDespawnEffects(false);
+
+        shootTrm.rotation = Quaternion.identity;
+
+        gameManager.player.IsReflect = false;
+        gameManager.SlowTimeSomeObjects = false;
+        playerInput.isAttack = false;
+        isAttack = false;
+    }
+
     public void SettingAngle()
     {
         if (!timeSlowSoundEffectBoxSpawned)

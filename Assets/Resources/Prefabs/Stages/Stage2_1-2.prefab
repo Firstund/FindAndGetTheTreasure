@@ -422,6 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageSkyBox: {fileID: 2100000, guid: 3a7ceca0431b20c4c97a18890b57a196, type: 2}
+  stageMainBGM: {fileID: 8300000, guid: 5fc5efec1161ae8498b4c1fc84f6d453, type: 3}
   _enemys: {fileID: 2043492885493875821}
   _soundBoxes: {fileID: 8680745061633033514}
   projectiles: []
