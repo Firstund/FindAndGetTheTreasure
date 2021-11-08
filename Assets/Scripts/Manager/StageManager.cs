@@ -121,7 +121,7 @@ public class StageManager : MonoBehaviour
     {
         shakeTimer = TimerCheck(shakeTimer);
     }
-    public void ShootProjectile(GameObject shootIt, EnemyStat enemyStat, bool flipX, Vector2 spawnPosition, float shootRange)
+    public GameObject ShootEnemyProjectile(GameObject shootIt, EnemyStat enemyStat, bool flipX, Vector2 spawnPosition, Quaternion angle, float shootRange)
     {
         GameObject shootObject = projectiles.Find(x => (x.name == shootIt.name + "(Clone)") && !x.activeSelf);
 
@@ -131,15 +131,44 @@ public class StageManager : MonoBehaviour
         {
             GameObject a = Instantiate(shootIt, projectilesTrm);
             a.transform.position = spawnPosition;
+            a.transform.rotation = angle;
             a.GetComponent<EnemyProjectile>().SpawnSet(shootRange, enemyStat.ap, shootDir);
+
+            shootObject = a;
         }
         else
         {
             shootObject.SetActive(true);
             shootObject.transform.position = spawnPosition;
+            shootObject.transform.rotation = angle;
             shootObject.GetComponent<EnemyProjectile>().SpawnSet(shootRange, enemyStat.ap, shootDir);
             projectiles.Remove(shootObject);
         }
+
+        return shootObject;
+    }
+    public GameObject ShootPlayerProjectile(GameObject shootIt, float damage, Vector2 spawnPosition, Quaternion angle, Vector2 shootDir, float shootRange)
+    {
+        GameObject shootObject = projectiles.Find(x => (x.name == shootIt.name + "(Clone)") && !x.activeSelf);
+
+        if(shootObject == null)
+        {
+            GameObject a = Instantiate(shootIt, projectilesTrm);
+            a.transform.position = spawnPosition;
+            a.transform.rotation = angle;
+            a.GetComponent<PlayerProjectile>().SpawnSet(shootRange, damage, shootDir);
+
+            shootObject = a;
+        }
+        else
+        {
+            shootObject.SetActive(true);
+            shootObject.transform.position = spawnPosition;
+            shootObject.transform.rotation = angle;
+            shootObject.GetComponent<PlayerProjectile>().SpawnSet(shootRange, damage, shootDir);
+        }
+
+        return shootObject;
     }
     public void DespawnProjectile(GameObject deSpawnProjectile)
     {

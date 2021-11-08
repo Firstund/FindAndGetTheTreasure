@@ -30,7 +30,7 @@ public class EnemyProjectile : Projectile_Base, IProjectile
         Despawn();
     }
 
-    public void SpawnSet(float shootR, float dm, Vector2 angle)
+    public void SpawnSet(float shootR, float dm, Vector2 dir)
     {
         firstPosition = transform.position;
         isDestroy = false;
@@ -39,17 +39,17 @@ public class EnemyProjectile : Projectile_Base, IProjectile
 
         if (isMoveToPlayer)
         {
-            shootAngle = GameManager.Instance.player.currentPosition - (Vector2)transform.position;
-            shootAngle = shootAngle.normalized;
+            shootDir = GameManager.Instance.player.currentPosition - (Vector2)transform.position;
+            shootDir = shootDir.normalized;
         }
         else
         {
-            shootAngle = angle;
+            shootDir = dir;
         }
     }
     public void Move()
     {
-        transform.Translate(shootAngle * speed * Time.fixedDeltaTime);
+        transform.Translate(shootDir * speed * Time.fixedDeltaTime);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

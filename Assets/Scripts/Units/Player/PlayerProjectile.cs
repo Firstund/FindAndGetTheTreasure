@@ -27,17 +27,17 @@ public class PlayerProjectile : Projectile_Base, IProjectile
 
         stageManager.Enemys.ForEach(item => Enemys.Add(item));
     }
-    public void SpawnSet(float shootR, float dm, Vector2 angle)
+    public void SpawnSet(float shootR, float dm, Vector2 dir)
     {
         firstPosition = transform.position;
         isDestroy = false;
         shootRange = shootR;
         damage = dm;
-        shootAngle = angle;
+        shootDir = dir;
     }
     public void Move()
     {
-        transform.Translate(shootAngle * speed * Time.fixedDeltaTime);
+        transform.Translate(shootDir * speed * Time.fixedDeltaTime);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

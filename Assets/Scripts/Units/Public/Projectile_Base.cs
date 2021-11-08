@@ -19,7 +19,7 @@ public abstract class Projectile_Base : MonoBehaviour
     protected bool isDestroy = false;
 
     protected Vector2 firstPosition = Vector2.zero;
-    protected Vector2 shootAngle = Vector2.zero;
+    protected Vector2 shootDir = Vector2.zero;
 
     protected void Start()
     {

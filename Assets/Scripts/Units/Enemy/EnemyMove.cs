@@ -434,7 +434,7 @@ public class EnemyMove : EnemyStatus
         {
             canAttack = false;
 
-            stageManager.ShootProjectile(projectile, enemyStat, spriteRenderer.flipX, currentPosition, enemyStat.shootRange);
+            stageManager.ShootEnemyProjectile(projectile, enemyStat, spriteRenderer.flipX, currentPosition, Quaternion.identity, enemyStat.shootRange);
 
             Invoke("AttackRe", enemyStat.attackDelay);
         }

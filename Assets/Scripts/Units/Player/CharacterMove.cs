@@ -408,7 +408,7 @@ public class CharacterMove : MonoBehaviour
         {
             if (gameManager.SlowTimeSomeObjects)
             {
-                anim.speed = 0f;
+                anim.speed = 1f / gameManager.SlowTimeNum;
 
                 rigid.gravityScale = firstGravity / gameManager.SlowTimeNum;
                 rigid.mass = firstMass / gameManager.SlowTimeNum;
