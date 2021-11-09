@@ -24,7 +24,12 @@ public class SoundManager : MonoBehaviour
             return instance;
         }
     }
+    private GameManager gameManager = null;
     private DontDestroyOnLoadManager dontDestroyOnLoadManager = null;
+
+    [SerializeField]
+    private AudioClip stageSelectMenuMainBGM = null;
+
     [SerializeField]
     private AudioSource mainBGM = null;
     public AudioSource MainBGM
@@ -48,10 +53,17 @@ public class SoundManager : MonoBehaviour
     public List<AudioSource> JumpEffectAudis = new List<AudioSource>();
     private void Awake()
     {
+        gameManager = GameManager.Instance;
         dontDestroyOnLoadManager = DontDestroyOnLoadManager.Instance;
     }
     private void Start()
     {
+        gameManager.WhenGoToStageSelectMenu += () =>
+        {
+            mainBGM.clip = stageSelectMenuMainBGM;
+            mainBGM.Play();
+        };
+
         dontDestroyOnLoadManager.DoNotDestroyOnLoad(gameObject);
 
         // SetMainBGMVolumeByLerp(1, 0, 5);

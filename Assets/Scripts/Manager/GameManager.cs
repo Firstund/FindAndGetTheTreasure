@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
     public event Action SetFalseSlowTimeSomeObjects;
     public event Action<int> SpawnStages;
     public Action<bool> StageEnd;
+    public Action WhenGoToStageSelectMenu;
 
     private bool _stopTime = false;
     public bool stopTime
@@ -240,6 +241,11 @@ public class GameManager : MonoBehaviour
             {
                 // 게임 오버상태일 때
             }
+        };
+
+        WhenGoToStageSelectMenu = () =>
+        {
+            
         };
 
     }

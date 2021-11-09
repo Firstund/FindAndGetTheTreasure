@@ -60,6 +60,7 @@ public class GameEndScript : MonoBehaviour
             if(gotoMainTimer <= 0f || Input.GetKeyUp(KeyCode.Space))
             {
                 gameManager.StopTime(false);
+                gameManager.WhenGoToStageSelectMenu();
                 SceneManager.LoadScene("MenuScene");
             }
         }

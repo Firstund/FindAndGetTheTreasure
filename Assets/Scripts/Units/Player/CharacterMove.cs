@@ -178,9 +178,6 @@ public class CharacterMove : MonoBehaviour
 
     private bool canSpawnAfterImageByDash = true;
 
-    private bool whenOutHangMove = false;
-    private bool whenOutHangMoveStarted = false;
-
     [Header("떨어지기 시작했을 때 이 값만큼 아래로 이동하면, 낙사처리")]
     [SerializeField]
     private float dropValue = 5f;
@@ -330,6 +327,7 @@ public class CharacterMove : MonoBehaviour
                 isDash = false;
                 isAttack = false;
                 isGround = false;
+                attacking = false;
 
                 Dead();
             }
@@ -358,7 +356,7 @@ public class CharacterMove : MonoBehaviour
                 if (!IsHang)
                 {
                     IsHang = true;
-                    whenOutHangMoveStarted = false;
+
                     whenIsNotInAirPosition = currentPosition;
                     isJump = false;
                 }
@@ -533,37 +531,13 @@ public class CharacterMove : MonoBehaviour
 
             anim.Play(characterName + "Hang");
             canJumpAgain = true;
-            whenOutHangMove = true;
         }
         else
         {
             rigid.gravityScale = firstGravity;
 
             pulley.SetActive(false);
-
-            if (whenOutHangMove)
-            {
-
-                if (spriteRenderer.flipX)
-                {
-                    rigid.velocity = new Vector2(-1f * characterStat.speed, rigid.velocity.y);
-                }
-                else
-                {
-                    rigid.velocity = new Vector2(1f * characterStat.speed, rigid.velocity.y);
-                }
-
-                if (!whenOutHangMoveStarted)
-                {
-                    Invoke("WhenOutHangMoveSet", 1f);
-                    whenOutHangMoveStarted = true;
-                }
-            }
         }
-    }
-    private void WhenOutHangMoveSet()
-    {
-        whenOutHangMove = false;
     }
     public void Hurt(float damage)
     {
@@ -960,6 +934,8 @@ public class CharacterMove : MonoBehaviour
                 canJumpAgain = true;
             }
 
+            attacking = false;
+
             anim.Play(characterName + "Jump");
         }
     }
@@ -968,6 +944,7 @@ public class CharacterMove : MonoBehaviour
         rigid.velocity = new Vector2(rigid.velocity.x, characterStat.jumpSpeed);
 
         isJump = false;
+        attacking = false;
 
         spawnEffect.ShowEffect(jumpEffect, transform.position);
         stageManager.SpawnSoundBox(jumpSoundBox);
@@ -1017,6 +994,7 @@ public class CharacterMove : MonoBehaviour
             SetAttacking();
             isJump = false;
             staping = true;
+            attacking = false;
             anim.Play(characterName + "Stap");
 
             Vector2 spawnPos = transform.position;
@@ -1043,14 +1021,11 @@ public class CharacterMove : MonoBehaviour
 
         if (isGround)
         {
-            WhenOutHangMoveSet();
-
             powerTimer = 0f;
             whenIsNotInAirPosition = currentPosition;
 
             staping = false;
         }
-
 
         isGround = a;
     }
@@ -1060,6 +1035,7 @@ public class CharacterMove : MonoBehaviour
         {
             canJumpAgain = true;
             isHangWall = true;
+            attacking = false;
         }
         else
         {
