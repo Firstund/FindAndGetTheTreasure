@@ -14,6 +14,17 @@ public static class ScriptHelper
             action(item);
         }
     }
+    public static List<T> ToList<T>(this IEnumerable<T> a)
+    {
+        List<T> results = new List<T>();
+
+        foreach(T item in a)
+        {
+            results.Add(item);
+        }
+
+        return results;
+    }
     public static Vector2 Sum(this Vector2 vec1, Vector2 vec2)
     {
         return new Vector2(vec1.x + vec2.x, vec1.y + vec2.y);

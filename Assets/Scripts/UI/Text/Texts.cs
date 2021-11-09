@@ -112,6 +112,33 @@ public class Texts : Text_Base
 
         nextButtonObj.SetActive(canNextTalk && doTextEnd);
     }
+    private void DoFunctionWhenText()
+    {
+        List<string> str_list = texts[currentTextNum].func.Split('.').ToList();
+
+        if (str_list.Count > 1)
+        {
+            if (str_list.Count > 2)
+            {
+                Debug.LogError(texts[currentTextNum].func + " is not effective command.");
+                return;
+            }
+
+            switch (str_list[0])
+            {
+                case "GameManager":
+                    gameManager.Invoke(str_list[1], 0);
+                    break;
+            }
+        }
+        else
+        {
+            if (str_list[0] != "")
+            {
+                Invoke(str_list[0], 0);
+            }
+        }
+    }
 
     private void SkipText()
     {
