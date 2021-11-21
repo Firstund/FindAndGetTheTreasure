@@ -305,5 +305,4 @@ public class GameManager : MonoBehaviour
     {
         _stopTime = st;
     }
-
 }

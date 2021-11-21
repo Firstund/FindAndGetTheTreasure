@@ -911,7 +911,6 @@ public class CharacterMove : MonoBehaviour
     }
     private Vector2 SetTargetPositionsForRay(Vector2 startPosition, Vector2 targetPosition)
     {
-        // targetPosition - startPosition
         return (targetPosition - startPosition);
     }
     private void SetAttacking()

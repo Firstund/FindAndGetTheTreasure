@@ -63,11 +63,10 @@ public class EventTriggerArea : MonoBehaviour
 
     void Update()
     {
-        if (conditions.enterThisArea || conditions.stayThisArea.stayThisArea || conditions.getKey.Length > 0)
+        if (CheckConditions())
         {
             GetKeyDownCheck();
             PlayerStayTimerCheck();
-            CheckDoEvent();
 
             if (conditions.getKey.Length > 0 && !playerStayTimerIsPlaying)
             {
@@ -81,6 +80,8 @@ public class EventTriggerArea : MonoBehaviour
                 playerStayTimer = 0f;
             }
 
+            CheckDoEvent();
+
             if (doEvent && !gameManager.stopTime)
             {
                 DoEvent();
@@ -91,6 +92,11 @@ public class EventTriggerArea : MonoBehaviour
             Debug.LogError("This EventTrigger of 'GameObject: " + gameObject.name + "' can't do Event! Because It has no Conditions! Check It!");
             enabled = false;
         }
+    }
+
+    private bool CheckConditions()
+    {
+        return conditions.enterThisArea || conditions.stayThisArea.stayThisArea || conditions.getKey.Length > 0;
     }
 
     private void PlayerStayTimerCheck()
@@ -114,11 +120,13 @@ public class EventTriggerArea : MonoBehaviour
 
     private void CheckDoEvent()
     {
-        doEvent = true;
-
         if ((conditions.enterThisArea && !playerEnterThisArea) || (conditions.stayThisArea.stayThisArea && !playerStayThisArea) || (conditions.getKey.Length > 0 && !getKey))
         {
             doEvent = false;
+        }
+        else
+        {
+            doEvent = true;
         }
     }
 

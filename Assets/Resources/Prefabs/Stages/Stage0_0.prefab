@@ -242,6 +242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageSkyBox: {fileID: 0}
+  stageMainBGM: {fileID: 0}
   _enemys: {fileID: 2043492885493875821}
   _soundBoxes: {fileID: 8680745061633033514}
   projectiles: []
@@ -4563,7 +4564,7 @@ PrefabInstance:
       objectReference: {fileID: 2532884112179290803}
     - target: {fileID: 524733670752210626, guid: f243d7def3c56804d94f53d89964f46c, type: 3}
       propertyPath: conditions.stayThisArea.stayThisArea
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 524733670752210628, guid: f243d7def3c56804d94f53d89964f46c, type: 3}
       propertyPath: m_LocalScale.x
@@ -6558,6 +6559,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TextEventTrigger_AttackTutorial2_2
       objectReference: {fileID: 0}
+    - target: {fileID: 5293386144212182963, guid: f243d7def3c56804d94f53d89964f46c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7107188357844462947, guid: f243d7def3c56804d94f53d89964f46c, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -6731,11 +6736,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5143956853646980547, guid: ce39850188d3ea74f96c6a467d013132, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.15
+      value: 67.91
       objectReference: {fileID: 0}
     - target: {fileID: 5143956853646980547, guid: ce39850188d3ea74f96c6a467d013132, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.75
+      value: 11.3
       objectReference: {fileID: 0}
     - target: {fileID: 5143956853646980547, guid: ce39850188d3ea74f96c6a467d013132, type: 3}
       propertyPath: m_LocalPosition.z
