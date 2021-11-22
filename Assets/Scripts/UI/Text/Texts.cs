@@ -19,7 +19,7 @@ public class Texts : Text_Base
         public Vector2 eventObjSpawnPos;
     }
 
-    [Header("해당 대화 이벤트에서 사용할 EventObject들, 첫번째는 플레이어의 EventObject")]
+    [Header("해당 대화 이벤트에서 사용할 EventObject들, 플레이어가 있다면, 첫번째는 플레이어의 EventObject")]
     [SerializeField]
     private List<SEventObjSpawnData> eventObjSpawnData = new List<SEventObjSpawnData>();
 
@@ -51,9 +51,12 @@ public class Texts : Text_Base
     [Header("이 값이 true면 TextEvent가 진행될 때 PlayerRespwnPosition을 이곳으로 바꾼다.")]
     [SerializeField]
     private bool SetPlayerRespawnPosition = true;
-    [Header("이 값이 true면 TextEvent가 진행됭 때 Player의 EventObject의 y값을 자동으로 줌")]
+    [Header("이 값이 true면 TextEvent가 진행될 때 Player의 EventObject의 y값을 자동으로 줌")]
     [SerializeField]
     private bool SetPlayerEventPosY = true;
+    [Header("이 값이 true면 대화가 끝나도 eventObj들을 Despawn처리하지 않음")]
+    [SerializeField]
+    private bool dontDespawnEventObjsOnTextEnd = false;
 
     [Header("이 값이 true면 대화가 끝났을 때 게임종료처리")]
     [SerializeField]
@@ -159,7 +162,10 @@ public class Texts : Text_Base
 
     private void TextEnd()
     {
-        eventObjSpawnData.ForEach(objData => objData.eventObject.SetActive(false));
+        if (!dontDespawnEventObjsOnTextEnd)
+        {
+            eventObjSpawnData.ForEach(objData => objData.eventObject.SetActive(false));
+        }
 
         talkManager.CurrentEvents.Clear();
 

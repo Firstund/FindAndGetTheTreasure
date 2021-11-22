@@ -185,6 +185,11 @@ public class EventTriggerArea : MonoBehaviour
         }
 
         eventPlayed = true;
+
+        if(gameManager.player.IsGround)
+        {
+            playerIsGround = true;
+        }
     }
     private void EnabledFalse()
     {

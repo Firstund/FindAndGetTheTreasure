@@ -98,6 +98,10 @@ public class CharacterMove : MonoBehaviour
     private Transform UpWallChecker;
 
     private bool isGround = false;
+    public bool IsGround
+    {
+        get{return isGround;}
+    }
     private bool leftWall = false;
     private bool rightWall = false;
     private bool upWall = false;
@@ -111,9 +115,6 @@ public class CharacterMove : MonoBehaviour
     [SerializeField]
     private float dashResetTime = 1f;
 
-    [SerializeField]
-    private float powerTimeWhenIsHangFalse = 5f;
-    private float powerTimer = 0f;
     private bool isJump = false;
     private bool isHang = false;
     private bool IsHang
@@ -124,25 +125,9 @@ public class CharacterMove : MonoBehaviour
         }
         set
         {
-            if (value)
-            {
-                powerTimer = 0f;
-            }
-            else if (!gameManager.SlowTimeSomeObjects)
-            {
-                giveLeftPowerWhenIsHangFalse = spriteRenderer.flipX;
-
-                WhenIsHangFalse();
-            }
-            else
-            {
-                powerTimer = 0f;
-            }
-
             isHang = value;
         }
     }
-    private bool giveLeftPowerWhenIsHangFalse = false;
     private bool isDash = false;
     private bool isDead = false;
     private bool isAttack = false;
@@ -274,7 +259,6 @@ public class CharacterMove : MonoBehaviour
             LeftWallCheck();
             RightWallCheck();
             CharacterHangWallCheck();
-            IsHangFalseGivePower();
         }
         else if (gameManager.stopTime && !characterTimeWarp.isTimeWarp && isReflect)
         {
@@ -288,6 +272,11 @@ public class CharacterMove : MonoBehaviour
         {
             DespawnProjectileByAttack();
         }
+
+        if(!upWall)
+        {
+            IsHang = false;
+        }
     }
     private void OnEnable()
     {
@@ -295,32 +284,6 @@ public class CharacterMove : MonoBehaviour
         attacking = false;
 
         spriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
-    }
-    private void WhenIsHangFalse()
-    {
-        powerTimer = powerTimeWhenIsHangFalse;
-    }
-    private void IsHangFalseGivePower()
-    {
-        if (powerTimer > 0f)
-        {
-            if (giveLeftPowerWhenIsHangFalse)
-            {
-                // rigid.velocity = new Vector2(Mathf.Lerp(0f, 1f, powerTimer / powerTimeWhenIsHangFalse), rigid.velocity.y);
-                rigid.AddForce(new Vector2(Mathf.Lerp(0f, 1f, powerTimer / powerTimeWhenIsHangFalse), 0f));
-            }
-            else
-            {
-                // rigid.velocity = new Vector2(Mathf.Lerp(0f, -1f, powerTimer / powerTimeWhenIsHangFalse), rigid.velocity.y);
-                rigid.AddForce(new Vector2(Mathf.Lerp(0f, -1f, powerTimer / powerTimeWhenIsHangFalse), 0f));
-            }
-
-            powerTimer -= Time.deltaTime;
-        }
-        else
-        {
-            powerTimer = 0f;
-        }
     }
     private void CheckDead()
     {
@@ -944,6 +907,11 @@ public class CharacterMove : MonoBehaviour
                 canJumpAgain = true;
             }
 
+            if(IsHang)
+            {
+                IsHang = false;
+            }
+
             attacking = false;
 
             anim.Play(characterName + "Jump");
@@ -978,7 +946,7 @@ public class CharacterMove : MonoBehaviour
 
     private void MoveX(float XMove)
     {
-        if (!IsHang && powerTimer <= 0f)
+        if (!IsHang)
         {
             rigid.velocity = new Vector2(XMove * characterStat.speed, rigid.velocity.y);
         }
@@ -1034,7 +1002,6 @@ public class CharacterMove : MonoBehaviour
 
         if (isGround)
         {
-            powerTimer = 0f;
             whenIsNotInAirPosition = currentPosition;
 
             staping = false;
@@ -1058,6 +1025,11 @@ public class CharacterMove : MonoBehaviour
     private void UpWallCheck()
     {
         bool a = Physics2D.OverlapCircle(UpWallChecker.position, 0.05f, whatIsGround);
+
+        if(!a && IsHang)
+        {
+            IsHang = false;
+        }
 
         upWall = a;
     }
@@ -1090,11 +1062,6 @@ public class CharacterMove : MonoBehaviour
 
     private void LRCheck(float XMove)
     {
-        if (playerInput.moveBtnDown)
-        {
-            powerTimer = 0f;
-        }
-
         if (!(IsHang || isReflect))
         {
             if (XMove < 0f)
