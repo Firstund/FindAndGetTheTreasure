@@ -67,7 +67,7 @@ public class CharacterTimeWarp : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
 
-        gameManager.player.whenPlayerDead += () =>
+        gameManager.player.WhenPlayerDead += () =>
         {
             CancelTimeWarp();
         };

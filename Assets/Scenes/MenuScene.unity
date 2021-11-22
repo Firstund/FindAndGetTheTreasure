@@ -5678,7 +5678,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: texts.Array.data[0].contents
-      value: "\uC798\uD588\uC5B4, \uC774\uC81C \uC67C\uCABD Alt\uD0A4\uB97C \uB20C\uB7EC\uBD10."
+      value: "\uC798\uD588\uC5B4, \uC774\uC81C, \uBC14\uB2E5\uC5D0\uC11C \uC67C\uCABD
+        Alt\uD0A4\uB97C \uB20C\uB7EC\uBD10."
       objectReference: {fileID: 0}
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: texts.Array.data[1].contents
@@ -7494,7 +7495,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 988320050}
   m_HandleRect: {fileID: 988320049}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

@@ -9,7 +9,7 @@ public static class ScriptHelper
 {
     public static void ForEach<T>(this IEnumerable<T> list, Action<T> action)
     {
-        foreach(var item in list)
+        foreach (var item in list)
         {
             action(item);
         }
@@ -18,7 +18,7 @@ public static class ScriptHelper
     {
         List<T> results = new List<T>();
 
-        foreach(T item in a)
+        foreach (T item in a)
         {
             results.Add(item);
         }
@@ -196,7 +196,6 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-
             return a;
         };
 
@@ -256,7 +255,7 @@ public class GameManager : MonoBehaviour
 
         WhenGoToStageSelectMenu = () =>
         {
-            
+
         };
 
     }
