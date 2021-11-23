@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TextEventObject : TextEventObject_Base
 {
+    private GameManager gameManager = null;
     private Texts textsScript = null;
 
     [SerializeField]
@@ -53,11 +54,18 @@ public class TextEventObject : TextEventObject_Base
 
     private void Awake()
     {
+        gameManager = GameManager.Instance;
+
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void Start()
     {
+        gameManager.StageEnd += (e) =>
+        {
+            gameObject.SetActive(false);
+        };
+
         PosSet();
     }
 
@@ -69,6 +77,13 @@ public class TextEventObject : TextEventObject_Base
         spriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
 
         eventNum = 0;
+    }
+    private void OnDisable() 
+    {
+        gameManager.StageEnd -= (e) =>
+        {
+            gameObject.SetActive(false);
+        };
     }
     private void PosSet()
     {

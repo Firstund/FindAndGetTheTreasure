@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class TimeSlowEffect : MonoBehaviour
     private float fadeInTime = 0.3f;
     private float fadeInTimer = 0f;
 
-    private void Awake() 
+    private void Awake()
     {
         gameManager = GameManager.Instance;
     }
@@ -35,16 +36,29 @@ public class TimeSlowEffect : MonoBehaviour
         transform.localScale = new Vector3(0f, 0f, 1f);
         fadeInTimer = 0f;
 
+        Debug.Log("Aaaa");
         gameManager.SetFalseSlowTimeSomeObjects += () =>
-        {
-            gameObject.SetActive(false);
+        { 
+            Despawn();
         };
     }
-    private void OnDisable() 
+    private void OnDisable()
     {
+        Debug.Log("bbb");
         gameManager.SetFalseSlowTimeSomeObjects -= () =>
         {
-            gameObject.SetActive(false);
+            Despawn();
         };
+    }
+    private void Despawn()
+    {
+        try
+        {
+            gameObject.SetActive(false);
+        }
+        catch(Exception e)
+        {
+
+        }
     }
 }

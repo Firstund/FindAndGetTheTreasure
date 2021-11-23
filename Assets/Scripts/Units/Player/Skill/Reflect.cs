@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -159,7 +160,7 @@ public class Reflect : MonoBehaviour
         shootAngle = transform.position;
 
         if (CanSettingAngle)
-        {   
+        {
             SettingAngle();
         }
         if (CanShoot)
@@ -224,8 +225,15 @@ public class Reflect : MonoBehaviour
 
     public void SpawnDespawnEffects(bool spawn)
     {
-        refelctTimer.SetActive(spawn);
-        timeSlowEffectObj.SetActive(spawn);
+        try
+        {
+            refelctTimer.SetActive(spawn);
+            timeSlowEffectObj.SetActive(spawn);
+        }
+        catch (Exception e)
+        {
+
+        }
     }
 
     private void OnDrawGizmos()
