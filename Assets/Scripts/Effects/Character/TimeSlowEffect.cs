@@ -36,7 +36,6 @@ public class TimeSlowEffect : MonoBehaviour
         transform.localScale = new Vector3(0f, 0f, 1f);
         fadeInTimer = 0f;
 
-        Debug.Log("Aaaa");
         gameManager.SetFalseSlowTimeSomeObjects += () =>
         { 
             Despawn();
@@ -44,7 +43,6 @@ public class TimeSlowEffect : MonoBehaviour
     }
     private void OnDisable()
     {
-        Debug.Log("bbb");
         gameManager.SetFalseSlowTimeSomeObjects -= () =>
         {
             Despawn();

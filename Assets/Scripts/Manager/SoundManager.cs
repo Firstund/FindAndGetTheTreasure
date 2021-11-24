@@ -25,7 +25,6 @@ public class SoundManager : MonoBehaviour
         }
     }
     private GameManager gameManager = null;
-    private DontDestroyOnLoadManager dontDestroyOnLoadManager = null;
 
     [SerializeField]
     private AudioClip stageSelectMenuMainBGM = null;
@@ -54,7 +53,6 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         gameManager = GameManager.Instance;
-        dontDestroyOnLoadManager = DontDestroyOnLoadManager.Instance;
     }
     private void Start()
     {
@@ -63,8 +61,6 @@ public class SoundManager : MonoBehaviour
             mainBGM.clip = stageSelectMenuMainBGM;
             mainBGM.Play();
         };
-
-        dontDestroyOnLoadManager.DoNotDestroyOnLoad(gameObject);
 
         // SetMainBGMVolumeByLerp(1, 0, 5);
         SetMainBGMPitch(1f);

@@ -39,6 +39,11 @@ public class SpawnEnemy : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+    private void OnDrawGizmos() 
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, 0.35f);
+    }
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

@@ -25,7 +25,7 @@ public class TalkManager : MonoBehaviour
     }
 
     private GameManager gameManager = null;
-    private DontDestroyOnLoadManager dontDestroyOnLoadManager = null;
+
     [SerializeField]
     private List<GameObject> textBoxesParent;
 
@@ -63,10 +63,6 @@ public class TalkManager : MonoBehaviour
     }
     void Start()
     {
-        dontDestroyOnLoadManager = DontDestroyOnLoadManager.Instance;
-
-        dontDestroyOnLoadManager.DoNotDestroyOnLoad(gameObject);
-
         gameManager.SpawnStages += stageNum => SpawnTextBoxes(stageNum);
         gameManager.StageEnd += a => DeSpawnTextBoxes();
     }

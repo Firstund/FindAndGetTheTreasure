@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
-    private DontDestroyOnLoadManager dontDestroyOnLoadManager = null;
 
     [SerializeField]
     private CinemachineVirtualCamera _cinemachineVirtualCamera = null;
@@ -258,12 +257,6 @@ public class GameManager : MonoBehaviour
 
         };
 
-    }
-    void Start()
-    {
-        dontDestroyOnLoadManager = DontDestroyOnLoadManager.Instance;
-
-        dontDestroyOnLoadManager.DoNotDestroyOnLoad(gameObject);
     }
     void Update()
     {

@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventSystemScript : MonoBehaviour
+public class DontDestroyOnLoadThisObj : MonoBehaviour
 {
-    DontDestroyOnLoadManager dontDestroyOnLoadManager = null;
+    private DontDestroyOnLoadManager dontDestroyOnLoadManager = null;
+    
     void Start()
     {
         dontDestroyOnLoadManager = DontDestroyOnLoadManager.Instance;
-        
+
         dontDestroyOnLoadManager.DoNotDestroyOnLoad(gameObject);
     }
 }
