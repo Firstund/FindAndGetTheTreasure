@@ -279,4 +279,9 @@ public class EventTriggerArea : MonoBehaviour
             playerStayTimer = 0f;
         }
     }
+    private void OnDrawGizmos() 
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(transform.position, 0.35f);    
+    }
 }

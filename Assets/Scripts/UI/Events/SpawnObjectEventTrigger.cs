@@ -7,24 +7,20 @@ public class SpawnObjectEventTrigger : MonoBehaviour, IEventTrigger
     private GameManager gameManager = null;
     [SerializeField]
     private GameObject spawnObject = null;
-    
+
     [SerializeField]
-    private Vector2 spawnPosition = Vector2.zero;
+    private Transform spawnPosition = null;
     private void Awake() 
     {
         gameManager = GameManager.Instance;
     }
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
     public void DoEvent()
     {
+        if(!gameManager.IsGameEnd)
+        {
+            GameObject o = Instantiate(spawnObject, gameManager.SpawnObjByTriggerTrm);
 
+            o.transform.position = spawnPosition.position;
+        }
     }
 }

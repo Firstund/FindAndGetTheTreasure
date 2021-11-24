@@ -230,7 +230,7 @@ public class Reflect : MonoBehaviour
             refelctTimer.SetActive(spawn);
             timeSlowEffectObj.SetActive(spawn);
         }
-        catch (Exception e)
+        catch (Exception)
         {
 
         }

@@ -70,6 +70,13 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField]
+    private Transform spawnObjByTriggerTrm = null;
+    public Transform SpawnObjByTriggerTrm
+    {
+        get { return spawnObjByTriggerTrm; }
+    }
+
+    [SerializeField]
     private CharacterMove _player = null;
     public CharacterMove player
     {

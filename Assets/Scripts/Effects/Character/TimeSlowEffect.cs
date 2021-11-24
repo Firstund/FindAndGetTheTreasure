@@ -54,7 +54,7 @@ public class TimeSlowEffect : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-        catch(Exception e)
+        catch(Exception)
         {
 
         }
