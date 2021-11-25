@@ -5,17 +5,28 @@ using UnityEngine;
 
 public class BossStatus : MonoBehaviour
 {
+    private GameManager gameManager = null;
+
     private Animator anim = null;
     public Animator Anim
     {
         get { return anim; }
     }
 
-    private List<IBossSkill> bossSkills = null;
+    private List<IBossSkill> bossSkills = new List<IBossSkill>();
+    private List<int> failedBossSkillNums = new List<int>(); // DoSkill함수 실행에 실패한 스킬들의 모임
+
     private int currentSkillNum = 0;
+
+    public float DistanceWithPlayer
+    {
+        get { return Vector2.Distance(transform.position, gameManager.player.transform.position); }
+    }
 
     private void Awake()
     {
+        gameManager = GameManager.Instance;
+
         anim = GetComponent<Animator>();
 
         bossSkills = GetComponents<IBossSkill>().ToList();
@@ -31,11 +42,38 @@ public class BossStatus : MonoBehaviour
 
         bossSkills[currentSkillNum].DoSkill();
     }
-    private void RandomSetSKillNum()
+    public void DoCurrentSkillFail()
+    {
+        failedBossSkillNums.Add(currentSkillNum);
+
+        RandomSetSKillNum();
+    }
+    public void ClearFailedBossSkillNumList()
+    {
+        Debug.Log("bbb"); // 실행순서 문제
+
+        failedBossSkillNums.Clear();
+    }
+    public void RandomSetSKillNum()
     {
         if (bossSkills.Count > 0)
         {
-            int num = UnityEngine.Random.Range(0, bossSkills.Count - 1);
+            int num;
+
+            while (true)
+            {
+                num = UnityEngine.Random.Range(0, bossSkills.Count);
+
+                for (int i = 0; i < failedBossSkillNums.Count; i++)
+                {
+                    if (failedBossSkillNums[i] == num)
+                    {
+                        continue;
+                    }
+                }
+
+                break;
+            }
 
             DebugBossSkillName(bossSkills[num]);
 
@@ -46,7 +84,7 @@ public class BossStatus : MonoBehaviour
             Debug.LogError(gameObject.name + " has no bossSkill.");
         }
     }
-    private void SetSKillNum(int num)
+    public void SetSkillNum(int num)
     {
         try
         {
@@ -60,7 +98,7 @@ public class BossStatus : MonoBehaviour
         }
         catch (Exception)
         {
-            Debug.LogError("SetSkillNum Error in " + this.name + " of " + gameObject.name);
+            Debug.LogError("SetSkillNum Error in SetSkillNum of " + gameObject.name);
         }
     }
     private void DebugBossSkillName(IBossSkill b)

@@ -44,11 +44,13 @@ public class BossMoveToPlayer : MonoBehaviour, IBossSkill
     }
     public string GetSkillScriptName()
     {
-        return this.name;
+        return "BossMoveToPlayer";
     }
     public void DoSkill()
     {
         bossStatus.Anim.SetTrigger(doAnimationTriggerName);
+
+        bossStatus.ClearFailedBossSkillNumList();
 
         isMove = true;
     }

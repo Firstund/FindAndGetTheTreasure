@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 524880437545052655}
   - component: {fileID: 3288756276468478061}
   - component: {fileID: 5753150598058098366}
+  - component: {fileID: 6284245269852912914}
   - component: {fileID: 3795084859178476248}
   m_Layer: 0
   m_Name: Bringer-of-Death
@@ -153,6 +154,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &6284245269852912914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726058607269260468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9e0123909f331b45950ad458c9c8a46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doAnimationTriggerName: Move
+  damage: 2
+  canAttackDistance: 3
 --- !u!61 &3795084859178476248
 BoxCollider2D:
   m_ObjectHideFlags: 0
