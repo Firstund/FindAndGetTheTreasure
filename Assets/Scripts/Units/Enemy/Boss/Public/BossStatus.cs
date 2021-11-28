@@ -50,8 +50,6 @@ public class BossStatus : MonoBehaviour
     }
     public void ClearFailedBossSkillNumList()
     {
-        Debug.Log("bbb"); // 실행순서 문제
-
         failedBossSkillNums.Clear();
     }
     public void RandomSetSKillNum()
@@ -62,22 +60,29 @@ public class BossStatus : MonoBehaviour
 
             while (true)
             {
+                bool numSetAgain = false;
+
                 num = UnityEngine.Random.Range(0, bossSkills.Count);
 
                 for (int i = 0; i < failedBossSkillNums.Count; i++)
                 {
                     if (failedBossSkillNums[i] == num)
                     {
-                        continue;
+                        numSetAgain = true;
                     }
+                }
+
+                if(numSetAgain)
+                {
+                    continue;
                 }
 
                 break;
             }
 
-            DebugBossSkillName(bossSkills[num]);
-
             currentSkillNum = num;
+
+            DebugBossSkillName(bossSkills[num]);
         }
         else
         {

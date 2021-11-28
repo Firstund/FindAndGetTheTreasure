@@ -34,9 +34,9 @@ public class MeleeAttack : MonoBehaviour, IBossSkill
     }
     public void DoSkill()
     {
-        if(bossStatus.DistanceWithPlayer > canAttackDistance)
+        if(bossStatus.DistanceWithPlayer > canAttackDistance) // 스킬 실행 실패조건을 정의
         {
-            Debug.Log("aaa");
+            // 스킬 실행에 실패했을 때 작동될 코드
             isAttack = false;
 
             bossStatus.DoCurrentSkillFail();
