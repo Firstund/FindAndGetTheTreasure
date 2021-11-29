@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GROUND
   - Enemy
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - DAMAGABLEOBSTACLE
   - PROJECTILE
   - PLAYERPROJECTILE
-  - 
+  - BOSS
   - 
   - 
   - 
