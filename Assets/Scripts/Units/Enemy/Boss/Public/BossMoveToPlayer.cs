@@ -16,9 +16,6 @@ public class BossMoveToPlayer : MonoBehaviour, IBossSkill
     [SerializeField]
     private string doAnimationTriggerName = "";
 
-    [SerializeField]
-    private LayerMask whatIsGround;
-
     private Vector2 targetPos = Vector2.zero;
     private Vector2 moveDir
     {
