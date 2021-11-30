@@ -57,6 +57,8 @@ public class BossMoveToPlayer : MonoBehaviour, IBossSkill
     }
     public void DoSkill()
     {
+        targetPos = gameManager.player.transform.position;
+        
         bossStatus.Anim.SetTrigger(doAnimationTriggerName);
 
         bossStatus.ClearFailedBossSkillNumList();
@@ -70,8 +72,6 @@ public class BossMoveToPlayer : MonoBehaviour, IBossSkill
 
         if (isMove)
         {
-            targetPos = gameManager.player.transform.position;
-
             if (gameManager.stopTime)
             {
                 speed = 0f;

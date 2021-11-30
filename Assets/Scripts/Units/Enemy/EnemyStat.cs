@@ -80,6 +80,13 @@ public class EnemyStat : EnemyStatus, IDespawnableByOutCamera
     }
 
     [SerializeField]
+    private bool _isLookLeftAtFirst = false;
+    public bool isLookLeftAtFirst
+    {
+        get { return _isLookLeftAtFirst; }
+    }
+
+    [SerializeField]
     private float _foundRange = 5f;
     public float foundRange
     {
@@ -118,10 +125,10 @@ public class EnemyStat : EnemyStatus, IDespawnableByOutCamera
 
         objectOutCheck = GetComponent<ObjectOutCheck>();
 
-        if(objectOutCheck == null)
+        if (objectOutCheck == null)
         {
             objectOutCheck = gameObject.AddComponent<ObjectOutCheck>();
-            
+
             Debug.LogWarning(gameObject.name + "has no ObjectOutCheck Script.");
         }
 
@@ -134,8 +141,6 @@ public class EnemyStat : EnemyStatus, IDespawnableByOutCamera
     void Start()
     {
         stageManager = StageManager.Instance;
-
-        
     }
 
     void Update()

@@ -159,7 +159,7 @@ public class BossStatus : MonoBehaviour
         }
         catch (Exception)
         {
-            Debug.LogError("SetSkillNum Error in SetSkillNum of " + gameObject.name);
+            Debug.LogError("Error in SetSkillNum of " + gameObject.name);
         }
     }
     private void DebugBossSkillName(IBossSkill b)

@@ -174,7 +174,7 @@ public class Reflect : MonoBehaviour
         if (isAttack)
         {
             //Instantiate(projectile, shootTrm.position, Quaternion.Euler(0f, 0f, shootAnlgePlus)).GetComponent<PlayerProjectile>().SpawnSet(projectileShootRange, projectileDamage, Vector2.right);
-            stageManager.ShootPlayerProjectile(projectile, projectileDamage, shootTrm.position, Quaternion.Euler(0f, 0f, shootAnlgePlus), Vector2.right, projectileShootRange);
+            stageManager.ShootProjectile(projectile, projectileDamage, shootTrm.position, Quaternion.Euler(0f, 0f, shootAnlgePlus), Vector2.right, projectileShootRange);
             WhenReflectEnd();
         }
     }

@@ -310,6 +310,7 @@ public class EnemyMove : EnemyStatus
     private void FlipCheck(Vector2 targetPosition)
     {
         spriteRenderer.flipX = enemyStat.searchCharacter.CheckFlip(targetPosition);
+        spriteRenderer.flipX = enemyStat.isLookLeftAtFirst ? !spriteRenderer.flipX : spriteRenderer.flipX;
     }
     private void Pursue()
     {
@@ -434,7 +435,28 @@ public class EnemyMove : EnemyStatus
         {
             canAttack = false;
 
-            stageManager.ShootEnemyProjectile(projectile, enemyStat, spriteRenderer.flipX, currentPosition, Quaternion.identity, enemyStat.shootRange);
+            if (enemyStat.isLookLeftAtFirst)
+            {
+                if (spriteRenderer.flipX)
+                {
+                    stageManager.ShootProjectile(projectile, enemyStat.ap, currentPosition, Quaternion.identity, Vector2.right, enemyStat.shootRange);
+                }
+                else
+                {
+                    stageManager.ShootProjectile(projectile, enemyStat.ap, currentPosition, Quaternion.identity, Vector2.left, enemyStat.shootRange);
+                }
+            }
+            else
+            {
+                if (spriteRenderer.flipX)
+                {
+                    stageManager.ShootProjectile(projectile, enemyStat.ap, currentPosition, Quaternion.identity, Vector2.left, enemyStat.shootRange);
+                }
+                else
+                {
+                    stageManager.ShootProjectile(projectile, enemyStat.ap, currentPosition, Quaternion.identity, Vector2.right, enemyStat.shootRange);
+                }
+            }
 
             Invoke("AttackRe", enemyStat.attackDelay);
         }
