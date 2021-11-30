@@ -16,7 +16,7 @@ public class BossStatus : MonoBehaviour
     }
 
     private List<IBossSkill> bossSkills = new List<IBossSkill>();
-    private List<int> failedBossSkillNums = new List<int>(); // DoSkill함수 실행에 실패한 스킬들의 모임
+    private List<int> ignoreBossSkillNums = new List<int>(); // DoSkill함수 실행에 실패한 스킬들의 모임
 
     [Header("이 보스의 스프라이트 파일들이 왼쪽을 바라보고 있다면 이 값을 true로 해준다.")]
     [SerializeField]
@@ -53,7 +53,8 @@ public class BossStatus : MonoBehaviour
     }
     private void Start()
     {
-        RandomSetSKillNum();
+        RandomSetSkillNum();
+        DoCurrentSkill();
     }
     public void LRCheckByPlayer()
     {
@@ -87,24 +88,28 @@ public class BossStatus : MonoBehaviour
     {
         Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + " failed.");
 
-        failedBossSkillNums.Add(currentSkillNum);
+        ignoreBossSkillNums.Add(currentSkillNum);
 
-        RandomSetSKillNum();
+        RandomSetSkillNum();
+
+        DoCurrentSkill();
     }
     public void DoCurrentSkillSuccess() // 현재 스킬이 성공적으로 실행되었을 때 실행.
     {
         Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + " successed.");
 
-        RandomSetSKillNum();
+        ignoreBossSkillNums.Add(currentSkillNum);
+
+        RandomSetSkillNum();
 
         Invoke("DoCurrentSkill", doSkillCycle);
     }
     public void ClearFailedBossSkillNumList()
     {
         Debug.Log("Clear List");
-        failedBossSkillNums.Clear();
+        ignoreBossSkillNums.Clear();
     }
-    public void RandomSetSKillNum()
+    public void RandomSetSkillNum()
     {
         if (bossSkills.Count > 0)
         {
@@ -114,11 +119,16 @@ public class BossStatus : MonoBehaviour
             {
                 bool numSetAgain = false;
 
+                if (ignoreBossSkillNums.Count == bossSkills.Count)
+                {
+                    ignoreBossSkillNums.Clear();
+                }
+
                 num = UnityEngine.Random.Range(0, bossSkills.Count);
 
-                for (int i = 0; i < failedBossSkillNums.Count; i++)
+                for (int i = 0; i < ignoreBossSkillNums.Count; i++)
                 {
-                    if (failedBossSkillNums[i] == num)
+                    if (ignoreBossSkillNums[i] == num)
                     {
                         numSetAgain = true;
                     }
@@ -135,8 +145,6 @@ public class BossStatus : MonoBehaviour
             currentSkillNum = num;
 
             DebugBossSkillName(bossSkills[num]);
-
-            DoCurrentSkill();
         }
         else
         {
@@ -150,8 +158,6 @@ public class BossStatus : MonoBehaviour
             DebugBossSkillName(bossSkills[num]);
 
             currentSkillNum = num;
-
-            DoCurrentSkill();
         }
         catch (IndexOutOfRangeException)
         {

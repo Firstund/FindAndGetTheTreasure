@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5753150598058098366}
   - component: {fileID: 6284245269852912914}
   - component: {fileID: 3795084859178476248}
+  - component: {fileID: 459619629510437081}
   m_Layer: 13
   m_Name: Bringer-of-Death
   m_TagString: Boss
@@ -30,8 +31,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 726058607269260468}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.09, y: -120.02, z: -10}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.881, y: -120.09, z: -10}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -121,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLookLeftAtFirst: 1
   isAirUnit: 0
-  doSkillCycle: 2
+  doSkillCycle: 0.5
 --- !u!114 &3288756276468478061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,9 +136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doAnimationTriggerName: Move
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
   moveSpeed: 7
   moveStopDistance: 2
 --- !u!50 &5753150598058098366
@@ -189,10 +187,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.060942322, y: -0.18176895}
+  m_Offset: {x: 0.009743571, y: 0.031766355}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.75, y: 0.3}
     oldSize: {x: 1.4, y: 0.93}
     newSize: {x: 1.4, y: 0.93}
     adaptiveTilingThreshold: 0.5
@@ -200,5 +198,35 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9665119, y: 0.56646216}
+  m_Size: {x: 0.45951915, y: 0.6039251}
   m_EdgeRadius: 0
+--- !u!114 &459619629510437081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726058607269260468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e55b966c92eea6841bb23e8934b26ace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnIt: {fileID: 7053485288860369376, guid: be60058f717a22a458c30974d2a85782, type: 3}
+  spawnInfos:
+    spawnPos: {fileID: 3872542765924400584}
+    spawnNum: 18
+    isProjectile: 1
+    shootToPlayer: 0
+    projectileDamage: 1
+    spawnDistance: 10
+    spawnDelay: 0.1
+  randomSpawnInfos:
+    randomSetSpawnPos: 1
+    minDis: {x: -5, y: 0}
+    maxDis: {x: 5, y: 10}
+  angleSpawnInfos:
+    angleSpawnPos: 1
+    startAngle: 0
+    anglePlus: 20
+  spawnLooping: 1

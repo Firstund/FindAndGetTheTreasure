@@ -25,6 +25,13 @@ public static class ScriptHelper
 
         return results;
     }
+    public static Vector2 RandomVector(Vector2 min, Vector2 max)
+    {
+        float x = UnityEngine.Random.Range(min.x, max.x);
+        float y = UnityEngine.Random.Range(min.y, max.y);
+
+        return new Vector2(x, y);
+    }
     public static Vector2 Sum(this Vector2 vec1, Vector2 vec2)
     {
         return new Vector2(vec1.x + vec2.x, vec1.y + vec2.y);
