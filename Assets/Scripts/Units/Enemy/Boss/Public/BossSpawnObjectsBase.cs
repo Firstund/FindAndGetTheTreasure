@@ -20,6 +20,8 @@ public class BossSpawnObjectsBase : MonoBehaviour
         [Header("이것이 발사체일 때의 데미지")]
         public float projectileDamage = 1f;
         public float spawnDistance = 10f;
+        [Header("소환한 오브젝트에 적용될 첫 알파값")]
+        public float spawnAlpha = 1f;
         public float spawnDelay = 1f;
     }
     [Serializable]

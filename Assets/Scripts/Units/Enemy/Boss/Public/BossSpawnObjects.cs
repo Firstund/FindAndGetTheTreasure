@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class BossSpawnObjects : BossSpawnObjectsBase, IBossSkill
 {
+    private GameManager gameManager = null;
     private StageManager stageManager = null;
+
     private BossStatus bossStatus = null;
 
     [SerializeField]
@@ -24,6 +26,7 @@ public class BossSpawnObjects : BossSpawnObjectsBase, IBossSkill
 
     private void Awake()
     {
+        gameManager = GameManager.Instance;
         stageManager = StageManager.Instance;
 
         bossStatus = GetComponent<BossStatus>();
@@ -61,13 +64,13 @@ public class BossSpawnObjects : BossSpawnObjectsBase, IBossSkill
         {
             targetPos += ScriptHelper.RandomVector(randomSpawnInfos.minDis, randomSpawnInfos.maxDis);
         }
-        else if(spawnInfos.spawnPos.position != Vector3.zero)
+        else if (spawnInfos.spawnPos.position != Vector3.zero)
         {
             targetPos = spawnInfos.spawnPos.position;
             firstTargetPos = targetPos;
         }
 
-        if (angleSpawnInfos.angleSpawnPos)
+        if (angleSpawnInfos.angleSpawnPos && spawnInfos.isProjectile)
         {
             angle = angleSpawnInfos.startAngle;
         }
@@ -76,7 +79,12 @@ public class BossSpawnObjects : BossSpawnObjectsBase, IBossSkill
         {
             if (spawnInfos.isProjectile)
             {
-                stageManager.ShootProjectile(spawnIt, spawnInfos.projectileDamage, targetPos, Quaternion.Euler(0f, 0f, angle), shootDir, spawnInfos.spawnDistance);
+                if (spawnInfos.shootToPlayer)
+                {
+                    shootDir = (gameManager.player.transform.position - transform.position).normalized;
+                }
+
+                stageManager.ShootProjectile(spawnIt, spawnInfos.projectileDamage, targetPos, Quaternion.Euler(0f, 0f, angle), shootDir, spawnInfos.spawnDistance, spawnInfos.spawnAlpha);
             }
             else
             {
@@ -96,11 +104,11 @@ public class BossSpawnObjects : BossSpawnObjectsBase, IBossSkill
                 angle += angleSpawnInfos.anglePlus;
             }
 
-            if(i == spawnInfos.spawnNum - 1)
+            if (i == spawnInfos.spawnNum - 1)
             {
                 bossStatus.DoCurrentSkillSuccess();
 
-                if(!spawnLooping)
+                if (!spawnLooping)
                 {
                     bossStatus.Anim.SetTrigger("Idle");
                 }

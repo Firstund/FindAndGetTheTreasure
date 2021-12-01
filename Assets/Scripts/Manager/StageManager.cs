@@ -134,7 +134,6 @@ public class StageManager : MonoBehaviour
     public GameObject ShootProjectile(GameObject shootIt, float damage, Vector2 spawnPosition, Quaternion angle, Vector2 shootDir, float shootRange)
     {
         GameObject shootObject = projectiles.Find(x => (x.name == shootIt.name + "(Clone)") && !x.activeSelf);
-        
 
         if (shootObject == null)
         {
@@ -151,6 +150,30 @@ public class StageManager : MonoBehaviour
             shootObject.transform.position = spawnPosition;
             shootObject.transform.rotation = angle;
             shootObject.GetComponent<IProjectile>().SpawnSet(shootRange, damage, shootDir);
+            projectiles.Remove(shootObject);
+        }
+
+        return shootObject;
+    }
+    public GameObject ShootProjectile(GameObject shootIt, float damage, Vector2 spawnPosition, Quaternion angle, Vector2 shootDir, float shootRange, float alpha)
+    {
+        GameObject shootObject = projectiles.Find(x => (x.name == shootIt.name + "(Clone)") && !x.activeSelf);
+
+        if (shootObject == null)
+        {
+            GameObject a = Instantiate(shootIt, projectilesTrm);
+            a.transform.position = spawnPosition;
+            a.transform.rotation = angle;
+            a.GetComponent<IProjectile>().SpawnSet(shootRange, damage, shootDir, alpha);
+
+            shootObject = a;
+        }
+        else
+        {
+            shootObject.SetActive(true);
+            shootObject.transform.position = spawnPosition;
+            shootObject.transform.rotation = angle;
+            shootObject.GetComponent<IProjectile>().SpawnSet(shootRange, damage, shootDir, alpha);
             projectiles.Remove(shootObject);
         }
 

@@ -21,13 +21,15 @@ public abstract class Projectile_Base : MonoBehaviour
     protected Vector2 firstPosition = Vector2.zero;
     protected Vector2 shootDir = Vector2.zero;
 
+    protected void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
     protected void Start()
     {
         gameManager = GameManager.Instance;
         stageManager = StageManager.Instance;
         
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
         originSpeed = speed;
     }
     // 벽에 부딪히면 사라지는 코드

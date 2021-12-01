@@ -36,6 +36,15 @@ public class PlayerProjectile : Projectile_Base, IProjectile
         damage = dm;
         shootDir = dir;
     }
+    public void SpawnSet(float shootR, float dm, Vector2 dir, float a)
+    {
+        firstPosition = transform.position;
+        isDestroy = false;
+        shootRange = shootR;
+        damage = dm;
+        shootDir = dir;
+        spriteRenderer.color = new Vector4(1f, 1f, 1f, a);
+    }
     public void Move()
     {
         transform.Translate(shootDir * speed * Time.fixedDeltaTime);
