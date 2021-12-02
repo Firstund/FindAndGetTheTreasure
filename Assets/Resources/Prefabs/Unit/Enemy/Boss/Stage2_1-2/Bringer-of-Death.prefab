@@ -220,10 +220,10 @@ MonoBehaviour:
     spawnNum: 3
     isProjectile: 1
     shootToPlayer: 1
-    projectileDamage: 3
+    projectileDamage: 2
     spawnDistance: 20
     spawnAlpha: 0.1
-    spawnDelay: 1
+    spawnDelay: 2
   randomSpawnInfos:
     randomSetSpawnPos: 0
     minDis: {x: -5, y: 0}
@@ -248,13 +248,13 @@ MonoBehaviour:
   spawnIt: {fileID: 7053485288860369376, guid: 6a1a9768842167f4eb138ad0ce096e9f, type: 3}
   spawnInfos:
     spawnPos: {fileID: 3872542765924400584}
-    spawnNum: 9
+    spawnNum: 18
     isProjectile: 1
     shootToPlayer: 0
     projectileDamage: 1
     spawnDistance: 20
     spawnAlpha: 0.5
-    spawnDelay: 1
+    spawnDelay: 0.1
   randomSpawnInfos:
     randomSetSpawnPos: 1
     minDis: {x: -5, y: 0}
@@ -262,7 +262,7 @@ MonoBehaviour:
   angleSpawnInfos:
     angleSpawnPos: 1
     startAngle: 0
-    anglePlus: 40
+    anglePlus: 20
   spawnLooping: 1
 --- !u!1 &2491974959857139423
 GameObject:

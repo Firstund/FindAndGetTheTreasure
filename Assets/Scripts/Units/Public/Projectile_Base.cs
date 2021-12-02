@@ -23,13 +23,13 @@ public abstract class Projectile_Base : MonoBehaviour
 
     protected void Awake()
     {
+        gameManager = GameManager.Instance;
+        stageManager = StageManager.Instance;
+
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
     protected void Start()
     {
-        gameManager = GameManager.Instance;
-        stageManager = StageManager.Instance;
-        
         originSpeed = speed;
     }
     // 벽에 부딪히면 사라지는 코드

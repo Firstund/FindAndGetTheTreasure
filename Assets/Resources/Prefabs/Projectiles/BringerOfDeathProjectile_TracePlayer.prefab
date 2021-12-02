@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1756726538050510266, guid: 9fb29886e8624564b9b43f0930c625e7, type: 3}
+  m_Sprite: {fileID: 6358284476999747156, guid: 9fb29886e8624564b9b43f0930c625e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -103,6 +103,7 @@ MonoBehaviour:
   alphaPlusSpeed: 1
   startMoveAlpha: 1
   isMoveToPlayer: 1
+  targetPosMark: {fileID: 3136435146279858430, guid: 958cdaf14433d3d47b3c40003c875f1d, type: 3}
 --- !u!61 &8019624195745091298
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -139,7 +140,7 @@ Animator:
   m_GameObject: {fileID: 7053485288860369376}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: db355815322a84149a77d11b082228f9, type: 2}
+  m_Controller: {fileID: 9100000, guid: 229e19a6dbff265429f327479f4d3c9d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
