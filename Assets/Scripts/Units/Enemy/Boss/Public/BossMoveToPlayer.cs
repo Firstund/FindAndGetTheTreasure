@@ -2,19 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossMoveToPlayer : MonoBehaviour, IBossSkill
+public class BossMoveToPlayer : BossSkillBase
 {
-    private GameManager gameManager = null;
-    private StageManager stageManager = null;
-
     private Rigidbody2D rigid = null;
     private SpriteRenderer spriteRenderer = null;
-
-    private BossStatus bossStatus = null;
-
-    [Header("함수 DoSkill이 실행될 때 실행될 애니메이션 트리거의 이름, 없으면 비워둔다.")]
-    [SerializeField]
-    private string doAnimationTriggerName = "";
 
     private Vector2 targetPos = Vector2.zero;
     private Vector2 moveDir
@@ -36,8 +27,9 @@ public class BossMoveToPlayer : MonoBehaviour, IBossSkill
 
     private bool isMove = false;
 
-    private void Awake()
+    public void Awake()
     {
+        DoAwake();
         gameManager = GameManager.Instance;
         stageManager = StageManager.Instance;
 
@@ -51,15 +43,14 @@ public class BossMoveToPlayer : MonoBehaviour, IBossSkill
     {
         MoveToPlayer();
     }
-    public string GetSkillScriptName()
+    public override string GetSkillScriptName()
     {
         return "BossMoveToPlayer";
     }
-    public void DoSkill()
+    public override void DoSkill()
     {
+        base.DoSkill();
         targetPos = gameManager.player.transform.position;
-        
-        bossStatus.Anim.SetTrigger(doAnimationTriggerName);
 
         bossStatus.ClearFailedBossSkillNumList();
         bossStatus.LRCheckByPlayer();

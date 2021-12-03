@@ -3,13 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossSpawnObjects : BossSpawnObjectsBase, IBossSkill
+public class BossSpawnObjects : BossSpawnObjectsBase
 {
-    private GameManager gameManager = null;
-    private StageManager stageManager = null;
-
-    private BossStatus bossStatus = null;
-
     [SerializeField]
     private GameObject spawnIt = null;
 
@@ -26,18 +21,17 @@ public class BossSpawnObjects : BossSpawnObjectsBase, IBossSkill
 
     private void Awake()
     {
-        gameManager = GameManager.Instance;
-        stageManager = StageManager.Instance;
-
-        bossStatus = GetComponent<BossStatus>();
+        base.DoAwake();
     }
 
-    public string GetSkillScriptName()
+    public override string GetSkillScriptName()
     {
         return "BossSpawnObjects";
     }
-    public void DoSkill()
+    public override void DoSkill()
     {
+        base.DoSkill();
+
         if (spawnInfos.spawnDistance < bossStatus.DistanceWithPlayer)
         {
             bossStatus.DoCurrentSkillFail();

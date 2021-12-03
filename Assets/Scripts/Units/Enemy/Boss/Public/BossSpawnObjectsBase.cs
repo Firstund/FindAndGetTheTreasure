@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossSpawnObjectsBase : MonoBehaviour
+public class BossSpawnObjectsBase : BossSkillBase
 {
     [Serializable]
     protected class SpawnInfos
