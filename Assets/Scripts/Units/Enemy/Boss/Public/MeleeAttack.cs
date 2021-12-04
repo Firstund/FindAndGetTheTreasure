@@ -41,8 +41,6 @@ public class MeleeAttack : MonoBehaviour, IBossSkill
             return;
         }
 
-        bossStatus.Anim.SetTrigger(doAnimationTriggerName);
-
         bossStatus.ClearFailedBossSkillNumList();
         bossStatus.LRCheckByPlayer();
 

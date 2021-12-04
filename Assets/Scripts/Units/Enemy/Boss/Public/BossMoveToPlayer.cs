@@ -84,11 +84,11 @@ public class BossMoveToPlayer : BossSkillBase
 
             if (distance <= moveStopDistance)
             {
+                isMove = false;
+
                 bossStatus.Anim.SetTrigger("Idle");
 
-                rigid.velocity = Vector2.zero;
-                
-                isMove = false;
+                rigid.velocity = Vector2.zero; 
 
                 bossStatus.DoCurrentSkillSuccess();
             }

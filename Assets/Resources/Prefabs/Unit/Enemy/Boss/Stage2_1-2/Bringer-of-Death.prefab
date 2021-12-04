@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 3795084859178476248}
   - component: {fileID: 459619629510437081}
   - component: {fileID: 4360625455736770461}
+  - component: {fileID: -7311032118440363361}
   m_Layer: 13
   m_Name: Bringer-of-Death
   m_TagString: Boss
@@ -124,6 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLookLeftAtFirst: 1
   isAirUnit: 0
+  cantDoSkill: 0
   doSkillCycle: 0.5
 --- !u!114 &3288756276468478061
 MonoBehaviour:
@@ -214,6 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e55b966c92eea6841bb23e8934b26ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doAnimationTriggerName: Skill1
   spawnIt: {fileID: 7053485288860369376, guid: 600cf5ffacffecb429ed803220d34930, type: 3}
   spawnInfos:
     spawnPos: {fileID: 6298060469745813320}
@@ -245,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e55b966c92eea6841bb23e8934b26ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doAnimationTriggerName: Skill1
   spawnIt: {fileID: 7053485288860369376, guid: 6a1a9768842167f4eb138ad0ce096e9f, type: 3}
   spawnInfos:
     spawnPos: {fileID: 3872542765924400584}
@@ -264,6 +268,27 @@ MonoBehaviour:
     startAngle: 0
     anglePlus: 20
   spawnLooping: 1
+--- !u!114 &-7311032118440363361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726058607269260468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d0203eb46f41534cb9cfea0e05a5ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doAnimationTriggerName: FadeOut
+  isWarpToPlayer: 1
+  isWarpRandom: 0
+  randWarpMin: {x: 0, y: 0}
+  randWarpMax: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0}
+  fadeOutSpeed: 1
+  fadeInSpeed: 1
+  fadeInTrigger: FadeIn
 --- !u!1 &2491974959857139423
 GameObject:
   m_ObjectHideFlags: 0

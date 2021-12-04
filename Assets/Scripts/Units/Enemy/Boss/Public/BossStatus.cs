@@ -32,6 +32,8 @@ public class BossStatus : MonoBehaviour
     {
         get { return isAirUnit; }
     }
+    private bool doSkill = false;
+    public bool cantDoSkill = false;
 
     private int currentSkillNum = 0;
 
@@ -80,29 +82,47 @@ public class BossStatus : MonoBehaviour
     }
     public void DoCurrentSkill()
     {
-        Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + ".");
+        if (!doSkill)
+        {
+            doSkill = true;
 
-        bossSkills[currentSkillNum].DoSkill();
+            Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + ".");
+
+            bossSkills[currentSkillNum].DoSkill();
+        }
     }
     public void DoCurrentSkillFail() // 현재 스킬 실행에 실패했을 때 실행.
     {
-        Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + " failed.");
+        if (doSkill)
+        {
+            Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + " failed.");
 
-        ignoreBossSkillNums.Add(currentSkillNum);
+            ignoreBossSkillNums.Add(currentSkillNum);
 
-        RandomSetSkillNum();
+            doSkill = false;
+            
+            RandomSetSkillNum();
 
-        DoCurrentSkill();
+            DoCurrentSkill();
+        }
     }
     public void DoCurrentSkillSuccess() // 현재 스킬이 성공적으로 실행되었을 때 실행.
     {
-        Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + " successed.");
+        if (doSkill)
+        {
+            Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + " successed.");
 
-        ignoreBossSkillNums.Add(currentSkillNum);
+            ignoreBossSkillNums.Add(currentSkillNum);
 
-        RandomSetSkillNum();
+            RandomSetSkillNum();
 
-        Invoke("DoCurrentSkill", doSkillCycle);
+            Invoke("DoSkillAgain", doSkillCycle); // 여기문제아님
+        }
+    }
+    private void DoSkillAgain()
+    {
+        doSkill = false;
+        DoCurrentSkill();
     }
     public void ClearFailedBossSkillNumList()
     {

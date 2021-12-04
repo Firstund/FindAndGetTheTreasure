@@ -38,8 +38,6 @@ public class BossSpawnObjects : BossSpawnObjectsBase
 
             return;
         }
-
-        bossStatus.Anim.SetTrigger("Skill1");
     }
     private void DoSpawn()
     {
@@ -100,12 +98,9 @@ public class BossSpawnObjects : BossSpawnObjectsBase
 
             if (i == spawnInfos.spawnNum - 1)
             {
+                bossStatus.Anim.SetTrigger("Idle");
+                
                 bossStatus.DoCurrentSkillSuccess();
-
-                if (!spawnLooping)
-                {
-                    bossStatus.Anim.SetTrigger("Idle");
-                }
             }
         }
     }
