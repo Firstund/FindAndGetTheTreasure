@@ -7,6 +7,13 @@ public abstract class BossSkillBase : MonoBehaviour, IBossSkill
     protected GameManager gameManager = null;
     protected StageManager stageManager = null;
 
+    protected bool doThisSkill = false;
+    public bool DoThisSkill
+    {
+        get { return doThisSkill; }
+        set { doThisSkill = value; }
+    }
+
     protected BossStatus bossStatus = null;
     [Header("함수 DoSkill이 실행될 때 실행될 애니메이션 트리거의 이름, 없으면 비워둔다.")]
     [SerializeField]
@@ -22,7 +29,11 @@ public abstract class BossSkillBase : MonoBehaviour, IBossSkill
 
     public virtual void DoSkill()
     {
-        bossStatus.Anim.SetTrigger(doAnimationTriggerName);
+        if (doThisSkill)
+        {
+            bossStatus.Anim.SetTrigger(doAnimationTriggerName);
+            bossStatus.DoSkill = true;
+        }
     }
     public virtual string GetSkillScriptName()
     {

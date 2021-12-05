@@ -49,13 +49,16 @@ public class BossMoveToPlayer : BossSkillBase
     }
     public override void DoSkill()
     {
-        base.DoSkill();
-        targetPos = gameManager.player.transform.position;
+        if (doThisSkill)
+        {
+            base.DoSkill();
+            targetPos = gameManager.player.transform.position;
 
-        bossStatus.ClearFailedBossSkillNumList();
-        bossStatus.LRCheckByPlayer();
+            bossStatus.ClearFailedBossSkillNumList();
+            bossStatus.LRCheckByPlayer();
 
-        isMove = true;
+            isMove = true;
+        }
     }
     private void MoveToPlayer()
     {
@@ -86,11 +89,14 @@ public class BossMoveToPlayer : BossSkillBase
             {
                 isMove = false;
 
-                bossStatus.Anim.SetTrigger("Idle");
+                rigid.velocity = Vector2.zero;
 
-                rigid.velocity = Vector2.zero; 
+                bossStatus.DoSkill = false;
+                doThisSkill = false;
 
                 bossStatus.DoCurrentSkillSuccess();
+
+                bossStatus.Anim.SetTrigger("Idle");
             }
         }
     }

@@ -30,13 +30,17 @@ public class BossSpawnObjects : BossSpawnObjectsBase
     }
     public override void DoSkill()
     {
-        base.DoSkill();
-
-        if (spawnInfos.spawnDistance < bossStatus.DistanceWithPlayer)
+        if (doThisSkill)
         {
-            bossStatus.DoCurrentSkillFail();
+            if (spawnInfos.spawnDistance < bossStatus.DistanceWithPlayer)
+            {
+                doThisSkill = false;
+                bossStatus.DoCurrentSkillFail();
 
-            return;
+                return;
+            }
+
+            base.DoSkill();
         }
     }
     private void DoSpawn()
@@ -98,8 +102,9 @@ public class BossSpawnObjects : BossSpawnObjectsBase
 
             if (i == spawnInfos.spawnNum - 1)
             {
-                bossStatus.Anim.SetTrigger("Idle");
-                
+                bossStatus.DoSkill = false;
+                doThisSkill = false;
+
                 bossStatus.DoCurrentSkillSuccess();
             }
         }

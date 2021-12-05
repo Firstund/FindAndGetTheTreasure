@@ -15,7 +15,7 @@ public class BossStatus : MonoBehaviour
         get { return anim; }
     }
 
-    private List<IBossSkill> bossSkills = new List<IBossSkill>();
+    private List<BossSkillBase> bossSkills = new List<BossSkillBase>();
     private List<int> ignoreBossSkillNums = new List<int>(); // DoSkill함수 실행에 실패한 스킬들의 모임
 
     [Header("이 보스의 스프라이트 파일들이 왼쪽을 바라보고 있다면 이 값을 true로 해준다.")]
@@ -33,6 +33,11 @@ public class BossStatus : MonoBehaviour
         get { return isAirUnit; }
     }
     private bool doSkill = false;
+    public bool DoSkill
+    {
+        get { return doSkill; }
+        set { doSkill = value; }
+    }
     public bool cantDoSkill = false;
 
     private int currentSkillNum = 0;
@@ -51,7 +56,7 @@ public class BossStatus : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 
-        bossSkills = GetComponents<IBossSkill>().ToList();
+        bossSkills = GetComponents<BossSkillBase>().ToList();
     }
     private void Start()
     {
@@ -84,23 +89,28 @@ public class BossStatus : MonoBehaviour
     {
         if (!doSkill)
         {
-            doSkill = true;
+            for(int i = 0; i < bossSkills.Count; i++)
+            {
+                if(bossSkills[i].DoThisSkill)
+                {
+                    return;
+                }
+            }
 
             Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + ".");
 
+            bossSkills[currentSkillNum].DoThisSkill = true;
             bossSkills[currentSkillNum].DoSkill();
         }
     }
     public void DoCurrentSkillFail() // 현재 스킬 실행에 실패했을 때 실행.
     {
-        if (doSkill)
+        if (!doSkill)
         {
             Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + " failed.");
 
             ignoreBossSkillNums.Add(currentSkillNum);
 
-            doSkill = false;
-            
             RandomSetSkillNum();
 
             DoCurrentSkill();
@@ -108,7 +118,7 @@ public class BossStatus : MonoBehaviour
     }
     public void DoCurrentSkillSuccess() // 현재 스킬이 성공적으로 실행되었을 때 실행.
     {
-        if (doSkill)
+        if (!doSkill)
         {
             Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + " successed.");
 
@@ -121,7 +131,6 @@ public class BossStatus : MonoBehaviour
     }
     private void DoSkillAgain()
     {
-        doSkill = false;
         DoCurrentSkill();
     }
     public void ClearFailedBossSkillNumList()

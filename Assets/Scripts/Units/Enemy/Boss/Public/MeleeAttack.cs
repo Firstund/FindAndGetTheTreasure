@@ -2,15 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeAttack : MonoBehaviour, IBossSkill
+public class MeleeAttack : BossSkillBase
 {
-    private GameManager gameManager = null;
-    private BossStatus bossStatus = null;
-    
-    [Header("함수 DoSkill이 실행될 때 실행될 애니메이션 트리거의 이름, 없으면 비워둔다.")]
-    [SerializeField]
-    private string doAnimationTriggerName = "";
-
     [SerializeField]
     private float damage = 2f;
     [SerializeField]
@@ -19,36 +12,41 @@ public class MeleeAttack : MonoBehaviour, IBossSkill
     private bool isAttack = false;
     private bool attacked = false;
 
-    private void Awake() 
+    private void Awake()
     {
-        gameManager = GameManager.Instance;
-        bossStatus = GetComponent<BossStatus>();
+        DoAwake();
     }
 
-    public string GetSkillScriptName()
+    public override string GetSkillScriptName()
     {
         return "MeleeAttack";
     }
-    public void DoSkill()
+    public override void DoSkill()
     {
-        if(bossStatus.DistanceWithPlayer > canAttackDistance) // 스킬 실행 실패조건을 정의
+        if (doThisSkill)
         {
-            // 스킬 실행에 실패했을 때 작동될 코드
-            isAttack = false;
+            if (bossStatus.DistanceWithPlayer > canAttackDistance) // 스킬 실행 실패조건을 정의
+            {
+                // 스킬 실행에 실패했을 때 작동될 코드
+                isAttack = false;
+                doThisSkill = false;
 
-            bossStatus.DoCurrentSkillFail();
+                bossStatus.DoCurrentSkillFail();
 
-            return;
+                return;
+            }
+
+            base.DoSkill();
+
+            bossStatus.ClearFailedBossSkillNumList();
+            bossStatus.LRCheckByPlayer();
+
+            isAttack = true;
         }
-
-        bossStatus.ClearFailedBossSkillNumList();
-        bossStatus.LRCheckByPlayer();
-
-        isAttack = true;
     }
     private void GetDamage()
     {
-        if(isAttack && bossStatus.DistanceWithPlayer <= canAttackDistance)
+        if (isAttack && bossStatus.DistanceWithPlayer <= canAttackDistance)
         {
             Debug.Log("Hit Player");
 
@@ -57,9 +55,10 @@ public class MeleeAttack : MonoBehaviour, IBossSkill
     }
     private void AttackEnd()
     {
-        bossStatus.Anim.SetTrigger("Idle");
-        
         isAttack = false;
+
+        bossStatus.DoSkill = false;
+        doThisSkill = false;
 
         bossStatus.DoCurrentSkillSuccess();
     }

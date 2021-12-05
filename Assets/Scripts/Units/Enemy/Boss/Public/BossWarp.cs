@@ -54,6 +54,9 @@ public class BossWarp : BossSkillBase
 
                 if (fadeInTrigger == "")
                 {
+                    bossStatus.DoSkill = false;
+                    doThisSkill = false;
+
                     bossStatus.DoCurrentSkillSuccess();
                 }
             }
@@ -74,11 +77,14 @@ public class BossWarp : BossSkillBase
     }
     public override void DoSkill()
     {
-        base.DoSkill();
+        if (doThisSkill)
+        {
+            base.DoSkill();
 
-        bossStatus.cantDoSkill = true;
+            bossStatus.cantDoSkill = true;
 
-        StartFadeOut();
+            StartFadeOut();
+        }
     }
     public override string GetSkillScriptName()
     {
@@ -94,7 +100,7 @@ public class BossWarp : BossSkillBase
         fadeOut = false;
         fadeIn = true;
 
-        if(fadeInTrigger != "")
+        if (fadeInTrigger != "")
         {
             bossStatus.Anim.SetTrigger(fadeInTrigger);
         }
@@ -105,9 +111,13 @@ public class BossWarp : BossSkillBase
         fadeIn = false;
 
         bossStatus.cantDoSkill = false;
-        bossStatus.Anim.SetTrigger("Idle");
+
+        bossStatus.DoSkill = false;
+        doThisSkill = false;
 
         bossStatus.DoCurrentSkillSuccess();
+        
+        bossStatus.Anim.SetTrigger("Idle");
     }
     private void DoWarp()
     {
