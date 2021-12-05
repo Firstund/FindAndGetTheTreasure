@@ -57,7 +57,6 @@ public class MeleeAttack : BossSkillBase
     {
         isAttack = false;
 
-        bossStatus.DoSkill = false;
         doThisSkill = false;
 
         bossStatus.DoCurrentSkillSuccess();

@@ -49,63 +49,65 @@ public class BossSpawnObjects : BossSpawnObjectsBase
     }
     private IEnumerator Spawn()
     {
-        Vector2 targetPos = transform.position;
-        Vector2 firstTargetPos = targetPos;
-
-        Vector2 shootDir = Vector2.right;
-
-        float angle = 0f;
-
-        if (randomSpawnInfos.randomSetSpawnPos)
+        if (doThisSkill)
         {
-            targetPos += ScriptHelper.RandomVector(randomSpawnInfos.minDis, randomSpawnInfos.maxDis);
-        }
-        else if (spawnInfos.spawnPos.position != Vector3.zero)
-        {
-            targetPos = spawnInfos.spawnPos.position;
-            firstTargetPos = targetPos;
-        }
+            Vector2 targetPos = transform.position;
+            Vector2 firstTargetPos = targetPos;
 
-        if (angleSpawnInfos.angleSpawnPos && spawnInfos.isProjectile)
-        {
-            angle = angleSpawnInfos.startAngle;
-        }
+            Vector2 shootDir = Vector2.right;
 
-        for (int i = 0; i < spawnInfos.spawnNum; i++)
-        {
-            if (spawnInfos.isProjectile)
-            {
-                if (spawnInfos.shootToPlayer)
-                {
-                    shootDir = (gameManager.player.transform.position - transform.position).normalized;
-                }
-
-                stageManager.ShootProjectile(spawnIt, spawnInfos.projectileDamage, targetPos, Quaternion.Euler(0f, 0f, angle), shootDir, spawnInfos.spawnDistance, spawnInfos.spawnAlpha);
-            }
-            else
-            {
-                stageManager.SpawnEnemy(spawnIt, targetPos);
-            }
-
-            yield return new WaitForSeconds(spawnInfos.spawnDelay);
+            float angle = 0f;
 
             if (randomSpawnInfos.randomSetSpawnPos)
             {
-                targetPos = firstTargetPos;
                 targetPos += ScriptHelper.RandomVector(randomSpawnInfos.minDis, randomSpawnInfos.maxDis);
             }
-
-            if (angleSpawnInfos.angleSpawnPos)
+            else if (spawnInfos.spawnPos.position != Vector3.zero)
             {
-                angle += angleSpawnInfos.anglePlus;
+                targetPos = spawnInfos.spawnPos.position;
+                firstTargetPos = targetPos;
             }
 
-            if (i == spawnInfos.spawnNum - 1)
+            if (angleSpawnInfos.angleSpawnPos && spawnInfos.isProjectile)
             {
-                bossStatus.DoSkill = false;
-                doThisSkill = false;
+                angle = angleSpawnInfos.startAngle;
+            }
 
-                bossStatus.DoCurrentSkillSuccess();
+            for (int i = 0; i < spawnInfos.spawnNum; i++)
+            {
+                if (spawnInfos.isProjectile)
+                {
+                    if (spawnInfos.shootToPlayer)
+                    {
+                        shootDir = (gameManager.player.transform.position - transform.position).normalized;
+                    }
+
+                    stageManager.ShootProjectile(spawnIt, spawnInfos.projectileDamage, targetPos, Quaternion.Euler(0f, 0f, angle), shootDir, spawnInfos.spawnDistance, spawnInfos.spawnAlpha);
+                }
+                else
+                {
+                    stageManager.SpawnEnemy(spawnIt, targetPos);
+                }
+
+                yield return new WaitForSeconds(spawnInfos.spawnDelay);
+
+                if (randomSpawnInfos.randomSetSpawnPos)
+                {
+                    targetPos = firstTargetPos;
+                    targetPos += ScriptHelper.RandomVector(randomSpawnInfos.minDis, randomSpawnInfos.maxDis);
+                }
+
+                if (angleSpawnInfos.angleSpawnPos)
+                {
+                    angle += angleSpawnInfos.anglePlus;
+                }
+
+                if (i == spawnInfos.spawnNum - 1)
+                {
+                    doThisSkill = false;
+
+                    bossStatus.DoCurrentSkillSuccess();
+                }
             }
         }
     }

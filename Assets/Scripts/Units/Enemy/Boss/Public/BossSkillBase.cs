@@ -32,7 +32,6 @@ public abstract class BossSkillBase : MonoBehaviour, IBossSkill
         if (doThisSkill)
         {
             bossStatus.Anim.SetTrigger(doAnimationTriggerName);
-            bossStatus.DoSkill = true;
         }
     }
     public virtual string GetSkillScriptName()

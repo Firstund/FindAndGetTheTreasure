@@ -32,14 +32,6 @@ public class BossStatus : MonoBehaviour
     {
         get { return isAirUnit; }
     }
-    private bool doSkill = false;
-    public bool DoSkill
-    {
-        get { return doSkill; }
-        set { doSkill = value; }
-    }
-    public bool cantDoSkill = false;
-
     private int currentSkillNum = 0;
 
     [SerializeField]
@@ -87,47 +79,38 @@ public class BossStatus : MonoBehaviour
     }
     public void DoCurrentSkill()
     {
-        if (!doSkill)
+        for (int i = 0; i < bossSkills.Count; i++)
         {
-            for(int i = 0; i < bossSkills.Count; i++)
+            if (bossSkills[i].DoThisSkill) // 이미 실행중인 스킬이 있으면, 이 스킬은 실행하지 않는다.
             {
-                if(bossSkills[i].DoThisSkill)
-                {
-                    return;
-                }
+                return;
             }
-
-            Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + ".");
-
-            bossSkills[currentSkillNum].DoThisSkill = true;
-            bossSkills[currentSkillNum].DoSkill();
         }
+
+        Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + ".");
+
+        bossSkills[currentSkillNum].DoThisSkill = true;
+        bossSkills[currentSkillNum].DoSkill();
     }
     public void DoCurrentSkillFail() // 현재 스킬 실행에 실패했을 때 실행.
     {
-        if (!doSkill)
-        {
-            Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + " failed.");
+        Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + " failed.");
 
-            ignoreBossSkillNums.Add(currentSkillNum);
+        ignoreBossSkillNums.Add(currentSkillNum);
 
-            RandomSetSkillNum();
+        RandomSetSkillNum();
 
-            DoCurrentSkill();
-        }
+        DoCurrentSkill();
     }
     public void DoCurrentSkillSuccess() // 현재 스킬이 성공적으로 실행되었을 때 실행.
     {
-        if (!doSkill)
-        {
-            Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + " successed.");
+        Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + " successed.");
 
-            ignoreBossSkillNums.Add(currentSkillNum);
+        ignoreBossSkillNums.Add(currentSkillNum);
 
-            RandomSetSkillNum();
+        RandomSetSkillNum();
 
-            Invoke("DoSkillAgain", doSkillCycle); // 여기문제아님
-        }
+        Invoke("DoSkillAgain", doSkillCycle);
     }
     private void DoSkillAgain()
     {

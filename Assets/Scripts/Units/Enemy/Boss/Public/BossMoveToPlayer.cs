@@ -91,7 +91,6 @@ public class BossMoveToPlayer : BossSkillBase
 
                 rigid.velocity = Vector2.zero;
 
-                bossStatus.DoSkill = false;
                 doThisSkill = false;
 
                 bossStatus.DoCurrentSkillSuccess();

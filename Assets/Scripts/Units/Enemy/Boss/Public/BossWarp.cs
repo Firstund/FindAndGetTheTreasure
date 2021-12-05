@@ -54,7 +54,6 @@ public class BossWarp : BossSkillBase
 
                 if (fadeInTrigger == "")
                 {
-                    bossStatus.DoSkill = false;
                     doThisSkill = false;
 
                     bossStatus.DoCurrentSkillSuccess();
@@ -80,8 +79,6 @@ public class BossWarp : BossSkillBase
         if (doThisSkill)
         {
             base.DoSkill();
-
-            bossStatus.cantDoSkill = true;
 
             StartFadeOut();
         }
@@ -110,13 +107,10 @@ public class BossWarp : BossSkillBase
         fadeOut = false;
         fadeIn = false;
 
-        bossStatus.cantDoSkill = false;
-
-        bossStatus.DoSkill = false;
         doThisSkill = false;
 
         bossStatus.DoCurrentSkillSuccess();
-        
+
         bossStatus.Anim.SetTrigger("Idle");
     }
     private void DoWarp()
