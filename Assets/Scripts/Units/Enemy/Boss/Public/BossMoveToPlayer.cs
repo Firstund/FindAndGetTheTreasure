@@ -20,6 +20,11 @@ public class BossMoveToPlayer : BossSkillBase
     [SerializeField]
     private float moveStopDistance = 2f;
 
+    [Header("움직이기 시작하고 나서부터 지난 시간(초)가 이 값보다 크면 DoCurrentSkillSuccess처리")]
+    [SerializeField]
+    private float moveTime = 2f;
+    private float moveTimer = 0f;
+
     private float distance
     {
         get { return Vector2.Distance(transform.position, targetPos); }
@@ -41,7 +46,19 @@ public class BossMoveToPlayer : BossSkillBase
 
     void FixedUpdate()
     {
-        MoveToPlayer();
+        if (doThisSkill)
+        {
+            if(moveTimer < moveTime)
+            {
+                moveTimer += Time.fixedDeltaTime;
+            }
+            else
+            {
+                MoveDone();
+            }
+            
+            MoveToPlayer();
+        }
     }
     public override string GetSkillScriptName()
     {
@@ -57,6 +74,7 @@ public class BossMoveToPlayer : BossSkillBase
             bossStatus.ClearFailedBossSkillNumList();
             bossStatus.LRCheckByPlayer();
 
+            moveTimer = 0f;
             isMove = true;
         }
     }
@@ -87,20 +105,21 @@ public class BossMoveToPlayer : BossSkillBase
 
             if (distance <= moveStopDistance)
             {
-                isMove = false;
-
-                rigid.velocity = Vector2.zero;
-
-                doThisSkill = false;
-
-                bossStatus.DoCurrentSkillSuccess();
-
-                bossStatus.Anim.SetTrigger("Idle");
+                MoveDone();
             }
         }
     }
-    public void SetFalseIsMove()
+
+    private void MoveDone()
     {
         isMove = false;
+
+        rigid.velocity = Vector2.zero;
+
+        doThisSkill = false;
+
+        bossStatus.DoCurrentSkillSuccess();
+
+        bossStatus.Anim.SetTrigger("Idle");
     }
 }

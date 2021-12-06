@@ -83,8 +83,7 @@ public class CharacterMove : MonoBehaviour
     private LayerMask whatIsGround;
     [SerializeField]
     private LayerMask whatIsEnemy;
-    [SerializeField]
-    private LayerMask whatIsHitable;
+    private LayerMask whatIsDashAttackable;
     [SerializeField]
     private LayerMask whatIsPorjectile;
 
@@ -100,7 +99,7 @@ public class CharacterMove : MonoBehaviour
     private bool isGround = false;
     public bool IsGround
     {
-        get{return isGround;}
+        get { return isGround; }
     }
     private bool leftWall = false;
     private bool rightWall = false;
@@ -234,7 +233,7 @@ public class CharacterMove : MonoBehaviour
         firstGravity = rigid.gravityScale;
         firstMass = rigid.mass;
 
-        whatIsHitable.value = whatIsEnemy + whatIsGround;
+        whatIsDashAttackable.value = whatIsEnemy + whatIsGround;
 
         characterStat.hp = characterStat.firstHp;
 
@@ -273,7 +272,7 @@ public class CharacterMove : MonoBehaviour
             DespawnProjectileByAttack();
         }
 
-        if(!upWall)
+        if (!upWall)
         {
             IsHang = false;
         }
@@ -540,7 +539,6 @@ public class CharacterMove : MonoBehaviour
             StartCoroutine(hurt());
 
             Invoke("isHurtSet", 1f);
-
         }
     }
     private IEnumerator hurt()
@@ -549,8 +547,6 @@ public class CharacterMove : MonoBehaviour
         Color color_origin = new Color(1f, 1f, 1f, 1f);
 
         spriteRenderer.color = color;
-
-        // HitSound 재생
 
         yield return new WaitForSeconds(0.5f);
 
@@ -760,7 +756,23 @@ public class CharacterMove : MonoBehaviour
 
             EnemyMove enemyMove = item.GetComponent<EnemyMove>();
 
-            enemyMove.Hurt(characterStat.ap);
+            if (enemyMove == null)
+            {
+                BossStat bossStat = item.GetComponent<BossStat>();
+
+                if (bossStat == null)
+                {
+                    Debug.LogWarning(item.name + " has Neither EnemyMove nor BossStat");
+                }
+                else
+                {
+                    bossStat.Hurt(characterStat.ap);
+                }
+            }
+            else
+            {
+                enemyMove.Hurt(characterStat.ap);
+            }
         });
     }
     private void DespawnProjectileByAttack()
@@ -852,7 +864,7 @@ public class CharacterMove : MonoBehaviour
 
         for (int i = 0; i < 5; i++)
         {
-            RaycastHit2D[] hit = Physics2D.RaycastAll(rays[i].origin, rays[i].direction, attackRange, whatIsHitable);
+            RaycastHit2D[] hit = Physics2D.RaycastAll(rays[i].origin, rays[i].direction, attackRange, whatIsDashAttackable);
 
             Debug.DrawRay(rays[i].origin, rays[i].direction, Color.red, 10f);
 
@@ -871,14 +883,27 @@ public class CharacterMove : MonoBehaviour
         {
             EnemyMove enemyMove = item.transform.GetComponent<EnemyMove>();
 
-            if (enemyMove != null)
+            if (!soundPlayed)
             {
-                if (!soundPlayed)
-                {
-                    soundPlayed = true;
-                    stageManager.SpawnSoundBox(dashAttackSoundBox);
-                }
+                soundPlayed = true;
+                stageManager.SpawnSoundBox(dashAttackSoundBox);
+            }
 
+            if (enemyMove == null)
+            {
+                BossStat bossStat = item.transform.GetComponent<BossStat>();
+
+                if (bossStat == null)
+                {
+                    Debug.LogWarning(item.transform.name + " has Neither EnemyMove nor BossStat");
+                }
+                else
+                {
+                    bossStat.Hurt(characterStat.ap);
+                }
+            }
+            else
+            {
                 enemyMove.Hurt(characterStat.ap);
             }
         });
@@ -907,7 +932,7 @@ public class CharacterMove : MonoBehaviour
                 canJumpAgain = true;
             }
 
-            if(IsHang)
+            if (IsHang)
             {
                 IsHang = false;
             }
@@ -1026,7 +1051,7 @@ public class CharacterMove : MonoBehaviour
     {
         bool a = Physics2D.OverlapCircle(UpWallChecker.position, 0.05f, whatIsGround);
 
-        if(!a && IsHang)
+        if (!a && IsHang)
         {
             IsHang = false;
         }

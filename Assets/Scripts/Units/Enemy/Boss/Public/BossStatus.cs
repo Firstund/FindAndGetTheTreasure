@@ -8,12 +8,13 @@ public class BossStatus : MonoBehaviour
     private GameManager gameManager = null;
 
     private SpriteRenderer spriteRenderer = null;
-
     private Animator anim = null;
     public Animator Anim
     {
         get { return anim; }
     }
+
+    private BossStat bossStat = null;
 
     private List<BossSkillBase> bossSkills = new List<BossSkillBase>();
     private List<int> ignoreBossSkillNums = new List<int>(); // DoSkill함수 실행에 실패한 스킬들의 모임
@@ -48,12 +49,22 @@ public class BossStatus : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 
+        bossStat = GetComponent<BossStat>();
+
         bossSkills = GetComponents<BossSkillBase>().ToList();
     }
     private void Start()
     {
         RandomSetSkillNum();
         DoCurrentSkill();
+
+        bossStat.WhenIsDead += () =>
+        {
+            for (int i = 0; i < bossSkills.Count; i++)
+            {
+                bossSkills[i].DoThisSkill = false;
+            }
+        };
     }
     public void LRCheckByPlayer()
     {

@@ -9,7 +9,7 @@ public class PlayerProjectile : Projectile_Base, IProjectile
     private GameObject targetEnemy = null;
 
     private bool soundBoxSpawned = false;
-    private List<GameObject> Enemys = new List<GameObject>();
+    private List<GameObject> TargetObjs = new List<GameObject>();
 
     void Update()
     {
@@ -23,10 +23,10 @@ public class PlayerProjectile : Projectile_Base, IProjectile
             stageManager = StageManager.Instance;
         }
 
-        Enemys.Clear();
+        TargetObjs.Clear();
         soundBoxSpawned = false;
 
-        stageManager.Enemys.ForEach(item => Enemys.Add(item));
+        stageManager.Enemys.ForEach(item => TargetObjs.Add(item));
     }
     public void SpawnSet(float shootR, float dm, Vector2 dir)
     {
@@ -51,10 +51,18 @@ public class PlayerProjectile : Projectile_Base, IProjectile
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject != null)
         {
             targetEnemy = other.gameObject;
+        }
+        
+        if (other.gameObject.CompareTag("Enemy"))
+        {
             GetDamage();
+        }
+        else if (other.gameObject.CompareTag("Boss"))
+        {
+            GetBossDamage();
         }
     }
     public void GetDamage()
@@ -72,7 +80,25 @@ public class PlayerProjectile : Projectile_Base, IProjectile
                 soundBoxSpawned = true;
             }
 
-            Enemys.Remove(targetEnemy);
+            TargetObjs.Remove(targetEnemy);
+        }
+    }
+    public void GetBossDamage()
+    {
+        if (targetEnemy.activeSelf)
+        {
+            BossStat bossStat = targetEnemy.GetComponent<BossStat>();
+
+            bossStat.Hurt(damage);
+
+            if (!soundBoxSpawned)
+            {
+                stageManager.SpawnSoundBox(attackSoundBox);
+
+                soundBoxSpawned = true;
+            }
+
+            TargetObjs.Remove(targetEnemy);
         }
     }
     public void Despawn()

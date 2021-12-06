@@ -91,11 +91,9 @@ public class StageManager : MonoBehaviour
 
                     cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0f;
                 }
-
             }
 
             return t;
-
         };
 
         PlayerRespawn = () =>
@@ -285,7 +283,6 @@ public class StageManager : MonoBehaviour
                 }
             }
 
-
             if (flipX)
             {
                 if (originPosition.x <= endPosition.x)
@@ -316,7 +313,6 @@ public class StageManager : MonoBehaviour
                 }
             }
         } while (!a && (!b || !c));
-
 
         return originPosition;
     }
