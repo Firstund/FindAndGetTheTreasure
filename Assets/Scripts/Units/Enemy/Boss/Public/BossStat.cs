@@ -17,6 +17,7 @@ public class BossStat : MonoBehaviour
         get { return hp; }
         set { hp = value; }
     }
+    private float firstHp = 0f;
 
     // 보스는 스킬기반으로 움직이기에 따로 기본 공격력을 두지 않는다.
 
@@ -27,6 +28,7 @@ public class BossStat : MonoBehaviour
         get { return dp; }
         set { dp = value; }
     }
+    private float firstDp = 0f;
 
     private bool isDead = false;
     public bool IsDead
@@ -49,14 +51,25 @@ public class BossStat : MonoBehaviour
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        firstHp = hp;
+        firstDp = dp;
+
         WhenIsDead = () =>
         {
             anim.SetTrigger(deadAnimTrigger);
         };
     }
-    private void Start() 
+    private void Start()
     {
         stageManager.Enemys.Add(gameObject);
+    }
+    private void OnEnable()
+    {
+        isDead = false;
+        alreadyDead = false;
+
+        hp = firstHp;
+        dp = firstDp;
     }
     void Update()
     {
@@ -69,22 +82,25 @@ public class BossStat : MonoBehaviour
     }
     public void Hurt(float damage)
     {
-        float dm = (damage - dp);
-
-        if (dm <= 0f)
+        if (!isDead)
         {
-            dm = 0.5f;
-        }
+            float dm = (damage - dp);
 
-        hp -= dm;
+            if (dm <= 0f)
+            {
+                dm = 0.5f;
+            }
 
-        if (hp <= 0f)
-        {
-            isDead = true;
-        }
-        else
-        {
-            StartCoroutine(hurt());
+            hp -= dm;
+
+            if (hp <= 0f)
+            {
+                isDead = true;
+            }
+            else
+            {
+                StartCoroutine(hurt());
+            }
         }
     }
     private IEnumerator hurt()
@@ -100,6 +116,6 @@ public class BossStat : MonoBehaviour
     }
     private void Destroye()
     {
-        Destroy(gameObject);
+        stageManager.DespawnEnemy(gameObject);
     }
 }

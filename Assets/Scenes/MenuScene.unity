@@ -10236,7 +10236,7 @@ MonoBehaviour:
   - {fileID: 4289256257823219725, guid: 3bd1248d5d6cfee43b9245f262f35669, type: 3}
   - {fileID: 5283051012625576936, guid: 69385ae3934bdb445b1e6159ec5c2429, type: 3}
   - {fileID: 4289256257823219725, guid: 58cb124efb2448245bb0f9812daa2c9a, type: 3}
-  spawnObjByTriggerTrm: {fileID: 0}
+  spawnObjByTriggerTrm: {fileID: 187273280}
   _player: {fileID: 0}
   _characterStat: {fileID: 0}
   slowTimeSomeObjectsTime: 3

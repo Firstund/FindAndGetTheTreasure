@@ -6,8 +6,10 @@ using UnityEngine;
 public class BossStatus : MonoBehaviour
 {
     private GameManager gameManager = null;
+    private StageManager stageManager = null;
 
     private SpriteRenderer spriteRenderer = null;
+    private Rigidbody2D rigid = null;
     private Animator anim = null;
     public Animator Anim
     {
@@ -35,6 +37,10 @@ public class BossStatus : MonoBehaviour
     }
     private int currentSkillNum = 0;
 
+    private float firstAnimSpeed = 0f;
+    private float firstMass = 0f;
+    private float firstGravity = 0f;
+
     [SerializeField]
     private float doSkillCycle = 2f;
     public float DistanceWithPlayer
@@ -42,12 +48,14 @@ public class BossStatus : MonoBehaviour
         get { return Vector2.Distance(transform.position, gameManager.player.transform.position); }
     }
 
+
     private void Awake()
     {
         gameManager = GameManager.Instance;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        rigid = GetComponent<Rigidbody2D>();
 
         bossStat = GetComponent<BossStat>();
 
@@ -58,6 +66,10 @@ public class BossStatus : MonoBehaviour
         RandomSetSkillNum();
         DoCurrentSkill();
 
+        firstAnimSpeed = anim.speed;
+        firstMass = rigid.mass;
+        firstGravity = rigid.gravityScale;
+
         bossStat.WhenIsDead += () =>
         {
             for (int i = 0; i < bossSkills.Count; i++)
@@ -65,6 +77,27 @@ public class BossStatus : MonoBehaviour
                 bossSkills[i].DoThisSkill = false;
             }
         };
+    }
+    private void FixedUpdate() 
+    {
+        if(gameManager.SlowTimeSomeObjects)
+        {
+            anim.speed = firstAnimSpeed / gameManager.SlowTimeNum;
+            rigid.mass = firstMass / gameManager.SlowTimeNum;
+            rigid.gravityScale = firstGravity / gameManager.SlowTimeNum;
+        }
+        else if(gameManager.stopTime)
+        {
+            anim.speed = 0f;
+            rigid.mass = 0f;
+            rigid.gravityScale = 0f;
+        }
+        else
+        {
+            anim.speed = firstAnimSpeed;
+            rigid.mass = firstMass;
+            rigid.gravityScale = firstGravity;
+        }
     }
     public void LRCheckByPlayer()
     {

@@ -48,15 +48,22 @@ public class BossMoveToPlayer : BossSkillBase
     {
         if (doThisSkill)
         {
-            if(moveTimer < moveTime)
+            if (moveTimer < moveTime)
             {
-                moveTimer += Time.fixedDeltaTime;
+                if (gameManager.SlowTimeSomeObjects)
+                {
+                    moveTimer += Time.fixedDeltaTime / gameManager.SlowTimeNum;
+                }
+                else
+                {
+                    moveTimer += Time.fixedDeltaTime;
+                }
             }
             else
             {
                 MoveDone();
             }
-            
+
             MoveToPlayer();
         }
     }
