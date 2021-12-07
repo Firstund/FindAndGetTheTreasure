@@ -748,12 +748,6 @@ public class CharacterMove : MonoBehaviour
 
         a.ForEach(item =>
         {
-            if (!soundPlayed)
-            {
-                stageManager.SpawnSoundBox(attackSoundBox);
-                soundPlayed = true;
-            }
-
             EnemyMove enemyMove = item.GetComponent<EnemyMove>();
 
             if (enemyMove == null)
@@ -766,12 +760,27 @@ public class CharacterMove : MonoBehaviour
                 }
                 else
                 {
-                    bossStat.Hurt(characterStat.ap);
+                    if (!bossStat.IsNothurtMode)
+                    {
+                        bossStat.Hurt(characterStat.ap);
+
+                        if (!soundPlayed)
+                        {
+                            stageManager.SpawnSoundBox(attackSoundBox);
+                            soundPlayed = true;
+                        }
+                    }
                 }
             }
             else
             {
                 enemyMove.Hurt(characterStat.ap);
+
+                if (!soundPlayed)
+                {
+                    stageManager.SpawnSoundBox(attackSoundBox);
+                    soundPlayed = true;
+                }
             }
         });
     }
@@ -883,12 +892,6 @@ public class CharacterMove : MonoBehaviour
         {
             EnemyMove enemyMove = item.transform.GetComponent<EnemyMove>();
 
-            if (!soundPlayed)
-            {
-                soundPlayed = true;
-                stageManager.SpawnSoundBox(dashAttackSoundBox);
-            }
-
             if (enemyMove == null)
             {
                 BossStat bossStat = item.transform.GetComponent<BossStat>();
@@ -899,12 +902,27 @@ public class CharacterMove : MonoBehaviour
                 }
                 else
                 {
-                    bossStat.Hurt(characterStat.ap);
+                    if (!bossStat.IsNothurtMode)
+                    {
+                        bossStat.Hurt(characterStat.ap);
+
+                        if (!soundPlayed)
+                        {
+                            soundPlayed = true;
+                            stageManager.SpawnSoundBox(dashAttackSoundBox);
+                        }
+                    }
                 }
             }
             else
             {
                 enemyMove.Hurt(characterStat.ap);
+
+                if (!soundPlayed)
+                {
+                    soundPlayed = true;
+                    stageManager.SpawnSoundBox(dashAttackSoundBox);
+                }
             }
         });
     }

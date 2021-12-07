@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doAnimationTriggerName: Attack
-  damage: 3
+  damage: 4
   canAttackDistance: 3
 --- !u!114 &459619629510437081
 MonoBehaviour:
@@ -190,7 +190,7 @@ MonoBehaviour:
   spawnIt: {fileID: 7053485288860369376, guid: 600cf5ffacffecb429ed803220d34930, type: 3}
   spawnInfos:
     spawnPos: {fileID: 6298060469745813320}
-    spawnNum: 3
+    spawnNum: 5
     isProjectile: 1
     shootToPlayer: 1
     projectileDamage: 2

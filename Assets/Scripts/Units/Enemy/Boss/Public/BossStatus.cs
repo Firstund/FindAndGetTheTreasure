@@ -35,6 +35,7 @@ public class BossStatus : MonoBehaviour
     {
         get { return isAirUnit; }
     }
+
     private int currentSkillNum = 0;
 
     private float firstAnimSpeed = 0f;
@@ -47,8 +48,6 @@ public class BossStatus : MonoBehaviour
     {
         get { return Vector2.Distance(transform.position, gameManager.player.transform.position); }
     }
-
-
     private void Awake()
     {
         gameManager = GameManager.Instance;

@@ -37,6 +37,13 @@ public class BossStat : MonoBehaviour
         set { isDead = value; }
     }
 
+    private bool isNothurtMode = false;
+    public bool IsNothurtMode
+    {
+        get{return isNothurtMode;}
+        set{isNothurtMode = value;}
+    }
+
     private bool alreadyDead = false;
 
     [SerializeField]
@@ -82,7 +89,7 @@ public class BossStat : MonoBehaviour
     }
     public void Hurt(float damage)
     {
-        if (!isDead)
+        if (!isDead && !isNothurtMode)
         {
             float dm = (damage - dp);
 

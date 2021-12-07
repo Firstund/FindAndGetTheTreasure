@@ -100,10 +100,9 @@ MonoBehaviour:
   speed: 10
   damage: 1
   hitRange: 0.5
-  alphaPlusSpeed: 1
+  alphaPlusSpeed: 2
   startMoveAlpha: 1
   isMoveToPlayer: 1
-  targetPosMark: {fileID: 3136435146279858430, guid: 958cdaf14433d3d47b3c40003c875f1d, type: 3}
 --- !u!61 &8019624195745091298
 BoxCollider2D:
   m_ObjectHideFlags: 0

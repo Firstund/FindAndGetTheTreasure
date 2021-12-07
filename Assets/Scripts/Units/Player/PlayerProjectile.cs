@@ -55,7 +55,7 @@ public class PlayerProjectile : Projectile_Base, IProjectile
         {
             targetEnemy = other.gameObject;
         }
-        
+
         if (other.gameObject.CompareTag("Enemy"))
         {
             GetDamage();
@@ -89,16 +89,19 @@ public class PlayerProjectile : Projectile_Base, IProjectile
         {
             BossStat bossStat = targetEnemy.GetComponent<BossStat>();
 
-            bossStat.Hurt(damage);
-
-            if (!soundBoxSpawned)
+            if (!bossStat.IsNothurtMode)
             {
-                stageManager.SpawnSoundBox(attackSoundBox);
+                bossStat.Hurt(damage);
 
-                soundBoxSpawned = true;
+                if (!soundBoxSpawned)
+                {
+                    stageManager.SpawnSoundBox(attackSoundBox);
+
+                    soundBoxSpawned = true;
+                }
+
+                TargetObjs.Remove(targetEnemy);
             }
-
-            TargetObjs.Remove(targetEnemy);
         }
     }
     public void Despawn()

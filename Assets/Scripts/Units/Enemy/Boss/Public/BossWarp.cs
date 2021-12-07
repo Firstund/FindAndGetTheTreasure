@@ -89,6 +89,7 @@ public class BossWarp : BossSkillBase
     }
     private void StartFadeOut()
     {
+        bossStat.IsNothurtMode = true;
         fadeIn = false;
         fadeOut = true;
     }
@@ -104,6 +105,7 @@ public class BossWarp : BossSkillBase
     }
     private void FadeInSuccess()
     {
+        bossStat.IsNothurtMode = false;
         fadeOut = false;
         fadeIn = false;
 
