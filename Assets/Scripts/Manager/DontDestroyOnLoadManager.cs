@@ -32,15 +32,15 @@ public class DontDestroyOnLoadManager : MonoBehaviour
     }
     public void DoNotDestroyOnLoad(GameObject donDestroyOnLoadObject)
     {
-        dontDestroyOnLoadObjectList.ForEach(item =>
+        foreach (var item in dontDestroyOnLoadObjectList)
         {
             if (item.name == donDestroyOnLoadObject.name)
-            {
+            {   
                 Destroy(donDestroyOnLoadObject);
                 return;
             }
-        });
-
+        }
+        
         dontDestroyOnLoadObjectList.Add(donDestroyOnLoadObject);
         DontDestroyOnLoad(donDestroyOnLoadObject);
     }

@@ -58,8 +58,11 @@ public class SoundManager : MonoBehaviour
     {
         gameManager.WhenGoToStageSelectMenu += () =>
         {
-            mainBGM.clip = stageSelectMenuMainBGM;
-            mainBGM.Play();
+            if (mainBGM != null && stageSelectMenuMainBGM != null)
+            {
+                mainBGM.clip = stageSelectMenuMainBGM;
+                mainBGM.Play();
+            }
         };
 
         // SetMainBGMVolumeByLerp(1, 0, 5);

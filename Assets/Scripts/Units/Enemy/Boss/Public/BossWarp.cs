@@ -22,6 +22,9 @@ public class BossWarp : BossSkillBase
     private Vector2 targetPos = Vector2.zero;
 
     [SerializeField]
+    private LayerMask whatIsWall;
+
+    [SerializeField]
     private float fadeOutSpeed = 0f;
     [SerializeField]
     private float fadeInSpeed = 0f;
@@ -127,11 +130,26 @@ public class BossWarp : BossSkillBase
         }
         else if (isWarpRandom)
         {
+            Ray2D ray = new Ray2D();
+            RaycastHit2D hit = new RaycastHit2D();
+
             targetPos.x = Random.Range(randWarpMin.x, randWarpMax.x);
             targetPos.y = Random.Range(randWarpMin.y, randWarpMax.y);
-        }
 
-        transform.position += new Vector3(targetPos.x, targetPos.y, 0f);
+            ray.origin = bossStat.CurrentPosition;
+            ray.direction = targetPos.normalized;
+
+            hit = Physics2D.Raycast(ray.origin, ray.direction, randWarpMax.x + randWarpMax.y, whatIsWall);
+
+            if(hit)
+            {
+                transform.position = hit.point;
+            }
+            else
+            {
+                transform.position += (Vector3)targetPos;
+            }
+        }
 
         StartFadeIn();
     }

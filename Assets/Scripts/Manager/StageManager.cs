@@ -50,18 +50,22 @@ public class StageManager : MonoBehaviour
     {
         get { return projectilesTrm; }
     }
+    private List<GameObject> spawnObjs = new List<GameObject>();
     [SerializeField]
-    private Transform playerRespanwTrm = null;
+    private Transform spawnObjTrm = null;
+
+    [SerializeField]
+    private Transform playerRespawnTrm = null;
     private Transform PlayerRespawnTrm
     {
         get
         {
-            if (playerRespanwTrm == null)
+            if (playerRespawnTrm == null)
             {
-                playerRespanwTrm = GameObject.Find("PlayerRespawnTrm").transform;
+                playerRespawnTrm = GameObject.Find("PlayerRespawnTrm").transform;
             }
 
-            return playerRespanwTrm;
+            return playerRespawnTrm;
         }
     }
 
@@ -183,29 +187,54 @@ public class StageManager : MonoBehaviour
         deSpawnProjectile.SetActive(false);
     }
 
-    public void SpawnEnemy(GameObject spawnObject, Vector2 spawnPosition)
+    public GameObject SpawnEnemy(GameObject spawnObject, Vector2 spawnPosition)
     {
         GameObject spawnEnemy = enemys.Find(x => (x.name == spawnObject.name + "(Clone)") && (!x.activeSelf));
 
         if (spawnEnemy == null)
         {
-            GameObject a = Instantiate(spawnObject, _enemys);
-            a.transform.position = spawnPosition;
-            enemys.Add(a);
+            spawnEnemy = Instantiate(spawnObject, _enemys);
+            spawnEnemy.transform.position = spawnPosition;
+            enemys.Add(spawnEnemy);
         }
         else
         {
             spawnEnemy.transform.position = spawnPosition;
             spawnEnemy.SetActive(true);
         }
+
+        return spawnEnemy;
     }
     public void DespawnEnemy(GameObject deSpawnObject)
     {
         deSpawnObject.SetActive(false);
     }
+    public GameObject SpawnObject(GameObject spawnObject, Vector2 spawnPosition)
+    {
+        GameObject spawnObj = spawnObjs.Find(x => (x.name == spawnObject.name + "(Clone)"));
+
+        if (spawnObj == null)
+        {
+            spawnObj = Instantiate(spawnObject, spawnObjTrm);
+            spawnObj.transform.position = spawnPosition;
+        }
+        else
+        {
+            spawnObj.transform.position = spawnPosition;
+            spawnObj.SetActive(true);
+            spawnObjs.Remove(spawnObj);
+        }
+
+        return spawnObj;
+    }
+    public void DespawnObject(GameObject deSpawnObject)
+    {
+        spawnObjs.Add(deSpawnObject);
+        deSpawnObject.SetActive(false);
+    }
     public GameObject SpawnSoundBox(GameObject spawnIt)
     {
-        GameObject spawnSoundBox = soundBoxes.Find(x => x.name == spawnIt.name + "(Clone)");
+        GameObject spawnSoundBox = soundBoxes.Find(x => (x.name == spawnIt.name + "(Clone)"));
 
         if (spawnSoundBox == null)
         {

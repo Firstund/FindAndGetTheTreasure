@@ -10,6 +10,8 @@ public class BossStat : MonoBehaviour
     private Animator anim = null;
     private SpriteRenderer spriteRenderer = null;
 
+    private List<IWhenBossDead> whenBossDeads = new List<IWhenBossDead>();
+
     [SerializeField]
     private float hp = 10f;
     public float Hp
@@ -40,14 +42,20 @@ public class BossStat : MonoBehaviour
     private bool isNothurtMode = false;
     public bool IsNothurtMode
     {
-        get{return isNothurtMode;}
-        set{isNothurtMode = value;}
+        get { return isNothurtMode; }
+        set { isNothurtMode = value; }
     }
 
     private bool alreadyDead = false;
 
     [SerializeField]
     private string deadAnimTrigger = "";
+
+    private Vector2 currentPosition = Vector2.zero;
+    public Vector2 CurrentPosition
+    {
+        get { return currentPosition; }
+    }
 
     public event Action WhenIsDead;
 
@@ -58,11 +66,18 @@ public class BossStat : MonoBehaviour
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        whenBossDeads = GetComponents<IWhenBossDead>().ToList();
+
         firstHp = hp;
         firstDp = dp;
 
         WhenIsDead = () =>
         {
+            foreach (var item in whenBossDeads)
+            {
+                item.DoWhenBossDead();
+            }
+
             anim.SetTrigger(deadAnimTrigger);
         };
     }
@@ -80,12 +95,15 @@ public class BossStat : MonoBehaviour
     }
     void Update()
     {
+        currentPosition = transform.position;
+
         if (isDead && !alreadyDead)
         {
             alreadyDead = true;
-
             WhenIsDead();
         }
+
+        transform.position = currentPosition;
     }
     public void Hurt(float damage)
     {

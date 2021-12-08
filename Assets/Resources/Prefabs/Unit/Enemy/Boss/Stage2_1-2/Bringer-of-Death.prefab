@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 7354649387243658889}
   - component: {fileID: 5753150598058098366}
   - component: {fileID: 3795084859178476248}
+  - component: {fileID: 8318669429201057638}
   m_Layer: 9
   m_Name: Bringer-of-Death
   m_TagString: Boss
@@ -256,6 +257,9 @@ MonoBehaviour:
   randWarpMin: {x: 0, y: 0}
   randWarpMax: {x: 0, y: 0}
   targetPos: {x: 0, y: 0}
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 64
   fadeOutSpeed: 1
   fadeInSpeed: 1
   fadeInTrigger: FadeIn
@@ -277,6 +281,9 @@ MonoBehaviour:
   randWarpMin: {x: -5, y: 0}
   randWarpMax: {x: 5, y: 0}
   targetPos: {x: 0, y: 0}
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 64
   fadeOutSpeed: 0
   fadeInSpeed: 0
   fadeInTrigger: FadeIn
@@ -327,6 +334,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.45951915, y: 0.6039251}
   m_EdgeRadius: 0
+--- !u!114 &8318669429201057638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726058607269260468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a611a44b72f4b34d9fd85e87c91f510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnIt: {fileID: 7627716270796501530, guid: 4cfce419bdd241141a69fa058a49b3aa, type: 3}
+  spawnPos: {fileID: 3872542765924400584}
 --- !u!1 &2491974959857139423
 GameObject:
   m_ObjectHideFlags: 0

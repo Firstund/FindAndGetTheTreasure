@@ -77,15 +77,15 @@ public class BossStatus : MonoBehaviour
             }
         };
     }
-    private void FixedUpdate() 
+    private void FixedUpdate()
     {
-        if(gameManager.SlowTimeSomeObjects)
+        if (gameManager.SlowTimeSomeObjects)
         {
             anim.speed = firstAnimSpeed / gameManager.SlowTimeNum;
             rigid.mass = firstMass / gameManager.SlowTimeNum;
             rigid.gravityScale = firstGravity / gameManager.SlowTimeNum;
         }
-        else if(gameManager.stopTime)
+        else if (gameManager.stopTime)
         {
             anim.speed = 0f;
             rigid.mass = 0f;
@@ -122,18 +122,21 @@ public class BossStatus : MonoBehaviour
     }
     public void DoCurrentSkill()
     {
-        for (int i = 0; i < bossSkills.Count; i++)
+        if (!bossStat.IsDead)
         {
-            if (bossSkills[i].DoThisSkill) // 이미 실행중인 스킬이 있으면, 이 스킬은 실행하지 않는다.
+            for (int i = 0; i < bossSkills.Count; i++)
             {
-                return;
+                if (bossSkills[i].DoThisSkill) // 이미 실행중인 스킬이 있으면, 이 스킬은 실행하지 않는다.
+                {
+                    return;
+                }
             }
+
+            Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + ".");
+
+            bossSkills[currentSkillNum].DoThisSkill = true;
+            bossSkills[currentSkillNum].DoSkill();
         }
-
-        Debug.Log("Do " + bossSkills[currentSkillNum].GetSkillScriptName() + ".");
-
-        bossSkills[currentSkillNum].DoThisSkill = true;
-        bossSkills[currentSkillNum].DoSkill();
     }
     public void DoCurrentSkillFail() // 현재 스킬 실행에 실패했을 때 실행.
     {
