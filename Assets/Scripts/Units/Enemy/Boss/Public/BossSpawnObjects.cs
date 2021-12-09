@@ -15,13 +15,35 @@ public class BossSpawnObjects : BossSpawnObjectsBase
     [SerializeField]
     private AngleSpawnInfos angleSpawnInfos = new AngleSpawnInfos();
 
-    [Header("이 스킬은 다음 스킬이 들어올 때 까지 반복하는가")]
-    [SerializeField]
-    private bool spawnLooping = false;
+    private Vector2 targetPos = Vector2.zero;
+    private Vector2 firstTargetPos = Vector2.zero;
+
+    private Vector2 shootDir = Vector2.right;
+
+    private float angle = 0f;
+    private float spawnTimer = 0f;
+
+    private int spawnCount = 0;
+
+    private bool spawnStart = false;
 
     private void Awake()
     {
         base.DoAwake();
+    }
+    private void Update()
+    {
+        if (spawnTimer >= spawnInfos.spawnDelay && spawnCount < spawnInfos.spawnNum)
+        {
+            Spawn();
+
+            spawnTimer = 0f;
+            spawnCount++;
+        }
+        else
+        {
+            spawnTimer += Time.deltaTime;
+        }
     }
 
     public override string GetSkillScriptName()
@@ -41,75 +63,82 @@ public class BossSpawnObjects : BossSpawnObjectsBase
             }
 
             base.DoSkill();
+
+            targetPos = transform.position;
+            firstTargetPos = targetPos;
+
+            spawnCount = 0;
+            spawnTimer = spawnInfos.spawnDelay;
+
+            SpawnSet();
         }
     }
-    private void DoSpawn()
+    private void SpawnStart()
     {
-        StartCoroutine(Spawn());
+        spawnStart = true;
     }
-    private IEnumerator Spawn()
+    private void Spawn()
     {
-        if (doThisSkill)
+        if (doThisSkill && spawnStart)
         {
-            Vector2 targetPos = transform.position;
-            Vector2 firstTargetPos = targetPos;
-
-            Vector2 shootDir = Vector2.right;
-
-            float angle = 0f;
-
-            if (randomSpawnInfos.randomSetSpawnPos)
-            {
-                targetPos += ScriptHelper.RandomVector(randomSpawnInfos.minDis, randomSpawnInfos.maxDis);
-            }
-            else if (spawnInfos.spawnPos.position != Vector3.zero)
-            {
-                targetPos = spawnInfos.spawnPos.position;
-                firstTargetPos = targetPos;
-            }
-
-            if (angleSpawnInfos.angleSpawnPos && spawnInfos.isProjectile)
-            {
-                angle = angleSpawnInfos.startAngle;
-            }
-
-            for (int i = 0; i < spawnInfos.spawnNum; i++)
-            {
-                if (spawnInfos.isProjectile)
-                {
-                    if (spawnInfos.shootToPlayer)
-                    {
-                        shootDir = (gameManager.player.transform.position - transform.position).normalized;
-                    }
-
-                    stageManager.ShootProjectile(spawnIt, spawnInfos.projectileDamage, targetPos, Quaternion.Euler(0f, 0f, angle), shootDir, spawnInfos.spawnDistance, spawnInfos.spawnAlpha);
-                }
-                else
-                {
-                    stageManager.SpawnEnemy(spawnIt, targetPos);
-                }
-
-                yield return new WaitForSeconds(spawnInfos.spawnDelay);
-
-                if (randomSpawnInfos.randomSetSpawnPos)
-                {
-                    targetPos = firstTargetPos;
-                    targetPos += ScriptHelper.RandomVector(randomSpawnInfos.minDis, randomSpawnInfos.maxDis);
-                }
-
-                if (angleSpawnInfos.angleSpawnPos)
-                {
-                    angle += angleSpawnInfos.anglePlus;
-                }
-
-                if (i == spawnInfos.spawnNum - 1)
-                {
-                    doThisSkill = false;
-
-                    bossStatus.DoCurrentSkillSuccess();
-                }
-            }
+            DoSpawn(angle);
+            SpawnDoneSet();
         }
     }
 
+    private void SpawnDoneSet()
+    {
+        if (randomSpawnInfos.randomSetSpawnPos)
+        {
+            targetPos = firstTargetPos;
+            targetPos += ScriptHelper.RandomVector(randomSpawnInfos.minDis, randomSpawnInfos.maxDis);
+        }
+
+        if (angleSpawnInfos.angleSpawnPos)
+        {
+            angle += angleSpawnInfos.anglePlus;
+        }
+
+        if (spawnCount == spawnInfos.spawnNum - 1)
+        {
+            doThisSkill = false;
+
+            bossStatus.DoCurrentSkillSuccess();
+        }
+    }
+
+    private void SpawnSet()
+    {
+        if (randomSpawnInfos.randomSetSpawnPos)
+        {
+            targetPos += ScriptHelper.RandomVector(randomSpawnInfos.minDis, randomSpawnInfos.maxDis);
+        }
+        else if (spawnInfos.spawnPos.position != Vector3.zero)
+        {
+            targetPos = spawnInfos.spawnPos.position;
+            firstTargetPos = targetPos;
+        }
+
+        if (angleSpawnInfos.angleSpawnPos && spawnInfos.isProjectile)
+        {
+            angle = angleSpawnInfos.startAngle;
+        }
+    }
+
+    private void DoSpawn(float angle)
+    {
+        if (spawnInfos.isProjectile)
+        {
+            if (spawnInfos.shootToPlayer)
+            {
+                shootDir = (gameManager.player.transform.position - transform.position).normalized;
+            }
+
+            stageManager.ShootProjectile(spawnIt, spawnInfos.projectileDamage, targetPos, Quaternion.Euler(0f, 0f, angle), shootDir, spawnInfos.spawnDistance, spawnInfos.spawnAlpha);
+        }
+        else
+        {
+            stageManager.SpawnEnemy(spawnIt, targetPos);
+        }
+    }
 }

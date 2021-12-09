@@ -14,7 +14,12 @@ public class EnemyProjectile : Projectile_Base, IProjectile
 
     [SerializeField]
     private bool isMoveToPlayer = false;
+    private bool toPlayerDirSet = false;
 
+    private void OnEnable()
+    {
+        toPlayerDirSet = false;
+    }
     void FixedUpdate()
     {
         if (gameManager.SlowTimeSomeObjects && gameManager.CurrentSlowTimePerSlowTime == 0)
@@ -41,8 +46,21 @@ public class EnemyProjectile : Projectile_Base, IProjectile
         }
         else
         {
+            MoveToPlayerDirSet();
+
             Move();
             Despawn();
+        }
+    }
+
+    private void MoveToPlayerDirSet()
+    {
+        if (!toPlayerDirSet && isMoveToPlayer)
+        {
+            shootDir = gameManager.player.currentPosition - (Vector2)transform.position;
+            shootDir = shootDir.normalized;
+
+            toPlayerDirSet = true;
         }
     }
 
@@ -52,16 +70,7 @@ public class EnemyProjectile : Projectile_Base, IProjectile
         isDestroy = false;
         shootRange = shootR;
         damage = dm;
-
-        if (isMoveToPlayer)
-        {
-            shootDir = GameManager.Instance.player.currentPosition - (Vector2)transform.position;
-            shootDir = shootDir.normalized;
-        }
-        else
-        {
-            shootDir = dir;
-        }
+        shootDir = dir;
     }
     public void SpawnSet(float shootR, float dm, Vector2 dir, float a)
     {
@@ -69,18 +78,9 @@ public class EnemyProjectile : Projectile_Base, IProjectile
         isDestroy = false;
         shootRange = shootR;
         damage = dm;
+        shootDir = dir;
 
         spriteRenderer.color = new Vector4(1f, 1f, 1f, a);
-
-        if (isMoveToPlayer)
-        {
-            shootDir = GameManager.Instance.player.currentPosition - (Vector2)transform.position;
-            shootDir = shootDir.normalized;
-        }
-        else
-        {
-            shootDir = dir;
-        }
     }
     public void Move()
     {

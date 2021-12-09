@@ -197,7 +197,7 @@ MonoBehaviour:
     projectileDamage: 2
     spawnDistance: 20
     spawnAlpha: 0.1
-    spawnDelay: 2
+    spawnDelay: 0.2
   randomSpawnInfos:
     randomSetSpawnPos: 0
     minDis: {x: -5, y: 0}
@@ -206,7 +206,6 @@ MonoBehaviour:
     angleSpawnPos: 0
     startAngle: 0
     anglePlus: 20
-  spawnLooping: 0
 --- !u!114 &4360625455736770461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +237,6 @@ MonoBehaviour:
     angleSpawnPos: 1
     startAngle: 0
     anglePlus: 20
-  spawnLooping: 1
 --- !u!114 &-7311032118440363361
 MonoBehaviour:
   m_ObjectHideFlags: 0

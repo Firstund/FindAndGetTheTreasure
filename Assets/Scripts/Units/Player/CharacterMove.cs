@@ -259,7 +259,7 @@ public class CharacterMove : MonoBehaviour
             RightWallCheck();
             CharacterHangWallCheck();
         }
-        else if (gameManager.stopTime && !characterTimeWarp.isTimeWarp && isReflect)
+        else if (gameManager.stopTime && !characterTimeWarp.isTimeWarp)
         {
             anim.speed = 0f;
         }

@@ -119,7 +119,7 @@ public class EventTriggerArea : MonoBehaviour
                 DoEvent();
             }
 
-            if(eventPlayed)
+            if (eventPlayed)
             {
                 EventTriggerAreasEnabledTrue();
             }
@@ -171,24 +171,27 @@ public class EventTriggerArea : MonoBehaviour
 
     private void DoEvent()
     {
-        if (eventTriggerObj != null)
+        if (!gameManager.stopTime)
         {
-            IEventTrigger eventTrigger = eventTriggerObj.GetComponent<IEventTrigger>();
-
-            if (eventTrigger == null)
+            if (eventTriggerObj != null)
             {
-                Debug.LogError(eventTriggerObj + " has no IEventTrigger!");
-                return;
+                IEventTrigger eventTrigger = eventTriggerObj.GetComponent<IEventTrigger>();
+
+                if (eventTrigger == null)
+                {
+                    Debug.LogError(eventTriggerObj + " has no IEventTrigger!");
+                    return;
+                }
+
+                eventTrigger.DoEvent();
             }
 
-            eventTrigger.DoEvent();
-        }
+            eventPlayed = true;
 
-        eventPlayed = true;
-
-        if(gameManager.player.IsGround)
-        {
-            playerIsGround = true;
+            if (gameManager.player.IsGround)
+            {
+                playerIsGround = true;
+            }
         }
     }
     private void EnabledFalse()
@@ -279,9 +282,9 @@ public class EventTriggerArea : MonoBehaviour
             playerStayTimer = 0f;
         }
     }
-    private void OnDrawGizmos() 
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(transform.position, 0.35f);    
+        Gizmos.DrawSphere(transform.position, 0.35f);
     }
 }
