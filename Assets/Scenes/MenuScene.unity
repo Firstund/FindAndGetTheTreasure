@@ -4940,7 +4940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: eventObjSpawnData.Array.data[0].eventObjSpawnPos.y
-      value: -120
+      value: -121.08
       objectReference: {fileID: 0}
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: eventObjSpawnData.Array.data[1].eventObjSpawnPos.x
@@ -4948,7 +4948,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 98518312303491311, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: eventObjSpawnData.Array.data[1].eventObjSpawnPos.y
-      value: -121.13
+      value: -120.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 98518312625873329, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 98518312725156332, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: m_Name
@@ -9870,6 +9874,14 @@ PrefabInstance:
       propertyPath: eventObjSpawnData.Array.data[0].eventObject
       value: 
       objectReference: {fileID: 411663288}
+    - target: {fileID: 98518312625873329, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 98518312625873330, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 80ef65cf2056dc24d8ceccf5bf925b8c, type: 3}
     - target: {fileID: 98518312725156332, guid: 61a4d766067715b49967c084ba401ac2, type: 3}
       propertyPath: m_Name
       value: TextBox_2_4_MeetTheBringerOfDeath
@@ -13317,6 +13329,10 @@ PrefabInstance:
     - target: {fileID: 6819796447490617241, guid: 6ce66582581c01943bb2affd2b82d4da, type: 3}
       propertyPath: eventDatas.Array.data[5].flipX
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6819796447490617241, guid: 6ce66582581c01943bb2affd2b82d4da, type: 3}
+      propertyPath: eventDatas.Array.data[0].animName
+      value: UmikoIdle
       objectReference: {fileID: 0}
     - target: {fileID: 6819796447490617241, guid: 6ce66582581c01943bb2affd2b82d4da, type: 3}
       propertyPath: eventDatas.Array.data[1].animName

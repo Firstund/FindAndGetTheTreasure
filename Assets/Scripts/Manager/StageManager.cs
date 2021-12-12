@@ -117,8 +117,7 @@ public class StageManager : MonoBehaviour
 
         if (stageMainBGM != null)
         {
-            soundManager.MainBGM.clip = stageMainBGM;
-            soundManager.MainBGM.Play();
+            soundManager.ChangeMainBGM(stageMainBGM);
         }
 
         originOrthographicSize = cinemachineVirtualCamera.m_Lens.OrthographicSize;

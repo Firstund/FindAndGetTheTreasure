@@ -31,11 +31,6 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField]
     private AudioSource mainBGM = null;
-    public AudioSource MainBGM
-    {
-        get { return mainBGM; }
-        set { mainBGM = value; }
-    }
 
     private float mainBGMPitchTimer = 0f;
     private float mainBGMPitchTimerOrigin = 0f;
@@ -72,6 +67,11 @@ public class SoundManager : MonoBehaviour
     {
         SetPitch();
         SetVolume();
+    }
+    public void ChangeMainBGM(AudioClip changeToIt)
+    {
+        mainBGM.clip = changeToIt;
+        mainBGM.Play();
     }
 
     private void SetPitch()
