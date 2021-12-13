@@ -76,6 +76,8 @@ public class BossMoveToPlayer : BossSkillBase
         if (doThisSkill)
         {
             base.DoSkill();
+            PlaySound();
+            
             targetPos = gameManager.player.transform.position;
 
             bossStatus.ClearFailedBossSkillNumList();

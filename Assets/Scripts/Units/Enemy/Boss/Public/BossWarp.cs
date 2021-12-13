@@ -82,7 +82,8 @@ public class BossWarp : BossSkillBase
         if (doThisSkill)
         {
             base.DoSkill();
-
+            PlaySound();
+            
             StartFadeOut();
         }
     }

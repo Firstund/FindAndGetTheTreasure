@@ -37,6 +37,7 @@ public class MeleeAttack : BossSkillBase
             }
 
             base.DoSkill();
+            PlaySound();
 
             bossStatus.ClearFailedBossSkillNumList();
             bossStatus.LRCheckByPlayer();

@@ -33,21 +33,22 @@ public abstract class BossSkillBase : MonoBehaviour, IBossSkill
         bossStat = GetComponent<BossStat>();
         bossStatus = GetComponent<BossStatus>();
     }
-
     public virtual void DoSkill()
     {
         if (doThisSkill)
         {
             bossStatus.Anim.SetTrigger(doAnimationTriggerName);
-
-            if(skillEffectSoundBox != null)
-            {
-                stageManager.SpawnSoundBox(skillEffectSoundBox);
-            }
         }
     }
     public virtual string GetSkillScriptName()
     {
         return "noname";
+    }
+    protected void PlaySound()
+    {
+        if (skillEffectSoundBox != null)
+        {
+            stageManager.SpawnSoundBox(skillEffectSoundBox);
+        }
     }
 }

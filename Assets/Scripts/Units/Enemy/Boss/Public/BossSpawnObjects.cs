@@ -78,6 +78,8 @@ public class BossSpawnObjects : BossSpawnObjectsBase
     }
     private void SpawnStart()
     {
+        PlaySound();
+        
         spawnStart = true;
     }
     private void Spawn()

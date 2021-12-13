@@ -202,6 +202,7 @@ MonoBehaviour:
   _pursueSpeed: 3
   _attackDelay: 1
   _isShootProjectile: 0
+  _isLookLeftAtFirst: 0
   _foundRange: 7
   _attackRange: 0.5
   _shootRange: 5
@@ -276,4 +277,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0.27295685, b: 1, a: 1}
-  radious: 4
+  radious: 7
