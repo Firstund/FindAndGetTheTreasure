@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doAnimationTriggerName: Move
+  skillEffectSoundBox: {fileID: 0}
   moveSpeed: 7
   moveStopDistance: 2
   moveTime: 2
@@ -173,6 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doAnimationTriggerName: Attack
+  skillEffectSoundBox: {fileID: 0}
   damage: 4
   canAttackDistance: 3
 --- !u!114 &459619629510437081
@@ -188,10 +190,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doAnimationTriggerName: Skill1
+  skillEffectSoundBox: {fileID: 0}
   spawnIt: {fileID: 7053485288860369376, guid: 600cf5ffacffecb429ed803220d34930, type: 3}
   spawnInfos:
     spawnPos: {fileID: 6298060469745813320}
-    spawnNum: 5
+    spawnNum: 3
     isProjectile: 1
     shootToPlayer: 1
     projectileDamage: 2
@@ -219,6 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doAnimationTriggerName: Skill1
+  skillEffectSoundBox: {fileID: 0}
   spawnIt: {fileID: 7053485288860369376, guid: 6a1a9768842167f4eb138ad0ce096e9f, type: 3}
   spawnInfos:
     spawnPos: {fileID: 3872542765924400584}
@@ -250,6 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doAnimationTriggerName: FadeOut
+  skillEffectSoundBox: {fileID: 7089593807922516557, guid: 459b660d4b325bf4794ef42b22d7f185, type: 3}
   isWarpToPlayer: 1
   isWarpRandom: 0
   randWarpMin: {x: 0, y: 0}
@@ -257,7 +262,7 @@ MonoBehaviour:
   targetPos: {x: 0, y: 0}
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1088
   fadeOutSpeed: 1
   fadeInSpeed: 1
   fadeInTrigger: FadeIn
@@ -274,6 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doAnimationTriggerName: FadeOut
+  skillEffectSoundBox: {fileID: 7089593807922516557, guid: d6d55217b7f03a04da2e53655842597a, type: 3}
   isWarpToPlayer: 0
   isWarpRandom: 1
   randWarpMin: {x: -5, y: 0}
@@ -281,7 +287,7 @@ MonoBehaviour:
   targetPos: {x: 0, y: 0}
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1088
   fadeOutSpeed: 0
   fadeInSpeed: 0
   fadeInTrigger: FadeIn

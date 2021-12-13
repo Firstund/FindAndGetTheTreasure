@@ -28,10 +28,10 @@ public class DamagableObstacle : MonoBehaviour
     void FixedUpdate()
     {
         // 테스트용
-        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.left + Vector2.up) * 10f, Color.red, 10f);
-        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.left + Vector2.down) * 10f, Color.red, 10f);
-        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.right + Vector2.up) * 10f, Color.red, 10f);
-        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.right + Vector2.down) * 10f, Color.red, 10f);
+        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.left + Vector2.up) * 10f, Color.red);
+        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.left + Vector2.down) * 10f, Color.red);
+        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.right + Vector2.up) * 10f, Color.red);
+        Debug.DrawLine(transform.position, (Vector2)transform.position + (Vector2.right + Vector2.down) * 10f, Color.red);
 
         CheckDirection();
 

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SoundBoxScript : MonoBehaviour
 {
-    [SerializeField]
     private StageManager stageManager = null;
     [SerializeField]
     private float playTime = 1f;

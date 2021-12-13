@@ -21,6 +21,10 @@ public abstract class BossSkillBase : MonoBehaviour, IBossSkill
     [SerializeField]
     protected string doAnimationTriggerName = "";
 
+    [Header("스킬을 사용했을 때 재생되는 효과음) 없으면 비워둔다.")]
+    [SerializeField]
+    protected GameObject skillEffectSoundBox = null;
+
     protected void DoAwake()
     {
         gameManager = GameManager.Instance;
@@ -35,6 +39,11 @@ public abstract class BossSkillBase : MonoBehaviour, IBossSkill
         if (doThisSkill)
         {
             bossStatus.Anim.SetTrigger(doAnimationTriggerName);
+
+            if(skillEffectSoundBox != null)
+            {
+                stageManager.SpawnSoundBox(skillEffectSoundBox);
+            }
         }
     }
     public virtual string GetSkillScriptName()

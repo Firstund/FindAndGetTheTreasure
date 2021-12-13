@@ -33,16 +33,19 @@ public class BossSpawnObjects : BossSpawnObjectsBase
     }
     private void Update()
     {
-        if (spawnTimer >= spawnInfos.spawnDelay && spawnCount < spawnInfos.spawnNum)
+        if (spawnStart)
         {
-            Spawn();
+            if (spawnTimer >= spawnInfos.spawnDelay && spawnCount < spawnInfos.spawnNum)
+            {
+                Spawn();
 
-            spawnTimer = 0f;
-            spawnCount++;
-        }
-        else
-        {
-            spawnTimer += Time.deltaTime;
+                spawnTimer = 0f;
+                spawnCount++;
+            }
+            else
+            {
+                spawnTimer += Time.deltaTime;
+            }
         }
     }
 
@@ -102,6 +105,7 @@ public class BossSpawnObjects : BossSpawnObjectsBase
         if (spawnCount == spawnInfos.spawnNum - 1)
         {
             doThisSkill = false;
+            spawnStart = false;
 
             bossStatus.DoCurrentSkillSuccess();
         }

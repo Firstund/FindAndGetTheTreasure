@@ -132,16 +132,35 @@ public class BossWarp : BossSkillBase
         {
             Ray2D ray = new Ray2D();
             RaycastHit2D hit = new RaycastHit2D();
+            float distance = 0f;
 
             targetPos.x = Random.Range(randWarpMin.x, randWarpMax.x);
-            targetPos.y = Random.Range(randWarpMin.y, randWarpMax.y);
+
+            if (bossStatus.IsAirUnit)
+            {
+                targetPos.y = Random.Range(randWarpMin.y, randWarpMax.y);
+            }
+            else
+            {
+                targetPos.y = 0f;
+            }
 
             ray.origin = bossStat.CurrentPosition;
             ray.direction = targetPos.normalized;
 
-            hit = Physics2D.Raycast(ray.origin, ray.direction, randWarpMax.x + randWarpMax.y, whatIsWall);
+            distance = Vector2.Distance(bossStat.CurrentPosition, targetPos);
 
-            if(hit)
+            // hit = Physics2D.Raycast(ray.origin, ray.direction, randWarpMax.x + randWarpMax.y, whatIsWall);
+            if (randWarpMax.x > randWarpMax.y)
+            {
+                hit = Physics2D.CircleCast(ray.origin, 0.5f, ray.direction, randWarpMax.x, whatIsWall);
+            }
+            else
+            {
+                hit = Physics2D.CircleCast(ray.origin, 0.5f, ray.direction, randWarpMax.y, whatIsWall);
+            }
+
+            if (hit)
             {
                 transform.position = hit.point;
             }
