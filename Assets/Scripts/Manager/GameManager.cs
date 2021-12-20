@@ -40,6 +40,17 @@ public static class ScriptHelper
     {
         return new Vector3(vec1.x + vec2.x, vec1.y + vec2.y, vec1.z + vec2.z);
     }
+    public static Vector4 Sum(this Vector4 vec1, Vector4 vec2)
+    {
+        return new Vector4(vec1.x + vec2.x, vec1.y + vec2.y, vec1.z + vec2.z, vec1.w + vec2.w);
+    }
+    public static Color SetColorAlpha(this Color color, float a)
+    {
+        Color newColor = color;
+        newColor.a = a;
+
+        return newColor;
+    }
 }
 public class GameManager : MonoBehaviour
 {
@@ -155,7 +166,7 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField]
-    private float slowTimeNum = 20; // 몇몇 오브젝트들만 느려지는 코드를 실행시킬 때 1/n으로 속도를 조정
+    private float slowTimeNum = 20; // 몇몇 오브젝트들만 느려지는 코드를 실행시킬 때 1/slowTimeNum으로 속도를 조정
     public float SlowTimeNum
     {
         get { return slowTimeNum; }
