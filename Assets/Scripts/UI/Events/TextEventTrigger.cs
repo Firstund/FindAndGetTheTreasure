@@ -11,7 +11,7 @@ public class TextEventTrigger : MonoBehaviour, IEventTrigger
     [SerializeField]
     private int spawnTextBoxIndex = 0;
     
-    private void Start()
+    private void Awake()
     {
         gameManager = GameManager.Instance;
         talkManager = TalkManager.Instance;

@@ -182,6 +182,9 @@ public class CharacterMove : MonoBehaviour
 
     private void Awake()
     {
+        gameManager = GameManager.Instance;
+        stageManager = StageManager.Instance;
+
         rigid = GetComponent<Rigidbody2D>();
         boxCol2D = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -213,9 +216,6 @@ public class CharacterMove : MonoBehaviour
 
     void Start()
     {
-        gameManager = GameManager.Instance;
-        stageManager = StageManager.Instance;
-
         stageManager.SetPlayerRespawnPosition(transform.position);
 
         if (playerInput == null)
@@ -236,7 +236,7 @@ public class CharacterMove : MonoBehaviour
 
         pulley.SetActive(false);
     }
-    private void OnEnable() 
+    private void OnEnable()
     {
         stageManager.PlayerRespawn += () =>
         {
@@ -248,7 +248,7 @@ public class CharacterMove : MonoBehaviour
 
         spriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
     }
-    private void OnDisable() 
+    private void OnDisable()
     {
         stageManager.PlayerRespawn -= () =>
         {

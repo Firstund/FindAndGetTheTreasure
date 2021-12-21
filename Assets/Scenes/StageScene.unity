@@ -250,6 +250,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1282865222, guid: 26e614d81075bba4eba3f02d3ff162ff, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1282865222, guid: 26e614d81075bba4eba3f02d3ff162ff, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1282865222, guid: 26e614d81075bba4eba3f02d3ff162ff, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1282865222, guid: 26e614d81075bba4eba3f02d3ff162ff, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1282865222, guid: 26e614d81075bba4eba3f02d3ff162ff, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549118853, guid: 26e614d81075bba4eba3f02d3ff162ff, type: 3}
+      propertyPath: isApplicationQuick
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2027693339, guid: 26e614d81075bba4eba3f02d3ff162ff, type: 3}
+      propertyPath: m_text
+      value: Are you sure Exit This Stage?
+      objectReference: {fileID: 0}
     - target: {fileID: 8635146845158350842, guid: 26e614d81075bba4eba3f02d3ff162ff, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

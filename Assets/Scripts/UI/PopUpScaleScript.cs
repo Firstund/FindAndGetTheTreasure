@@ -23,18 +23,6 @@ public abstract class PopUpScaleScript : MonoBehaviour
         gameManager = GameManager.Instance;
         menuManager = MenuManager.Instance;
     }
-    protected void OnEnable() 
-    {
-        menuManager.OnShowMenu += () =>
-        {
-            OnShowMenu();
-        };
-
-        menuManager.OnHideMenu += () =>
-        {
-            OnHideMenu();
-        };
-    }
     public virtual void Start()
     {
         maxScale.x = transform.localScale.x;
@@ -46,33 +34,22 @@ public abstract class PopUpScaleScript : MonoBehaviour
     {
         SetScale();
     }
-    protected void OnDisable()
+    public virtual void OnDisable()
     {
         currentScale = Vector2.zero;
         transform.localScale = Vector2.zero;
         gameManager.StopTime(false);
 
         onFadeOut = false;
-
-        menuManager.OnShowMenu -= () =>
-        {
-            OnShowMenu();
-        };
-
-        menuManager.OnHideMenu -= () =>
-        {
-            OnHideMenu();
-        };
     }
-    protected void OnHideMenu()
+    protected void OnHidePopUp()
     {
         onFadeIn = false;
         onFadeOut = true;
     }
 
-    protected void OnShowMenu()
+    protected void OnShowPopUp()
     {
-        Debug.Log(this);
         transform.localScale = Vector2.zero;
 
         onFadeIn = true;

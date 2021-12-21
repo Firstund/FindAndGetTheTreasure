@@ -81,19 +81,6 @@ public class EventTriggerArea : MonoBehaviour
             };
         }
     }
-    private void OnDisable()
-    {
-        if (enableTrueEventTriggerAreasWhenIsGround)
-        {
-            gameManager.player.WhenInAirToGround -= () =>
-            {
-                if (eventPlayed)
-                {
-                    playerIsGround = true;
-                }
-            };
-        }
-    }
 
     void Update()
     {

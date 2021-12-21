@@ -61,7 +61,7 @@ public class TalkManager : MonoBehaviour
     {
         gameManager = GameManager.Instance;
     }
-    private void OnEnable()
+    private void Start()
     {
         gameManager.SpawnStages += stageNum => SpawnTextBoxes(stageNum);
         gameManager.StageEnd += a => DeSpawnTextBoxes();
@@ -81,7 +81,6 @@ public class TalkManager : MonoBehaviour
         {
             if (textBoxesParent[index] != null)
             {
-
                 textBoxesParent[index].SetActive(true); // 메뉴로 돌아왔다가 다시 스테이지 접근에 시도하면 textBoxesParent가 null이 되는 현상 발생
 
                 _currentTextBoxesParent = textBoxesParent[index].GetComponent<TextBoxesParent>();

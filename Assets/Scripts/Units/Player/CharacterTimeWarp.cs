@@ -55,7 +55,7 @@ public class CharacterTimeWarp : MonoBehaviour
     private bool canSpawnAfterImage = true;
 
 
-    void Start()
+    private void Awake()
     {
         gameManager = GameManager.Instance;
         soundManager = SoundManager.Instance;
@@ -66,19 +66,14 @@ public class CharacterTimeWarp : MonoBehaviour
         spawnAfterImage = GetComponent<SpawnAfterImage>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
-
+    }
+    void Start()
+    {
         OriginSet();
     }
     private void OnEnable()
     {
         gameManager.player.WhenPlayerDead += () =>
-        {
-            CancelTimeWarp();
-        };
-    }
-    private void OnDisable()
-    {
-        gameManager.player.WhenPlayerDead -= () =>
         {
             CancelTimeWarp();
         };

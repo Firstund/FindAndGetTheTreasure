@@ -91,9 +91,6 @@ public class SoundManager : MonoBehaviour
             WhenGoToStageSelectMenu();
         };
     }
-
-
-
     private void Start()
     {
         // SetMainBGMVolumeByLerp(1, 0, 5);
