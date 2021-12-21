@@ -23,30 +23,60 @@ public abstract class PopUpScaleScript : MonoBehaviour
         gameManager = GameManager.Instance;
         menuManager = MenuManager.Instance;
     }
+    protected void OnEnable() 
+    {
+        menuManager.OnShowMenu += () =>
+        {
+            OnShowMenu();
+        };
+
+        menuManager.OnHideMenu += () =>
+        {
+            OnHideMenu();
+        };
+    }
     public virtual void Start()
     {
         maxScale.x = transform.localScale.x;
         maxScale.y = transform.localScale.y;
 
         menuManager.SetMenu(gameObject);
-
-        menuManager.OnShowMenu += () =>
-        {
-            transform.localScale = Vector2.zero;
-
-            onFadeIn = true;
-            onFadeOut = false;
-        };
-
-        menuManager.OnHideMenu += () =>
-        {
-            onFadeIn = false;
-            onFadeOut = true;
-        };
     }
     public virtual void Update()
     {
         SetScale();
+    }
+    protected void OnDisable()
+    {
+        currentScale = Vector2.zero;
+        transform.localScale = Vector2.zero;
+        gameManager.StopTime(false);
+
+        onFadeOut = false;
+
+        menuManager.OnShowMenu -= () =>
+        {
+            OnShowMenu();
+        };
+
+        menuManager.OnHideMenu -= () =>
+        {
+            OnHideMenu();
+        };
+    }
+    protected void OnHideMenu()
+    {
+        onFadeIn = false;
+        onFadeOut = true;
+    }
+
+    protected void OnShowMenu()
+    {
+        Debug.Log(this);
+        transform.localScale = Vector2.zero;
+
+        onFadeIn = true;
+        onFadeOut = false;
     }
     protected void SetScale()
     {
@@ -70,13 +100,5 @@ public abstract class PopUpScaleScript : MonoBehaviour
         }
 
         transform.localScale = currentScale;
-    }
-    protected void OnDisable()
-    {
-        currentScale = Vector2.zero;
-        transform.localScale = Vector2.zero;
-        gameManager.StopTime(false);
-
-        onFadeOut = false;
     }
 }

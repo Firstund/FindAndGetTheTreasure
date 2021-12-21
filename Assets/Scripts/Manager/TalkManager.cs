@@ -61,7 +61,7 @@ public class TalkManager : MonoBehaviour
     {
         gameManager = GameManager.Instance;
     }
-    void Start()
+    private void OnEnable()
     {
         gameManager.SpawnStages += stageNum => SpawnTextBoxes(stageNum);
         gameManager.StageEnd += a => DeSpawnTextBoxes();

@@ -67,12 +67,21 @@ public class CharacterTimeWarp : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
 
+        OriginSet();
+    }
+    private void OnEnable()
+    {
         gameManager.player.WhenPlayerDead += () =>
         {
             CancelTimeWarp();
         };
-
-        OriginSet();
+    }
+    private void OnDisable()
+    {
+        gameManager.player.WhenPlayerDead -= () =>
+        {
+            CancelTimeWarp();
+        };
     }
 
     private void OriginSet()

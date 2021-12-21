@@ -61,16 +61,16 @@ public class TextEventObject : TextEventObject_Base
     }
     private void Start()
     {
-        gameManager.StageEnd += (e) =>
-        {
-            gameObject.SetActive(false);
-        };
-
         PosSet();
     }
 
     private void OnEnable()
     {
+        gameManager.StageEnd += (e) =>
+        {
+            gameObject.SetActive(false);
+        };
+
         textsScript = FindObjectOfType<Texts>(true);
         PosSet();
 
@@ -78,7 +78,7 @@ public class TextEventObject : TextEventObject_Base
 
         eventNum = 0;
     }
-    private void OnDisable() 
+    private void OnDisable()
     {
         gameManager.StageEnd -= (e) =>
         {

@@ -66,6 +66,10 @@ public class EventTriggerArea : MonoBehaviour
     {
         playerStayTimer = conditions.stayThisArea.staySec;
 
+        enabled = !disableOnStart;
+    }
+    private void OnEnable() 
+    {
         if (enableTrueEventTriggerAreasWhenIsGround)
         {
             gameManager.player.WhenInAirToGround += () =>
@@ -76,8 +80,6 @@ public class EventTriggerArea : MonoBehaviour
                 }
             };
         }
-
-        enabled = !disableOnStart;
     }
     private void OnDisable()
     {

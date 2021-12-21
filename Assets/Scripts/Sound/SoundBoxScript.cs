@@ -5,6 +5,10 @@ using UnityEngine;
 public class SoundBoxScript : MonoBehaviour
 {
     private StageManager stageManager = null;
+    private SoundManager soundManager = null;
+
+    private AudioSource audioSource = null;
+
     [SerializeField]
     private float playTime = 1f;
     private float playTimer = 0f;
@@ -13,6 +17,9 @@ public class SoundBoxScript : MonoBehaviour
     void Start()
     {
         stageManager = StageManager.Instance;
+        soundManager = SoundManager.Instance;
+        
+        audioSource = GetComponent<AudioSource>();
 
         playTimer = playTime;
     }
@@ -23,6 +30,8 @@ public class SoundBoxScript : MonoBehaviour
     }
     void Update()
     {
+        audioSource.volume = soundManager.EffectSoundVolume * soundManager.MasterVolume;
+
         if(playTimer > 0f)
         {
             playTimer -= Time.deltaTime;
@@ -30,7 +39,7 @@ public class SoundBoxScript : MonoBehaviour
             if(!soundPlayed)
             {
                 soundPlayed = true;
-                GetComponent<AudioSource>().Play();
+                audioSource.Play();
             }
         }
         else

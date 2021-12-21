@@ -218,12 +218,6 @@ public class CharacterMove : MonoBehaviour
 
         stageManager.SetPlayerRespawnPosition(transform.position);
 
-        stageManager.PlayerRespawn += () =>
-        {
-            whenIsNotInAirPosition = currentPosition;
-            characterStat.hp = characterStat.firstHp;
-        };
-
         if (playerInput == null)
         {
             playerInput = gameObject.AddComponent<PlayerInput>();
@@ -242,6 +236,32 @@ public class CharacterMove : MonoBehaviour
 
         pulley.SetActive(false);
     }
+    private void OnEnable() 
+    {
+        stageManager.PlayerRespawn += () =>
+        {
+            PlayerRespawn();
+        };
+
+        isDead = false;
+        attacking = false;
+
+        spriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
+    }
+    private void OnDisable() 
+    {
+        stageManager.PlayerRespawn -= () =>
+        {
+            PlayerRespawn();
+        };
+    }
+
+    private void PlayerRespawn()
+    {
+        whenIsNotInAirPosition = currentPosition;
+        characterStat.hp = characterStat.firstHp;
+    }
+
     void Update()
     {
         if (!(isDead || gameManager.stopTime || characterTimeWarp.isTimeWarp || isReflect))
@@ -276,13 +296,6 @@ public class CharacterMove : MonoBehaviour
         {
             IsHang = false;
         }
-    }
-    private void OnEnable()
-    {
-        isDead = false;
-        attacking = false;
-
-        spriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
     }
     private void CheckDead()
     {

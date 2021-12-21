@@ -52,8 +52,6 @@ public class MenuManager : MonoBehaviour
             if (menuWasShow)
             {
                 HideMenu();
-
-                menuWasShow = false;
             }
             else
             {
@@ -80,5 +78,7 @@ public class MenuManager : MonoBehaviour
     {
         //Hide할 땐 menuObj에서 직접 SetActive(false)를 실행한다.
         OnHideMenu?.Invoke();
+
+        menuWasShow = false;
     }
 }

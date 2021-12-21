@@ -68,13 +68,20 @@ public class BossStatus : MonoBehaviour
         firstAnimSpeed = anim.speed;
         firstMass = rigid.mass;
         firstGravity = rigid.gravityScale;
-
+    }
+    private void OnEnable()
+    {
         bossStat.WhenIsDead += () =>
         {
-            for (int i = 0; i < bossSkills.Count; i++)
-            {
-                bossSkills[i].DoThisSkill = false;
-            }
+            WhenIsDead();
+        };
+    }
+
+    private void OnDisable()
+    {
+        bossStat.WhenIsDead -= () =>
+        {
+            WhenIsDead();
         };
     }
     private void FixedUpdate()
@@ -96,6 +103,13 @@ public class BossStatus : MonoBehaviour
             anim.speed = firstAnimSpeed;
             rigid.mass = firstMass;
             rigid.gravityScale = firstGravity;
+        }
+    }
+    private void WhenIsDead()
+    {
+        for (int i = 0; i < bossSkills.Count; i++)
+        {
+            bossSkills[i].DoThisSkill = false;
         }
     }
     public void LRCheckByPlayer()

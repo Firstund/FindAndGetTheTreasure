@@ -61,7 +61,7 @@ public class GameEndScript : MonoBehaviour
             {
                 gameManager.StopTime(false);
                 gameManager.WhenGoToStageSelectMenu();
-                SceneManager.LoadScene("MenuScene");
+                SceneManager.LoadScene("StageSelectScene");
             }
         }
 
