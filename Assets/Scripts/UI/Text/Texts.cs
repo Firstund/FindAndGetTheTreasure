@@ -76,6 +76,25 @@ public class Texts : Text_Base
 
         nextButtonTxt = nextButtonObj.GetComponentInChildren<Text>();
     }
+    private void OnEnable()
+    {
+        eventObjSpawnData.ForEach(objData =>
+        {
+            objData.eventObject.SetActive(true);
+
+            if (!objData.eventObject.GetComponent<TextEventObject>().IsStartAtPlayer)
+            {
+                objData.eventObject.transform.position = objData.eventObjSpawnPos;
+            }
+
+            talkManager.CurrentEvents.Add(objData.eventObject.GetComponent<TextEventObject>());
+
+        });
+
+        doFirstText = true;
+        
+        currentTextNum = 0;
+    }
     public void Update()
     {
         DoTextEndCheck();
@@ -185,24 +204,6 @@ public class Texts : Text_Base
         currentTextNum = 0;
 
         talkManager.currentTextBoxesParent.DeSpawnTextBox();
-    }
-
-    private void OnEnable()
-    {
-        eventObjSpawnData.ForEach(objData =>
-        {
-            objData.eventObject.SetActive(true);
-
-            if (!objData.eventObject.GetComponent<TextEventObject>().IsStartAtPlayer)
-            {
-                objData.eventObject.transform.position = objData.eventObjSpawnPos;
-            }
-
-            talkManager.CurrentEvents.Add(objData.eventObject.GetComponent<TextEventObject>());
-
-        });
-
-        doFirstText = true;
     }
 
     public void SetText() // gameManager의 SetSlowTime이 실행된 상태면 텍스트 설정이 느리게 되는 버그

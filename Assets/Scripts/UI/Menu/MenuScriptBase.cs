@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class MenuScriptBase : PopUpScaleScript
 {
-
     public override void Awake()
     {
         base.Awake();
     }
     private void OnEnable()
     {
-        menuManager.OnShowMenu += () =>
+        menuManager.OnShowMenu += () => 
         {
             OnShowPopUp();
         };
@@ -29,8 +28,8 @@ public class MenuScriptBase : PopUpScaleScript
     }
     public override void OnDisable()
     {
-        base.OnDisable();
-        
+        base.OnDisable();  
+
         menuManager.OnShowMenu -= () =>
         {
             OnShowPopUp();
@@ -38,10 +37,9 @@ public class MenuScriptBase : PopUpScaleScript
 
         menuManager.OnHideMenu -= () =>
         {
-            OnHidePopUp();
+            OnHidePopUp(); 
         };
     }
-
     public override void Update()
     {
         base.Update();

@@ -66,14 +66,14 @@ public class TalkManager : MonoBehaviour
         gameManager.SpawnStages += stageNum => SpawnTextBoxes(stageNum);
         gameManager.StageEnd += a => DeSpawnTextBoxes();
     }
-    private void Update()
-    {
-        test = currentEvents.ToArray();
-    }
     private void OnDisable()
     {
         gameManager.SpawnStages -= stageNum => SpawnTextBoxes(stageNum);
         gameManager.StageEnd -= a => DeSpawnTextBoxes();
+    }
+    private void Update()
+    {
+        test = currentEvents.ToArray();
     }
     private void SpawnTextBoxes(int index)
     {

@@ -62,7 +62,14 @@ public class QuickGameAnswerPopUp : PopUpScaleScript
         }
         else
         {
-            gameManager.StageEnd(false);
+            GetOutStage();
         }
+    }
+    private void GetOutStage()
+    {
+        gameManager.StageEnd(false);
+        gameManager.StopTime(false);
+        gameManager.WhenGoToStageSelectMenu();
+        SceneManager.LoadScene("StageSelectScene");
     }
 }

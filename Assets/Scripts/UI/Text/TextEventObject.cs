@@ -84,6 +84,8 @@ public class TextEventObject : TextEventObject_Base
         {
             gameObject.SetActive(false);
         };
+
+        eventNum = 0;
     }
     private void PosSet()
     {

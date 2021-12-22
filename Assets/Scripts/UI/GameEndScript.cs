@@ -18,17 +18,15 @@ public class GameEndScript : MonoBehaviour
     void Awake()
     {
         gameManager = GameManager.Instance;
-
-        
     }
-    private void OnEnable() 
+    private void OnEnable()
     {
         gameManager.StageEnd += gameClear =>
         {
             WhenGameEnd();
         };
     }
-    private void OnDisable() 
+    private void OnDisable()
     {
         gameManager.StageEnd -= gameClear =>
         {
@@ -53,17 +51,20 @@ public class GameEndScript : MonoBehaviour
     }
     void Update()
     {
-        if(gotoMainTimer > 0f)
+        if (gotoMainTimer > 0f)
         {
             gotoMainTimer -= Time.deltaTime;
-            
-            if(gotoMainTimer <= 0f || Input.GetKeyUp(KeyCode.Space))
+
+            if (gotoMainTimer <= 0f || Input.GetKeyUp(KeyCode.Space))
             {
-                gameManager.StopTime(false);
-                gameManager.WhenGoToStageSelectMenu();
-                SceneManager.LoadScene("StageSelectScene");
+                GetOutStage();
             }
         }
-
+    }
+    private void GetOutStage()
+    {
+        gameManager.StopTime(false);
+        gameManager.WhenGoToStageSelectMenu();
+        SceneManager.LoadScene("StageSelectScene");
     }
 }

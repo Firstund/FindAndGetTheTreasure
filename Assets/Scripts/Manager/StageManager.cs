@@ -27,11 +27,15 @@ public class StageManager : MonoBehaviour
     }
     private GameManager gameManager = null;
     private SoundManager soundManager = null;
+
+    private Camera mainCamera = null;
+
     private List<GameObject> enemys = new List<GameObject>();
     public List<GameObject> Enemys
     {
         get { return enemys; }
     }
+
     [SerializeField]
     private Material stageSkyBox = null;
     [SerializeField]
@@ -83,6 +87,9 @@ public class StageManager : MonoBehaviour
 
     private void Awake()
     {
+        gameManager = GameManager.Instance;
+        soundManager = SoundManager.Instance;
+
         TimerCheck = t =>
         {
             if (t > 0f)
@@ -109,8 +116,7 @@ public class StageManager : MonoBehaviour
 
     void Start()
     {
-        gameManager = GameManager.Instance;
-        soundManager = SoundManager.Instance;
+        mainCamera = Camera.main;
 
         cinemachineVirtualCamera = gameManager.cinemachineVirtualCamera;
         cinemachineVirtualCamera.m_Follow = gameManager.player.transform;
@@ -124,7 +130,7 @@ public class StageManager : MonoBehaviour
 
         if (stageSkyBox != null)
         {
-            Camera.main.GetComponent<Skybox>().material = stageSkyBox;
+            mainCamera.GetComponent<Skybox>().material = stageSkyBox;
         }
     }
 

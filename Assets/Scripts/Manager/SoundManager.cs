@@ -71,28 +71,19 @@ public class SoundManager : MonoBehaviour
     private List<AudioSource> jumpEffectAudis = new List<AudioSource>();
     public List<AudioSource> JumpEffectAudis = new List<AudioSource>();
 
-    [SerializeField]
-    private Slider masterVolumeSlider = null;
-    [SerializeField]
-    private Slider mainVolumeSlider = null;
-    [SerializeField]
-    private Slider effectVolumeSlider = null;
-
     private bool bSetVolumeByLerp = false;
 
     private void Awake()
     {
         gameManager = GameManager.Instance;
     }
-    private void OnEnable()
+    private void Start()
     {
         gameManager.WhenGoToStageSelectMenu += () =>
         {
             WhenGoToStageSelectMenu();
         };
-    }
-    private void Start()
-    {
+
         // SetMainBGMVolumeByLerp(1, 0, 5);
         SetMainBGMPitch(1f);
     }
@@ -190,11 +181,11 @@ public class SoundManager : MonoBehaviour
         masterVolume = volume;
         SetMainBGMVolume(mainVolume);
     }
-    public void SetMasterVolumeBySlider()
+    public void SetMasterVolumeBySlider(Slider slider)
     {
         bSetVolumeByLerp = false;
 
-        masterVolume = masterVolumeSlider.value;
+        masterVolume = slider.value;
         SetMainBGMVolume(mainVolume);
     }
     public void SetMainBGMVolume(float volume)
@@ -204,18 +195,18 @@ public class SoundManager : MonoBehaviour
         mainVolume = volume;
         mainBGMVolumeTimer = mainBGMVolumeTimerOrigin;
     }
-    public void SetMainVolumeBySlider()
+    public void SetMainVolumeBySlider(Slider slider)
     {
         bSetVolumeByLerp = false;
 
-        mainVolume = mainVolumeSlider.value;
+        mainVolume = slider.value;
     }
     public void SetEffectSoundVolume(float volume)
     {
         effectSoundVolume = volume;
     }
-    public void SetEffectVolumeBySlider()
+    public void SetEffectVolumeBySlider(Slider slider)
     {
-        effectSoundVolume = effectVolumeSlider.value;
+        effectSoundVolume = slider.value;
     }
 }

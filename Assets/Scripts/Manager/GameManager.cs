@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
-
+    private Camera mainCamera = null;
     [SerializeField]
     private CinemachineVirtualCamera _cinemachineVirtualCamera = null;
     public CinemachineVirtualCamera cinemachineVirtualCamera
@@ -183,7 +183,6 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-
         TimeSlow = a =>
         {
             if (a > 0f)
@@ -273,9 +272,13 @@ public class GameManager : MonoBehaviour
 
         WhenGoToStageSelectMenu = () =>
         {
-
+            mainCamera.GetComponent<Skybox>().material = null;
         };
 
+    }
+    private void Start()
+    {
+        mainCamera = Camera.main;
     }
     void Update()
     {

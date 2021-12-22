@@ -764,6 +764,7 @@ GameObject:
   - component: {fileID: 513734749}
   - component: {fileID: 513734751}
   - component: {fileID: 513734750}
+  - component: {fileID: 5623697850414755646}
   m_Layer: 5
   m_Name: VolumePanel
   m_TagString: Untagged
@@ -831,6 +832,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5623697850414755646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513734748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d06cb84f94d122d4dae8608ece4269c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterVolumeSlider: {fileID: 589732884}
+  mainVolumeSlider: {fileID: 1051195751}
+  effectVolumeSlider: {fileID: 1571801482}
 --- !u!1 &515552946
 GameObject:
   m_ObjectHideFlags: 0
@@ -1243,8 +1259,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+      - m_Target: {fileID: 5623697850414755646}
+        m_TargetAssemblyTypeName: VolumePannel, Assembly-CSharp
         m_MethodName: SetMasterVolumeBySlider
         m_Mode: 1
         m_Arguments:
@@ -2559,9 +2575,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: SetMainVolumeBySlider
+      - m_Target: {fileID: 5623697850414755646}
+        m_TargetAssemblyTypeName: VolumePannel, Assembly-CSharp
+        m_MethodName: SetMainBGMVolumeBySlider
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3835,9 +3851,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: SetEffectVolumeBySlider
+      - m_Target: {fileID: 5623697850414755646}
+        m_TargetAssemblyTypeName: VolumePannel, Assembly-CSharp
+        m_MethodName: SetEffectSoundVolumeBySlider
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5292,9 +5308,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: HideMenu
+      - m_Target: {fileID: 8635146845158350841}
+        m_TargetAssemblyTypeName: PopUpScaleScript, Assembly-CSharp
+        m_MethodName: OnClickCloseBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

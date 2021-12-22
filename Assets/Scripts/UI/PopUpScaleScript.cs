@@ -55,6 +55,10 @@ public abstract class PopUpScaleScript : MonoBehaviour
         onFadeIn = true;
         onFadeOut = false;
     }
+    public void OnClickCloseBtn()
+    {
+        menuManager.HideMenu();
+    }
     protected void SetScale()
     {
         currentScale = transform.localScale;
