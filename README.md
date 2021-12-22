@@ -1,7 +1,7 @@
 # FindAndGetTheTreasure
 ## 게임소개
 ### 장르
-FIndAndGetTheTreasure(이하: FAGT)는 1인개발 액션 플랫포머게임입니다.
+FIndAndGetTheTreasure(이하: FAGT)는 1인개발 액션게임입니다.
 ### 메인 스토리
 시공간을 다룰 수 있는 Umiko가 차원을 넘나들며 여러 세계로 찾아가 그 세계의 보물을 어떤 목적을 위해서 계속해서 모으고 수집합니다. 
 보물을 모으는 과정에서 여러 인물과 만나서 교감하고, 싸우게 됩니다.
