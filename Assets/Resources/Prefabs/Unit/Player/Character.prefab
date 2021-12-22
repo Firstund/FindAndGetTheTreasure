@@ -5533,6 +5533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pulley: {fileID: 5143956854866003331}
+  dashEffectSoundBox: {fileID: 7089593807922516557, guid: 2516d1ef76850574794494c52f0285ad, type: 3}
   dashAttackSoundBox: {fileID: 7089593807922516557, guid: b94227e17357ff94cbc42df33bbe2e3a, type: 3}
   attackSoundBox: {fileID: 6815060912298649864, guid: c6dc2a82fe465304d8bffe80eebd9746, type: 3}
   hurtSoundBox: {fileID: 758409182668700053, guid: eebc025157ad5704cbfec068c1fd5b72, type: 3}
@@ -5556,9 +5557,6 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 768
-  whatIsHitable:
-    serializedVersion: 2
-    m_Bits: 0
   whatIsPorjectile:
     serializedVersion: 2
     m_Bits: 2048
@@ -5570,7 +5568,6 @@ MonoBehaviour:
   dashStopRange: 0.1
   dashDoTime: 0.04
   dashResetTime: 0.25
-  powerTimeWhenIsHangFalse: 5
   dropValue: 15
 --- !u!114 &5143956853646980548
 MonoBehaviour:

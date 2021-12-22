@@ -13,6 +13,8 @@ public class SoundBoxScript : MonoBehaviour
     private float playTime = 1f;
     private float playTimer = 0f;
 
+    private float originVolume = 0f;
+
     private bool soundPlayed = false;
     void Start()
     {
@@ -22,6 +24,7 @@ public class SoundBoxScript : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         playTimer = playTime;
+        originVolume = audioSource.volume;
     }
 
     private void OnEnable() 
@@ -30,7 +33,7 @@ public class SoundBoxScript : MonoBehaviour
     }
     void Update()
     {
-        audioSource.volume = soundManager.EffectSoundVolume * soundManager.MasterVolume;
+        audioSource.volume = originVolume * soundManager.EffectSoundVolume * soundManager.MasterVolume;
 
         if(playTimer > 0f)
         {

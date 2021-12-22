@@ -46,6 +46,8 @@ public class CharacterMove : MonoBehaviour
     private GameObject pulley = null;
     [Header("여기부터 사운드박스들")]
     [SerializeField]
+    private GameObject dashEffectSoundBox = null;
+    [SerializeField]
     private GameObject dashAttackSoundBox = null;
     [SerializeField]
     private GameObject attackSoundBox = null;
@@ -620,6 +622,8 @@ public class CharacterMove : MonoBehaviour
             dashPosition = stageManager.PositionCantCrossWall(dashPosition, endPosition, spriteRenderer.flipX, whatIsGround);
 
             dashPosition.y = currentPosition.y;
+
+            stageManager.SpawnSoundBox(dashEffectSoundBox);
 
             dashMoving = true;
 
