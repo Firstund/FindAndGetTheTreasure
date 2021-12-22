@@ -18,15 +18,9 @@ public class QuickGameAnswerPopUp : PopUpScaleScript
     }
     private void OnEnable() 
     {
-        showQuickGameAnswerPopUp.WhenAnswerQuick += () =>
-        {
-            OnShowPopUp();
-        };
+        showQuickGameAnswerPopUp.WhenAnswerQuick += OnShowPopUp;
 
-        showQuickGameAnswerPopUp.WhenCancelQuick += () =>
-        {
-            OnHidePopUp();
-        };
+        showQuickGameAnswerPopUp.WhenCancelQuick += OnHidePopUp;
     }
     public override void Start()
     {
@@ -36,15 +30,9 @@ public class QuickGameAnswerPopUp : PopUpScaleScript
     {
         base.OnDisable();
 
-        showQuickGameAnswerPopUp.WhenAnswerQuick -= () =>
-        {
-            OnShowPopUp();
-        };
+        showQuickGameAnswerPopUp.WhenAnswerQuick -= OnShowPopUp;
 
-        showQuickGameAnswerPopUp.WhenCancelQuick -= () =>
-        {
-            OnHidePopUp();
-        };
+        showQuickGameAnswerPopUp.WhenCancelQuick -= OnHidePopUp;
     }
     public override void Update()
     {

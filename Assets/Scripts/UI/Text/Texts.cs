@@ -91,8 +91,9 @@ public class Texts : Text_Base
 
         });
 
+        gameManager.TextEventPlaying = true;
         doFirstText = true;
-        
+
         currentTextNum = 0;
     }
     public void Update()
@@ -201,6 +202,7 @@ public class Texts : Text_Base
         gameManager.player.gameObject.SetActive(true);
         gameManager.cinemachineVirtualCamera.Follow = gameManager.player.transform;
 
+        gameManager.TextEventPlaying = false;
         currentTextNum = 0;
 
         talkManager.currentTextBoxesParent.DeSpawnTextBox();

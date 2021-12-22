@@ -21,20 +21,14 @@ public class GameEndScript : MonoBehaviour
     }
     private void OnEnable()
     {
-        gameManager.StageEnd += gameClear =>
-        {
-            WhenGameEnd();
-        };
+        gameManager.StageEnd += WhenGameEnd;
     }
     private void OnDisable()
     {
-        gameManager.StageEnd -= gameClear =>
-        {
-            WhenGameEnd();
-        };
+        gameManager.StageEnd -= WhenGameEnd;   
     }
 
-    private void WhenGameEnd()
+    private void WhenGameEnd(bool a)
     {
         gameManager.StopTime(true);
         gotoMainTimer = gotoMainTime;

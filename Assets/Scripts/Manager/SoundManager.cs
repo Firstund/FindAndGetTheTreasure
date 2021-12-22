@@ -79,20 +79,16 @@ public class SoundManager : MonoBehaviour
     }
     private void Start()
     {
-        gameManager.WhenGoToStageSelectMenu += () =>
-        {
-            WhenGoToStageSelectMenu();
-        };
+        gameManager.WhenGoToStageSelectMenu += WhenGoToStageSelectMenu;
+       
 
         // SetMainBGMVolumeByLerp(1, 0, 5);
         SetMainBGMPitch(1f);
     }
     private void OnDisable()
     {
-        gameManager.WhenGoToStageSelectMenu -= () =>
-        {
-            WhenGoToStageSelectMenu();
-        };
+        gameManager.WhenGoToStageSelectMenu -= WhenGoToStageSelectMenu;
+        
     }
     private void Update()
     {

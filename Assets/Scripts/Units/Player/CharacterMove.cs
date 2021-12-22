@@ -175,7 +175,6 @@ public class CharacterMove : MonoBehaviour
     private float firstMass = 0f;
 
     public event Action WhenPlayerDead;
-    public event Action WhenPlayerInAir;
     public event Action WhenInAirToGround;
 
     // TODO: OnCollision을 이용하여 벽에 붙었을 때 서서히 내려감
@@ -199,11 +198,6 @@ public class CharacterMove : MonoBehaviour
         reflect = GetComponent<Reflect>();
 
         WhenPlayerDead = () =>
-        {
-
-        };
-
-        WhenPlayerInAir = () =>
         {
 
         };
@@ -238,10 +232,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void OnEnable()
     {
-        stageManager.PlayerRespawn += () =>
-        {
-            PlayerRespawn();
-        };
+        stageManager.PlayerRespawn += PlayerRespawn;
 
         isDead = false;
         attacking = false;
@@ -250,10 +241,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void OnDisable()
     {
-        stageManager.PlayerRespawn -= () =>
-        {
-            PlayerRespawn();
-        };
+        stageManager.PlayerRespawn -= PlayerRespawn;
     }
 
     private void PlayerRespawn()
@@ -1026,9 +1014,11 @@ public class CharacterMove : MonoBehaviour
         if (!isGround && a) // 착지하는 순간
         {
             SetAttacking();
+            
             isJump = false;
             staping = true;
             attacking = false;
+
             anim.Play(characterName + "Stap");
 
             Vector2 spawnPos = transform.position;
@@ -1052,7 +1042,6 @@ public class CharacterMove : MonoBehaviour
 
         if (isGround && !a)// 공중으로 떨어진 순간
         {
-            WhenPlayerInAir();
             canJumpAgain = true;
         }
 

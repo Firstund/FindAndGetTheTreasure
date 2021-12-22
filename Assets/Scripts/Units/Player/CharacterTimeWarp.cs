@@ -73,11 +73,9 @@ public class CharacterTimeWarp : MonoBehaviour
     }
     private void OnEnable()
     {
-        gameManager.player.WhenPlayerDead += () =>
-        {
-            CancelTimeWarp();
-        };
+        gameManager.player.WhenPlayerDead += CancelTimeWarp;
     }
+    
 
     private void OriginSet()
     {

@@ -38,7 +38,11 @@ public abstract class PopUpScaleScript : MonoBehaviour
     {
         currentScale = Vector2.zero;
         transform.localScale = Vector2.zero;
-        gameManager.StopTime(false);
+
+        if (!gameManager.TextEventPlaying)
+        {
+            gameManager.StopTime(false);
+        }
 
         onFadeOut = false;
     }

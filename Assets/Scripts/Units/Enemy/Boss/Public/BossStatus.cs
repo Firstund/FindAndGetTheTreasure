@@ -71,18 +71,12 @@ public class BossStatus : MonoBehaviour
     }
     private void OnEnable()
     {
-        bossStat.WhenIsDead += () =>
-        {
-            WhenIsDead();
-        };
+        bossStat.WhenIsDead += WhenIsDead;
     }
 
     private void OnDisable()
     {
-        bossStat.WhenIsDead -= () =>
-        {
-            WhenIsDead();
-        };
+        bossStat.WhenIsDead -= WhenIsDead;
     }
     private void FixedUpdate()
     {

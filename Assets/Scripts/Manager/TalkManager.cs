@@ -56,20 +56,20 @@ public class TalkManager : MonoBehaviour
         get { return currentTalkableObject; }
         set { currentTalkableObject = value; }
     }
-
+    
     private void Awake()
     {
-        gameManager = GameManager.Instance;
+        gameManager = GameManager.Instance;  
     }
     private void Start()
     {
-        gameManager.SpawnStages += stageNum => SpawnTextBoxes(stageNum);
-        gameManager.StageEnd += a => DeSpawnTextBoxes();
+        gameManager.SpawnStages += SpawnTextBoxes;
+        gameManager.StageEnd += DeSpawnTextBoxes;
     }
     private void OnDisable()
     {
-        gameManager.SpawnStages -= stageNum => SpawnTextBoxes(stageNum);
-        gameManager.StageEnd -= a => DeSpawnTextBoxes();
+        gameManager.SpawnStages -= SpawnTextBoxes;
+        gameManager.StageEnd -= DeSpawnTextBoxes;
     }
     private void Update()
     {
@@ -87,7 +87,7 @@ public class TalkManager : MonoBehaviour
             }
         }
     }
-    public void DeSpawnTextBoxes()
+    public void DeSpawnTextBoxes(bool a)
     {
         if (currentTextBoxesParent != null)
         {

@@ -136,6 +136,12 @@ public class GameManager : MonoBehaviour
     public Action<bool> StageEnd;
     public Action WhenGoToStageSelectMenu;
 
+    private bool textEventPlaying = false;
+    public bool TextEventPlaying
+    {
+        get { return textEventPlaying; }
+        set { textEventPlaying = value; }
+    }
     private bool _stopTime = false;
     public bool stopTime
     {

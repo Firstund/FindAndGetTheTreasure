@@ -72,13 +72,15 @@ public class EventTriggerArea : MonoBehaviour
     {
         if (enableTrueEventTriggerAreasWhenIsGround)
         {
-            gameManager.player.WhenInAirToGround += () =>
-            {
-                if (eventPlayed)
-                {
-                    playerIsGround = true;
-                }
-            };
+            gameManager.player.WhenInAirToGround += WhenIsAirToGround;
+        }
+    }
+
+    private void WhenIsAirToGround()
+    {
+        if (eventPlayed)
+        {
+            playerIsGround = true;
         }
     }
 

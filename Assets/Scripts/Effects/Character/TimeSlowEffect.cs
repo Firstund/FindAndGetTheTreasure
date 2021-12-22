@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TimeSlowEffect : MonoBehaviour
-
 {
     private GameManager gameManager = null;
     [SerializeField]
@@ -25,9 +24,7 @@ public class TimeSlowEffect : MonoBehaviour
 
             if (transform.localScale.x < maxSize || transform.localScale.y < maxSize)
             {
-                transform.localScale = new Vector2(
-                    Mathf.Lerp(0f, maxSize, fadeInTimer / fadeInTime),
-                 Mathf.Lerp(0f, maxSize, fadeInTimer / fadeInTime));
+                transform.localScale = Vector2.Lerp(Vector2.zero, new Vector2(maxSize, maxSize), fadeInTimer / fadeInTime);
             }
         }
     }
@@ -36,17 +33,11 @@ public class TimeSlowEffect : MonoBehaviour
         transform.localScale = new Vector3(0f, 0f, 1f);
         fadeInTimer = 0f;
 
-        gameManager.SetFalseSlowTimeSomeObjects += () =>
-        { 
-            Despawn();
-        };
+        gameManager.SetFalseSlowTimeSomeObjects += Despawn;
     }
     private void OnDisable()
     {
-        gameManager.SetFalseSlowTimeSomeObjects -= () =>
-        {
-            Despawn();
-        };
+        gameManager.SetFalseSlowTimeSomeObjects -= Despawn;
     }
     private void Despawn()
     {
