@@ -270,6 +270,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1374808865, guid: 26e614d81075bba4eba3f02d3ff162ff, type: 3}
+      propertyPath: despawnIts.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1549118853, guid: 26e614d81075bba4eba3f02d3ff162ff, type: 3}
       propertyPath: isApplicationQuick
       value: 0

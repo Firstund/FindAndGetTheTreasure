@@ -11,7 +11,7 @@ public class SetActiveObjects : MonoBehaviour
 
     public void OnClick()
     {
-        spawnIts.ForEach(x => x.SetActive(true));
-        despawnIts.ForEach(x => x.SetActive(false));
+        spawnIts.ForEach(x => { if (x != null) { x.SetActive(true); } });
+        despawnIts.ForEach(x => { if (x != null) { x.SetActive(false); } });
     }
 }

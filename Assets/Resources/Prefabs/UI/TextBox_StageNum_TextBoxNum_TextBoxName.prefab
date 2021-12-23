@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 247, y: -94}
+  m_AnchoredPosition: {x: 330, y: -94}
   m_SizeDelta: {x: 190, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &98518312110453816
@@ -241,6 +241,7 @@ MonoBehaviour:
     canNextTalk: 0
     startOtherTextEventOnPlayerSkip: 0
     otherTextEventIndex: 0
+    func: 
   - LSprite: {fileID: 21300000, guid: 169d48a3f79a7f8499b08b66525c471c, type: 3}
     RSprite: {fileID: 0}
     cameraFollowPos: {fileID: 0}
@@ -254,6 +255,7 @@ MonoBehaviour:
     canNextTalk: 0
     startOtherTextEventOnPlayerSkip: 0
     otherTextEventIndex: 0
+    func: 
   - LSprite: {fileID: 21300000, guid: 169d48a3f79a7f8499b08b66525c471c, type: 3}
     RSprite: {fileID: 0}
     cameraFollowPos: {fileID: 0}
@@ -264,6 +266,7 @@ MonoBehaviour:
     canNextTalk: 0
     startOtherTextEventOnPlayerSkip: 0
     otherTextEventIndex: 0
+    func: 
   - LSprite: {fileID: 21300000, guid: 169d48a3f79a7f8499b08b66525c471c, type: 3}
     RSprite: {fileID: 0}
     cameraFollowPos: {fileID: 0}
@@ -273,6 +276,7 @@ MonoBehaviour:
     canNextTalk: 0
     startOtherTextEventOnPlayerSkip: 0
     otherTextEventIndex: 0
+    func: 
   - LSprite: {fileID: 21300000, guid: 169d48a3f79a7f8499b08b66525c471c, type: 3}
     RSprite: {fileID: -4845280888193106427, guid: 152e4bb3e98c71740a0a65df6b19ba59, type: 3}
     cameraFollowPos: {fileID: 0}
@@ -283,6 +287,7 @@ MonoBehaviour:
     canNextTalk: 0
     startOtherTextEventOnPlayerSkip: 0
     otherTextEventIndex: 0
+    func: 
   text: {fileID: 98518312303491304}
   LSpriteRenderer: {fileID: 98518312733871346}
   RSpriteRenderer: {fileID: 98518312625873330}
@@ -292,6 +297,7 @@ MonoBehaviour:
   despawnPlayerObjWhenTextEvent: 0
   SetPlayerRespawnPosition: 1
   SetPlayerEventPosY: 1
+  dontDespawnEventObjsOnTextEnd: 0
   endGameAtEndTalk: 0
   gameClearAtEndGame: 0
   canNextTalk: 1
