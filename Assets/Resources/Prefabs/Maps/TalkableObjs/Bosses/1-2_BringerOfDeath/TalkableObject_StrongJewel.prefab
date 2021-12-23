@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a37d458fb8cbf4f4db19390c0895a873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  talkableDistance: 0.5
+  talkableDistance: 2
   fadeInTime: 0.5
   spawnTextBoxIndex: 5
   despawnWhenTextEvent: 0

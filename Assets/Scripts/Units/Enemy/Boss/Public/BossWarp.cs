@@ -36,7 +36,6 @@ public class BossWarp : BossSkillBase
     private bool fadeOut = false;
     private bool fadeIn = false;
 
-
     private void Awake()
     {
         DoAwake();
@@ -83,7 +82,7 @@ public class BossWarp : BossSkillBase
         {
             base.DoSkill();
             PlaySound();
-            
+
             StartFadeOut();
         }
     }
@@ -149,17 +148,19 @@ public class BossWarp : BossSkillBase
             ray.origin = bossStat.CurrentPosition;
             ray.direction = targetPos.normalized;
 
-            distance = Vector2.Distance(bossStat.CurrentPosition, targetPos);
+            distance = Vector2.Distance(bossStat.CurrentPosition, bossStat.CurrentPosition + targetPos);
 
             // hit = Physics2D.Raycast(ray.origin, ray.direction, randWarpMax.x + randWarpMax.y, whatIsWall);
-            if (randWarpMax.x > randWarpMax.y)
-            {
-                hit = Physics2D.CircleCast(ray.origin, 0.5f, ray.direction, randWarpMax.x, whatIsWall);
-            }
-            else
-            {
-                hit = Physics2D.CircleCast(ray.origin, 0.5f, ray.direction, randWarpMax.y, whatIsWall);
-            }
+            // if (randWarpMax.x > randWarpMax.y)
+            // {
+            //     hit = Physics2D.CircleCast(ray.origin, 0.5f, ray.direction, randWarpMax.x, whatIsWall);
+            // }
+            // else
+            // {
+            //     hit = Physics2D.CircleCast(ray.origin, 0.5f, ray.direction, randWarpMax.y, whatIsWall);
+            // }
+
+            hit = Physics2D.Raycast(ray.origin, ray.direction, distance, whatIsWall);
 
             if (hit)
             {
