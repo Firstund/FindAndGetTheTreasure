@@ -24075,10 +24075,26 @@ PrefabInstance:
       propertyPath: despawnWhenTextEvent
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2769251109118625774, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e5f6f5ac96d8504cb60836fe6c69f1d, type: 3}
     - target: {fileID: 4168131238916339567, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 962955ff32861cc41af52647f9bca110, type: 2}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 7627716270796501530, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
       propertyPath: m_Name
       value: TalkableObject_WeakJewel
@@ -24842,7 +24858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2254114647285386739, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -120.19
+      value: -120.75
       objectReference: {fileID: 0}
     - target: {fileID: 2254114647285386739, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
       propertyPath: m_LocalPosition.z
@@ -24884,10 +24900,42 @@ PrefabInstance:
       propertyPath: spawnTextBoxIndex
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2769251109118625774, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e5f6f5ac96d8504cb60836fe6c69f1d, type: 3}
+    - target: {fileID: 4068479417713424990, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4068479417713424990, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4068479417713424990, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4168131238916339567, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: ccee253ff083e9e45ac8d4d553de6318, type: 2}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640191692956685452, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: showDistance
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7627716270796501530, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
       propertyPath: m_Name
       value: TalkableObject_BringerOfDeath

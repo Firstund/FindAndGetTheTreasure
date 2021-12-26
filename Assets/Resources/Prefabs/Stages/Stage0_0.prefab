@@ -247,8 +247,8 @@ MonoBehaviour:
   _soundBoxes: {fileID: 8680745061633033514}
   projectiles: []
   projectilesTrm: {fileID: 7994530517581462407}
-  playerRespanwTrm: {fileID: 0}
   spawnObjTrm: {fileID: 5909913680566100573}
+  playerRespawnTrm: {fileID: 0}
   respawnDelay: 2
   cinemachineVirtualCamera: {fileID: 0}
 --- !u!1 &3958201675347783038
@@ -4981,10 +4981,38 @@ PrefabInstance:
       propertyPath: despawnWhenTextEvent
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2769251109118625774, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e5f6f5ac96d8504cb60836fe6c69f1d, type: 3}
     - target: {fileID: 4168131238916339567, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 962955ff32861cc41af52647f9bca110, type: 2}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7627716270796501530, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
       propertyPath: m_Name
       value: TalkableObject_GreenJewel
@@ -5293,10 +5321,26 @@ PrefabInstance:
       propertyPath: despawnWhenTextEvent
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2769251109118625774, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e5f6f5ac96d8504cb60836fe6c69f1d, type: 3}
     - target: {fileID: 4168131238916339567, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: bf5febee0af13f94c864cda66d7588df, type: 2}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 7627716270796501530, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
       propertyPath: m_Name
       value: TalkableObject_GrayJewel
@@ -5941,10 +5985,38 @@ PrefabInstance:
       propertyPath: despawnWhenTextEvent
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2769251109118625774, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e5f6f5ac96d8504cb60836fe6c69f1d, type: 3}
     - target: {fileID: 4168131238916339567, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: c7c055df1c16a3347acbf77e4b70f7a7, type: 2}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146610451405480817, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7627716270796501530, guid: 7716cfb31a38f944c9f8b696e6d24885, type: 3}
       propertyPath: m_Name
       value: TalkableObject_BlueJewel
