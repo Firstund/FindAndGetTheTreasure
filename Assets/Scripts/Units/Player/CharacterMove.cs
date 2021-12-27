@@ -695,6 +695,7 @@ public class CharacterMove : MonoBehaviour
             if (IsHang)
             {
                 IsHang = false;
+                canJumpAgain = true;
             }
 
             attacking = false;
@@ -797,7 +798,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void CharacterHangWallCheck()
     {
-        if ((leftWall || rightWall) && !isGround)
+        if ((leftWall || rightWall) && !upWall && !isGround)
         {
             canJumpAgain = true;
             isHangWall = true;
