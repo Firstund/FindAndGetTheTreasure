@@ -110,9 +110,9 @@ public class CharacterTimeWarp : MonoBehaviour
             flipXes[0] = spriteRenderer.flipX;
         }
 
-        if (playerInput.timeWarp && canTimeWarp && !canTimeWaprPositionSet && characterMove.SkillUseSpValue.timeWarp < characterStat.sp)
+        if (playerInput.timeWarp && canTimeWarp && !canTimeWaprPositionSet && characterMove.SkillUseValue.timeWarp < characterStat.sp)
         {
-            characterStat.sp -= characterMove.SkillUseSpValue.timeWarp;
+            characterStat.sp -= characterMove.SkillUseValue.timeWarp;
             canTimeWarp = false;
             _isTimeWarp = true;
 

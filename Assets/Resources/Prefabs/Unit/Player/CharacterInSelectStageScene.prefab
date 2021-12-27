@@ -5339,9 +5339,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingLayerID: -486550627
+  m_SortingLayer: 3
+  m_SortingOrder: 0
   m_Sprite: {fileID: 1999919436320433271, guid: 152e4bb3e98c71740a0a65df6b19ba59, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5460,7 +5460,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -486550627
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -9131384123704057759, guid: ada3122eacc95fc4c8f59b866d3e7ea7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5533,14 +5533,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pulley: {fileID: 5143956854866003331}
-  dashEffectSoundBox: {fileID: 7089593807922516557, guid: 2516d1ef76850574794494c52f0285ad, type: 3}
-  dashAttackSoundBox: {fileID: 7089593807922516557, guid: b94227e17357ff94cbc42df33bbe2e3a, type: 3}
-  attackSoundBox: {fileID: 6815060912298649864, guid: c6dc2a82fe465304d8bffe80eebd9746, type: 3}
   hurtSoundBox: {fileID: 758409182668700053, guid: eebc025157ad5704cbfec068c1fd5b72, type: 3}
   jumpSoundBox: {fileID: 8538887207857704578, guid: 5a4695ff55e895f4a91bab8193165629, type: 3}
   stapSoundBox: {fileID: 8538887207857704578, guid: d4836f3261475134298f70256d269e64, type: 3}
-  attackEffect: {fileID: 2650916574421451465, guid: 3343c6ae7106e4e45870f9f12dd67316, type: 3}
-  dashAttackEffect: {fileID: 3136435146279858430, guid: 958cdaf14433d3d47b3c40003c875f1d, type: 3}
   slideAtSideWall: {fileID: 6449521256822418348, guid: 3e882ce853fb65444a834277d739e54d, type: 3}
   jumpEffect: {fileID: 3275992218428455322, guid: 17657c5b5e7fdcc48be57616642622e5, type: 3}
   stapEffect: {fileID: 3275992218428455322, guid: ded14106cb8c80b41ac8fc3f74f1a45f, type: 3}
@@ -5560,14 +5555,10 @@ MonoBehaviour:
   whatIsPorjectile:
     serializedVersion: 2
     m_Bits: 2048
-  GroundChecker: {fileID: 5143956853967837845}
-  LeftWallChecker: {fileID: 5143956853037991215}
-  RightWallChecker: {fileID: 5143956853739470317}
-  UpWallChecker: {fileID: 5143956854152094835}
-  dashRange: 5
-  dashStopRange: 0.1
-  dashDoTime: 0.04
-  dashResetTime: 0.25
+  groundChecker: {fileID: 5143956853967837845}
+  leftWallChecker: {fileID: 5143956853037991215}
+  rightWallChecker: {fileID: 5143956853739470317}
+  upWallChecker: {fileID: 5143956854152094835}
   dropValue: 15
 --- !u!114 &5143956853646980548
 MonoBehaviour:
@@ -6248,7 +6239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5143956854824626258}
   m_Layer: 0
-  m_Name: Character
+  m_Name: CharacterInSelectStageScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6344,9 +6335,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingLayerID: -486550627
+  m_SortingLayer: 3
+  m_SortingOrder: 0
   m_Sprite: {fileID: 3049196970285722106, guid: 152e4bb3e98c71740a0a65df6b19ba59, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

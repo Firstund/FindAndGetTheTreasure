@@ -32,25 +32,17 @@ public class CharacterMove : MonoBehaviour
     private SpawnEffect spawnEffect = null;
 
     private PlayerInput playerInput = null;
-    private SpawnAfterImage spawnAfterImage = null;
     private CharacterStat characterStat = null;
     public CharacterStat CharacterStat
     {
         get { return characterStat; }
     }
-    private Reflect reflect = null;
 
     private CharacterTimeWarp characterTimeWarp = null;
 
     [SerializeField]
     private GameObject pulley = null;
     [Header("여기부터 사운드박스들")]
-    [SerializeField]
-    private GameObject dashEffectSoundBox = null;
-    [SerializeField]
-    private GameObject dashAttackSoundBox = null;
-    [SerializeField]
-    private GameObject attackSoundBox = null;
     [SerializeField]
     private GameObject hurtSoundBox = null;
     [SerializeField]
@@ -59,10 +51,6 @@ public class CharacterMove : MonoBehaviour
     private GameObject stapSoundBox = null;
 
     [Header("여기부터 이펙트들")]
-    [SerializeField]
-    private GameObject attackEffect = null;
-    [SerializeField]
-    private GameObject dashAttackEffect = null;
     [SerializeField]
     private GameObject slideAtSideWall = null;
     [SerializeField]
@@ -76,27 +64,92 @@ public class CharacterMove : MonoBehaviour
     [Header("스킬을 사용할 때 소모되는 SP의 양")]
     [SerializeField]
     private SkillUseSpValue skillUseValue;
-    public SkillUseSpValue SkillUseSpValue
+    public SkillUseSpValue SkillUseValue
     {
         get { return skillUseValue; }
     }
 
     [SerializeField]
     private LayerMask whatIsGround;
+    public LayerMask WhatIsGround
+    {
+        get
+        {
+            return whatIsGround;
+        }
+    }
     [SerializeField]
     private LayerMask whatIsEnemy;
+    public LayerMask WhatIsEnemy
+    {
+        get
+        {
+            return whatIsEnemy;
+        }
+    }
     private LayerMask whatIsDashAttackable;
+    public LayerMask WhatIsDashAttackable
+    {
+        get
+        {
+            return whatIsDashAttackable;
+        }
+    }
     [SerializeField]
     private LayerMask whatIsPorjectile;
 
     [SerializeField]
-    private Transform GroundChecker;
+    private Transform groundChecker;
+    public Transform GroundChecker
+    {
+        get
+        {
+            return groundChecker;
+        }
+        set
+        {
+            groundChecker = value;
+        }
+    }
     [SerializeField]
-    private Transform LeftWallChecker;
+    private Transform leftWallChecker;
+    public Transform LeftWallChecker
+    {
+        get
+        {
+            return leftWallChecker;
+        }
+        set
+        {
+            leftWallChecker = value;
+        }
+    }
     [SerializeField]
-    private Transform RightWallChecker;
+    private Transform rightWallChecker;
+    public Transform RightWallChecker
+    {
+        get
+        {
+            return rightWallChecker;
+        }
+        set
+        {
+            rightWallChecker = value;
+        }
+    }
     [SerializeField]
-    private Transform UpWallChecker;
+    private Transform upWallChecker;
+    public Transform UpWallChecker
+    {
+        get
+        {
+            return upWallChecker;
+        }
+        set
+        {
+            upWallChecker = value;
+        }
+    }
 
     private bool isGround = false;
     public bool IsGround
@@ -107,18 +160,9 @@ public class CharacterMove : MonoBehaviour
     private bool rightWall = false;
     private bool upWall = false;
 
-    [SerializeField]
-    private float dashRange = 2f;
-    [SerializeField]
-    private float dashStopRange = 0.1f;
-    [SerializeField]
-    private float dashDoTime = 0.1f;
-    [SerializeField]
-    private float dashResetTime = 1f;
-
     private bool isJump = false;
     private bool isHang = false;
-    private bool IsHang
+    public bool IsHang
     {
         get
         {
@@ -130,8 +174,34 @@ public class CharacterMove : MonoBehaviour
         }
     }
     private bool isDash = false;
+    public bool IsDash
+    {
+        get
+        {
+            return isDash;
+        }
+        set
+        {
+            isDash = value;
+        }
+    }
     private bool isDead = false;
+    public bool IsDead
+    {
+        get { return isDead; }
+    }
     private bool isAttack = false;
+    public bool IsAttack 
+    {
+        get
+        {
+            return isAttack;
+        }
+        set
+        {
+            isAttack = value;
+        }
+    }
     private bool isHurt = false;
     private bool _canHurt = true;
     public bool canHurt
@@ -139,6 +209,17 @@ public class CharacterMove : MonoBehaviour
         get { return _canHurt; }
     }
     private bool isHangWall = false;
+    public bool IsHangWall
+    {
+        get
+        {
+            return isHangWall;
+        }
+        set
+        {
+            isHangWall = value;
+        }
+    }
     private bool isReflect = false;
     public bool IsReflect
     {
@@ -146,30 +227,71 @@ public class CharacterMove : MonoBehaviour
         set { isReflect = value; }
     }
     private bool canDash = true;
-    private bool canDashAttack = true;
+    public bool CanDash
+    {
+        get
+        {
+            return canDash;
+        }
+        set
+        {
+            canDash = value;
+        }
+    }
     private bool dashMoving = false;
+    public bool DashMoving
+    {
+        get
+        {
+            return dashMoving;
+        }
+        set
+        {
+            dashMoving = value;
+        }
+    }
     private bool staping = false;
+    public bool Staping
+    {
+        get
+        {
+            return staping;
+        }
+        set
+        {
+            staping = value;
+        }
+    }
     private bool attacking = false;
     public bool Attacking
     {
-        get { return attacking; }
-        set { attacking = value; }
+        get
+        {
+            return attacking;
+        }
+        set
+        {
+            attacking = value;
+        }
     }
     private bool dashAttacking = false;
     public bool DashAttacking
     {
-        get { return dashAttacking; }
+        get
+        {
+            return dashAttacking;
+        }
+        set
+        {
+            dashAttacking = value;
+        }
     }
     private bool canJumpAgain = false;
-
-    private bool canSpawnAfterImageByDash = true;
 
     [Header("떨어지기 시작했을 때 이 값만큼 아래로 이동하면, 낙사처리")]
     [SerializeField]
     private float dropValue = 5f;
     private Vector2 whenIsNotInAirPosition = Vector2.zero; // 공중에 떨어져 있지 않을 때의 위치
-
-    private Vector2 dashPosition = Vector2.zero;
 
     public Vector2 currentPosition { get; private set; }
 
@@ -194,10 +316,8 @@ public class CharacterMove : MonoBehaviour
 
         playerInput = GetComponent<PlayerInput>();
         characterStat = GetComponent<CharacterStat>();
-        spawnAfterImage = GetComponent<SpawnAfterImage>();
         characterTimeWarp = GetComponent<CharacterTimeWarp>();
         spawnEffect = GetComponent<SpawnEffect>();
-        reflect = GetComponent<Reflect>();
 
         WhenPlayerDead = () =>
         {
@@ -272,11 +392,6 @@ public class CharacterMove : MonoBehaviour
 
         SetAnimByTimeWarp();
         CheckDead();
-
-        if (attacking)
-        {
-            DespawnProjectileByAttack();
-        }
 
         if (!upWall)
         {
@@ -448,20 +563,15 @@ public class CharacterMove : MonoBehaviour
                 anim.Play(name + "ReflectR");
 
                 reflectEffect.SetActive(true);
-                reflectEffect.transform.position = spriteRenderer.flipX ? RightWallChecker.position : LeftWallChecker.position;
+                reflectEffect.transform.position = spriteRenderer.flipX ? rightWallChecker.position : leftWallChecker.position;
             }
             else
             {
                 Jump();
                 Hang();
-                Attack();
                 MoveX(XMove);
 
                 InAirCheck();
-                Dash(XMove);
-
-                DashMove();
-                SpawnAfterImageByDash();
 
                 reflectEffect.SetActive(false);
             }
@@ -482,11 +592,11 @@ public class CharacterMove : MonoBehaviour
                 {
                     if (spriteRenderer.flipX)
                     {
-                        spawnEffect.ShowEffect(slideAtSideWall, LeftWallChecker.position);
+                        spawnEffect.ShowEffect(slideAtSideWall, leftWallChecker.position);
                     }
                     else
                     {
-                        spawnEffect.ShowEffect(slideAtSideWall, RightWallChecker.position);
+                        spawnEffect.ShowEffect(slideAtSideWall, rightWallChecker.position);
                     }
                 }
             }
@@ -567,375 +677,6 @@ public class CharacterMove : MonoBehaviour
         stageManager.Respawn();
         gameObject.SetActive(false);
     }
-    private void Dash(float XMove)
-    {
-        if (XMove != 0 && isDash && !IsHang && !staping && !dashMoving && canDash)
-        {
-            float _dashRange = dashRange;
-            dashPosition = GroundChecker.position;
-
-            dashPosition.y += 0.2f;
-
-            if (attacking)
-            {
-                if (characterStat.sp >= skillUseValue.dashAttack)
-                {
-                    characterStat.sp -= skillUseValue.dashAttack;
-                }
-                else
-                {
-                    isDash = false;
-                    return;
-                }
-
-                gameManager.SetSlowTime(0.1f);
-                _dashRange = DashAttack(_dashRange);
-            }
-            else
-            {
-                canDashAttack = false;
-
-                if (characterStat.sp >= skillUseValue.dash)
-                {
-                    characterStat.sp -= skillUseValue.dash;
-                }
-                else
-                {
-                    isDash = false;
-                    return;
-                }
-            }
-
-            if (spriteRenderer.flipX)
-            {
-                _dashRange = -_dashRange;
-            }
-
-            Vector2 endPosition = currentPosition;
-
-            endPosition.x = currentPosition.x + _dashRange;
-
-            dashPosition = stageManager.PositionCantCrossWall(dashPosition, endPosition, spriteRenderer.flipX, whatIsGround);
-
-            dashPosition.y = currentPosition.y;
-
-            stageManager.SpawnSoundBox(dashEffectSoundBox);
-
-            dashMoving = true;
-
-            isDash = false;
-            canDash = false;
-
-            Invoke("DashRe", dashResetTime);
-        }
-        else
-        {
-            isDash = false;
-        }
-
-    }
-    private float DashAttack(float _dashRange)
-    {
-        if (canDashAttack)
-        {
-            dashAttacking = true;
-
-            spawnEffect.ShowEffect(dashAttackEffect, Vector2.zero);
-
-            anim.Play(characterName + "DashAttack");
-
-            _dashRange = dashRange * (2f / 3f);
-
-            Vector2 endPosition = currentPosition;
-
-            dashPosition = GroundChecker.position;
-
-            dashPosition.y += 0.2f;
-
-            endPosition.x = currentPosition.x + _dashRange;
-
-            dashPosition = stageManager.PositionCantCrossWall(dashPosition, endPosition, spriteRenderer.flipX, whatIsGround);
-
-            GetDashAttackDamage();
-        }
-
-        return _dashRange;
-    }
-    private void DashAttackReSet()
-    {
-        dashAttacking = false;
-    }
-
-    private void DashRe()
-    {
-        canDash = true;
-        canDashAttack = true;
-        dashAttacking = false;
-    }
-    private void SpawnAfterImageByDash()
-    {
-        if (dashMoving && canSpawnAfterImageByDash)
-        {
-            float spawnAfterImageDelay = UnityEngine.Random.Range(spawnAfterImage.spawnAfterImageDelayMinimum, spawnAfterImage.spawnAfterImageDelayMaximum);
-            spawnAfterImage.SetAfterImage();
-            canSpawnAfterImageByDash = false;
-
-            Invoke("SpawnAfterImageByDashRe", spawnAfterImageDelay);
-        }
-    }
-    private void SpawnAfterImageByDashRe()
-    {
-        canSpawnAfterImageByDash = true;
-    }
-    private void DashMove()
-    {
-        if (dashMoving)
-        {
-            rigid.velocity = new Vector2(rigid.velocity.x, 0f);
-            transform.DOMove(dashPosition, dashDoTime).SetEase(Ease.InQuad);
-        }
-
-        Vector2 _dashPosition = dashPosition;
-        Vector2 _currentPosition = currentPosition;
-        _dashPosition.y = 0f;
-        _currentPosition.y = 0f;
-
-        float distance = Vector2.Distance(_dashPosition, _currentPosition);
-
-        if (distance <= dashStopRange)
-        {
-            dashMoving = false;
-        }
-    }
-    private void Attack()
-    {
-        if (!attacking && !dashMoving && !isHangWall && !staping && isAttack && !isReflect) //isGround에 따라서 GroundAttack과 InAirAttack을 나눌것, dashing == true라면 dashAttack을 할것
-        {
-            if (characterStat.sp >= skillUseValue.attack)
-            {
-                characterStat.sp -= skillUseValue.attack;
-            }
-            else
-            {
-                isAttack = false;
-                return;
-            }
-
-            spawnEffect.ShowEffect(attackEffect, Vector2.zero);
-            if (isGround)
-            {
-                attacking = true;
-
-                anim.Play(characterName + "Attack");
-
-                isAttack = false;
-            }
-            else
-            {
-                attacking = true;
-
-                anim.Play(characterName + "InAirAttack");
-
-                isAttack = false;
-            }
-
-            GetDamage();
-        }
-    }
-    private void GetDamage()
-    {
-        bool soundPlayed = false;
-        Collider2D[] a = Physics2D.OverlapCircleAll(currentPosition, characterStat.attackRange, whatIsEnemy);
-
-        a.ForEach(item =>
-        {
-            EnemyMove enemyMove = item.GetComponent<EnemyMove>();
-
-            if (enemyMove == null)
-            {
-                BossStat bossStat = item.GetComponent<BossStat>();
-
-                if (bossStat == null)
-                {
-                    Debug.LogWarning(item.name + " has Neither EnemyMove nor BossStat");
-                }
-                else
-                {
-                    if (!bossStat.IsNothurtMode)
-                    {
-                        bossStat.Hurt(characterStat.ap);
-
-                        if (!soundPlayed)
-                        {
-                            stageManager.SpawnSoundBox(attackSoundBox);
-                            soundPlayed = true;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                enemyMove.Hurt(characterStat.ap);
-
-                if (!soundPlayed)
-                {
-                    stageManager.SpawnSoundBox(attackSoundBox);
-                    soundPlayed = true;
-                }
-            }
-        });
-    }
-    private void DespawnProjectileByAttack()
-    {
-        if (skillUseValue.reflect < characterStat.sp && !isReflect)
-        {
-            bool projectileDespawned = false;
-            float distance;
-            float damage = 0f;
-
-            for (int i = 0; i < stageManager.ProjectilesTrm.childCount; i++)
-            {
-                GameObject item = stageManager.ProjectilesTrm.GetChild(i).gameObject;
-
-                if (item.activeSelf)
-                {
-                    distance = Vector2.Distance(currentPosition, item.transform.position);
-
-                    if (distance <= characterStat.attackRange)
-                    {
-                        stageManager.DespawnProjectile(item);
-                        damage += 2;
-                        projectileDespawned = true;
-                    }
-                }
-            }
-
-            if (projectileDespawned)
-            {
-                reflect.CanSettingAngle = true;
-                reflect.CanShoot = true;
-                attacking = false;
-                isReflect = true;
-
-                reflect.ProjectileDamage = damage;
-                characterStat.sp -= skillUseValue.reflect;
-            }
-        }
-    }
-    private void GetDashAttackDamage() // 판정관련 오류 있음
-    {
-        bool soundPlayed = false;
-        float attackRange = dashRange;
-
-        Vector2 _currentPosition = currentPosition;
-
-        List<RaycastHit2D> hits = new List<RaycastHit2D>();
-
-        Vector2[] targetPositions = new Vector2[5];
-
-        targetPositions = new Vector2[5] {
-            new Vector2(GroundChecker.position.x,UpWallChecker.position.y),
-             new Vector2(currentPosition.x, currentPosition.y),
-          new Vector2(UpWallChecker.position.x, GroundChecker.position.y),
-          new Vector2(UpWallChecker.position.x, UpWallChecker.position.y),
-          new Vector2(GroundChecker.position.x, GroundChecker.position.y)
-           };
-
-        if (spriteRenderer.flipX)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                Vector2 endPosition = new Vector2(targetPositions[i].x - attackRange, targetPositions[i].y);
-                targetPositions[i] = stageManager.PositionCantCrossWall(targetPositions[i], endPosition, spriteRenderer.flipX, whatIsGround);
-            }
-        }
-        else
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                Vector2 endPosition = new Vector2(targetPositions[i].x + attackRange, targetPositions[i].y);
-                targetPositions[i] = stageManager.PositionCantCrossWall(targetPositions[i], endPosition, spriteRenderer.flipX, whatIsGround);
-            }
-        }
-
-        targetPositions[0] = SetTargetPositionsForRay(GroundChecker.position, targetPositions[0]);
-        targetPositions[1] = SetTargetPositionsForRay(currentPosition, targetPositions[1]);
-        targetPositions[2] = SetTargetPositionsForRay(UpWallChecker.position, targetPositions[2]);
-        targetPositions[3] = SetTargetPositionsForRay(UpWallChecker.position, targetPositions[3]);
-        targetPositions[4] = SetTargetPositionsForRay(GroundChecker.position, targetPositions[4]);
-
-        Ray2D[] rays = new Ray2D[5];
-
-        rays[0] = new Ray2D(GroundChecker.position, targetPositions[0]);
-        rays[1] = new Ray2D(currentPosition, targetPositions[1]);
-        rays[2] = new Ray2D(UpWallChecker.position, targetPositions[2]);
-        rays[3] = new Ray2D(UpWallChecker.position, targetPositions[3]);
-        rays[4] = new Ray2D(GroundChecker.position, targetPositions[4]);
-
-        for (int i = 0; i < 5; i++)
-        {
-            RaycastHit2D[] hit = Physics2D.RaycastAll(rays[i].origin, rays[i].direction, attackRange, whatIsDashAttackable);
-
-            Debug.DrawRay(rays[i].origin, rays[i].direction, Color.red, 10f);
-
-            hit.ForEach(item =>
-            {
-                if (whatIsGround != (whatIsGround | 1 << item.transform.gameObject.layer))
-                {
-                    hits.Add(item);
-                }
-            });
-        }
-
-        hits = hits.Distinct().ToList();
-
-        hits.ForEach(item =>
-        {
-            EnemyMove enemyMove = item.transform.GetComponent<EnemyMove>();
-
-            if (enemyMove == null)
-            {
-                BossStat bossStat = item.transform.GetComponent<BossStat>();
-
-                if (bossStat == null)
-                {
-                    Debug.LogWarning(item.transform.name + " has Neither EnemyMove nor BossStat");
-                }
-                else
-                {
-                    if (!bossStat.IsNothurtMode)
-                    {
-                        bossStat.Hurt(characterStat.ap);
-
-                        if (!soundPlayed)
-                        {
-                            soundPlayed = true;
-                            stageManager.SpawnSoundBox(dashAttackSoundBox);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                enemyMove.Hurt(characterStat.ap);
-
-                if (!soundPlayed)
-                {
-                    soundPlayed = true;
-                    stageManager.SpawnSoundBox(dashAttackSoundBox);
-                }
-            }
-        });
-    }
-    private Vector2 SetTargetPositionsForRay(Vector2 startPosition, Vector2 targetPosition)
-    {
-        return (targetPosition - startPosition);
-    }
-    private void SetAttacking()
-    {
-        attacking = false;
-        isAttack = false;
-    }
     private void Jump()
     {
         if ((isJump && !staping && !attacking && isGround && !isHangWall) || (canJumpAgain && isJump && !staping && !attacking && !isHangWall))
@@ -1009,12 +750,12 @@ public class CharacterMove : MonoBehaviour
 
     private void GroundCheck()
     {
-        bool a = Physics2D.OverlapCircle(GroundChecker.position, 0.05f, whatIsGround);
+        bool a = Physics2D.OverlapCircle(groundChecker.position, 0.05f, whatIsGround);
 
         if (!isGround && a) // 착지하는 순간
         {
-            SetAttacking();
-            
+            // SetAttacking();
+
             isJump = false;
             staping = true;
             attacking = false;
@@ -1035,7 +776,7 @@ public class CharacterMove : MonoBehaviour
                 }
             }
 
-            WhenInAirToGround();
+            WhenInAirToGround?.Invoke();
 
             canJumpAgain = false;
         }
@@ -1069,7 +810,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void UpWallCheck()
     {
-        bool a = Physics2D.OverlapCircle(UpWallChecker.position, 0.05f, whatIsGround);
+        bool a = Physics2D.OverlapCircle(upWallChecker.position, 0.05f, whatIsGround);
 
         if (!a && IsHang)
         {
@@ -1080,7 +821,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void LeftWallCheck()
     {
-        bool a = Physics2D.OverlapCircle(LeftWallChecker.position, 0.1f, whatIsGround);
+        bool a = Physics2D.OverlapCircle(leftWallChecker.position, 0.1f, whatIsGround);
 
         if (a)
         {
@@ -1091,7 +832,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void RightWallCheck()
     {
-        bool a = Physics2D.OverlapCircle(RightWallChecker.position, 0.1f, whatIsGround);
+        bool a = Physics2D.OverlapCircle(rightWallChecker.position, 0.1f, whatIsGround);
 
         if (a)
         {

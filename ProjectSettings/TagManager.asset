@@ -47,14 +47,20 @@ TagManager:
   - name: Background
     uniqueID: 1378268877
     locked: 0
-  - name: Player
-    uniqueID: 3808416669
+  - name: Deco
+    uniqueID: 1382038571
     locked: 0
   - name: Ground
     uniqueID: 1033771803
     locked: 0
+  - name: Player
+    uniqueID: 3808416669
+    locked: 0
   - name: Obj
     uniqueID: 1832607491
+    locked: 0
+  - name: Effect
+    uniqueID: 3572563525
     locked: 0
   - name: UI
     uniqueID: 109838569

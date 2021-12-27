@@ -5,18 +5,30 @@ using UnityEngine;
 public class SpawnEffect : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer = null;
-    private StageManager stageManager = null;
     [SerializeField]
     private Transform effectSpawnPosition = null;
     [SerializeField]
     private List<GameObject> effects = new List<GameObject>();
+    private Transform effectSpawnTrm = null;
 
     private void Start()
     {
-       stageManager = StageManager.Instance;
-
         spriteRenderer = GetComponent<SpriteRenderer>();
+        GetEffectSpawnTrm();
     }
+
+    private void GetEffectSpawnTrm()
+    {
+        GameObject a = GameObject.Find("EffectSpawnTrm");
+
+        if (a == null)
+        {
+            a = new GameObject("EffectSpawnTrm");
+        }
+
+        effectSpawnTrm = a.transform;
+    }
+
     public void ShowEffect(GameObject spawnIt, Vector2 spawnPosition)
     {
         Transform spawnTrm = effectSpawnPosition;
@@ -26,7 +38,7 @@ public class SpawnEffect : MonoBehaviour
 
         if (spawnIt.GetComponent<EffectScript>().IsSpawnOnWorld)
         {
-            spawnTrm = stageManager.transform;
+            spawnTrm = effectSpawnTrm;
         }
 
         if (spawnPosition != Vector2.zero)

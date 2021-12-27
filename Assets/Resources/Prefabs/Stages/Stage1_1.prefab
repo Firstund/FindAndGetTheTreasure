@@ -18158,21 +18158,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5283051012625576935}
     m_Modifications:
-    - target: {fileID: 5143956853063132805, guid: ce39850188d3ea74f96c6a467d013132, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5143956853646980545, guid: ce39850188d3ea74f96c6a467d013132, type: 3}
-      propertyPath: m_Interpolate
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5143956853646980559, guid: ce39850188d3ea74f96c6a467d013132, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 5143956854824626257, guid: ce39850188d3ea74f96c6a467d013132, type: 3}
       propertyPath: m_Name
-      value: Character
+      value: CharacterInStage
       objectReference: {fileID: 0}
     - target: {fileID: 5143956854824626258, guid: ce39850188d3ea74f96c6a467d013132, type: 3}
       propertyPath: m_RootOrder
@@ -18217,10 +18205,6 @@ PrefabInstance:
     - target: {fileID: 5143956854824626258, guid: ce39850188d3ea74f96c6a467d013132, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5692364802189788718, guid: ce39850188d3ea74f96c6a467d013132, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce39850188d3ea74f96c6a467d013132, type: 3}

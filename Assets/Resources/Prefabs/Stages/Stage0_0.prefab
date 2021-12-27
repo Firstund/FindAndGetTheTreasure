@@ -6934,7 +6934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5143956854824626257, guid: ce39850188d3ea74f96c6a467d013132, type: 3}
       propertyPath: m_Name
-      value: Character
+      value: CharacterInStage
       objectReference: {fileID: 0}
     - target: {fileID: 5143956854824626258, guid: ce39850188d3ea74f96c6a467d013132, type: 3}
       propertyPath: m_RootOrder
