@@ -42,6 +42,8 @@ public class EventTriggerArea : MonoBehaviour
 
     [SerializeField]
     private bool triggerLooping = false;
+    [SerializeField]
+    private bool doItWhenStopTime = false;
 
     private bool playerEnterThisArea = false;
     private bool playerStayThisArea = false;
@@ -103,9 +105,30 @@ public class EventTriggerArea : MonoBehaviour
 
             CheckDoEvent();
 
-            if (doEvent && !eventPlayed && !gameManager.stopTime)
+            if (doEvent)
             {
-                DoEvent();
+                if (doItWhenStopTime)
+                {
+                    if (triggerLooping)
+                    {
+                        DoEvent();
+                    }
+                    else if (!eventPlayed)
+                    {
+                        DoEvent();
+                    }
+                }
+                else if (!gameManager.stopTime)
+                {
+                    if (triggerLooping)
+                    {
+                        DoEvent();
+                    }
+                    else if (!eventPlayed)
+                    {
+                        DoEvent();
+                    }
+                }
             }
 
             if (eventPlayed)
@@ -160,32 +183,29 @@ public class EventTriggerArea : MonoBehaviour
 
     private void DoEvent()
     {
-        if (!gameManager.stopTime)
+        if (eventTriggerObj != null)
         {
-            if (eventTriggerObj != null)
+            IEventTrigger eventTrigger = eventTriggerObj.GetComponent<IEventTrigger>();
+
+            if (eventTrigger == null)
             {
-                IEventTrigger eventTrigger = eventTriggerObj.GetComponent<IEventTrigger>();
-
-                if (eventTrigger == null)
-                {
-                    Debug.LogError(eventTriggerObj + " has no IEventTrigger!");
-                    return;
-                }
-
-                eventTrigger.DoEvent();
+                Debug.LogError(eventTriggerObj + " has no IEventTrigger!");
+                return;
             }
 
-            eventPlayed = true;
+            eventTrigger.DoEvent();
+        }
 
-            if (gameManager.player.IsGround)
-            {
-                playerIsGround = true;
-            }
+        eventPlayed = true;
+
+        if (gameManager.player.IsGround)
+        {
+            playerIsGround = true;
         }
     }
     private void EnabledFalse()
     {
-        if (eventPlayed)
+        if (eventPlayed && !triggerLooping)
         {
             if (enableTrueEventTriggerAreasWhenIsGround)
             {
@@ -225,7 +245,7 @@ public class EventTriggerArea : MonoBehaviour
 
             conditions.getKey.ForEach(item =>
             {
-                if (!Input.GetKey(item))
+                if (!Input.GetKeyUp(item))
                 {
                     getKey = false;
                 }

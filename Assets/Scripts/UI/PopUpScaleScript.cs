@@ -12,6 +12,9 @@ public abstract class PopUpScaleScript : MonoBehaviour
     [SerializeField]
     protected float disableVector = 1f;
 
+    [SerializeField]
+    protected bool isMenu = false;
+
     protected Vector2 currentScale = Vector2.zero;
     protected Vector2 maxScale = Vector2.zero;
 
@@ -28,7 +31,10 @@ public abstract class PopUpScaleScript : MonoBehaviour
         maxScale.x = transform.localScale.x;
         maxScale.y = transform.localScale.y;
 
-        menuManager.SetMenu(gameObject);
+        if (isMenu)
+        {
+            menuManager.SetMenu(gameObject);
+        }
     }
     public virtual void Update()
     {
@@ -46,13 +52,13 @@ public abstract class PopUpScaleScript : MonoBehaviour
 
         onFadeOut = false;
     }
-    protected void OnHidePopUp()
+    public void OnHidePopUp()
     {
         onFadeIn = false;
         onFadeOut = true;
     }
 
-    protected void OnShowPopUp()
+    public void OnShowPopUp()
     {
         transform.localScale = Vector2.zero;
 
@@ -61,7 +67,14 @@ public abstract class PopUpScaleScript : MonoBehaviour
     }
     public void OnClickCloseBtn()
     {
-        menuManager.HideMenu();
+        if(isMenu)
+        {
+            menuManager.HideMenu();
+        }
+        else
+        {
+            OnHidePopUp();
+        }
     }
     protected void SetScale()
     {

@@ -282,6 +282,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Are you sure Exit This Stage?
       objectReference: {fileID: 0}
+    - target: {fileID: 8635146845158350841, guid: 26e614d81075bba4eba3f02d3ff162ff, type: 3}
+      propertyPath: isMenu
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8635146845158350842, guid: 26e614d81075bba4eba3f02d3ff162ff, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
