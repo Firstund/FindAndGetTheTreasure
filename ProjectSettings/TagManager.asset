@@ -56,6 +56,9 @@ TagManager:
   - name: Player
     uniqueID: 3808416669
     locked: 0
+  - name: DecoFrontPlayer
+    uniqueID: 1453466975
+    locked: 0
   - name: Obj
     uniqueID: 1832607491
     locked: 0
