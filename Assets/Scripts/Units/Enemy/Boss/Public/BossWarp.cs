@@ -12,6 +12,9 @@ public class BossWarp : BossSkillBase
     [Header("isWarpToPlayer와 함꼐 true인 상태라면, 무조건 플레이어한테 워프한다.")]
     [SerializeField]
     private bool isWarpRandom = false;
+    [Header("랜덤으로 순간이동할 때 플레이어와의 최소 거리")]
+    [SerializeField]
+    private float minDisWithPlayer = 1f;
     [SerializeField]
     private Vector2 randWarpMin = Vector2.zero;
     [SerializeField]
@@ -120,13 +123,11 @@ public class BossWarp : BossSkillBase
     }
     private void DoWarp()
     {
+        Vector2 warpPos = transform.position;
+
         if (isWarpToPlayer)
         {
-            transform.position = gameManager.player.transform.position;
-
-            StartFadeIn();
-
-            return;
+            warpPos = gameManager.player.transform.position;
         }
         else if (isWarpRandom)
         {
@@ -150,27 +151,28 @@ public class BossWarp : BossSkillBase
 
             distance = Vector2.Distance(bossStat.CurrentPosition, bossStat.CurrentPosition + targetPos);
 
-            // hit = Physics2D.Raycast(ray.origin, ray.direction, randWarpMax.x + randWarpMax.y, whatIsWall);
-            // if (randWarpMax.x > randWarpMax.y)
-            // {
-            //     hit = Physics2D.CircleCast(ray.origin, 0.5f, ray.direction, randWarpMax.x, whatIsWall);
-            // }
-            // else
-            // {
-            //     hit = Physics2D.CircleCast(ray.origin, 0.5f, ray.direction, randWarpMax.y, whatIsWall);
-            // }
-
             hit = Physics2D.Raycast(ray.origin, ray.direction, distance, whatIsWall);
 
             if (hit)
             {
-                transform.position = hit.point;
+                warpPos = hit.point;
             }
             else
             {
-                transform.position += (Vector3)targetPos;
+                warpPos += targetPos;
+            }
+
+            distance = Vector2.Distance(warpPos, gameManager.player.currentPosition);
+
+            if(distance <= minDisWithPlayer)
+            {
+                DoWarp();
+
+                return;
             }
         }
+    
+        transform.position = warpPos;
 
         StartFadeIn();
     }
