@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1832607491
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -7433492225296222189, guid: 59c0fa65a33f0d34d86905b2fd1eb34d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -127,6 +127,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2254114647285386739}
     m_Modifications:
+    - target: {fileID: 37450817997701016, guid: 7b52a4d68eb8baa43a413713c7833fb7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 37450817997701016, guid: 7b52a4d68eb8baa43a413713c7833fb7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 37450817997701016, guid: 7b52a4d68eb8baa43a413713c7833fb7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 153608987496638503, guid: 7b52a4d68eb8baa43a413713c7833fb7, type: 3}
       propertyPath: m_Name
       value: ShowSpriteWhenPlayerClose
@@ -175,6 +187,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8333475461500345095, guid: 7b52a4d68eb8baa43a413713c7833fb7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e5f6f5ac96d8504cb60836fe6c69f1d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b52a4d68eb8baa43a413713c7833fb7, type: 3}
 --- !u!4 &4068479417713424990 stripped
