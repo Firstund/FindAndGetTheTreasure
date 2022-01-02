@@ -582,7 +582,7 @@ public class CharacterMove : MonoBehaviour
     {
         int layer = 2 << col.gameObject.layer - 1;
 
-        if (layer == LayerMask.GetMask("GROUND"))
+        if (layer == LayerMask.GetMask("GROUND") && !isGround)
         {
             if (rigid.velocity.y < 0f)
             {
