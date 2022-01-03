@@ -18,4 +18,8 @@ public class SpawnStageEventTrigger : MonoBehaviour, IEventTrigger
     {
         spawnStageManager.SpawnNewStage(spawnStageIndex);
     }
+    public void DoEventWhenDoEventFalse()
+    {
+        
+    }
 }

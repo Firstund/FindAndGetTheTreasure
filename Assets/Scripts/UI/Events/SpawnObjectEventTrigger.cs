@@ -23,4 +23,8 @@ public class SpawnObjectEventTrigger : MonoBehaviour, IEventTrigger
             stageManager.SpawnObject(spawnObject, spawnPosition.position);
         }
     }
+    public void DoEventWhenDoEventFalse()
+    {
+        
+    }
 }

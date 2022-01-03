@@ -17,4 +17,8 @@ public class ChangeMainBGM : MonoBehaviour, IEventTrigger
     {
         soundManager.ChangeMainBGM(changeToIt);
     }
+    public void DoEventWhenDoEventFalse()
+    {
+        
+    }
 }

@@ -58,6 +58,7 @@ public class EventTriggerArea : MonoBehaviour
     private bool playerStayTimerIsPlaying = false;
     private float playerStayTimer = 0f;
 
+
     private void Awake()
     {
         gameManager = GameManager.Instance;
@@ -144,7 +145,6 @@ public class EventTriggerArea : MonoBehaviour
             enabled = false;
         }
     }
-
     private bool CheckConditions()
     {
         return conditions.enterThisArea || conditions.stayThisArea.stayThisArea || conditions.getKey.Length > 0;
@@ -173,6 +173,11 @@ public class EventTriggerArea : MonoBehaviour
     {
         if ((conditions.enterThisArea && !playerEnterThisArea) || (conditions.stayThisArea.stayThisArea && !playerStayThisArea) || (conditions.getKey.Length > 0 && !getKey))
         {
+            if(doEvent == true)
+            {
+                DoEventWhenDoEventFalse();
+            }
+
             doEvent = false;
         }
         else
@@ -201,6 +206,21 @@ public class EventTriggerArea : MonoBehaviour
         if (gameManager.player.IsGround)
         {
             playerIsGround = true;
+        }
+    }
+    private void DoEventWhenDoEventFalse() // doEvent변수가 true였다가 false로 바뀔 때 실행
+    {
+        if (eventTriggerObj != null)
+        {
+            IEventTrigger eventTrigger = eventTriggerObj.GetComponent<IEventTrigger>();
+
+            if (eventTrigger == null)
+            {
+                Debug.LogError(eventTriggerObj + " has no IEventTrigger!");
+                return;
+            }
+
+            eventTrigger.DoEventWhenDoEventFalse();
         }
     }
     private void EnabledFalse()

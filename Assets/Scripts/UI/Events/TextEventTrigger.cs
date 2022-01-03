@@ -24,4 +24,8 @@ public class TextEventTrigger : MonoBehaviour, IEventTrigger
             talkManager.currentTextBoxesParent.SpawnTextBox(spawnTextBoxIndex);
         }
     }
+    public void DoEventWhenDoEventFalse()
+    {
+        
+    }
 }

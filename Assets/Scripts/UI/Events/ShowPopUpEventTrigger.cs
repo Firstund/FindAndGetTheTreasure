@@ -23,4 +23,8 @@ public class ShowPopUpEventTrigger : MonoBehaviour, IEventTrigger
 
         popUpShowed = !popUpShowed;
     }
+    public void DoEventWhenDoEventFalse()
+    {
+        
+    }
 }
