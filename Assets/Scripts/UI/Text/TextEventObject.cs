@@ -39,6 +39,9 @@ public class TextEventObject : TextEventObject_Base
             if (value)
             {
                 eventNum++;
+
+                OnMoveEnd();
+
                 originPos = transform.position;
             }
             else
@@ -58,10 +61,6 @@ public class TextEventObject : TextEventObject_Base
 
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-    private void Start()
-    {
-        PosSet();
     }
 
     private void OnEnable()
@@ -154,18 +153,31 @@ public class TextEventObject : TextEventObject_Base
 
         float distance = Vector2.Distance(transform.position, originPos + eventDatas[eventNum].moveTargetPos);
 
-        if (distance <= 0.1f && eventDatas[eventNum].setCanNextTalkByMoves)
+        if (eventDatas[eventNum].moveTargetPos != Vector2.zero)
         {
-            OnEventEnd();
+            if (distance <= 0.1f && eventDatas[eventNum].setCanNextTalkByMoves)
+            {
+                OnEventEnd();
+            }
+            else if (distance <= 0.1f)
+            {
+                OnMoveEnd();
+            }
         }
     }
+    private void OnMoveEnd()
+    {
+        transform.position = originPos + eventDatas[eventNum].moveTargetPos;
 
+        anim.SetTrigger("GoToFirst");
+    }
     private void OnEventEnd()
     {
         canDoEvent = false;
         textEventPlayed = false;
 
-        anim.SetTrigger("GoToFirst");
+        OnMoveEnd();
+
         textsScript.canNextTalk = eventDatas[eventNum].setCanNextAtThisEventEnds;
     }
     public void StartFadeOut()

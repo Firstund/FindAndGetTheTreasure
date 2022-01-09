@@ -79,6 +79,8 @@ public class GameManager : MonoBehaviour
     {
         get { return _cinemachineVirtualCamera; }
     }
+    [SerializeField]
+    private CompositeCollider2D stageSelectSceneBackgroundTilemap = null;
 
     [SerializeField]
     private GameObject[] _stages;
@@ -130,7 +132,6 @@ public class GameManager : MonoBehaviour
     private Func<float, float> TimeSlow;
     private Func<float, float> TimeSlowByLerp;
     private Func<float, float> FuncSlowTimeSomeObjects;
-    public Action StopSlowTimeByLerp;
     public event Action SetFalseSlowTimeSomeObjects;
     public event Action<int> SpawnStages;
     public Action<bool> StageEnd;
@@ -214,7 +215,8 @@ public class GameManager : MonoBehaviour
 
                 if (a <= 0f)
                 {
-                    StopSlowTimeByLerp();
+                    EventManager.TriggerEvent("StopSlowTimeByLerp");
+                    // StopSlowTimeByLerp();
                     Time.timeScale = 1f;
                 }
             }
@@ -238,11 +240,11 @@ public class GameManager : MonoBehaviour
             return a;
         };
 
-        StopSlowTimeByLerp = () =>
+        EventManager.StartListening("StopSlowTimeByLerp", () =>
         {
             slowTimeByLerp = 0f;
             firstSlowTimeByLerp = 0f;
-        };
+        });
 
         SetFalseSlowTimeSomeObjects = () =>
         {
@@ -279,6 +281,11 @@ public class GameManager : MonoBehaviour
         WhenGoToStageSelectMenu = () =>
         {
             mainCamera.GetComponent<Skybox>().material = null;
+            
+            if (stageSelectSceneBackgroundTilemap != null)
+            {
+                cinemachineVirtualCamera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = stageSelectSceneBackgroundTilemap;
+            }
         };
 
     }

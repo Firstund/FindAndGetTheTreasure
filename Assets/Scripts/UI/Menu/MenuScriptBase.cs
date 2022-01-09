@@ -10,9 +10,8 @@ public class MenuScriptBase : PopUpScaleScript
     }
     private void OnEnable()
     {
-        menuManager.OnShowMenu += OnShowPopUp;
-
-        menuManager.OnHideMenu += OnHidePopUp;
+        EventManager.StartListening("OnShowMenu", OnShowPopUp);
+        EventManager.StartListening("OnHideMenu", OnHidePopUp);
     }
     public override void Start()
     {
@@ -24,9 +23,8 @@ public class MenuScriptBase : PopUpScaleScript
     {
         base.OnDisable();
 
-        menuManager.OnShowMenu -= OnShowPopUp;
-
-        menuManager.OnHideMenu -= OnHidePopUp;
+        EventManager.StopListening("OnShowMenu", OnShowPopUp);
+        EventManager.StopListening("OnHideMenu", OnHidePopUp);
     }
     public override void Update()
     {

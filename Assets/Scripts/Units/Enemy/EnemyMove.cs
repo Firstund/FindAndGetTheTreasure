@@ -96,7 +96,7 @@ public class EnemyMove : EnemyStatus
         {
             if (!(isDead || gameManager.stopTime))
             {
-                if (anim.speed == 0f)
+                if (anim.speed == 0f && !isHurt)
                 {
                     anim.speed = 1f;
                 }
@@ -230,7 +230,7 @@ public class EnemyMove : EnemyStatus
                 rigid.gravityScale = firstGravity / gameManager.SlowTimeNum;
                 rigid.mass = firstMass / gameManager.SlowTimeNum;
             }
-            else if (!gameManager.SlowTimeSomeObjects)
+            else if (!gameManager.SlowTimeSomeObjects && !isHurt)
             {
                 DoFixedUpdate();
 
@@ -506,13 +506,14 @@ public class EnemyMove : EnemyStatus
         {
             isHurt = true;
 
+            anim.speed = 0f;
             stageManager.ShakeCamera(1.5f, 0.1f);
             gameManager.SetSlowTime(0.01f);
-            Invoke("isHurtSet", 1f);
+            Invoke("isHurtSet", 0.3f);
         }
     }
     private void isHurtSet()
-    {
+        {
         isHurt = false;
     }
     private void SearchPositionSet()

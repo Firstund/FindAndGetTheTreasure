@@ -99,13 +99,13 @@ public class Reflect : MonoBehaviour
     }
     private void OnEnable()
     {
-        gameManager.StopSlowTimeByLerp += WhenTimeNotSlow;
+        EventManager.StartListening("StopSlowTimeByLerp", WhenTimeNotSlow);
 
         gameManager.SetFalseSlowTimeSomeObjects += WhenTimeNotSlow;
     }
     private void OnDisable()
     {
-        gameManager.StopSlowTimeByLerp -= WhenTimeNotSlow;
+        EventManager.StopListening("StopSlowTimeByLerp", WhenTimeNotSlow);
 
         gameManager.SetFalseSlowTimeSomeObjects -= WhenTimeNotSlow;
     }

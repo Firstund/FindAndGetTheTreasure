@@ -29,22 +29,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private KeyCode spawnMenuKey;
 
-    public event Action OnShowMenu;
-    public event Action OnHideMenu;
-
     private bool menuWasShow = false;
-    private void Awake()
-    {
-        OnShowMenu = () =>
-        {
-
-        };
-
-        OnHideMenu = () =>
-        {
-
-        };
-    }
     private void Update()
     {
         if (Input.GetKeyUp(spawnMenuKey))
@@ -70,14 +55,14 @@ public class MenuManager : MonoBehaviour
     {
         menuObj.SetActive(true);
 
-        OnShowMenu?.Invoke();
+        EventManager.TriggerEvent("OnShowMenu");
 
         menuWasShow = true;
     }
     public void HideMenu()
     {
         //Hide할 땐 menuObj에서 직접 SetActive(false)를 실행한다.
-        OnHideMenu?.Invoke();
+        EventManager.TriggerEvent("OnHideMenu");
 
         menuWasShow = false;
     }

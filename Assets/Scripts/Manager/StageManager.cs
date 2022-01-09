@@ -81,6 +81,8 @@ public class StageManager : MonoBehaviour
 
     [SerializeField]
     private CinemachineVirtualCamera cinemachineVirtualCamera = null;
+    [SerializeField]
+    private CompositeCollider2D backgroundCompositeCollider = null;
 
     private Func<float, float> TimerCheck;
     public event Action PlayerRespawn;
@@ -116,6 +118,8 @@ public class StageManager : MonoBehaviour
 
     void Start()
     {
+        transform.SetAsFirstSibling();
+        
         mainCamera = Camera.main;
 
         cinemachineVirtualCamera = gameManager.cinemachineVirtualCamera;
@@ -132,6 +136,8 @@ public class StageManager : MonoBehaviour
         {
             mainCamera.GetComponent<Skybox>().material = stageSkyBox;
         }
+
+        SetCameraLimitLocation();
     }
 
     void Update()
@@ -267,6 +273,13 @@ public class StageManager : MonoBehaviour
 
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
         shakeTimer = time;
+    }
+    public void SetCameraLimitLocation()
+    {
+        if (backgroundCompositeCollider != null)
+        {
+            cinemachineVirtualCamera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = backgroundCompositeCollider;
+        }
     }
     public Vector2 PositionCantCrossWall(Vector2 originPosition, Vector2 endPosition, bool flipX, LayerMask whatIsGround)
     {
