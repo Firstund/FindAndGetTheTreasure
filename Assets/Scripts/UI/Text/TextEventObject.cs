@@ -38,9 +38,9 @@ public class TextEventObject : TextEventObject_Base
         {
             if (value)
             {
-                eventNum++;
+                transform.position = originPos + eventDatas[eventNum].moveTargetPos;    
 
-                OnMoveEnd();
+                eventNum++;
 
                 originPos = transform.position;
             }
@@ -76,6 +76,10 @@ public class TextEventObject : TextEventObject_Base
         spriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
 
         eventNum = 0;
+    }
+    private void Start() 
+    {
+        originPos = transform.position;
     }
     private void OnDisable()
     {

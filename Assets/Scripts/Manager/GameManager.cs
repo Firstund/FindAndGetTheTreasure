@@ -281,17 +281,16 @@ public class GameManager : MonoBehaviour
         WhenGoToStageSelectMenu = () =>
         {
             mainCamera.GetComponent<Skybox>().material = null;
-            
-            if (stageSelectSceneBackgroundTilemap != null)
-            {
-                cinemachineVirtualCamera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = stageSelectSceneBackgroundTilemap;
-            }
+
+            SetCameraLimitLocation();
         };
 
     }
     private void Start()
     {
         mainCamera = Camera.main;
+
+        SetCameraLimitLocation();
     }
     void Update()
     {
@@ -326,6 +325,13 @@ public class GameManager : MonoBehaviour
         {
             slowTimeByLerp = time;
             firstSlowTimeByLerp = time;
+        }
+    }
+    public void SetCameraLimitLocation()
+    {
+        if (stageSelectSceneBackgroundTilemap != null)
+        {
+            cinemachineVirtualCamera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = stageSelectSceneBackgroundTilemap;
         }
     }
     public void StopTime(bool st)
