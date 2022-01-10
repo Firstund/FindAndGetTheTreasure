@@ -70,6 +70,9 @@ public class EnemyStat : EnemyStatus, IDespawnableByOutCamera
     {
         get { return _attackDelay; }
     }
+    [Header("플레이어와의 y값이 이정도 이하로 차이가 나면, 플레이어 인식함.")]
+    [SerializeField]
+    private float canLookPlayerY = 2f;
 
     [Header("스테이터스 변경 관련 함수")]
     [SerializeField]
@@ -145,7 +148,7 @@ public class EnemyStat : EnemyStatus, IDespawnableByOutCamera
 
     void Update()
     {
-        currentStatus = searchCharacter.CheckStatus(playerPosition.position, isShootProjectile, foundRange, shootRange, attackRange);
+        currentStatus = searchCharacter.CheckStatus(playerPosition.position, isShootProjectile, canLookPlayerY, foundRange, shootRange, attackRange);
     }
 
     void FixedUpdate()

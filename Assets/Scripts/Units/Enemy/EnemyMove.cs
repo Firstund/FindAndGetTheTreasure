@@ -513,7 +513,7 @@ public class EnemyMove : EnemyStatus
         }
     }
     private void isHurtSet()
-        {
+    {
         isHurt = false;
     }
     private void SearchPositionSet()

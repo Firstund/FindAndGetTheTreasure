@@ -201,7 +201,9 @@ MonoBehaviour:
   _searchSpeed: 1
   _pursueSpeed: 5
   _attackDelay: 1
+  canLookPlayerY: 0.7
   _isShootProjectile: 0
+  _isLookLeftAtFirst: 0
   _foundRange: 8
   _attackRange: 1
   _shootRange: 10
