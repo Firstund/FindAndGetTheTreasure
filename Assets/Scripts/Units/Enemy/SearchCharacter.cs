@@ -9,11 +9,11 @@ public class SearchCharacter : EnemyStatus
     [SerializeField]
     private LayerMask whatIsGround;
     private float distance = 0f;
-    public Status CheckStatus(Vector2 playerPosition, bool isShootProjectile, float canLookPlayerY, float foundRange,float shootRange , float attackRange)
+    public States CheckStatus(Vector2 playerPosition, bool isShootProjectile, float canLookPlayerY, float foundRange,float shootRange , float attackRange)
     {
         if(Mathf.Abs(playerPosition.y - transform.position.y) > canLookPlayerY)
         {
-            return Status.Searching;
+            return States.Searching;
         }
 
         distance = Vector2.Distance(transform.position, playerPosition);
@@ -31,32 +31,31 @@ public class SearchCharacter : EnemyStatus
         {
             if (1 << hit.collider.gameObject.layer == LayerMask.GetMask("PLAYER"))
             {
-                
                 if (distance <= attackRange)
                 {
-                    return Status.Attack;
+                    return States.Attack;
                 }
                 else if(distance <= shootRange && isShootProjectile)
                 {
-                    return Status.Shoot;
+                    return States.Shoot;
                 }
                 else if (distance <= foundRange)
                 {
-                    return Status.Found;
+                    return States.Found;
                 }
                 else
                 {
-                    return Status.Searching;
+                    return States.Searching;
                 }
             }
             else
             {
-                return Status.Searching;
+                return States.Searching;
             }
         }
         else
         {
-            return Status.Searching;
+            return States.Searching;
         }
     }
     public bool CheckFlip(Vector2 targetPosition)

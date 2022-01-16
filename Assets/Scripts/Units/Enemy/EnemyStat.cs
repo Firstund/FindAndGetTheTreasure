@@ -8,7 +8,7 @@ public class EnemyStat : EnemyStatus, IDespawnableByOutCamera
     private StageManager stageManager = null;
     private ObjectOutCheck objectOutCheck = null;
     public SearchCharacter searchCharacter { get; private set; }
-    public Status currentStatus { get; private set; }
+    public States currentStatus { get; private set; }
 
     [Header("공중유닛인가?")]
     [SerializeField]

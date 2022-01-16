@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyStatus : MonoBehaviour
 {
-    public enum Status{
+    public enum States{
         Searching,
         Found,
         Attack,

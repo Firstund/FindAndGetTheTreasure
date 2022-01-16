@@ -297,8 +297,6 @@ public class GameManager : MonoBehaviour
         slowTime = TimeSlow(slowTime);
         slowTimeByLerp = TimeSlowByLerp(slowTimeByLerp);
         slowTimeSomeObjectsTimer = FuncSlowTimeSomeObjects(slowTimeSomeObjectsTimer);
-
-        // Debug.Log(Camera.main.WorldToViewportPoint(transform.position));
     }
     private void FixedUpdate()
     {

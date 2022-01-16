@@ -30,11 +30,11 @@ public abstract class PopUpScaleScript : MonoBehaviour
     {
         maxScale.x = transform.localScale.x;
         maxScale.y = transform.localScale.y;
-
+        
         if (isMenu)
         {
             menuManager.SetMenu(gameObject);
-        }
+        }   
     }
     public virtual void Update()
     {
@@ -79,7 +79,7 @@ public abstract class PopUpScaleScript : MonoBehaviour
     protected void SetScale()
     {
         currentScale = transform.localScale;
-
+        
         if (currentScale.x < maxScale.x - disableVector && currentScale.y < maxScale.y - disableVector && onFadeIn && !onFadeOut)
         {
             currentScale = Vector2.Lerp(currentScale, maxScale, scaleSpeed * Time.deltaTime);
@@ -87,7 +87,7 @@ public abstract class PopUpScaleScript : MonoBehaviour
         else if (currentScale.x > disableVector && currentScale.y > disableVector && !onFadeIn && onFadeOut)
         {
             currentScale = Vector2.Lerp(currentScale, Vector2.zero, scaleSpeed * Time.deltaTime);
-        }
+        } 
         else if (onFadeIn)
         {
             gameManager.StopTime(true);

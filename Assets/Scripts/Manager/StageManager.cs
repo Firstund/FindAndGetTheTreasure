@@ -82,7 +82,7 @@ public class StageManager : MonoBehaviour
     [SerializeField]
     private CinemachineVirtualCamera cinemachineVirtualCamera = null;
     [SerializeField]
-    private CompositeCollider2D backgroundCompositeCollider = null;
+    private CompositeCollider2D cinemachineBoundingShapeCompositeCollider = null;
 
     private Func<float, float> TimerCheck;
     public event Action PlayerRespawn;
@@ -276,9 +276,9 @@ public class StageManager : MonoBehaviour
     }
     public void SetCameraLimitLocation()
     {
-        if (backgroundCompositeCollider != null)
+        if (cinemachineBoundingShapeCompositeCollider != null)
         {
-            cinemachineVirtualCamera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = backgroundCompositeCollider;
+            cinemachineVirtualCamera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = cinemachineBoundingShapeCompositeCollider;
         }
     }
     public Vector2 PositionCantCrossWall(Vector2 originPosition, Vector2 endPosition, bool flipX, LayerMask whatIsGround)

@@ -3238,7 +3238,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.2161813, y: -4.8440437, z: -39.754036}
+  m_LocalPosition: {x: -5.2161236, y: -4.8440437, z: -39.754036}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1806299133}
@@ -5998,7 +5998,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766173253}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.2161813, y: -4.8440437, z: -39.754036}
+  m_LocalPosition: {x: -5.2161236, y: -4.8440437, z: -39.754036}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 29657377}
@@ -13699,7 +13699,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 988320049}
   m_Direction: 0
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -18942,6 +18942,7 @@ GameObject:
   - component: {fileID: 1971900278}
   - component: {fileID: 1971900280}
   - component: {fileID: 1971900279}
+  - component: {fileID: 1971900281}
   m_Layer: 0
   m_Name: BackgroundTilemap
   m_TagString: Untagged
@@ -33324,6 +33325,18 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!114 &1971900281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971900274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605849b97fe758a4bb82481dcfdb87ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1977106437
 GameObject:
   m_ObjectHideFlags: 0

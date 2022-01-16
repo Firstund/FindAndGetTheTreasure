@@ -38,6 +38,10 @@ public class QuickGameAnswerPopUp : PopUpScaleScript
     {
         base.Update();
     }
+    private void SetActiveFalse()
+    {
+
+    }
     public void Quick()
     {
         if (isApplicationQuick)

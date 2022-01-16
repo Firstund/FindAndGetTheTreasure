@@ -149,28 +149,28 @@ public class EnemyMove : EnemyStatus
 
     private void CheckStatus()
     {
-        if (enemyStat.currentStatus == Status.Shoot)
+        if (enemyStat.currentStatus == States.Shoot)
         {
             isShoot = true;
             isAttack = false;
             pursueTimer = 0f;
             isSearching = false;
         }
-        else if (enemyStat.currentStatus == Status.Attack)
+        else if (enemyStat.currentStatus == States.Attack)
         {
             isShoot = false;
             isAttack = true;
             pursueTimer = 0f;
             isSearching = false;
         }
-        else if (enemyStat.currentStatus == Status.Found)
+        else if (enemyStat.currentStatus == States.Found)
         {
             isShoot = false;
             isAttack = false;
             pursueTimer = pursueTime;
             isSearching = false;
         }
-        else if (enemyStat.currentStatus == Status.Searching)
+        else if (enemyStat.currentStatus == States.Searching)
         {
             isShoot = false;
             isAttack = false;
