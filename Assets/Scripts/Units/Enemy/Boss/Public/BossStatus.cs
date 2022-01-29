@@ -6,7 +6,6 @@ using UnityEngine;
 public class BossStatus : MonoBehaviour
 {
     private GameManager gameManager = null;
-    private StageManager stageManager = null;
 
     private SpriteRenderer spriteRenderer = null;
     private Rigidbody2D rigid = null;
@@ -71,12 +70,12 @@ public class BossStatus : MonoBehaviour
     }
     private void OnEnable()
     {
-        bossStat.WhenIsDead += WhenIsDead;
+        EventManager.StartListening("WhenBossIsDead", WhenBossIsDead);
     }
 
     private void OnDisable()
     {
-        bossStat.WhenIsDead -= WhenIsDead;
+        EventManager.StopListening("WhenBossIsDead", WhenBossIsDead);
     }
     private void FixedUpdate()
     {
@@ -99,7 +98,7 @@ public class BossStatus : MonoBehaviour
             rigid.gravityScale = firstGravity;
         }
     }
-    private void WhenIsDead()
+    private void WhenBossIsDead()
     {
         for (int i = 0; i < bossSkills.Count; i++)
         {

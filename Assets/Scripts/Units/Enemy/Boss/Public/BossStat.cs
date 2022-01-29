@@ -57,8 +57,6 @@ public class BossStat : MonoBehaviour
         get { return currentPosition; }
     }
 
-    public event Action WhenIsDead;
-
     private void Awake()
     {
         stageManager = StageManager.Instance;
@@ -71,7 +69,7 @@ public class BossStat : MonoBehaviour
         firstHp = hp;
         firstDp = dp;
 
-        WhenIsDead = () =>
+        EventManager.StartListening("WhenBossIsDead", () =>
         {
             foreach (var item in whenBossDeads)
             {
@@ -79,7 +77,7 @@ public class BossStat : MonoBehaviour
             }
 
             anim.SetTrigger(deadAnimTrigger);
-        };
+        });
     }
     private void Start()
     {
@@ -100,7 +98,7 @@ public class BossStat : MonoBehaviour
         if (isDead && !alreadyDead)
         {
             alreadyDead = true;
-            WhenIsDead();
+            EventManager.TriggerEvent("WhenBossIsDead");
         }
 
         transform.position = currentPosition;

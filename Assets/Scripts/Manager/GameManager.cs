@@ -132,10 +132,8 @@ public class GameManager : MonoBehaviour
     private Func<float, float> TimeSlow;
     private Func<float, float> TimeSlowByLerp;
     private Func<float, float> FuncSlowTimeSomeObjects;
-    public event Action SetFalseSlowTimeSomeObjects;
-    public event Action<int> SpawnStages;
-    public Action<bool> StageEnd;
-    public Action WhenGoToStageSelectMenu;
+
+    // public Action WhenGoToStageSelectMenu;
 
     private bool textEventPlaying = false;
     public bool TextEventPlaying
@@ -160,7 +158,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                SetFalseSlowTimeSomeObjects();
+                EventManager.TriggerEvent("SetFalseSlowTimeSomeObjects");
             }
 
             slowTimeSomeObjects = value;
@@ -246,12 +244,12 @@ public class GameManager : MonoBehaviour
             firstSlowTimeByLerp = 0f;
         });
 
-        SetFalseSlowTimeSomeObjects = () =>
+        EventManager.StartListening("SetFalseSlowTimeSomeObjects", () =>
         {
             slowTimeSomeObjects = false;
-        };
+        });
 
-        SpawnStages = stageNum =>
+        EventManager.StartListening("SpawnStages", stageNum =>
         {
             isGameEnd = false;
             SceneManager.LoadScene("StageScene");
@@ -262,9 +260,9 @@ public class GameManager : MonoBehaviour
             }
 
             _currentStageNum = stageNum;
-        };
+        });
 
-        StageEnd = gameClear =>
+        EventManager.StartListening_Bool("StageEnd", gameClear =>
         {
             isGameEnd = gameClear;
 
@@ -276,14 +274,14 @@ public class GameManager : MonoBehaviour
             {
                 // 게임 오버상태일 때
             }
-        };
+        });
 
-        WhenGoToStageSelectMenu = () =>
+        EventManager.StartListening("WhenGoToStageSelectMenu", () =>
         {
             mainCamera.GetComponent<Skybox>().material = null;
 
             SetCameraLimitLocation();
-        };
+        });
 
     }
     private void Start()
@@ -311,7 +309,7 @@ public class GameManager : MonoBehaviour
     }
     public void SpawnStage(int stage) // 버튼에 사용
     {
-        SpawnStages(stage);
+        EventManager.TriggerEvent("SpawnStages", stage);
     }
     public void SetSlowTime(float time)
     {

@@ -298,9 +298,6 @@ public class CharacterMove : MonoBehaviour
     private float firstGravity = 0f;
     private float firstMass = 0f;
 
-    public event Action WhenPlayerDead;
-    public event Action WhenInAirToGround;
-
     // TODO: OnCollision을 이용하여 벽에 붙었을 때 서서히 내려감
 
     private void Awake()
@@ -319,15 +316,15 @@ public class CharacterMove : MonoBehaviour
         characterTimeWarp = GetComponent<CharacterTimeWarp>();
         spawnEffect = GetComponent<SpawnEffect>();
 
-        WhenPlayerDead = () =>
+        EventManager.StartListening("WhenPlayerDead", () =>
         {
 
-        };
+        });
 
-        WhenInAirToGround = () =>
+        EventManager.StartListening("WhenPlayerInAirToGround", () =>
         {
 
-        };
+        });
     }
 
     void Start()
@@ -354,12 +351,16 @@ public class CharacterMove : MonoBehaviour
     }
     private void OnEnable()
     {
-        stageManager.PlayerRespawn += PlayerRespawn;
+        EventManager.StartListening("PlayerRespawn", PlayerRespawn);
 
         isDead = false;
         attacking = false;
 
         spriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
+    }
+    private void OnDisable() 
+    {
+        EventManager.StopListening("PlayerRespawn", PlayerRespawn);
     }
 
     private void PlayerRespawn()
@@ -672,7 +673,7 @@ public class CharacterMove : MonoBehaviour
     }
     private void Destroye()
     {
-        WhenPlayerDead();
+        EventManager.TriggerEvent("WhenPlayerDead");
 
         stageManager.Respawn();
         gameObject.SetActive(false);
@@ -777,7 +778,7 @@ public class CharacterMove : MonoBehaviour
                 }
             }
 
-            WhenInAirToGround?.Invoke();
+            EventManager.TriggerEvent("WhenPlayerInAirToGround");
 
             canJumpAgain = false;
         }

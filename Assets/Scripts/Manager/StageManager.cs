@@ -85,7 +85,6 @@ public class StageManager : MonoBehaviour
     private CompositeCollider2D cinemachineBoundingShapeCompositeCollider = null;
 
     private Func<float, float> TimerCheck;
-    public event Action PlayerRespawn;
 
     private void Awake()
     {
@@ -109,11 +108,11 @@ public class StageManager : MonoBehaviour
             return t;
         };
 
-        PlayerRespawn = () =>
+        EventManager.StartListening("PlayerRespawn", () =>
         {
             gameManager.player.gameObject.SetActive(true);
             gameManager.player.transform.position = PlayerRespawnTrm.position;
-        };
+        });
     }
 
     void Start()
@@ -381,6 +380,6 @@ public class StageManager : MonoBehaviour
     }
     public void RespawnPlayer()
     {
-        PlayerRespawn();
+        EventManager.TriggerEvent("PlayerRespawn");
     }
 }

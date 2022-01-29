@@ -8,29 +8,26 @@ public class ShowQuickGameAnswerPopUp : MonoBehaviour
     [SerializeField]
     private GameObject AnswerQuickPopUp = null;
 
-    public event Action WhenAnswerQuick;
-    public event Action WhenCancelQuick;
-
     private void Awake()
     {
-        WhenAnswerQuick = () =>
+        EventManager.StartListening("WhenAnswerQuick", () =>
         {
 
-        };
-        WhenCancelQuick = () =>
+        });
+        EventManager.StartListening("WhenCancelQuick", () =>
         {
 
-        };
+        });
     }
 
     public void AnswerQuick()
     {
         AnswerQuickPopUp.SetActive(true);
 
-        WhenAnswerQuick?.Invoke();
+        EventManager.TriggerEvent("WhenAnswerQuick");
     }
     public void CancelQuick()
     {
-        WhenCancelQuick?.Invoke();
+        EventManager.TriggerEvent("WhenCancelQuick");
     }
 }

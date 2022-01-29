@@ -38,10 +38,12 @@ public class CharacterAttack : MonoBehaviour
 
         anim = GetComponent<Animator>();
     }
+    private void OnEnable()
+    {
+        EventManager.StartListening("WhenPlayerInAirToGround", SetAttacking);
+    }
     void Start()
     {
-        characterMove.WhenInAirToGround += SetAttacking;
-
         characterName = characterStat.characterName;
     }
 
@@ -81,7 +83,7 @@ public class CharacterAttack : MonoBehaviour
     }
     private void OnDisable()
     {
-        characterMove.WhenInAirToGround -= SetAttacking;
+        EventManager.StopListening("WhenPlayerInAirToGround", SetAttacking);
     }
     private void Attack()
     {

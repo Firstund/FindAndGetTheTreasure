@@ -63,13 +63,13 @@ public class TalkManager : MonoBehaviour
     }
     private void Start()
     {
-        gameManager.SpawnStages += SpawnTextBoxes;
-        gameManager.StageEnd += DeSpawnTextBoxes;
+        EventManager.StartListening("SpawnStages", SpawnTextBoxes);
+        EventManager.StartListening_Bool("StageEnd", DeSpawnTextBoxes);
     }
     private void OnDisable()
     {
-        gameManager.SpawnStages -= SpawnTextBoxes;
-        gameManager.StageEnd -= DeSpawnTextBoxes;
+        EventManager.StopListening("SpawnStages", SpawnTextBoxes);
+        EventManager.StopListening_Bool("StageEnd", DeSpawnTextBoxes);
     }
     private void Update()
     {

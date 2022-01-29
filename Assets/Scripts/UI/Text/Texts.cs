@@ -321,7 +321,7 @@ public class Texts : Text_Base
 
                 if (endGameAtEndTalk)
                 {
-                    gameManager.StageEnd(gameClearAtEndGame);
+                    EventManager.TriggerEvent_Bool("StageEnd", gameClearAtEndGame);
                 }
             }
 

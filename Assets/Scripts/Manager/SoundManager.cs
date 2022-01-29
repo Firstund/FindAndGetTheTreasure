@@ -79,7 +79,7 @@ public class SoundManager : MonoBehaviour
     }
     private void Start()
     {
-        gameManager.WhenGoToStageSelectMenu += WhenGoToStageSelectMenu;
+        EventManager.StartListening("WhenGoToStageSelectMenu", WhenGoToStageSelectMenu);
        
 
         // SetMainBGMVolumeByLerp(1, 0, 5);
@@ -87,7 +87,7 @@ public class SoundManager : MonoBehaviour
     }
     private void OnDisable()
     {
-        gameManager.WhenGoToStageSelectMenu -= WhenGoToStageSelectMenu;
+        EventManager.StopListening("WhenGoToStageSelectMenu", WhenGoToStageSelectMenu);
         
     }
     private void Update()

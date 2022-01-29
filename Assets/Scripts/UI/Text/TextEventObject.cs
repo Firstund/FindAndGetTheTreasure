@@ -65,10 +65,7 @@ public class TextEventObject : TextEventObject_Base
 
     private void OnEnable()
     {
-        gameManager.StageEnd += (e) =>
-        {
-            gameObject.SetActive(false);
-        };
+        EventManager.StartListening_Bool("StageEnd", Despawn);
 
         textsScript = FindObjectOfType<Texts>(true);
         PosSet();
@@ -83,12 +80,13 @@ public class TextEventObject : TextEventObject_Base
     }
     private void OnDisable()
     {
-        gameManager.StageEnd -= (e) =>
-        {
-            gameObject.SetActive(false);
-        };
+        EventManager.StopListening_Bool("StageEnd", Despawn);
 
         eventNum = 0;
+    }
+    private void Despawn(bool a)
+    {
+        gameObject.SetActive(false);
     }
     private void PosSet()
     {

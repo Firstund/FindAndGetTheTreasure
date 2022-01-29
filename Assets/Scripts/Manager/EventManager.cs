@@ -6,7 +6,11 @@ using UnityEngine;
 public class EventManager
 {
     private static Dictionary<string, Action> eventDictionary = new Dictionary<string, Action>();
+    private static Dictionary<string, Action<bool>> bool_eventDictionary = new Dictionary<string, Action<bool>>();
+    private static Dictionary<string, Action<int>> int_eventDictionary = new Dictionary<string, Action<int>>();
+    private static Dictionary<string, Action<string, int>> str_int_eventDictionary = new Dictionary<string, Action<string, int>>();
     private static Dictionary<string, Action<Vector2>> vec2_EventDictionary = new Dictionary<string, Action<Vector2>>();
+    private static Dictionary<string, Action<GameObject>> gmo_EventDictionary = new Dictionary<string, Action<GameObject>>();
 
     public static void StartListening(string eventName, Action listener)
     {
@@ -22,6 +26,48 @@ public class EventManager
             eventDictionary.Add(eventName, listener);
         }
     }
+    public static void StartListening_Bool(string eventName, Action<bool> listener)
+    {
+        Action<bool> thisEvent;
+
+        if(bool_eventDictionary.TryGetValue(eventName, out thisEvent))
+        {
+            thisEvent += listener;
+            bool_eventDictionary[eventName] = thisEvent;
+        }
+        else
+        {
+            bool_eventDictionary.Add(eventName, listener);
+        }
+    }
+    public static void StartListening(string eventName, Action<int> listener)
+    {
+        Action<int> thisEvent;
+
+        if(int_eventDictionary.TryGetValue(eventName, out thisEvent))
+        {
+            thisEvent += listener;
+            int_eventDictionary[eventName] = thisEvent;
+        }
+        else
+        {
+            int_eventDictionary.Add(eventName, listener);
+        }
+    }
+    public static void StartListening(string eventName, Action<string, int> listener)
+    {
+        Action<string, int> thisEvent;
+
+        if (str_int_eventDictionary.TryGetValue(eventName, out thisEvent)) // 같은 이름의 DIctionary있는지 체크
+        {
+            thisEvent += listener;                   // 같은 이름있을 때 구독
+            str_int_eventDictionary[eventName] = thisEvent;
+        }
+        else
+        {
+            str_int_eventDictionary.Add(eventName, listener);
+        }
+    }
     public static void StartListening(string eventName, Action<Vector2> listener)
     {
         Action<Vector2> thisEvent;
@@ -34,6 +80,20 @@ public class EventManager
         else
         {
             vec2_EventDictionary.Add(eventName, listener);
+        }
+    }
+    public static void StartListening(string eventName, Action<GameObject> listener)
+    {
+        Action<GameObject> thisEvent;
+
+        if (gmo_EventDictionary.TryGetValue(eventName, out thisEvent)) // 같은 이름의 DIctionary있는지 체크
+        {
+            thisEvent += listener;                   // 같은 이름있을 때 구독
+            gmo_EventDictionary[eventName] = thisEvent;
+        }
+        else
+        {
+            gmo_EventDictionary.Add(eventName, listener);
         }
     }
 
@@ -51,6 +111,48 @@ public class EventManager
             eventDictionary.Remove(eventName);
         }
     }
+    public static void StopListening_Bool(string eventName, Action<bool> listener)
+    {
+        Action<bool> thisEvent;
+
+        if (bool_eventDictionary.TryGetValue(eventName, out thisEvent))
+        {
+            thisEvent -= listener;
+            bool_eventDictionary[eventName] = thisEvent;
+        }
+        else
+        {
+            bool_eventDictionary.Remove(eventName);
+        }
+    }
+    public static void StopListening(string eventName, Action<int> listener)
+    {
+        Action<int> thisEvent;
+
+        if (int_eventDictionary.TryGetValue(eventName, out thisEvent))
+        {
+            thisEvent -= listener;
+            int_eventDictionary[eventName] = thisEvent;
+        }
+        else
+        {
+            int_eventDictionary.Remove(eventName);
+        }
+    }
+    public static void StopListening(string eventName, Action<string, int> listener)
+    {
+        Action<string, int> thisEvent;
+
+        if (str_int_eventDictionary.TryGetValue(eventName, out thisEvent))
+        {
+            thisEvent -= listener;
+            str_int_eventDictionary[eventName] = thisEvent;
+        }
+        else
+        {
+            str_int_eventDictionary.Remove(eventName);
+        }
+    }
     public static void StopListening(string eventName, Action<Vector2> listener)
     {
         Action<Vector2> thisEvent;
@@ -65,6 +167,20 @@ public class EventManager
             vec2_EventDictionary.Remove(eventName);
         }
     }
+    public static void StopListening(string eventName, Action<GameObject> listener)
+    {
+        Action<GameObject> thisEvent;
+
+        if (gmo_EventDictionary.TryGetValue(eventName, out thisEvent))
+        {
+            thisEvent -= listener;
+            gmo_EventDictionary[eventName] = thisEvent;
+        }
+        else
+        {
+            gmo_EventDictionary.Remove(eventName);
+        }
+    }
     public static void TriggerEvent(string eventName)
     {
         Action thisEvent;
@@ -73,7 +189,33 @@ public class EventManager
         {
             thisEvent?.Invoke();
         }
+    }
+    public static void TriggerEvent_Bool(string eventName, bool bool_param)
+    {
+        Action<bool> thisEvent;
 
+        if (bool_eventDictionary.TryGetValue(eventName, out thisEvent))
+        {
+            thisEvent?.Invoke(bool_param);
+        }
+    }
+    public static void TriggerEvent(string eventName, int int_param)
+    {
+        Action<int> thisEvent;
+
+        if (int_eventDictionary.TryGetValue(eventName, out thisEvent))
+        {
+            thisEvent?.Invoke(int_param);
+        }
+    }
+    public static void TriggerEvent(string eventName, string str_param, int int_param)
+    {
+        Action<string, int> thisEvent;
+
+        if (str_int_eventDictionary.TryGetValue(eventName, out thisEvent))
+        {
+            thisEvent?.Invoke(str_param, int_param);
+        }
     }
     public static void TriggerEvent(string eventName, Vector2 param)
     {
@@ -83,6 +225,14 @@ public class EventManager
         {
             thisEvent?.Invoke(param);
         }
-        
+    }
+    public static void TriggerEvent(string eventName, GameObject param)
+    {
+        Action<GameObject> thisEvent;
+
+        if(gmo_EventDictionary.TryGetValue(eventName, out thisEvent))
+        {
+            thisEvent?.Invoke(param);
+        }
     }
 }

@@ -7,9 +7,6 @@ using UnityEngine.SceneManagement;
 public class QuickGameAnswerPopUp : PopUpScaleScript
 {
     [SerializeField]
-    private ShowQuickGameAnswerPopUp showQuickGameAnswerPopUp = null;
-
-    [SerializeField]
     private bool isApplicationQuick = false;
 
     public override void Awake()
@@ -18,9 +15,10 @@ public class QuickGameAnswerPopUp : PopUpScaleScript
     }
     private void OnEnable() 
     {
-        showQuickGameAnswerPopUp.WhenAnswerQuick += OnShowPopUp;
+        EventManager.StartListening("WhenAnswerQuick", OnShowPopUp);
 
-        showQuickGameAnswerPopUp.WhenCancelQuick += OnHidePopUp;
+        EventManager.StartListening("WhenCancelQuick", OnHidePopUp);
+
     }
     public override void Start()
     {
@@ -30,9 +28,9 @@ public class QuickGameAnswerPopUp : PopUpScaleScript
     {
         base.OnDisable();
 
-        showQuickGameAnswerPopUp.WhenAnswerQuick -= OnShowPopUp;
+        EventManager.StopListening("WhenAnswerQuick", OnShowPopUp);
 
-        showQuickGameAnswerPopUp.WhenCancelQuick -= OnHidePopUp;
+        EventManager.StopListening("WhenCancelQuick", OnHidePopUp);
     }
     public override void Update()
     {
@@ -59,9 +57,9 @@ public class QuickGameAnswerPopUp : PopUpScaleScript
     }
     private void GetOutStage()
     {
-        gameManager.StageEnd(false);
+        EventManager.TriggerEvent_Bool("StageEnd", false);
         gameManager.StopTime(false);
-        gameManager.WhenGoToStageSelectMenu();
+        EventManager.TriggerEvent("WhenGoToStageSelectMenu");
         SceneManager.LoadScene("StageSelectScene");
     }
 }

@@ -65,16 +65,25 @@ public class EventTriggerArea : MonoBehaviour
 
         eventTriggerAreaList.ForEach(e => e.disableOnStart = true);
     }
+    private void OnEnable()
+    {
+        if (enableTrueEventTriggerAreasWhenIsGround)
+        {
+            EventManager.StartListening("WhenPlayerInAirToGround", WhenIsAirToGround);
+        }
+    }
     private void Start()
     {
         playerStayTimer = conditions.stayThisArea.staySec;
 
+        enabled = !disableOnStart;
+    }
+    private void OnDisable()
+    {
         if (enableTrueEventTriggerAreasWhenIsGround)
         {
-            gameManager.player.WhenInAirToGround += WhenIsAirToGround;
+            EventManager.StopListening("WhenPlayerInAirToGround", WhenIsAirToGround);
         }
-
-        enabled = !disableOnStart;
     }
 
     private void WhenIsAirToGround()
@@ -173,7 +182,7 @@ public class EventTriggerArea : MonoBehaviour
     {
         if ((conditions.enterThisArea && !playerEnterThisArea) || (conditions.stayThisArea.stayThisArea && !playerStayThisArea) || (conditions.getKey.Length > 0 && !getKey))
         {
-            if(doEvent == true)
+            if (doEvent == true)
             {
                 DoEventWhenDoEventFalse();
             }

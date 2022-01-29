@@ -21,11 +21,11 @@ public class GameEndScript : MonoBehaviour
     }
     private void OnEnable()
     {
-        gameManager.StageEnd += WhenGameEnd;
+        EventManager.StartListening_Bool("StageEnd", WhenGameEnd);
     }
     private void OnDisable()
     {
-        gameManager.StageEnd -= WhenGameEnd;   
+        EventManager.StopListening_Bool("StageEnd", WhenGameEnd);
     }
 
     private void WhenGameEnd(bool a)
@@ -58,7 +58,7 @@ public class GameEndScript : MonoBehaviour
     private void GetOutStage()
     {
         gameManager.StopTime(false);
-        gameManager.WhenGoToStageSelectMenu();
+        EventManager.TriggerEvent("WhenGoToStageSelectMenu");
         SceneManager.LoadScene("StageSelectScene");
     }
 }
