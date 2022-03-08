@@ -3006,6 +3006,7 @@ MonoBehaviour:
   playerRespawnTrm: {fileID: 0}
   respawnDelay: 2
   cinemachineVirtualCamera: {fileID: 0}
+  cinemachineBoundingShapeCompositeCollider: {fileID: 0}
 --- !u!1 &3331679302697617779
 GameObject:
   m_ObjectHideFlags: 0
