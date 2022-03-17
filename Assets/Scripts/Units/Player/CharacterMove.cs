@@ -358,10 +358,6 @@ public class CharacterMove : MonoBehaviour
 
         spriteRenderer.color = new Vector4(1f, 1f, 1f, 1f);
     }
-    private void OnDisable() 
-    {
-        EventManager.StopListening("PlayerRespawn", PlayerRespawn);
-    }
 
     private void PlayerRespawn()
     {

@@ -502,6 +502,7 @@ MonoBehaviour:
   playerRespawnTrm: {fileID: 0}
   respawnDelay: 2
   cinemachineVirtualCamera: {fileID: 0}
+  cinemachineBoundingShapeCompositeCollider: {fileID: 0}
 --- !u!114 &3229255920845279246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24737,11 +24738,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5143956853646980547, guid: ce39850188d3ea74f96c6a467d013132, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.7
+      value: -16.35
       objectReference: {fileID: 0}
     - target: {fileID: 5143956853646980547, guid: ce39850188d3ea74f96c6a467d013132, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -119.8
+      value: -10.5
       objectReference: {fileID: 0}
     - target: {fileID: 5143956853646980547, guid: ce39850188d3ea74f96c6a467d013132, type: 3}
       propertyPath: m_LocalPosition.z

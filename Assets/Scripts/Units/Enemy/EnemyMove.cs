@@ -318,9 +318,16 @@ public class EnemyMove : EnemyStatus
         {
             anim.Play("Move");
 
-            MoveEnemy(playerPosition, enemyStat.pursueSpeed);
+            Vector2 targetPosition = playerPosition;
 
-            FlipCheck(playerPosition);
+            if (!enemyStat.isAirEnemy)
+            {
+                targetPosition.y = transform.position.y;
+            }
+
+            MoveEnemy(targetPosition, enemyStat.pursueSpeed);
+
+            FlipCheck(targetPosition);
         }
     }
     private void Searching()
@@ -542,6 +549,10 @@ public class EnemyMove : EnemyStatus
                 float _searchY = Random.Range(-searchRangeY, searchRangeY);
 
                 endPosition.y += _searchY;
+            }
+            else
+            {
+                endPosition.y = playerPosition.y;
             }
 
             if (enemyStat.isAirEnemy)
