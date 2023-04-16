@@ -45,7 +45,7 @@ TextureImporter:
       213: 9209069362094156757
     second: HPBar1
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -66,6 +66,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -104,6 +105,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -131,6 +133,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -448,6 +462,21 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      EmptyBar0: -1920392446027475436
+      HPBar0: 8563703866099969443
+      APBar0: -1322842705434909543
+      EmptyBar4: -7338703528498515568
+      DPBar1: -6061590818321070509
+      EmptyBar1: 6592925716863369257
+      EmptyBar2: -1965494322973671324
+      EmptyBar03: 5872413339820786855
+      DPBar0: -4824938191798264510
+      CharacterIcon: 3046575482385380619
+      EndBar: -8438216655564217254
+      APBar1: 6310959740719122636
+      HPBar1: 9209069362094156757
+      EmptyBar5: 4128009587498796924
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

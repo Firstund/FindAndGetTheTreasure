@@ -240,7 +240,7 @@ TextureImporter:
       213: 6693362058946391151
     second: castle_background_78
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -261,6 +261,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -299,6 +300,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -326,6 +328,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -2008,6 +2022,86 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      castle_background_28: 6214049704029520570
+      castle_background_71: -8899748637024409980
+      castle_background_8: 5092402082691217330
+      castle_background_60: 1685141626415132215
+      castle_background_40: -7121638558333211371
+      castle_background_0: -1143826198892266564
+      castle_background_2: 8866765192902582499
+      castle_background_10: 241847067875242667
+      castle_background_19: -897552281120868006
+      castle_background_33: -9059136454450562029
+      castle_background_1: -8890786659274120490
+      castle_background_24: -431249923486967787
+      castle_background_55: 2395631396178915497
+      castle_background_31: 7367734577206471589
+      castle_background_56: 3366902455864364022
+      castle_background_57: -6950660734940826895
+      castle_background_34: -2957334773381004076
+      castle_background_14: 7184050532114866520
+      castle_background_45: 2781545182953141256
+      castle_background_61: -8418388725505606219
+      castle_background_48: 7018336801957043938
+      castle_background_64: -2233483634237121126
+      castle_background_49: -2009633254943518841
+      castle_background_12: -553071217357088127
+      castle_background_47: -6199698128643589588
+      castle_background_43: 1803210027833177858
+      castle_background_5: 3799055798744956458
+      castle_background_22: -351704482791854856
+      castle_background_76: 5265940743524341719
+      castle_background_73: 3646702514444467893
+      castle_background_44: 3611528746021248260
+      castle_background_37: -2912074774938860380
+      castle_background_15: 4527440846443278563
+      castle_background_58: -4400120650525338582
+      castle_background_66: 2164680306311808971
+      castle_background_29: -4649298582590307501
+      castle_background_65: -1060659867716420954
+      castle_background_7: -5827711044862757091
+      castle_background_36: 2325223815269755066
+      castle_background_16: -6033212127553909745
+      castle_background_51: 7793047382945069834
+      castle_background_63: -2964725323492665719
+      castle_background_69: 7888719047927152308
+      castle_background_11: -4253827117089946849
+      castle_background_77: 542922459270349029
+      castle_background_4: 9053069844003779896
+      castle_background_25: -2109952659621377352
+      castle_background_41: -8415416998949404331
+      castle_background_23: 8151322948194052478
+      castle_background_59: -3998356794042721771
+      castle_background_52: -921215537325816703
+      castle_background_62: -799302959607630247
+      castle_background_17: -5310516755212513730
+      castle_background_20: -4271608333321715173
+      castle_background_72: -1981967244733775397
+      castle_background_67: -4166107769365481061
+      castle_background_39: 1070479053185764120
+      castle_background_42: -1546447338929290593
+      castle_background_46: 1723131007067787876
+      castle_background_74: -1222125696300993207
+      castle_background_27: -1252957694183061608
+      castle_background_30: 8653877858602089451
+      castle_background_50: 3229946661520869889
+      castle_background_6: 187295409714825114
+      castle_background_38: -6098559973360952206
+      castle_background_26: -2146077924775402
+      castle_background_68: -3500944358125292925
+      castle_background_70: 5914837719225876923
+      castle_background_9: 7089345957184862899
+      castle_background_18: -6198681752022131644
+      castle_background_13: 7552840242893563994
+      castle_background_3: 3604466069598852673
+      castle_background_54: -7833926938103099158
+      castle_background_75: -4823400661108385622
+      castle_background_78: 6693362058946391151
+      castle_background_53: 8867102576434959939
+      castle_background_32: 6106024890315519032
+      castle_background_35: -8055019975455337084
+      castle_background_21: -7711603442647119
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -354,7 +354,7 @@ TextureImporter:
       213: 4265675557361343525
     second: Obstacle_L_2
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -375,6 +375,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -413,6 +414,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -440,6 +442,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -2920,6 +2934,124 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      CastleMapTiles1_107: -1752818497786817928
+      CastleMapTiles1_2: 7909470498235462718
+      CastleMapTiles1_83: -963770210346606599
+      CastleMapTiles1_24: 3147777114355156850
+      CastleMapTiles1_72: -8670716750851367441
+      CastleMapTiles1_81: 5475381545022242027
+      CastleMapTiles1_79: 1850567266523254040
+      CastleMapTiles1_69: 832529190291044266
+      Obstacle_L_1: 1621439134662423857
+      CastleMapTiles1_98: 6086185757236647512
+      CastleMapTiles1_18: -431507307081905611
+      CastleMapTiles1_22: -8841583342735808293
+      CastleMapTiles1_16: -4649237070093692021
+      CastleMapTiles1_73: -1448486684871824578
+      CastleMapTiles1_92: -7378756005525795427
+      CastleMapTiles1_67: 433460141566026657
+      CastleMapTiles1_108: -6599558239703907070
+      CastleMapTiles1_9: -1725539774227035454
+      CastleMapTiles1_40: -3398417047413406257
+      CastleMapTiles1_68: 5255787897117218248
+      CastleMapTiles1_49: 2873133953670951977
+      CastleMapTiles1_104: -3828961095328055438
+      Obstacle_U_1: 2184291537902132352
+      CastleMapTiles1_60: 2817617254100890549
+      CastleMapTiles1_32: -2201308746892916353
+      CastleMapTiles1_10: 2057283283817519747
+      CastleMapTiles1_95: 2627601952847505101
+      CastleMapTiles1_90: -8333494456923569384
+      CastleMapTiles1_11: 8504960660721712040
+      CastleMapTiles1_82: 8198043456177557829
+      CastleMapTiles1_106: 7402537424114486937
+      CastleMapTiles1_86: -8386490766576147729
+      CastleMapTiles1_36: -4158247370971992971
+      CastleMapTiles1_62: -8458658957046211966
+      CastleMapTiles1_30: 1609143641511320478
+      CastleMapTiles1_35: 5078940075699547032
+      CastleMapTiles1_3: 3729947020002541754
+      CastleMapTiles1_38: -3996514989304950708
+      Obstacle_U_0: 7723699409999698860
+      CastleMapTiles1_34: 6696035932321215460
+      CastleMapTiles1_7: 186495990414415652
+      CastleMapTiles1_23: 7868990117876618331
+      CastleMapTiles1_70: 3161085704417018712
+      CastleMapTiles1_89: -6375477968278157543
+      CastleMapTiles1_93: 8055879303166528066
+      CastleMapTiles1_51: 1593188230399079958
+      CastleMapTiles1_54: -5525947529859584903
+      CastleMapTiles1_6: -1654803410377685387
+      CastleMapTiles1_61: 347488884888543827
+      CastleMapTiles1_88: -4146001444533153319
+      CastleMapTiles1_75: 4906911615703520572
+      CastleMapTiles1_94: 8839615110169689088
+      CastleMapTiles1_46: -3792290742327885157
+      CastleMapTiles1_55: -3323482589319363549
+      CastleMapTiles1_80: 8379515326387185637
+      CastleMapTiles1_65: -5867271443164219141
+      CastleMapTiles1_71: 4647147210535380485
+      CastleMapTiles1_109: 9125477058686574788
+      Obstacle_U_3: 4929823514642492389
+      CastleMapTiles1_105: -4736219716308711212
+      CastleMapTiles1_44: -8222833221870871209
+      CastleMapTiles1_1: -2247537152125307177
+      Obstacle_L_0: -7470179652982292261
+      CastleMapTiles1_21: -6253508510501841878
+      CastleMapTiles1_20: 2277425425562961703
+      CastleMapTiles1_84: -1054566151454582210
+      CastleMapTiles1_48: 4070924820147318312
+      CastleMapTiles1_14: 4640113997014819756
+      CastleMapTiles1_41: -4360809178221121836
+      CastleMapTiles1_96: -5131493542416233663
+      CastleMapTiles1_100: 8383520562883321562
+      CastleMapTiles1_5: -2718592999789800425
+      Obstacle_L_2: 4265675557361343525
+      CastleMapTiles1_19: 8284400303352582322
+      CastleMapTiles1_42: 6994438985295383126
+      CastleMapTiles1_17: 6685284928413904406
+      CastleMapTiles1_25: -8007514925780994848
+      CastleMapTiles1_97: -9166072385015675829
+      CastleMapTiles1_50: -131787993604805448
+      CastleMapTiles1_64: 5691086702543813639
+      CastleMapTiles1_27: 2713506612429835313
+      CastleMapTiles1_77: -2169207292756086531
+      CastleMapTiles1_58: 4254003056854415158
+      CastleMapTiles1_85: 5230886939276284888
+      CastleMapTiles1_28: 7700218569795716301
+      CastleMapTiles1_102: -7435183660819184073
+      CastleMapTiles1_99: -6648470722770250083
+      CastleMapTiles1_29: -5545591147933447472
+      CastleMapTiles1_8: 4192531341701687089
+      CastleMapTiles1_33: 7108865488333272620
+      CastleMapTiles1_66: -8935002419893146627
+      CastleMapTiles1_56: -2965694152076302999
+      CastleMapTiles1_39: 8370448151228731890
+      CastleMapTiles1_26: -4966264089468143055
+      CastleMapTiles1_59: 9118716472646511173
+      CastleMapTiles1_45: -2394397994940667980
+      CastleMapTiles1_76: -4627292056405119732
+      CastleMapTiles1_53: 6635696281140233803
+      CastleMapTiles1_101: 6792002034601474241
+      CastleMapTiles1_4: 5419619741010617715
+      CastleMapTiles1_47: 9146471670405938306
+      CastleMapTiles1_63: 6832849822745294237
+      CastleMapTiles1_12: 7833245140444702027
+      CastleMapTiles1_13: -7798588367134681490
+      CastleMapTiles1_103: -2612385591337752784
+      CastleMapTiles1_37: -2844108464104175360
+      CastleMapTiles1_15: -758530156183629192
+      CastleMapTiles1_43: 1175599682287990798
+      CastleMapTiles1_78: -4526441313600171001
+      CastleMapTiles1_52: 8132270718131996705
+      Obstacle_U_2: -3873303228381750083
+      CastleMapTiles1_87: 7663381206757656129
+      CastleMapTiles1_31: -5572882570466697562
+      CastleMapTiles1_57: -279000857566565069
+      CastleMapTiles1_74: 9218277621348228492
+      CastleMapTiles1_91: 7416520570307198743
+      CastleMapTiles1_0: -1684862321039676698
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

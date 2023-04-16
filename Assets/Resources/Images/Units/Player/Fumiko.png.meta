@@ -147,7 +147,7 @@ TextureImporter:
       213: 7116909014314669858
     second: Fumiko_14
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -168,6 +168,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -206,6 +207,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -233,6 +235,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -1264,6 +1278,55 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Fumiko_3: 2807182239480424780
+      Fumiko_DashAttack4: 8774143560641280700
+      Fumiko_6: 4573362537388687282
+      Fumiko_1: 2948790016783854865
+      Fumiko_Attack1: 1925709418608328035
+      Fumiko_5: -1951487983557138016
+      Fumiko_7: 9104862082341290735
+      Fumiko_30: -3810208243916166063
+      Fumiko_DashAttack1: -3302478448516477342
+      Fumiko_Jump0: -1928020750593270977
+      Fumiko_Stap1: -2036473936632080821
+      Fumiko_Walk2: 1154626865603213373
+      Fumiko_48: -7554847879729933539
+      Fumiko_Hurt1: 7177385748183536982
+      Fumiko_DashAttack5: -2758443679941686292
+      Fumiko_Walk1: -4703290682841777374
+      Fumiko_4: -5993450756036028084
+      Fumiko_Hurt2: 1091012550707837366
+      Fumiko_11: 6343562147573650944
+      Fumiko_Stap0: 3559018623632429323
+      Fumiko_Attack2: -8534045837946076090
+      Fumiko_DashAttack7: 5333102689963079627
+      Fumiko_Stap2: 3167859043841044674
+      Fumiko_DashAttack3: 6447135229361072815
+      Fumiko_0: 5331788272802834168
+      Fumiko_DashAttack6: -5358785150156675650
+      Fumiko_8: 5315391806225452420
+      Fumiko_47: 7065582192951854294
+      Fumiko_10: -8787330149692144275
+      Fumiko_Run2: -7815992558449841511
+      Fumiko_Walk0: -9131384123704057759
+      Fumiko_DashAttack0: -8379883815836706380
+      Fumiko_14: 7116909014314669858
+      Fumiko_Attack3: 3488574152074400837
+      Fumiko_12: -8765489509576712272
+      Fumiko_Run0: 1758345463728316329
+      Fumiko_DashAttack2: 8455739826895663768
+      Fumiko_31: 7995653024336800784
+      Fumiko_2: 3986944997836677075
+      Fumiko_Attack0: -2525418196212630378
+      Fumiko_9: -8380638479392749064
+      Fumiko_Hurt0: 4626920354569438321
+      Fumiko_DashAttack8: -2281400526286941001
+      Fumiko_Run1: 1069720050888688687
+      Fumiko_15: 1259554203563612604
+      Fumiko_13: 936123902315817516
+      Fumiko_Attack4: -3667406427384434209
+      Fumiko_Jump1: -5596998613280874597
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

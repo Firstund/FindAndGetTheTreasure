@@ -42,7 +42,7 @@ TextureImporter:
       213: 5319730559463424960
     second: shichimi publish._12
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -63,6 +63,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -101,6 +102,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -128,6 +130,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -424,6 +438,20 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      shichimi publish._7: 147802646765264473
+      shichimi publish._8: 5718689176866869829
+      shichimi publish._3: -9102879038250970761
+      shichimi publish._5: 3535078780184815946
+      shichimi publish._2: 1076760700361343246
+      shichimi publish._12: 5319730559463424960
+      shichimi publish._6: 6452202303721529692
+      shichimi publish._11: -6025672187743264686
+      shichimi publish._10: 4812885841604563089
+      shichimi publish._1: -3765572983435780147
+      shichimi publish._9: -1440338358855455519
+      shichimi publish._4: 6840342261980422082
+      shichimi publish._0: 4290873475095224000
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -4764,7 +4764,7 @@ TextureImporter:
       213: 6942374861949643726
     second: Building01_130
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -4785,6 +4785,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -4823,6 +4824,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 1
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -4862,6 +4864,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -7195,6 +7209,117 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Building01_64: -3761705185008051339
+      Building01_99: 2857397597422169736
+      Building01_70: 2702674873191268344
+      Building01_126: 4054449720231639700
+      Building01_128: -2979193169158423308
+      Building01_122: -3472390896830218083
+      Building01_9: -9202337883352729999
+      Building01_15: 1204455983462687642
+      Building01_47: -1031051140571429259
+      Building01_13: 1244532115815633680
+      Building01_130: 6942374861949643726
+      Building01_25: -1094527457599119153
+      Building01_89: 543743662933326971
+      Building01_14: -304753894929522856
+      Building01_41: -3882514284402007546
+      Building01_76: -6766856812309925517
+      Building01_58: -2620509724251411545
+      Building01_90: -9194180797966651678
+      Building01_44: 1021282756835008647
+      Building01_0: -8908189198508812227
+      Building01_86: 8749020549522429443
+      Building01_77: 6548291990073831728
+      Building01_1: 6426016883609377247
+      Building01_45: 1689844942992593214
+      Building01_4: 865412696622222661
+      Building01_93: 6069946879851297942
+      Building01_78: -6338779278701566073
+      Building01_56: 1564085434287625049
+      Building01_32: 2809696977333645802
+      Building01_16: 5834045161978670363
+      Building01_119: -3434338092436302413
+      Building01_81: 2753882877750904252
+      Building01_71: 5005745071511687786
+      Building01_38: 197970995611225366
+      Building01_3: 7558649244096420751
+      Building01_83: -5177679592077213240
+      Building01_53: 1569208971359899456
+      Building01_55: 3846297241495450504
+      Building01_52: -8358564553252773532
+      Building01_98: 2489780560841099025
+      Building01_57: -1854151692687057046
+      Building01_110: -1920955417523026724
+      Building01_6: 6729026600165602899
+      Building01_125: 2678251074823015703
+      Building01_30: -967444943577832734
+      Building01_114: -5582970433859293051
+      Building01_12: -1460985100545474234
+      Building01_42: -730661219012088769
+      Building01_113: 7724733256235822756
+      Building01_23: 8552849257900548235
+      Building01_20: -9148963380196836986
+      Building01_59: 3669064057117569756
+      Building01_10: 5101179991331832942
+      Building01_87: 435710467327937165
+      Building01_5: 7213238158603873429
+      Building01_62: 6871415809086604246
+      Building01_115: -2398657166450873007
+      Building01_107: 9013184976269442948
+      Building01_7: 508042255046999065
+      Building01_129: -2626672893887293107
+      Building01_39: 3780449947050848399
+      Building01_91: -2271705914978275915
+      Building01_48: -100050630470749954
+      Building01_43: 6220665507279833776
+      Building01_68: 8996348792710762822
+      Building01_102: -8022994471530808677
+      Building01_117: -8200440746714810743
+      Building01_103: 2570198907137677293
+      Building01_80: -4752083057749956447
+      Building01_101: 1687740012612920287
+      Building01_100: -8180412487301841490
+      Building01_21: 1592922455702655558
+      Building01_40: -2325959350765884123
+      Building01_24: 874861800884334968
+      Building01_65: 8043275084703385228
+      Building01_33: 1772647420075414654
+      Building01_34: -8348062169499327092
+      Building01_116: 6144058846825164807
+      Building01_123: -5048951720176824840
+      Building01_29: 8476042028213996010
+      Building01_69: -6811100368428274809
+      Building01_54: 5896143151971799045
+      Building01_46: 4256566644139190223
+      Building01_94: -3965898568653126015
+      Building01_60: 219919144863558407
+      Building01_66: -3018455108478408318
+      Building01_22: 3470602878220135312
+      Building01_104: 2835890223374779297
+      Building01_51: 1376190912930892634
+      Building01_75: -4987363921650068640
+      Building01_112: 4797215177423532562
+      Building01_124: 8143198674635114658
+      Building01_63: -2635655590880997048
+      Building01_82: 8052901041786025044
+      Building01_131: -3338388864275302041
+      Building01_106: 6937150236669872283
+      Building01_67: -512137777859695756
+      Building01_11: -3967034745948894286
+      Building01_50: 7509330064279570861
+      Building01_74: 4244383808430810823
+      Building01_88: -5292707355548334390
+      Building01_127: 1532042893774443381
+      Building01_92: -6711272967345186524
+      Building01_118: -1826710432274437939
+      Building01_79: -5480777795692924419
+      Building01_105: -1172974808284418864
+      Building01_31: -3963561846200178076
+      Building01_95: -2205319157338693670
+      Building01_2: 2806698094535776102
+      Building01_111: 8012235955779533743
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

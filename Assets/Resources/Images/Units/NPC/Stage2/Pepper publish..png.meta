@@ -42,7 +42,7 @@ TextureImporter:
       213: -822019729757235961
     second: Dofina_WalkL2
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -63,6 +63,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -101,6 +102,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -128,6 +130,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -424,6 +438,20 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Pepper publish._1: 3746003353611939540
+      Dofina_WalkL2: -822019729757235961
+      Dofina_WalkL1: 1450291684337545898
+      Pepper publish._0: -825764572508293568
+      Dofina_WalkR0: 1213466930230243087
+      Dofina_WalkR2: -851053162531539100
+      Pepper publish._2: 558001519708705027
+      Pepper publish._Icon: 1627113485811588198
+      Pepper publish._7: -4803938466359678493
+      Dofina_WalkR1: 2850284302858137940
+      Dofina_WalkL0: -8176845566098919731
+      Pepper publish._9: -3862170565015512088
+      Pepper publish._8: 1381668646267134054
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

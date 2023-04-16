@@ -285,7 +285,7 @@ TextureImporter:
       213: -779571428948014058
     second: messy_93
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -306,6 +306,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -344,6 +345,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -371,6 +373,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -2032,6 +2046,85 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      messy_93: -779571428948014058
+      FireTestEvent03: -2411028261873575617
+      messy_23: -6194080681099155481
+      messy_6: 6353019839678384917
+      messy_45: 8191550688011323424
+      FireTestEvent08: 7268819208287019591
+      messy_92: -8995077327767218254
+      messy_10: -6586192789743430530
+      messy_12: 7967710247023225768
+      test0: -7433492225296222189
+      messy_41: 5518741723342161208
+      messy_86: -8945145104104974981
+      FireTestEvent06: -901752875388576356
+      messy_46: 3841345096944585063
+      messy_5: 3971973608480139859
+      test2: -519731245006496700
+      FireTestEvent09: 785751084931479385
+      messy_28: 4003439055542263537
+      messy_49: 5710906810263284211
+      messy_89: 4244990887089256839
+      messy_47: 3910320023906081789
+      messy_0: -7668144579599846664
+      messy_18: -5175213520277400438
+      messy_88: -6460353036066989904
+      messy_90: -8409457659973604508
+      messy_20: -4243339172607595453
+      messy_24: 871702257982329612
+      messy_26: 5584329640731930641
+      messy_25: 3281214222470285158
+      FireTestEvent11: -9010680374039478437
+      FireTestEvent10: -5629760977268906259
+      test3: -1389443164584886065
+      messy_38: -4144225302542873825
+      messy_82: 4414187167054287594
+      messy_1: -277654833151186096
+      messy_87: 28176652961860936
+      messy_43: -630484986747707310
+      messy_83: 6896939632552147245
+      messy_2: 3337948120287748366
+      messy_21: -6838449254185074819
+      messy_7: 1201122927455054359
+      test1: -1360214987009013291
+      FireTestEvent14: 2259920100276346512
+      messy_85: 9110145459860108197
+      messy_11: -2948787643249178668
+      messy_32: -5432242165252466575
+      messy_48: -6746611671044926490
+      FireTestEvent12: 3144472025788373935
+      messy_51: 3896276942079743099
+      messy_44: -6948724261556842341
+      messy_29: -1108984336999315330
+      messy_31: -4353470719063112461
+      messy_15: -7138221210153211848
+      FireTestEvent02: 4719761814223861030
+      messy_39: 453679977649015978
+      messy_42: 2382826657708765523
+      messy_36: 3970107233312928615
+      messy_84: -4751355700592536491
+      messy_30: -4843902501565284989
+      messy_3: 2407206859076716249
+      messy_40: -8086504499011226551
+      FireTestEvent07: -8038180347620902398
+      messy_34: 8329772223149656352
+      messy_33: -1777411400306452130
+      messy_35: -3395036806824457684
+      messy_9: 9024564091849755644
+      FireTestEvent04: -1039904124882014929
+      messy_4: -3932034521436032673
+      messy_50: -3723689675960624424
+      messy_37: -3332750781954305440
+      messy_27: -8874605011189555893
+      FireTestEvent01: -5805978718955120339
+      messy_91: -5389351544777385292
+      messy_22: -8024661789843046146
+      messy_8: -3408497112917671335
+      FireTestEvent05: -248232584761912868
+      FireTestEvent13: 8913776757025537635
+      messy_17: 6811012717255937176
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

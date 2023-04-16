@@ -297,7 +297,7 @@ TextureImporter:
       213: 8183284226460915633
     second: wolfsheet1_97
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -318,6 +318,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -356,6 +357,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -383,6 +385,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -2464,6 +2478,105 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      wolfsheet1_36: 1178014730710684178
+      wolfsheet1_30: 3454694489847855185
+      wolfsheet1_62: -5633955977391852956
+      wolfsheet1_56: 5271342538253792417
+      wolfsheetAttack_3: 7712916096052772488
+      wolfsheetMove2: -2416009803156313005
+      wolfsheet1_42: 1408925835489547187
+      wolfsheetAttack_2: -1991760394403811308
+      wolfsheet1_28: 6353479552704395789
+      wolfsheet1_1: -8554926187522005066
+      wolfsheet1_15: 5036163949723037448
+      wolfsheet1_88: -1134859446918203463
+      wolfsheet1_91: 4085544845985249458
+      wolfsheet1_86: 1009456455562522813
+      wolfsheetDead1: -1593187259669133572
+      wolfsheet1_17: 5727575950173681214
+      wolfsheetAttack_4: -1592013544379571362
+      wolfsheet1_65: 6967342859715138059
+      wolfsheetDead0: -5001081346104882815
+      wolfsheetMove4: -7171463155061778278
+      wolfsheet1_77: 6332172630779795228
+      wolfsheet1_74: 15371695283632452
+      wolfsheet1_12: 6640856516662170040
+      wolfsheet1_19: -4415020824791801895
+      wolfsheet1_69: -4259421147170033708
+      wolfsheet1_93: -4619466705723533859
+      wolfsheet1_75: 1725987444086644831
+      wolfsheet1_45: 2563949017702454524
+      wolfsheet1_80: -8237135815228058999
+      wolfsheet1_97: 8183284226460915633
+      wolfsheet1_22: -6898781352384922298
+      wolfsheet1_95: -6370749181850176194
+      wolfsheet1_31: 913000133966436184
+      wolfsheet1_7: 7404320280896791928
+      wolfsheet1_79: 1286922235630176249
+      wolfsheet1_16: -2645662253144107830
+      wolfsheet1_46: -8826519690009264217
+      wolfsheet1_94: 3799011465130978356
+      wolfsheet1_9: -5092845092555646918
+      wolfsheet1_85: -2790691446186592163
+      wolfsheet1_55: 1342799183599786511
+      wolfsheetDead2: -6926429107137749909
+      wolfsheet1_67: -5474809069796482041
+      wolfsheet1_2: -6958861156679937414
+      wolfsheet1_84: -1310398855945326924
+      wolfsheet1_13: -7005624278902499926
+      wolfsheet1_27: 3392394737018576379
+      wolfsheet1_89: -8633949570949234904
+      wolfsheet1_44: 5017733330035557552
+      wolfsheet1_63: 6447418777468570330
+      wolfsheet1_72: -3265749810066490252
+      wolfsheetMove1: 814245466184866374
+      wolfsheetMove3: 8810020620405393221
+      wolfsheetAttack_1: 1381292284371437159
+      wolfsheet1_24: -982212359452996268
+      wolfsheet1_52: -1168334859646784970
+      wolfsheet1_35: -7654308578536232271
+      wolfsheet1_73: -5070951092222511433
+      wolfsheet1_59: 4690914483327172663
+      wolfsheet1_83: -6759107567463543592
+      wolfsheet1_33: 386956346309468350
+      wolfsheet1_70: 3725356210818927640
+      wolfsheet1_82: -4772576281451874741
+      wolfsheet1_11: -208909696368203006
+      wolfsheet1_26: 6144117646074773795
+      wolfsheet1_57: 5618355647899507970
+      wolfsheet1_71: 4344560854053686414
+      wolfsheet1_14: -4408769769723882930
+      wolfsheet1_78: 687363239202494912
+      wolfsheetDead3: 8021918276550481157
+      wolfsheet1_76: -4655037516027877370
+      wolfsheet1_34: -2498458515434605446
+      wolfsheet1_68: 2589747494429754797
+      wolfsheet1_53: 4699810304881585040
+      wolfsheet1_64: 2091488797763130687
+      wolfsheet1_18: -5048966745781339461
+      wolfsheet1_66: 6689571022290801119
+      wolfsheet1_29: -5679207695159106342
+      wolfsheet1_20: -5887456213747316114
+      wolfsheet1_23: 1684055312406961835
+      wolfsheet1_10: -1732505189353496963
+      wolfsheet1_58: -1283416012210316219
+      wolfsheetMove0: -3328449194814139668
+      wolfsheet1_54: -2130485542343861119
+      wolfsheet1_60: 4416194184308030892
+      wolfsheet1_81: 1284935263021939735
+      wolfsheet1_87: 6001894417703427381
+      wolfsheetAttack_0: 2603434821816694251
+      wolfsheet1_25: -6232832273201411306
+      wolfsheet1_0: 6504090109950332714
+      wolfsheet1_61: -4638745160737626498
+      wolfsheet1_90: 3002842605121228305
+      wolfsheet1_43: 1874587724203113672
+      wolfsheet1_96: -1026478909733961019
+      wolfsheet1_92: -2213138502043252615
+      wolfsheet1_32: -5869784790312068713
+      wolfsheet1_8: -2430393023287588171
+      wolfsheet1_21: -7377634391129206724
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

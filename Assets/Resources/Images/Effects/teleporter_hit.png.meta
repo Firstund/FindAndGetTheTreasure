@@ -183,7 +183,7 @@ TextureImporter:
       213: -1661958507451389141
     second: teleporter_hit_59
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -204,6 +204,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -242,6 +243,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -269,6 +271,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -1552,6 +1566,67 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      teleporter_hit_21: -1572795816451466045
+      teleporter_hit_10: -2669081248877184011
+      teleporter_hit_26: -114133182509815245
+      teleporter_hit_35: 3003461922044213565
+      teleporter_hit_49: -8162633588473529515
+      teleporter_hit_3: -7561248591158946294
+      teleporter_hit_17: 4738064616677464520
+      teleporter_hit_42: 8294006832996836739
+      teleporter_hit_46: 929297189439823591
+      teleporter_hit_34: -4512369144694183898
+      teleporter_hit_9: 8381123340271791634
+      teleporter_hit_43: 4556157421832061984
+      teleporter_hit_50: -6071632554500787726
+      teleporter_hit_14: -7860083151301413421
+      teleporter_hit_58: -1041625449867825294
+      teleporter_hit_11: 8070993870181354935
+      teleporter_hit_51: 8232642552362159735
+      teleporter_hit_12: -8069310498472021621
+      teleporter_hit_23: -8716555833447963680
+      teleporter_hit_36: -5416540976862897812
+      teleporter_hit_59: -1661958507451389141
+      teleporter_hit_22: -8122536274991875712
+      teleporter_hit_18: 3103563689546807854
+      teleporter_hit_52: 1237441813389344283
+      teleporter_hit_13: 3756428026533547301
+      teleporter_hit_41: -5223270586476363546
+      teleporter_hit_15: 3717779535914412069
+      teleporter_hit_2: 6230783078887785440
+      teleporter_hit_24: -3850019096668347707
+      teleporter_hit_38: -5357920140966873999
+      teleporter_hit_30: -6150065043581705289
+      teleporter_hit_25: -3393744077395555936
+      teleporter_hit_48: -4558789786164432552
+      teleporter_hit_57: -3216728586827529890
+      teleporter_hit_56: -487962768333382551
+      teleporter_hit_28: 3198304397146213324
+      teleporter_hit_40: -3832239627877588296
+      teleporter_hit_55: 6184331238300603244
+      teleporter_hit_7: 732576753859254690
+      teleporter_hit_32: -2120067717314285338
+      teleporter_hit_16: -4479185897912935304
+      teleporter_hit_5: 3231250931608195314
+      teleporter_hit_31: 2431584841970182770
+      teleporter_hit_47: -675058458012634778
+      teleporter_hit_53: -5174952715875702018
+      teleporter_hit_44: -1374603384364409316
+      teleporter_hit_0: -5801762202914483822
+      teleporter_hit_39: 9042094808142431129
+      teleporter_hit_4: -6695535118636718299
+      teleporter_hit_8: 8303648697907948016
+      teleporter_hit_37: -9214589051417023160
+      teleporter_hit_6: -6477708211844464310
+      teleporter_hit_20: 1372797845738091459
+      teleporter_hit_29: 3149174927208444262
+      teleporter_hit_27: -6284832245908109673
+      teleporter_hit_45: 7462573875528610099
+      teleporter_hit_54: -1175373554896754783
+      teleporter_hit_1: 5355129866990382355
+      teleporter_hit_19: 4775770400413868056
+      teleporter_hit_33: -6482083828237638854
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
